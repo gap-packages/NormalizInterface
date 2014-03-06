@@ -2,8 +2,8 @@
 #
 # Load the (optional) C part
 #
-if Filename(DirectoriesPackagePrograms("normaliz"), "normaliz.so") <> fail then
-	LoadDynamicModule(Filename(DirectoriesPackagePrograms("normaliz"), "normaliz.so"));
+if Filename(DirectoriesPackagePrograms("GAPnormaliz"), "normaliz.so") <> fail then
+	LoadDynamicModule(Filename(DirectoriesPackagePrograms("GAPnormaliz"), "normaliz.so"));
 fi;
 
 
