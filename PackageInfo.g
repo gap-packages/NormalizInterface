@@ -6,7 +6,22 @@ Version := "0.1dev",
 Date    := "??/03/2014",
 
 Persons := [
-  # TODO
+  rec(
+    LastName      := "Gutsche",
+    FirstNames    := "Sebastian",
+    IsAuthor      := true,
+    IsMaintainer  := true,
+    Email         := "gutsche@mathematik.uni-kl.de",
+    WWWHome       := "http://wwwb.math.rwth-aachen.de/~gutsche/",
+    PostalAddress := Concatenation(
+                       "Department of Mathematics\n",
+                       "University of Kaiserslautern\n",
+                       "67653 Kaiserslautern\n",
+                       "Germany" ),
+    Place         := "Kaiserslautern",
+    Institution   := "University of Kaiserslautern"
+  ),
+
   rec(
     LastName      := "Horn",
     FirstNames    := "Max",
@@ -24,13 +39,28 @@ Persons := [
     Place         := "Gießen",
     Institution   := "Justus-Liebig-Universität Gießen"
   ),
+
+  rec(
+    LastName      := "Söger",
+    FirstNames    := "Christof",
+    IsAuthor      := true,
+    IsMaintainer  := true,
+    Email         := "csoeger@uos.de",
+    #WWWHome       := "http://",
+    PostalAddress := Concatenation(
+                       "Institut für Mathematik\n",
+                       "Albrechtstr. 28a\n",
+                       "49076 Osnabrück" ),
+    Place         := "Osnabrück",
+    Institution   := "University of Osnabrück"
+  ),
 ],
 
 Status         := "dev",
 #CommunicatedBy := "name (place)",
 #AcceptDate     := "mm/yyyy",
 
-PackageWWWHome := "http://TODO//",
+PackageWWWHome := "https://github.com/fingolfin/GAPnormaliz",
 
 ArchiveFormats := ".tar.gz tar.bz2",
 ArchiveURL     := Concatenation( ~.PackageWWWHome, "GAPnormaliz-",~.Version),
