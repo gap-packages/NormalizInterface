@@ -1,0 +1,48 @@
+##
+##    Values imported from the configure script
+##
+top_srcdir = @top_srcdir@
+top_builddir = @top_builddir@
+srcdir = @srcdir@
+VPATH = @srcdir@
+subdir = .
+
+GAPROOT=@GAPROOT@
+BINDIR=bin/@GAPARCH@
+
+CC=@CC@
+CFLAGS=@CFLAGS@
+CPPFLAGS=@CPPFLAGS@
+
+COMPILEOPTIONS="-O3 -Wall -g"
+#COMPILEOPTIONS="-Wall -g"
+
+all: $(BINDIR)/normaliz.so
+
+
+$(BINDIR)/normaliz.so: src/normaliz.c
+	mkdir -p $(BINDIR)
+	$(GAPROOT)/$(BINDIR)/gac -p ${COMPILEOPTIONS} -d -o $@ $^
+
+# make a statically linked GAP including the normaliz module
+#static:
+#	(cd $(GAPROOT)/$(BINDIR); \
+#	./gac -o gap-static -p "-DNORMALIZSTATIC" -p ${COMPILEOPTIONS} -P "-static" \
+#	../../pkg/normaliz/src/normaliz.c)
+
+clean:
+	rm -rf $(BINDIR)
+
+
+# Re-create Makefile etc. as necessary
+.PRECIOUS: Makefile
+Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
+	cd $(top_builddir) && $(SHELL) ./config.status $@
+
+$(top_builddir)/config.status: $(top_srcdir)/configure $(CONFIG_STATUS_DEPENDENCIES)
+	$(SHELL) ./config.status --recheck
+
+$(top_srcdir)/configure: $(top_srcdir)/configure.ac
+	cd $(top_srcdir) && autoreconf
+
+.PHONY: all static clean
