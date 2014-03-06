@@ -90,12 +90,14 @@ static StructInitInfo module = {
 };
 
 #ifndef PCQLSTATIC
+extern "C"
 StructInitInfo * Init__Dynamic ( void )
 {
   return &module;
 }
 #endif
 
+extern "C"
 StructInitInfo * Init__pcql ( void )
 {
   return &module;
