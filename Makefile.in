@@ -20,7 +20,7 @@ COMPILEOPTIONS="-O3 -Wall -g"
 all: $(BINDIR)/normaliz.so
 
 
-$(BINDIR)/normaliz.so: src/normaliz.c
+$(BINDIR)/normaliz.so: src/normaliz.cc
 	mkdir -p $(BINDIR)
 	$(GAPROOT)/$(BINDIR)/gac -p ${COMPILEOPTIONS} -d -o $@ $^
 
