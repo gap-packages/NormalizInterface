@@ -3,15 +3,15 @@ dnl ## Process this file with autoconf to produce a configure script.
 dnl ## 
 AC_PREREQ([2.68])
 AC_INIT([GAPnormaliz], m4_esyscmd([tr -d '\n' < VERSION]))
-AC_CONFIG_SRCDIR([src/normaliz.c])
+AC_CONFIG_SRCDIR([src/normaliz.cc])
 m4_include([m4/ac_find_gap.m4])
 
-AC_PROG_CC
+AC_PROG_CXX
 
 dnl ##
-dnl ## C is the language 
+dnl ## C++ is the language 
 dnl ##
-AC_LANG([C])
+AC_LANG([C++])
 
 dnl ##
 dnl ## Checks for system header files.
@@ -22,6 +22,15 @@ dnl ##
 dnl ## Locate the GAP root dir
 dnl ##
 AC_FIND_GAP
+
+AC_ARG_WITH([normaliz],[TODOHELP],
+    [NORMALIZ="$with_normaliz"],
+    [AC_MSG_ERROR([Must use --with-normaliz])]
+)
+NORMALIZ_CPPFLAGS="-I$NORMALIZ"
+NORMALIZ_LDFLAGS="-L$NORMALIZ/libnormaliz"
+AC_SUBST(NORMALIZ_LDFLAGS)
+AC_SUBST(NORMALIZ_CPPFLAGS)
 
 dnl ##
 dnl ## Finally, generate the Makefiles and output everything
