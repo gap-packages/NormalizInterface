@@ -59,8 +59,15 @@ Dependencies := rec(
 ),
 
 AvailabilityTest := function()
+    local path;
+    # test for existence of the compiled binary
+    path := DirectoriesPackagePrograms("GAPnormaliz");
+    if not "normaliz" in SHOW_STAT() and
+       Filename(path, "normaliz.so") = fail then
+      return fail;
+    fi;
     return true;
-end,
+  end,
 
 Autoload := false,
 
