@@ -28,5 +28,22 @@
 extern "C" {
 #include "src/compiled.h"          /* GAP headers                */
 }
+#include "libnormaliz/cone.h"
+
+#ifndef T_NORMALIZ
+#define T_NORMALIZ T_SPARE1
+#endif
+
+extern Obj TheTypeNormalizCone;
+
+#define SET_CONE(o, p) (ADDR_OBJ(o)[1] = reinterpret_cast<Obj>(p))
+#define GET_CONE(o) (reinterpret_cast<Cone<long>*>(ADDR_OBJ(o)[1]))
+
+#define IS_CONE(o) (TNUM_OBJ(o)==T_NORMALIZ && \
+                    (UInt)(ADDR_OBJ(o)[0])==(UInt)TheTypeNormalizCone)
+
+Obj NewCone(libnormaliz::Cone<long>*);
+void NormalizFreeFunc(Obj o);
+Obj NormalizTypeFunc(Obj o);
 
 #endif

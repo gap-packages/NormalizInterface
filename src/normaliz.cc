@@ -18,7 +18,6 @@
  */
 
 #include "normaliz.h"
-#include "libnormaliz/cone.h"
 
 #include <vector>
 #include <iostream>
@@ -31,6 +30,32 @@ using libnormaliz::Type::InputType;
 using std::map;
 using std::vector;
 using std::string;
+
+Obj TheTypeNormalizCone;
+
+
+
+Obj NewCone(Cone<long>* C) {
+  Obj o;
+  o = NewBag(T_NORMALIZ, 2*sizeof(Obj));
+
+  ADDR_OBJ(o)[0] = TheTypeNormalizCone;
+  SET_CONE(o, C);
+  return o;
+}
+
+/* Free function */
+void NormalizFreeFunc(Obj o) {
+  Cone<long>* C = GET_CONE(o);
+  if(C != NULL)
+    delete C;
+}
+
+/* Type object function for the object */
+Obj NormalizTypeFunc(Obj o) {
+  return ADDR_OBJ(o)[0];
+}
+
 
 Obj NormalizTest(Obj self, Obj A)
 {
@@ -98,7 +123,7 @@ Obj NmzMatrixToGAP(const vector< vector<long> >& in)
 }
 
 
-Obj NormalizTestCone(Obj self, Obj input_list, Obj compu)
+Obj NormalizCone(Obj self, Obj input_list)
 {
 /*    long M[5][3] = {{2, 0, 0},
                     {1, 3, 1},
@@ -139,13 +164,11 @@ Obj NormalizTestCone(Obj self, Obj input_list, Obj compu)
         input[libnormaliz::to_type(type_str)] = Mat;
     }
 
+    Cone<long>* C = new Cone<long>(input);
+    Obj Cone = NewCone(C);
+    return Cone;
 
 
-    Cone<long> MyCone(input);
-
-//    MyCone.compute(libnormaliz::ConeProperty::HilbertBasis);
-    MyCone.compute(ConeProperties(libnormaliz::ConeProperty::HilbertBasis));
-    return NmzMatrixToGAP(MyCone.getHilbertBasis());
     }
     catch (libnormaliz::NormalizException& e) 
     {
@@ -155,6 +178,15 @@ Obj NormalizTestCone(Obj self, Obj input_list, Obj compu)
     }
 }
 
+
+Obj NmzHilbertBasis(Obj self, Obj cone)
+{
+    if(!IS_CONE(cone))
+        ErrorQuit("Input must be a cone",0,0);
+    Cone<long>* C = GET_CONE(cone);
+    C->compute(ConeProperties(libnormaliz::ConeProperty::HilbertBasis));
+    return NmzMatrixToGAP(C->getHilbertBasis());
+}
 
 typedef Obj (* GVarFunc)(/*arguments*/);
 
@@ -167,7 +199,8 @@ typedef Obj (* GVarFunc)(/*arguments*/);
 // Table of functions to export
 static StructGVarFunc GVarFuncs [] = {
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NormalizTest, 1, "xyz"),
-    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NormalizTestCone, 2, "type,Mat"),
+    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NormalizCone, 1, "list"),
+    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzHilbertBasis, 1, "Cone"),
 
 	{ 0 } /* Finish with an empty entry */
 
@@ -180,6 +213,15 @@ static Int InitKernel( StructInitInfo *module )
 {
     /* init filters and functions                                          */
     InitHdlrFuncsFromTable( GVarFuncs );
+
+    InitCopyGVar( "TheTypeNormalizCone", &TheTypeNormalizCone );
+       
+    InfoBags[T_NORMALIZ].name = "NormalizCone";
+    InitMarkFuncBags(T_NORMALIZ, &MarkOneSubBags);
+    InitFreeFuncBag(T_NORMALIZ, &NormalizFreeFunc);
+    TypeObjFuncs[T_NORMALIZ] = &NormalizTypeFunc;
+
+    
 
     /* return success                                                      */
     return 0;
