@@ -1,6 +1,12 @@
 LoadPackage("AutoDoc");
 
-AutoDoc( "GAPnormaliz" );
+AutoDoc( "GAPnormaliz" : scaffold := true,
+        autodoc := rec(
+            files := [
+                    "doc/intro.autodoc",
+                    ]
+            )
+     );
 
 PrintTo( "VERSION", PackageInfo( "GAPnormaliz" )[1].Version );
 
