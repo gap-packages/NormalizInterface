@@ -4,5 +4,5 @@ InstallMethod( ViewString,
                [ IsNormalizConeObject ],
 function( r )
     # TODO: May print more information when present
-    Print( "<a Normaliz cone object>" );
+    return "<a Normaliz cone object>";
 end );
