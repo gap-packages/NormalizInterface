@@ -30,6 +30,7 @@ using libnormaliz::Type::InputType;
 
 using std::map;
 using std::vector;
+using std::string;
 
 Obj NormalizTest(Obj self, Obj A)
 {
@@ -97,7 +98,7 @@ Obj NmzMatrixToGAP(const vector< vector<long> >& in)
 }
 
 
-Obj NormalizTestCone(Obj self, Obj M)
+Obj NormalizTestCone(Obj self, Obj input_list, Obj compu)
 {
 /*    long M[5][3] = {{2, 0, 0},
                     {1, 3, 1},
@@ -112,19 +113,46 @@ Obj NormalizTestCone(Obj self, Obj M)
         Gens.push_back(row);
     }
 */
-
-    vector<vector<long> > Gens;
-    bool okay = GAPIntMatrixToNmz(Gens, M);
-    if (!okay)
+    try
+    {
+    
+    if (!IS_DENSE_PLIST(input_list))
         return Fail;
 
     map <InputType, vector< vector<long> > > input;
-    input[libnormaliz::Type::integral_closure] = Gens;
+    const int n = LEN_PLIST(input_list);
+    if (n&1)
+        return Fail;
+    for (int i=0; i < n; i+=2)
+    {
+        Obj type = ELM_PLIST(input_list, i+1);
+        if (!IS_STRING_REP(type)) 
+            return Fail;
+        string type_str(CSTR_STRING(type));
+
+        Obj M = ELM_PLIST(input_list, i+2);
+        vector<vector<long> > Mat;
+        bool okay = GAPIntMatrixToNmz(Mat, M);
+        if (!okay)
+            return Fail;
+
+        input[libnormaliz::to_type(type_str)] = Mat;
+    }
+
+
+
     Cone<long> MyCone(input);
 
 //    MyCone.compute(libnormaliz::ConeProperty::HilbertBasis);
     MyCone.compute(ConeProperties(libnormaliz::ConeProperty::HilbertBasis));
     return NmzMatrixToGAP(MyCone.getHilbertBasis());
+    }
+    catch (libnormaliz::NormalizException& e) 
+    {
+        
+        ErrorQuit("Normaliz exeption thrown",0,0);
+        return Fail; 
+    }
 }
 
 
@@ -139,7 +167,7 @@ typedef Obj (* GVarFunc)(/*arguments*/);
 // Table of functions to export
 static StructGVarFunc GVarFuncs [] = {
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NormalizTest, 1, "xyz"),
-    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NormalizTestCone, 1, "Mat"),
+    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NormalizTestCone, 2, "type,Mat"),
 
 	{ 0 } /* Finish with an empty entry */
 
