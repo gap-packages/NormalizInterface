@@ -125,22 +125,7 @@ Obj NmzMatrixToGAP(const vector< vector<long> >& in)
 
 Obj NormalizCone(Obj self, Obj input_list)
 {
-/*    long M[5][3] = {{2, 0, 0},
-                    {1, 3, 1},
-                    {3, 3, 1},
-                    {0, 0, 2},
-                    {1,-3, 1}};
-
-    vector<long> row;
-    vector<vector<long> > Gens;
-    for (long i=0; i<5; ++i) {
-        row.assign(M[i], (M[i]) + 3);
-        Gens.push_back(row);
-    }
-*/
-    try
-    {
-    
+    FUNC_BEGIN    
     if (!IS_DENSE_PLIST(input_list))
         return Fail;
 
@@ -168,24 +153,19 @@ Obj NormalizCone(Obj self, Obj input_list)
     Obj Cone = NewCone(C);
     return Cone;
 
-
-    }
-    catch (libnormaliz::NormalizException& e) 
-    {
-        
-        ErrorQuit("Normaliz exeption thrown",0,0);
-        return Fail; 
-    }
+    FUNC_END
 }
 
 
 Obj NmzHilbertBasis(Obj self, Obj cone)
 {
+    FUNC_BEGIN    
     if(!IS_CONE(cone))
         ErrorQuit("Input must be a cone",0,0);
     Cone<long>* C = GET_CONE(cone);
     C->compute(ConeProperties(libnormaliz::ConeProperty::HilbertBasis));
     return NmzMatrixToGAP(C->getHilbertBasis());
+    FUNC_END
 }
 
 typedef Obj (* GVarFunc)(/*arguments*/);

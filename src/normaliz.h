@@ -34,6 +34,15 @@ extern "C" {
 #define T_NORMALIZ T_SPARE1
 #endif
 
+#define FUNC_BEGIN try\
+                    {
+
+#define FUNC_END   } catch (libnormaliz::NormalizException& e) { \
+                   ErrorQuit("Normaliz exeption thrown",0,0); \
+                   return Fail; \
+                   }
+
+
 extern Obj TheTypeNormalizCone;
 
 #define SET_CONE(o, p) (ADDR_OBJ(o)[1] = reinterpret_cast<Obj>(p))
