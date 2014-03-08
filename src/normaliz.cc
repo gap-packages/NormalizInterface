@@ -31,6 +31,9 @@ using std::map;
 using std::vector;
 using std::string;
 
+using std::cerr;
+using std::endl;
+
 Obj TheTypeNormalizCone;
 
 
@@ -127,24 +130,33 @@ Obj NormalizCone(Obj self, Obj input_list)
 {
     FUNC_BEGIN    
     if (!IS_DENSE_PLIST(input_list))
-        return Fail;
+        ErrorQuit("Input argument must be a list",0,0);
 
     map <InputType, vector< vector<long> > > input;
     const int n = LEN_PLIST(input_list);
     if (n&1)
+    {
+        cerr << "Input list must have even number of elements" << endl;
         return Fail;
+    }
     for (int i=0; i < n; i+=2)
     {
         Obj type = ELM_PLIST(input_list, i+1);
-        if (!IS_STRING_REP(type)) 
+        if (!IS_STRING_REP(type))
+        {
+            cerr << "Element " << i+1 << " of the input list must be a type string" << endl;
             return Fail;
+        }
         string type_str(CSTR_STRING(type));
 
         Obj M = ELM_PLIST(input_list, i+2);
         vector<vector<long> > Mat;
         bool okay = GAPIntMatrixToNmz(Mat, M);
         if (!okay)
+        {
+            cerr << "Element " << i+2 << " of the input list must integer matrix" << endl;
             return Fail;
+        }
 
         input[libnormaliz::to_type(type_str)] = Mat;
     }
@@ -153,6 +165,39 @@ Obj NormalizCone(Obj self, Obj input_list)
     Obj Cone = NewCone(C);
     return Cone;
 
+    FUNC_END
+}
+
+Obj NmzCompute(Obj self, Obj cone, Obj compute_list)
+{
+    FUNC_BEGIN
+    if (!IS_CONE(cone))
+        ErrorQuit("Input argument 1 must be a cone",0,0);
+    if (!IS_DENSE_PLIST(compute_list))
+        ErrorQuit("Input argument 2 must be a list",0,0);
+
+    ConeProperties Props;
+
+    const int n = LEN_PLIST(compute_list);
+
+    for (int i=0; i < n; ++i)
+    {
+        Obj prop = ELM_PLIST(compute_list, i+1);
+        if (!IS_STRING_REP(prop))
+        {
+            cerr << "Element " << i+1 << " of the input list must be a type string";
+            return Fail;
+        }
+        string prop_str(CSTR_STRING(prop));
+        Props.set( libnormaliz::toConeProperty(prop_str) );
+    }
+
+    Cone<long>* C = GET_CONE(cone);
+
+    // Cone.compute returns the not computed properties
+    // we return a bool, true when everything requested was computed
+    ConeProperties NotComputed = C->compute(Props);
+    return EVAL_BOOL_EXPR( NotComputed.none() );
     FUNC_END
 }
 
@@ -180,6 +225,7 @@ typedef Obj (* GVarFunc)(/*arguments*/);
 static StructGVarFunc GVarFuncs [] = {
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NormalizTest, 1, "xyz"),
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NormalizCone, 1, "list"),
+    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzCompute, 2, "Cone, list"),
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzHilbertBasis, 1, "Cone"),
 
 	{ 0 } /* Finish with an empty entry */
