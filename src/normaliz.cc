@@ -122,13 +122,14 @@ Obj NmzMatrixToGAP(const vector< vector<long> >& in)
         SET_ELM_PLIST(M, i+1, NmzVectorToGAP(in[i]));
         CHANGED_BAG( M );
     }
+    CHANGED_BAG( M );
     return M;
 }
 
 
 Obj NormalizCone(Obj self, Obj input_list)
 {
-    FUNC_BEGIN    
+    FUNC_BEGIN
     if (!IS_DENSE_PLIST(input_list))
         ErrorQuit("Input argument must be a list",0,0);
 
@@ -197,14 +198,17 @@ Obj NmzCompute(Obj self, Obj cone, Obj compute_list)
     // Cone.compute returns the not computed properties
     // we return a bool, true when everything requested was computed
     ConeProperties NotComputed = C->compute(Props);
-    return EVAL_BOOL_EXPR( NotComputed.none() );
+// TODO this gives: "Error, <expr> must be 'true' or 'false' (not a integer)"
+//      but .none() returns bool
+//    return EVAL_BOOL_EXPR( NotComputed.none() );
+    return (NotComputed.none() ? True : False );
     FUNC_END
 }
 
 
 Obj NmzHilbertBasis(Obj self, Obj cone)
 {
-    FUNC_BEGIN    
+    FUNC_BEGIN
     if(!IS_CONE(cone))
         ErrorQuit("Input must be a cone",0,0);
     Cone<long>* C = GET_CONE(cone);
@@ -212,6 +216,75 @@ Obj NmzHilbertBasis(Obj self, Obj cone)
     return NmzMatrixToGAP(C->getHilbertBasis());
     FUNC_END
 }
+
+Obj NmzDeg1Elements(Obj self, Obj cone)
+{
+    FUNC_BEGIN
+    if(!IS_CONE(cone))
+        ErrorQuit("Input must be a cone",0,0);
+    Cone<long>* C = GET_CONE(cone);
+    C->compute(ConeProperties(libnormaliz::ConeProperty::Deg1Elements));
+    return NmzMatrixToGAP(C->getDeg1Elements());
+    FUNC_END
+}
+
+Obj NmzExtremeRays(Obj self, Obj cone)
+{
+    FUNC_BEGIN
+    if(!IS_CONE(cone))
+        ErrorQuit("Input must be a cone",0,0);
+    Cone<long>* C = GET_CONE(cone);
+    C->compute(ConeProperties(libnormaliz::ConeProperty::ExtremeRays));
+    return NmzMatrixToGAP(C->getExtremeRays());
+    FUNC_END
+}
+
+Obj NmzSupportHyperplanes(Obj self, Obj cone)
+{
+    FUNC_BEGIN
+    if(!IS_CONE(cone))
+        ErrorQuit("Input must be a cone",0,0);
+    Cone<long>* C = GET_CONE(cone);
+    C->compute(ConeProperties(libnormaliz::ConeProperty::SupportHyperplanes));
+    return NmzMatrixToGAP(C->getSupportHyperplanes());
+    FUNC_END
+}
+
+Obj NmzEquations(Obj self, Obj cone)
+{
+    FUNC_BEGIN
+    if(!IS_CONE(cone))
+        ErrorQuit("Input must be a cone",0,0);
+    Cone<long>* C = GET_CONE(cone);
+    C->compute(ConeProperties(libnormaliz::ConeProperty::SupportHyperplanes));
+    return NmzMatrixToGAP(C->getEquations());
+    FUNC_END
+}
+
+Obj NmzCongruences(Obj self, Obj cone)
+{
+    FUNC_BEGIN
+    if(!IS_CONE(cone))
+        ErrorQuit("Input must be a cone",0,0);
+    Cone<long>* C = GET_CONE(cone);
+    C->compute(ConeProperties(libnormaliz::ConeProperty::SupportHyperplanes));
+    libnormaliz::Matrix<long> Cong = C->getCongruencesMatrix();
+    Cong.pretty_print(cerr);
+    return NmzMatrixToGAP(C->getCongruences());
+    FUNC_END
+}
+
+Obj NmzGrading(Obj self, Obj cone)
+{
+    FUNC_BEGIN
+    if(!IS_CONE(cone))
+        ErrorQuit("Input must be a cone",0,0);
+    Cone<long>* C = GET_CONE(cone);
+    C->compute(ConeProperties(libnormaliz::ConeProperty::Grading));
+    return NmzVectorToGAP(C->getGrading());
+    FUNC_END
+}
+
 
 typedef Obj (* GVarFunc)(/*arguments*/);
 
@@ -227,6 +300,12 @@ static StructGVarFunc GVarFuncs [] = {
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NormalizCone, 1, "list"),
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzCompute, 2, "Cone, list"),
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzHilbertBasis, 1, "Cone"),
+    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzDeg1Elements, 1, "Cone"),
+    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzExtremeRays, 1, "Cone"),
+    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzSupportHyperplanes, 1, "Cone"),
+    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzEquations, 1, "Cone"),
+    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzCongruences, 1, "Cone"),
+    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzGrading, 1, "Cone"),
 
 	{ 0 } /* Finish with an empty entry */
 
