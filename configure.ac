@@ -23,7 +23,8 @@ dnl ## Locate the GAP root dir
 dnl ##
 AC_FIND_GAP
 
-AC_ARG_WITH([normaliz],[TODOHELP],
+AC_ARG_WITH([normaliz],
+    [AC_HELP_STRING([--with-normaliz=<path>], [specify root of Normaliz installation])],
     [NORMALIZ="$with_normaliz"],
     [AC_MSG_ERROR([Must use --with-normaliz])]
 )
