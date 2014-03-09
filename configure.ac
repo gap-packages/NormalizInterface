@@ -2,7 +2,7 @@ dnl ##
 dnl ## Process this file with autoconf to produce a configure script.
 dnl ## 
 AC_PREREQ([2.68])
-AC_INIT([GAPnormaliz], m4_esyscmd([tr -d '\n' < VERSION]))
+AC_INIT([NormalizInterface], m4_esyscmd([tr -d '\n' < VERSION]))
 AC_CONFIG_SRCDIR([src/normaliz.cc])
 m4_include([m4/ac_find_gap.m4])
 

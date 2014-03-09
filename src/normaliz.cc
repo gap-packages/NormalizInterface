@@ -1,5 +1,5 @@
 /*
- * GAPnormaliz: GAP wrapper for normaliz
+ * NormalizInterface: GAP wrapper for normaliz
  * Copyright (C) 2014  TODO
  *
  * This program is free software; you can redistribute it and/or

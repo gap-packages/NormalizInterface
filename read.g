@@ -1,1 +1,1 @@
-ReadPackage("GAPnormaliz", "lib/normaliz.gi");
+ReadPackage("NormalizInterface", "lib/normaliz.gi");

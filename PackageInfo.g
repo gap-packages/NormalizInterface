@@ -1,6 +1,6 @@
 SetPackageInfo( rec(
 
-PackageName := "GAPnormaliz",
+PackageName := "NormalizInterface",
 Subtitle := "GAP wrapper for normaliz",
 Version := "0.1dev",
 Date    := "??/03/2014",
@@ -60,19 +60,19 @@ Status         := "dev",
 #CommunicatedBy := "name (place)",
 #AcceptDate     := "mm/yyyy",
 
-PackageWWWHome := "https://github.com/fingolfin/GAPnormaliz",
+PackageWWWHome := "https://github.com/fingolfin/NormalizInterface",
 
 ArchiveFormats := ".tar.gz tar.bz2",
-ArchiveURL     := Concatenation( ~.PackageWWWHome, "GAPnormaliz-",~.Version),
+ArchiveURL     := Concatenation( ~.PackageWWWHome, "NormalizInterface-",~.Version),
 README_URL     := Concatenation( ~.PackageWWWHome, "README" ),
 PackageInfoURL := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
 
 AbstractHTML   := Concatenation(
-               "The GAPnormaliz Package ... ",
+               "The NormalizInterface Package ... ",
                "TODO"),
 
 PackageDoc := rec(
-  BookName  := "GAPnormaliz",
+  BookName  := "NormalizInterface",
   ArchiveURLSubset := [ "doc" ],
   HTMLStart := "doc/chap0_mj.html",
   PDFFile   := "doc/manual.pdf",
@@ -91,7 +91,7 @@ Dependencies := rec(
 AvailabilityTest := function()
     local path;
     # test for existence of the compiled binary
-    path := DirectoriesPackagePrograms("GAPnormaliz");
+    path := DirectoriesPackagePrograms("NormalizInterface");
     if not "normaliz" in SHOW_STAT() and
        Filename(path, "normaliz.so") = fail then
       return fail;

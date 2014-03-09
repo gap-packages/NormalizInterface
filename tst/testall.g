@@ -1,5 +1,5 @@
-LoadPackage("GAPnormaliz");
-d := DirectoriesPackageLibrary("GAPnormaliz", "tst");
+LoadPackage("NormalizInterface");
+d := DirectoriesPackageLibrary("NormalizInterface", "tst");
 
 HasSuffix := function(list, suffix)
   local len;
