@@ -59,13 +59,6 @@ Obj NormalizTypeFunc(Obj o) {
   return ADDR_OBJ(o)[0];
 }
 
-
-Obj NormalizTest(Obj self, Obj A)
-{
-    // we just return our parameter
-    return A;
-}
-
 bool GAPIntVectorToNmz(vector<long>& out, Obj V)
 {
     if (!IS_DENSE_PLIST(V))
@@ -293,7 +286,6 @@ typedef Obj (* GVarFunc)(/*arguments*/);
 
 // Table of functions to export
 static StructGVarFunc GVarFuncs [] = {
-    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NormalizTest, 1, "xyz"),
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NormalizCone, 1, "list"),
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzCompute, 2, "Cone, list"),
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzHilbertBasis, 1, "Cone"),
