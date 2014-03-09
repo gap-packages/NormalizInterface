@@ -101,7 +101,7 @@ Obj NmzVectorToGAP(const vector<long>& in)
 {
     Obj M;
     const size_t n = in.size();
-    M = NEW_PLIST(T_PLIST_CYC, n);
+    M = NEW_PLIST((n > 0) ? T_PLIST_CYC : T_PLIST, n);
     SET_LEN_PLIST(M, n);
     for (size_t i=0; i < n; ++i)
     {
@@ -115,7 +115,7 @@ Obj NmzMatrixToGAP(const vector< vector<long> >& in)
 {
     Obj M;
     const size_t n = in.size();
-    M = NEW_PLIST(T_PLIST_CYC, n);
+    M = NEW_PLIST(T_PLIST, n);
     SET_LEN_PLIST(M, n);
     for (size_t i=0; i < n; ++i)
     {
