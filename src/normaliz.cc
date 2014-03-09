@@ -59,7 +59,7 @@ Obj NormalizTypeFunc(Obj o) {
     return ADDR_OBJ(o)[0];
 }
 
-bool GAPIntVectorToNmz(vector<long>& out, Obj V)
+static bool GAPIntVectorToNmz(vector<long>& out, Obj V)
 {
     if (!IS_DENSE_PLIST(V))
         return false;
@@ -75,7 +75,7 @@ bool GAPIntVectorToNmz(vector<long>& out, Obj V)
     return true;
 }
 
-bool GAPIntMatrixToNmz(vector< vector<long> >& out, Obj M)
+static bool GAPIntMatrixToNmz(vector< vector<long> >& out, Obj M)
 {
     if (!IS_DENSE_PLIST(M))
         return false;
@@ -90,7 +90,7 @@ bool GAPIntMatrixToNmz(vector< vector<long> >& out, Obj M)
     return true;
 }
 
-Obj NmzVectorToGAP(const vector<long>& in)
+static Obj NmzVectorToGAP(const vector<long>& in)
 {
     Obj M;
     const size_t n = in.size();
@@ -104,7 +104,7 @@ Obj NmzVectorToGAP(const vector<long>& in)
     return M;
 }
 
-Obj NmzMatrixToGAP(const vector< vector<long> >& in)
+static Obj NmzMatrixToGAP(const vector< vector<long> >& in)
 {
     Obj M;
     const size_t n = in.size();
