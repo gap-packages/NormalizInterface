@@ -39,24 +39,24 @@ Obj TheTypeNormalizCone;
 
 
 Obj NewCone(Cone<long>* C) {
-  Obj o;
-  o = NewBag(T_NORMALIZ, 2*sizeof(Obj));
+    Obj o;
+    o = NewBag(T_NORMALIZ, 2*sizeof(Obj));
 
-  ADDR_OBJ(o)[0] = TheTypeNormalizCone;
-  SET_CONE(o, C);
-  return o;
+    ADDR_OBJ(o)[0] = TheTypeNormalizCone;
+    SET_CONE(o, C);
+    return o;
 }
 
 /* Free function */
 void NormalizFreeFunc(Obj o) {
-  Cone<long>* C = GET_CONE(o);
-  if(C != NULL)
-    delete C;
+    Cone<long>* C = GET_CONE(o);
+    if(C != NULL)
+        delete C;
 }
 
 /* Type object function for the object */
 Obj NormalizTypeFunc(Obj o) {
-  return ADDR_OBJ(o)[0];
+    return ADDR_OBJ(o)[0];
 }
 
 bool GAPIntVectorToNmz(vector<long>& out, Obj V)
