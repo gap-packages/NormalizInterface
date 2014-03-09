@@ -329,50 +329,6 @@ Obj NmzConeProperty(Obj self, Obj cone, Obj prop)
     FUNC_END
 }
 
-Obj NmzHilbertBasis(Obj self, Obj cone)
-{
-    FUNC_BEGIN
-    if (!IS_CONE(cone))
-        ErrorQuit("<cone> must be a normaliz cone",0,0);
-    Cone<long>* C = GET_CONE(cone);
-    C->compute(ConeProperties(libnormaliz::ConeProperty::HilbertBasis));
-    return NmzMatrixToGAP(C->getHilbertBasis());
-    FUNC_END
-}
-
-Obj NmzDeg1Elements(Obj self, Obj cone)
-{
-    FUNC_BEGIN
-    if (!IS_CONE(cone))
-        ErrorQuit("<cone> must be a normaliz cone",0,0);
-    Cone<long>* C = GET_CONE(cone);
-    C->compute(ConeProperties(libnormaliz::ConeProperty::Deg1Elements));
-    return NmzMatrixToGAP(C->getDeg1Elements());
-    FUNC_END
-}
-
-Obj NmzExtremeRays(Obj self, Obj cone)
-{
-    FUNC_BEGIN
-    if (!IS_CONE(cone))
-        ErrorQuit("<cone> must be a normaliz cone",0,0);
-    Cone<long>* C = GET_CONE(cone);
-    C->compute(ConeProperties(libnormaliz::ConeProperty::ExtremeRays));
-    return NmzMatrixToGAP(C->getExtremeRays());
-    FUNC_END
-}
-
-Obj NmzSupportHyperplanes(Obj self, Obj cone)
-{
-    FUNC_BEGIN
-    if (!IS_CONE(cone))
-        ErrorQuit("<cone> must be a normaliz cone",0,0);
-    Cone<long>* C = GET_CONE(cone);
-    C->compute(ConeProperties(libnormaliz::ConeProperty::SupportHyperplanes));
-    return NmzMatrixToGAP(C->getSupportHyperplanes());
-    FUNC_END
-}
-
 Obj NmzEquations(Obj self, Obj cone)
 {
     FUNC_BEGIN
@@ -397,17 +353,6 @@ Obj NmzCongruences(Obj self, Obj cone)
     FUNC_END
 }
 
-Obj NmzGrading(Obj self, Obj cone)
-{
-    FUNC_BEGIN
-    if (!IS_CONE(cone))
-        ErrorQuit("<cone> must be a normaliz cone",0,0);
-    Cone<long>* C = GET_CONE(cone);
-    C->compute(ConeProperties(libnormaliz::ConeProperty::Grading));
-    return NmzVectorToGAP(C->getGrading());
-    FUNC_END
-}
-
 
 typedef Obj (* GVarFunc)(/*arguments*/);
 
@@ -425,13 +370,8 @@ static StructGVarFunc GVarFuncs [] = {
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzHasConeProperty, 2, "cone, prop"),
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzConeProperty, 2, "cone, prop"),
 
-    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzHilbertBasis, 1, "cone"),
-    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzDeg1Elements, 1, "cone"),
-    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzExtremeRays, 1, "cone"),
-    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzSupportHyperplanes, 1, "cone"),
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzEquations, 1, "cone"),
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzCongruences, 1, "cone"),
-    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzGrading, 1, "cone"),
 
 	{ 0 } /* Finish with an empty entry */
 
