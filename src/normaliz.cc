@@ -120,7 +120,7 @@ Obj NmzMatrixToGAP(const vector< vector<long> >& in)
 }
 
 
-Obj NormalizCone(Obj self, Obj input_list)
+Obj NmzCone(Obj self, Obj input_list)
 {
     FUNC_BEGIN
     if (!IS_DENSE_PLIST(input_list))
@@ -286,7 +286,7 @@ typedef Obj (* GVarFunc)(/*arguments*/);
 
 // Table of functions to export
 static StructGVarFunc GVarFuncs [] = {
-    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NormalizCone, 1, "list"),
+    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzCone, 1, "list"),
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzCompute, 2, "cone, list"),
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzHilbertBasis, 1, "cone"),
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzDeg1Elements, 1, "cone"),
