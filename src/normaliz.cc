@@ -198,9 +198,6 @@ Obj NmzCompute(Obj self, Obj cone, Obj compute_list)
     // Cone.compute returns the not computed properties
     // we return a bool, true when everything requested was computed
     ConeProperties NotComputed = C->compute(Props);
-// TODO this gives: "Error, <expr> must be 'true' or 'false' (not a integer)"
-//      but .none() returns bool
-//    return EVAL_BOOL_EXPR( NotComputed.none() );
     return (NotComputed.none() ? True : False );
     FUNC_END
 }
