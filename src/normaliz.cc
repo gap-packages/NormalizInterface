@@ -195,6 +195,139 @@ Obj NmzCompute(Obj self, Obj cone, Obj compute_list)
     FUNC_END
 }
 
+Obj NmzHasConeProperty(Obj self, Obj cone, Obj prop)
+{
+    FUNC_BEGIN
+
+    if (!IS_CONE(cone))
+        ErrorQuit("<cone> must be a normaliz cone",0,0);
+    if (!IS_STRING_REP(prop))
+        ErrorQuit("<prop> must be a string",0,0);
+
+    libnormaliz::ConeProperty::Enum p = libnormaliz::toConeProperty(CSTR_STRING(prop));
+    Cone<long>* C = GET_CONE(cone);
+
+    return (C->isComputed(p) ? True : False );
+
+    FUNC_END
+}
+
+Obj NmzConeProperty(Obj self, Obj cone, Obj prop)
+{
+    FUNC_BEGIN
+
+    if (!IS_CONE(cone))
+        ErrorQuit("<cone> must be a normaliz cone",0,0);
+    if (!IS_STRING_REP(prop))
+        ErrorQuit("<prop> must be a string",0,0);
+
+    Cone<long>* C = GET_CONE(cone);
+    libnormaliz::ConeProperty::Enum p = libnormaliz::toConeProperty(CSTR_STRING(prop));
+
+    C->compute(ConeProperties(p));
+    
+    switch (p) {
+    case libnormaliz::ConeProperty::Generators:
+        return NmzMatrixToGAP(C->getGenerators());
+
+    case libnormaliz::ConeProperty::ExtremeRays:
+        return NmzMatrixToGAP(C->getExtremeRays());
+
+    case libnormaliz::ConeProperty::VerticesOfPolyhedron:
+        return NmzMatrixToGAP(C->getVerticesOfPolyhedron());
+
+    case libnormaliz::ConeProperty::SupportHyperplanes:
+        return NmzMatrixToGAP(C->getSupportHyperplanes());
+
+    case libnormaliz::ConeProperty::TriangulationSize:
+        return ObjInt_Int(C->getTriangulationSize());
+
+    case libnormaliz::ConeProperty::TriangulationDetSum:
+        return ObjInt_Int(C->getTriangulationDetSum());
+
+//     case libnormaliz::ConeProperty::Triangulation:
+//         C->getTriangulation();   // TODO: implement conversion?
+//         break;
+
+//     case libnormaliz::ConeProperty::Multiplicity:
+//         {
+//         mpq_class mult = C->getMultiplicity();
+//         return ...;     // TODO: implement conversion?
+//         }
+
+    case libnormaliz::ConeProperty::Shift:
+        return ObjInt_Int(C->getShift());
+
+    case libnormaliz::ConeProperty::ModuleRank:
+        return ObjInt_Int(C->getModuleRank());
+
+    case libnormaliz::ConeProperty::HilbertBasis:
+        return NmzMatrixToGAP(C->getHilbertBasis());
+
+    case libnormaliz::ConeProperty::ModuleGenerators:
+        return NmzMatrixToGAP(C->getModuleGenerators());
+
+    case libnormaliz::ConeProperty::Deg1Elements:
+        return NmzMatrixToGAP(C->getDeg1Elements());
+
+//     case libnormaliz::ConeProperty::HilbertSeries:
+//         C->getHilbertSeries();   // TODO: implement conversion?
+//         break;
+
+    case libnormaliz::ConeProperty::Grading:
+        return NmzVectorToGAP(C->getGrading());
+
+    case libnormaliz::ConeProperty::IsPointed:
+        return C->isPointed() ? True : False;
+
+//     case libnormaliz::ConeProperty::IsDeg1Generated:
+//         TODO: Is this needed? No accessor function seems to exist
+
+    case libnormaliz::ConeProperty::IsDeg1ExtremeRays:
+        return C->isDeg1ExtremeRays() ? True : False;
+
+    case libnormaliz::ConeProperty::IsDeg1HilbertBasis:
+        return C->isDeg1HilbertBasis() ? True : False;
+
+    case libnormaliz::ConeProperty::IsIntegrallyClosed:
+        return C->isIntegrallyClosed() ? True : False;
+
+//     case libnormaliz::ConeProperty::GeneratorsOfToricRing:
+//         C->getGeneratorsOfToricRing();   // TODO: implement conversion?
+//         break;
+
+//     case libnormaliz::ConeProperty::ReesPrimary:
+//         TODO: Is this needed? No accessor function seems to exist
+
+    case libnormaliz::ConeProperty::ReesPrimaryMultiplicity:
+        return ObjInt_Int(C->getReesPrimaryMultiplicity());
+
+//     case libnormaliz::ConeProperty::StanleyDec:
+//         C->getStanleyDec();  // TODO: implement conversion?
+//         break;
+
+//     case libnormaliz::ConeProperty::InclusionExclusionData:
+//         C->getInclusionExclusionData();  // TODO: implement conversion?
+//         break;
+
+//     case libnormaliz::ConeProperty::DualMode:
+//         TODO: Is this needed? No accessor function seems to exist
+
+//     case libnormaliz::ConeProperty::ApproximateRatPolytope:
+//         TODO: Is this needed? No accessor function seems to exist
+
+//     case libnormaliz::ConeProperty::DefaultMode:
+//         TODO: Is this needed? No accessor function seems to exist
+
+    default:
+        // Case not handled. Should signal an error
+        break;
+    }
+
+    return Fail;
+
+    FUNC_END
+}
 
 Obj NmzHilbertBasis(Obj self, Obj cone)
 {
@@ -288,6 +421,10 @@ typedef Obj (* GVarFunc)(/*arguments*/);
 static StructGVarFunc GVarFuncs [] = {
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzCone, 1, "list"),
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzCompute, 2, "cone, list"),
+
+    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzHasConeProperty, 2, "cone, prop"),
+    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzConeProperty, 2, "cone, prop"),
+
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzHilbertBasis, 1, "cone"),
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzDeg1Elements, 1, "cone"),
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzExtremeRays, 1, "cone"),
