@@ -12,6 +12,8 @@ gap> NmzSupportHyperplanes(C);
 [ [ 3, -1, 0 ], [ -2, 1, 0 ] ]
 gap> NmzDeg1Elements(C);
 [  ]
+gap> NmzConeProperty(C, "Multiplicity");
+1/20
 gap> 
 gap> #############################################
 gap> 

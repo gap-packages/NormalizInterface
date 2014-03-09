@@ -290,11 +290,11 @@ Obj NmzConeProperty(Obj self, Obj cone, Obj prop)
 //         C->getTriangulation();   // TODO: implement conversion?
 //         break;
 
-//     case libnormaliz::ConeProperty::Multiplicity:
-//         {
-//         mpq_class mult = C->getMultiplicity();
-//         return ...;     // TODO: implement conversion?
-//         }
+    case libnormaliz::ConeProperty::Multiplicity:
+        {
+        mpq_class mult = C->getMultiplicity();
+        return MpqClassToGAP(mult);
+        }
 
     case libnormaliz::ConeProperty::Shift:
         return ObjInt_Int(C->getShift());
