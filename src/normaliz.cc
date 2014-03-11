@@ -38,7 +38,7 @@ Obj TheTypeNormalizCone;
 
 
 
-Obj NewCone(Cone<long>* C) {
+Obj NewCone(Cone<NMZ_INTEGER_TYPE>* C) {
     Obj o;
     o = NewBag(T_NORMALIZ, 2*sizeof(Obj));
 
@@ -49,7 +49,7 @@ Obj NewCone(Cone<long>* C) {
 
 /* Free function */
 void NormalizFreeFunc(Obj o) {
-    Cone<long>* C = GET_CONE(o);
+    Cone<NMZ_INTEGER_TYPE>* C = GET_CONE(o);
     if(C != NULL)
         delete C;
 }
@@ -99,8 +99,70 @@ static Obj MpqClassToGAP(const mpq_class& x)
     return QUO(num, den);
 }
 
+template<typename Integer>
+Obj NmzIntToGAP(Integer x)
+{
+    return Integer::unimplemented_function;
+}
 
-static bool GAPIntVectorToNmz(vector<long>& out, Obj V)
+template<>
+Obj NmzIntToGAP(long x)
+{
+    return ObjInt_Int(x);
+}
+
+template<>
+Obj NmzIntToGAP(mpz_class x)
+{
+    return MpzClassToGAP(x);
+}
+
+
+
+template<typename Integer>
+bool GAPIntToNmz(Obj x, Integer &out)
+{
+    return Integer::unimplemented_function;
+}
+
+template<>
+bool GAPIntToNmz(Obj x, long &out)
+{
+    if (IS_INTOBJ(x)) {
+        out = INT_INTOBJ(x);
+        return true;
+    } else if (TNUM_OBJ(x) == T_INTPOS || TNUM_OBJ(x) == T_INTNEG) {
+        UInt size = SIZE_INT(x);
+        if (size == 1) {
+            out = *ADDR_INT(x);
+            if (out < 0)
+                return false;   // overflow
+            if (TNUM_OBJ(x) == T_INTNEG)
+                out = -out;
+        }
+    }
+    return false;
+}
+
+template<>
+bool GAPIntToNmz(Obj x, mpz_class &out)
+{
+    if (IS_INTOBJ(x)) {
+        out = (int)INT_INTOBJ(x);
+        return true;
+    } else if (TNUM_OBJ(x) == T_INTPOS || TNUM_OBJ(x) == T_INTNEG) {
+        mpz_ptr m = out.get_mpz_t();
+        UInt size = SIZE_INT(x);
+        mpz_realloc2(m, size * GMP_NUMB_BITS);
+        memcpy(m->_mp_d, ADDR_INT(x), sizeof(mp_limb_t) * size);
+        m->_mp_size = (TNUM_OBJ(x) == T_INTPOS) ? (Int)size : - (Int)size;
+        return true;
+    }
+    return false;
+}
+
+template<typename Integer>
+static bool GAPIntVectorToNmz(vector<Integer>& out, Obj V)
 {
     if (!IS_DENSE_PLIST(V))
         return false;
@@ -109,14 +171,14 @@ static bool GAPIntVectorToNmz(vector<long>& out, Obj V)
     for (int i=0; i < n; ++i)
     {
         Obj tmp = ELM_PLIST(V, i+1);
-        if (!IS_INTOBJ(tmp))
+        if (!GAPIntToNmz(tmp, out[i]))
             return false;
-        out[i] = INT_INTOBJ(tmp);
     }
     return true;
 }
 
-static bool GAPIntMatrixToNmz(vector< vector<long> >& out, Obj M)
+template<typename Integer>
+static bool GAPIntMatrixToNmz(vector< vector<Integer> >& out, Obj M)
 {
     if (!IS_DENSE_PLIST(M))
         return false;
@@ -131,7 +193,8 @@ static bool GAPIntMatrixToNmz(vector< vector<long> >& out, Obj M)
     return true;
 }
 
-static Obj NmzVectorToGAP(const vector<long>& in)
+template<typename Integer>
+static Obj NmzVectorToGAP(const vector<Integer>& in)
 {
     Obj M;
     const size_t n = in.size();
@@ -139,13 +202,14 @@ static Obj NmzVectorToGAP(const vector<long>& in)
     SET_LEN_PLIST(M, n);
     for (size_t i=0; i < n; ++i)
     {
-        SET_ELM_PLIST(M, i+1, ObjInt_Int(in[i]));
+        SET_ELM_PLIST(M, i+1, NmzIntToGAP(in[i]));
         CHANGED_BAG( M );
     }
     return M;
 }
 
-static Obj NmzMatrixToGAP(const vector< vector<long> >& in)
+template<typename Integer>
+static Obj NmzMatrixToGAP(const vector< vector<Integer> >& in)
 {
     Obj M;
     const size_t n = in.size();
@@ -167,7 +231,7 @@ Obj NmzCone(Obj self, Obj input_list)
     if (!IS_DENSE_PLIST(input_list))
         ErrorQuit("Input argument must be a list",0,0);
 
-    map <InputType, vector< vector<long> > > input;
+    map <InputType, vector< vector<NMZ_INTEGER_TYPE> > > input;
     const int n = LEN_PLIST(input_list);
     if (n&1)
     {
@@ -185,7 +249,7 @@ Obj NmzCone(Obj self, Obj input_list)
         string type_str(CSTR_STRING(type));
 
         Obj M = ELM_PLIST(input_list, i+2);
-        vector<vector<long> > Mat;
+        vector<vector<NMZ_INTEGER_TYPE> > Mat;
         bool okay = GAPIntMatrixToNmz(Mat, M);
         if (!okay)
         {
@@ -196,7 +260,7 @@ Obj NmzCone(Obj self, Obj input_list)
         input[libnormaliz::to_type(type_str)] = Mat;
     }
 
-    Cone<long>* C = new Cone<long>(input);
+    Cone<NMZ_INTEGER_TYPE>* C = new Cone<NMZ_INTEGER_TYPE>(input);
     Obj Cone = NewCone(C);
     return Cone;
 
@@ -227,7 +291,7 @@ Obj NmzCompute(Obj self, Obj cone, Obj compute_list)
         Props.set( libnormaliz::toConeProperty(prop_str) );
     }
 
-    Cone<long>* C = GET_CONE(cone);
+    Cone<NMZ_INTEGER_TYPE>* C = GET_CONE(cone);
 
     // Cone.compute returns the not computed properties
     // we return a bool, true when everything requested was computed
@@ -246,7 +310,7 @@ Obj NmzHasConeProperty(Obj self, Obj cone, Obj prop)
         ErrorQuit("<prop> must be a string",0,0);
 
     libnormaliz::ConeProperty::Enum p = libnormaliz::toConeProperty(CSTR_STRING(prop));
-    Cone<long>* C = GET_CONE(cone);
+    Cone<NMZ_INTEGER_TYPE>* C = GET_CONE(cone);
 
     return (C->isComputed(p) ? True : False );
 
@@ -262,7 +326,7 @@ Obj NmzConeProperty(Obj self, Obj cone, Obj prop)
     if (!IS_STRING_REP(prop))
         ErrorQuit("<prop> must be a string",0,0);
 
-    Cone<long>* C = GET_CONE(cone);
+    Cone<NMZ_INTEGER_TYPE>* C = GET_CONE(cone);
     libnormaliz::ConeProperty::Enum p = libnormaliz::toConeProperty(CSTR_STRING(prop));
 
     C->compute(ConeProperties(p));
@@ -281,10 +345,10 @@ Obj NmzConeProperty(Obj self, Obj cone, Obj prop)
         return NmzMatrixToGAP(C->getSupportHyperplanes());
 
     case libnormaliz::ConeProperty::TriangulationSize:
-        return ObjInt_Int(C->getTriangulationSize());
+        return ObjInt_UInt(C->getTriangulationSize());
 
     case libnormaliz::ConeProperty::TriangulationDetSum:
-        return ObjInt_Int(C->getTriangulationDetSum());
+        return NmzIntToGAP(C->getTriangulationDetSum());
 
 //     case libnormaliz::ConeProperty::Triangulation:
 //         C->getTriangulation();   // TODO: implement conversion?
@@ -297,10 +361,10 @@ Obj NmzConeProperty(Obj self, Obj cone, Obj prop)
         }
 
     case libnormaliz::ConeProperty::Shift:
-        return ObjInt_Int(C->getShift());
+        return NmzIntToGAP(C->getShift());
 
     case libnormaliz::ConeProperty::ModuleRank:
-        return ObjInt_Int(C->getModuleRank());
+        return ObjInt_UInt(C->getModuleRank());
 
     case libnormaliz::ConeProperty::HilbertBasis:
         return NmzMatrixToGAP(C->getHilbertBasis());
@@ -341,7 +405,7 @@ Obj NmzConeProperty(Obj self, Obj cone, Obj prop)
 //         TODO: Is this needed? No accessor function seems to exist
 
     case libnormaliz::ConeProperty::ReesPrimaryMultiplicity:
-        return ObjInt_Int(C->getReesPrimaryMultiplicity());
+        return NmzIntToGAP(C->getReesPrimaryMultiplicity());
 
 //     case libnormaliz::ConeProperty::StanleyDec:
 //         C->getStanleyDec();  // TODO: implement conversion?
@@ -375,7 +439,7 @@ Obj NmzEquations(Obj self, Obj cone)
     FUNC_BEGIN
     if (!IS_CONE(cone))
         ErrorQuit("<cone> must be a normaliz cone",0,0);
-    Cone<long>* C = GET_CONE(cone);
+    Cone<NMZ_INTEGER_TYPE>* C = GET_CONE(cone);
     C->compute(ConeProperties(libnormaliz::ConeProperty::SupportHyperplanes));
     return NmzMatrixToGAP(C->getEquations());
     FUNC_END
@@ -386,9 +450,9 @@ Obj NmzCongruences(Obj self, Obj cone)
     FUNC_BEGIN
     if (!IS_CONE(cone))
         ErrorQuit("<cone> must be a normaliz cone",0,0);
-    Cone<long>* C = GET_CONE(cone);
+    Cone<NMZ_INTEGER_TYPE>* C = GET_CONE(cone);
     C->compute(ConeProperties(libnormaliz::ConeProperty::SupportHyperplanes));
-    libnormaliz::Matrix<long> Cong = C->getCongruencesMatrix();
+    libnormaliz::Matrix<NMZ_INTEGER_TYPE> Cong = C->getCongruencesMatrix();
     Cong.pretty_print(cerr);
     return NmzMatrixToGAP(C->getCongruences());
     FUNC_END

@@ -34,6 +34,12 @@ extern "C" {
 #define T_NORMALIZ T_SPARE1
 #endif
 
+#if 1
+#define NMZ_INTEGER_TYPE    long
+#else
+#define NMZ_INTEGER_TYPE    mpz_class
+#endif
+
 #define FUNC_BEGIN try\
                     {
 
@@ -46,12 +52,12 @@ extern "C" {
 extern Obj TheTypeNormalizCone;
 
 #define SET_CONE(o, p) (ADDR_OBJ(o)[1] = reinterpret_cast<Obj>(p))
-#define GET_CONE(o) (reinterpret_cast<Cone<long>*>(ADDR_OBJ(o)[1]))
+#define GET_CONE(o) (reinterpret_cast<Cone<NMZ_INTEGER_TYPE>*>(ADDR_OBJ(o)[1]))
 
 #define IS_CONE(o) (TNUM_OBJ(o)==T_NORMALIZ && \
                     (UInt)(ADDR_OBJ(o)[0])==(UInt)TheTypeNormalizCone)
 
-Obj NewCone(libnormaliz::Cone<long>*);
+Obj NewCone(libnormaliz::Cone<NMZ_INTEGER_TYPE>*);
 void NormalizFreeFunc(Obj o);
 Obj NormalizTypeFunc(Obj o);
 
