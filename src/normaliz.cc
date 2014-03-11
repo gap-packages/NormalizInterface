@@ -397,9 +397,8 @@ Obj NmzConeProperty(Obj self, Obj cone, Obj prop)
     case libnormaliz::ConeProperty::IsIntegrallyClosed:
         return C->isIntegrallyClosed() ? True : False;
 
-//     case libnormaliz::ConeProperty::GeneratorsOfToricRing:
-//         C->getGeneratorsOfToricRing();   // TODO: implement conversion?
-//         break;
+     case libnormaliz::ConeProperty::GeneratorsOfToricRing:
+         return NmzMatrixToGAP(C->getGeneratorsOfToricRing());
 
 //     case libnormaliz::ConeProperty::ReesPrimary:
 //         TODO: Is this needed? No accessor function seems to exist
