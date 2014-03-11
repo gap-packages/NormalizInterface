@@ -24,9 +24,9 @@ COMPILEOPTIONS="-O3 -Wall -g $(NORMALIZ_CPPFLAGS)"
 all: $(BINDIR)/normaliz.so
 
 
-$(BINDIR)/normaliz.so: src/normaliz.cc
+$(BINDIR)/normaliz.so: src/normaliz.cc src/normaliz.h
 	mkdir -p $(BINDIR)
-	$(GAPROOT)/$(BINDIR)/gac -p ${COMPILEOPTIONS} -d -o $@ $^ \
+	$(GAPROOT)/$(BINDIR)/gac -p ${COMPILEOPTIONS} -d -o $@ $< \
 	    -L "$(LDFLAGS) $(NORMALIZ_LDFLAGS)" \
 	    -L "-lnormaliz -fopenmp -lstdc++ -lgmpxx -lgmp"
 
