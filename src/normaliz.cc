@@ -547,8 +547,6 @@ Obj NmzCongruences(Obj self, Obj cone)
         ErrorQuit("<cone> must be a normaliz cone",0,0);
     Cone<NMZ_INTEGER_TYPE>* C = GET_CONE(cone);
     C->compute(ConeProperties(libnormaliz::ConeProperty::SupportHyperplanes));
-    libnormaliz::Matrix<NMZ_INTEGER_TYPE> Cong = C->getCongruencesMatrix();
-    Cong.pretty_print(cerr);
     return NmzMatrixToGAP(C->getCongruences());
     FUNC_END
 }
