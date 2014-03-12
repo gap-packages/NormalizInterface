@@ -1,6 +1,21 @@
 LoadPackage("NormalizInterface");
 d := DirectoriesPackageLibrary("NormalizInterface", "tst");
 
+# Little helper for testing outputs
+NmzPropFingerprint := function(cone, prop)
+    local tmp;
+    if not NmzHasConeProperty(cone, prop) then
+        return fail;
+    fi;
+    tmp := NmzConeProperty(cone, prop);
+    if IsCyc(tmp) then
+        return tmp;
+    elif IsMatrix(tmp) then
+        return Length(tmp);
+    fi;
+    return tmp;
+end;
+
 HasSuffix := function(list, suffix)
   local len;
   len := Length(list);
