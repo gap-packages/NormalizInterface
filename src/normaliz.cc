@@ -25,6 +25,7 @@
 using libnormaliz::Cone;
 //using libnormaliz::ConeProperty;
 using libnormaliz::ConeProperties;
+using libnormaliz::Sublattice_Representation;
 using libnormaliz::Type::InputType;
 
 using std::map;
@@ -103,6 +104,12 @@ template<typename Integer>
 Obj NmzIntToGAP(Integer x)
 {
     return Integer::unimplemented_function;
+}
+
+template<>
+Obj NmzIntToGAP(size_t x)
+{
+    return ObjInt_UInt(x);
 }
 
 template<>
@@ -295,8 +302,8 @@ Obj NmzCompute(Obj self, Obj cone, Obj compute_list)
 
     // Cone.compute returns the not computed properties
     // we return a bool, true when everything requested was computed
-    ConeProperties NotComputed = C->compute(Props);
-    return (NotComputed.none() ? True : False );
+    ConeProperties notComputed = C->compute(Props);
+    return (notComputed.none() ? True : False );
     FUNC_END
 }
 
@@ -329,8 +336,11 @@ Obj NmzConeProperty(Obj self, Obj cone, Obj prop)
     Cone<NMZ_INTEGER_TYPE>* C = GET_CONE(cone);
     libnormaliz::ConeProperty::Enum p = libnormaliz::toConeProperty(CSTR_STRING(prop));
 
-    C->compute(ConeProperties(p));
-    
+    ConeProperties notComputed = C->compute(ConeProperties(p));
+    if (notComputed.any()) {
+        return Fail;
+    }
+
     switch (p) {
     case libnormaliz::ConeProperty::Generators:
         return NmzMatrixToGAP(C->getGenerators());
@@ -364,7 +374,7 @@ Obj NmzConeProperty(Obj self, Obj cone, Obj prop)
         return NmzIntToGAP(C->getShift());
 
     case libnormaliz::ConeProperty::ModuleRank:
-        return ObjInt_UInt(C->getModuleRank());
+        return NmzIntToGAP(C->getModuleRank());
 
     case libnormaliz::ConeProperty::HilbertBasis:
         return NmzMatrixToGAP(C->getHilbertBasis());
@@ -433,6 +443,92 @@ Obj NmzConeProperty(Obj self, Obj cone, Obj prop)
     FUNC_END
 }
 
+Obj NmzDimension(Obj self, Obj cone)
+{
+    FUNC_BEGIN
+    if (!IS_CONE(cone))
+        ErrorQuit("<cone> must be a normaliz cone",0,0);
+    Cone<NMZ_INTEGER_TYPE>* C = GET_CONE(cone);
+    return NmzIntToGAP(C->getDim());
+    FUNC_END
+}
+
+Obj NmzBasisChange(Obj self, Obj cone)
+{
+    FUNC_BEGIN
+    if (!IS_CONE(cone))
+        ErrorQuit("<cone> must be a normaliz cone",0,0);
+    Cone<NMZ_INTEGER_TYPE>* C = GET_CONE(cone);
+    Sublattice_Representation<NMZ_INTEGER_TYPE> bc = C->getBasisChange();
+    
+    // TODO: return a record instead of an array. For now,
+    // we use an array because it is simpler.
+    Obj res = NEW_PLIST(T_PLIST, 6);
+    SET_LEN_PLIST(res, 6);
+    AssPlist(res, 1, NmzIntToGAP(bc.get_dim()));
+    AssPlist(res, 2, NmzIntToGAP(bc.get_rank()));
+    AssPlist(res, 3, NmzIntToGAP(bc.get_index()));
+    AssPlist(res, 4, NmzMatrixToGAP(bc.get_A().get_elements()));
+    AssPlist(res, 5, NmzMatrixToGAP(bc.get_B().get_elements()));
+    AssPlist(res, 6, NmzIntToGAP(bc.get_c()));
+    // bc.get_congruences() is already covered by NmzCongruences
+    return res;
+    FUNC_END
+}
+
+// TODO: Do we want this?
+Obj NmzBasisChangeRank(Obj self, Obj cone)
+{
+    FUNC_BEGIN
+    if (!IS_CONE(cone))
+        ErrorQuit("<cone> must be a normaliz cone",0,0);
+    Cone<NMZ_INTEGER_TYPE>* C = GET_CONE(cone);
+    return NmzIntToGAP(C->getBasisChange().get_rank());
+    FUNC_END
+}
+
+// TODO: Do we want this?
+Obj NmzBasisChangeIndex(Obj self, Obj cone)
+{
+    FUNC_BEGIN
+    if (!IS_CONE(cone))
+        ErrorQuit("<cone> must be a normaliz cone",0,0);
+    Cone<NMZ_INTEGER_TYPE>* C = GET_CONE(cone);
+    return NmzIntToGAP(C->getBasisChange().get_index());
+    FUNC_END
+}
+
+Obj NmzGradingDenom(Obj self, Obj cone)
+{
+    FUNC_BEGIN
+    if (!IS_CONE(cone))
+        ErrorQuit("<cone> must be a normaliz cone",0,0);
+    Cone<NMZ_INTEGER_TYPE>* C = GET_CONE(cone);
+    C->compute(ConeProperties(libnormaliz::ConeProperty::Grading));
+    return NmzIntToGAP(C->getGradingDenom());
+    FUNC_END
+}
+
+Obj NmzIsInhomogeneous(Obj self, Obj cone)
+{
+    FUNC_BEGIN
+    if (!IS_CONE(cone))
+        ErrorQuit("<cone> must be a normaliz cone",0,0);
+    Cone<NMZ_INTEGER_TYPE>* C = GET_CONE(cone);
+    return C->isInhomogeneous() ? True : False;
+    FUNC_END
+}
+
+Obj NmzIsReesPrimary(Obj self, Obj cone)
+{
+    FUNC_BEGIN
+    if (!IS_CONE(cone))
+        ErrorQuit("<cone> must be a normaliz cone",0,0);
+    Cone<NMZ_INTEGER_TYPE>* C = GET_CONE(cone);
+    return C->isReesPrimary() ? True : False;
+    FUNC_END
+}
+
 Obj NmzEquations(Obj self, Obj cone)
 {
     FUNC_BEGIN
@@ -474,6 +570,13 @@ static StructGVarFunc GVarFuncs [] = {
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzHasConeProperty, 2, "cone, prop"),
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzConeProperty, 2, "cone, prop"),
 
+    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzDimension, 1, "cone"),
+    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzBasisChange, 1, "cone"),
+    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzBasisChangeRank, 1, "cone"),
+    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzBasisChangeIndex, 1, "cone"),
+    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzGradingDenom, 1, "cone"),
+    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzIsInhomogeneous, 1, "cone"),
+    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzIsReesPrimary, 1, "cone"),
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzEquations, 1, "cone"),
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzCongruences, 1, "cone"),
 
