@@ -40,14 +40,16 @@ extern "C" {
 #define NMZ_INTEGER_TYPE    mpz_class
 #endif
 
-#define FUNC_BEGIN try\
-                    {
+#define FUNC_BEGIN try {
 
-#define FUNC_END   } catch (libnormaliz::NormalizException& e) { \
-                   ErrorQuit("Normaliz exeption thrown",0,0); \
-                   return Fail; \
-                   }
-
+#define FUNC_END \
+    } catch (libnormaliz::NormalizException& e) { \
+        ErrorQuit("Normaliz exeption thrown",0,0); \
+        return Fail; \
+    } catch (...) { \
+        ErrorQuit("unknown exeption thrown",0,0); \
+        return Fail; \
+    }
 
 extern Obj TheTypeNormalizCone;
 
