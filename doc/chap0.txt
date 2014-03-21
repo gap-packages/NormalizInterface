@@ -1,1 +1,60 @@
-Placeholder
+  
+  
+                              [1X NormalizInterface [101X
+  
+  
+                           [1X [5XGAP[105X wrapper for normaliz [101X
+  
+  
+                                     0.1dev
+  
+  
+                                   ??/03/2014
+  
+  
+                               Sebastian Gutsche
+  
+                                    Max Horn
+  
+                                 Christof Söger
+  
+  
+  
+  Sebastian Gutsche
+      Email:    [7Xmailto:gutsche@mathematik.uni-kl.de[107X
+      Homepage: [7Xhttp://wwwb.math.rwth-aachen.de/~gutsche/[107X
+      Address:  [33X[0;14YDepartment of Mathematics[133X
+                [33X[0;14YUniversity of Kaiserslautern[133X
+                [33X[0;14Y67653 Kaiserslautern[133X
+                [33X[0;14YGermany[133X
+  
+  
+  Max Horn
+      Email:    [7Xmailto:max.horn@math.uni-giessen.de[107X
+      Homepage: [7Xhttp://www.quendi.de/math[107X
+      Address:  [33X[0;14YAG Algebra[133X
+                [33X[0;14YMathematisches Institut[133X
+                [33X[0;14YJustus-Liebig-Universität Gießen[133X
+                [33X[0;14YArndtstraße 2[133X
+                [33X[0;14Y35392 Gießen[133X
+                [33X[0;14YGermany[133X
+  
+  
+  Christof Söger
+      Email:    [7Xmailto:csoeger@uos.de[107X
+      Address:  [33X[0;14YInstitut für Mathematik[133X
+                [33X[0;14YAlbrechtstr. 28a[133X
+                [33X[0;14Y49076 Osnabrück[133X
+  
+  
+  
+  -------------------------------------------------------
+  
+  
+  [1XContents (NormalizInterface)[101X
+  
+  1 [33X[0;0YIntroduction[133X
+    1.1 [33X[0;0YWhat is the idea of the this package?[133X
+  
+  
+  [32X

@@ -1,17 +1,27 @@
-#############################################################################
-##  
-##  Demo PackageInfo.g for the GitHubPagesForGAP
-##
-
 SetPackageInfo( rec(
 
-PackageName := "GitHubPagesForGAP",
-
-Subtitle := "A GitHubPages generator for GAP packages",
-Version := "0.1",
-Date := "21/03/2014", # dd/mm/yyyy format
+PackageName := "NormalizInterface",
+Subtitle := "GAP wrapper for normaliz",
+Version := "0.1dev",
+Date    := "??/03/2014",
 
 Persons := [
+  rec(
+    LastName      := "Gutsche",
+    FirstNames    := "Sebastian",
+    IsAuthor      := true,
+    IsMaintainer  := true,
+    Email         := "gutsche@mathematik.uni-kl.de",
+    WWWHome       := "http://wwwb.math.rwth-aachen.de/~gutsche/",
+    PostalAddress := Concatenation(
+                       "Department of Mathematics\n",
+                       "University of Kaiserslautern\n",
+                       "67653 Kaiserslautern\n",
+                       "Germany" ),
+    Place         := "Kaiserslautern",
+    Institution   := "University of Kaiserslautern"
+  ),
+
   rec(
     LastName      := "Horn",
     FirstNames    := "Max",
@@ -22,81 +32,80 @@ Persons := [
     PostalAddress := Concatenation(
                        "AG Algebra\n",
                        "Mathematisches Institut\n",
-                       "Justus-Liebig-Universit‰t Gieﬂen\n",
-                       "Arndtstraﬂe 2\n",
-                       "35392 Gieﬂen\n",
+                       "Justus-Liebig-Universit√§t Gie√üen\n",
+                       "Arndtstra√üe 2\n",
+                       "35392 Gie√üen\n",
                        "Germany" ),
-    Place         := "Gieﬂen",
-    Institution   := "Justus-Liebig-Universit‰t Gieﬂen"
+    Place         := "Gie√üen",
+    Institution   := "Justus-Liebig-Universit√§t Gie√üen"
   ),
 
   rec(
-    LastName      := "Thor",
-    FirstNames    := "A. U.",
+    LastName      := "S√∂ger",
+    FirstNames    := "Christof",
     IsAuthor      := true,
-    IsMaintainer  := false,
-    #Email         := "author@example.com",
-  ),
-
-  rec(
-    LastName      := "Itor",
-    FirstNames    := "Jan",
-    IsAuthor      := false,
     IsMaintainer  := true,
-    #Email         := "janitor@example.com",
+    Email         := "csoeger@uos.de",
+    #WWWHome       := "http://",
+    PostalAddress := Concatenation(
+                       "Institut f√ºr Mathematik\n",
+                       "Albrechtstr. 28a\n",
+                       "49076 Osnabr√ºck" ),
+    Place         := "Osnabr√ºck",
+    Institution   := "University of Osnabr√ºck"
   ),
 ],
 
-Status := "other",
+Status         := "dev",
+#CommunicatedBy := "name (place)",
+#AcceptDate     := "mm/yyyy",
 
-# The following are not strictly necessary in your own PackageInfo.g
-# (in the sense that update.g only looks at the usual fields
-# like PackageWWWHome, ArchiveURL etc.). But they are convenient
-# if you use exactly the scheme for your package website that we propose.
-GithubUser := "fingolfin",
-GithubRepository := ~.PackageName,
-GithubWWW := Concatenation("https://github.com/", ~.GithubUser, "/", ~.GithubRepository),
+PackageWWWHome := "https://github.com/fingolfin/NormalizInterface",
 
-PackageWWWHome := Concatenation("http://", ~.GithubUser, ".github.io/", ~.GithubRepository, "/"),
+ArchiveFormats := ".tar.gz tar.bz2",
+ArchiveURL     := Concatenation( ~.PackageWWWHome, "NormalizInterface-",~.Version),
 README_URL     := Concatenation( ~.PackageWWWHome, "README" ),
 PackageInfoURL := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
-# The following assumes you are using the Github releases system. If not, adjust
-# it accordingly.
-ArchiveURL     := Concatenation(~.GithubWWW,
-                    "/releases/download/v", ~.Version, "/",
-                    ~.GithubRepository, "-", ~.Version),
 
-ArchiveFormats := ".tar.gz .tar.bz2",
-
-AbstractHTML := 
-  "This is a pseudo package that contains no actual\
-  <span class=\"pkgname\">GAP</span> code. Instead, it is a template for other\
-  GAP packages that allows to quickly setup GitHub pages.",
+AbstractHTML   := Concatenation(
+               "The NormalizInterface Package ... ",
+               "TODO"),
 
 PackageDoc := rec(
-  BookName  := "GitHubPagesForGAP",
-  ArchiveURLSubset := ["doc"],
-  HTMLStart := "doc/chap0.html",
+  BookName  := "NormalizInterface",
+  ArchiveURLSubset := [ "doc" ],
+  HTMLStart := "doc/chap0_mj.html",
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
-  LongTitle := "A GitHubPages generator for GAP packages",
+  LongTitle := "GAP wrapper for normaliz",
+  Autoload  := true
 ),
 
-# The following dependencies are fake and for testing / demo purposes
 Dependencies := rec(
-  GAP := ">=4.5.5",
-  NeededOtherPackages := [
-    ["GAPDoc", ">= 1.2"],
-    ["IO", ">= 4.1"],
-  ],
-  SuggestedOtherPackages := [["orb", ">= 4.2"]],
-  ExternalConditions := []
+  GAP                    := ">= 4.7",
+  NeededOtherPackages    := [ ],
+  SuggestedOtherPackages := [ ],
+  ExternalConditions     := [ ]
 ),
 
-AvailabilityTest := ReturnTrue,
+AvailabilityTest := function()
+    local path;
+    # test for existence of the compiled binary
+    path := DirectoriesPackagePrograms("NormalizInterface");
+    if not "normaliz" in SHOW_STAT() and
+       Filename(path, "normaliz.so") = fail then
+      return fail;
+    fi;
+    return true;
+  end,
 
-Keywords := ["GitHub pages", "GAP"]
+Autoload := false,
+
+Keywords := [
+  "normaliz",
+  "cones"
+],
+
+TestFile := "tst/testall.g",
 
 ));
-
-

@@ -1,43 +1,38 @@
-name: GitHubPagesForGAP
-version: 0.1
-date: 21/03/2014
-description: A GitHubPages generator for GAP packages
+name: NormalizInterface
+version: 0.1dev
+date: ??/03/2014
+description: GAP wrapper for normaliz
 
 authors:
+    - name: Sebastian Gutsche
+      url: http://wwwb.math.rwth-aachen.de/~gutsche/
     - name: Max Horn
       url: http://www.quendi.de/math
-    - name: A. U. Thor
+    - name: Christof Söger
+      url: mailto:csoeger@uos.de
 
 maintainers:
+    - name: Sebastian Gutsche
+      url: http://wwwb.math.rwth-aachen.de/~gutsche/
     - name: Max Horn
       url: http://www.quendi.de/math
-    - name: Jan Itor
+    - name: Christof Söger
+      url: mailto:csoeger@uos.de
 
-GAP: ">=4.5.5"
+GAP: ">= 4.7"
 
-needed-pkgs:
-    - name: "GAPDoc"
-      version: ">= 1.2"
-    - name: "IO"
-      version: ">= 4.1"
-
-suggested-pkgs:
-    - name: "orb"
-      version: ">= 4.2"
-
-www: http://fingolfin.github.io/GitHubPagesForGAP/
-readme: http://fingolfin.github.io/GitHubPagesForGAP/README
-packageinfo: http://fingolfin.github.io/GitHubPagesForGAP/PackageInfo.g
-github: https://github.com/fingolfin/GitHubPagesForGAP
+www: https://github.com/fingolfin/NormalizInterface
+readme: https://github.com/fingolfin/NormalizInterfaceREADME
+packageinfo: https://github.com/fingolfin/NormalizInterfacePackageInfo.g
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/fingolfin/GitHubPagesForGAP/releases/download/v0.1/GitHubPagesForGAP-0.1.tar.gz
-    - name: .tar.bz2
-      url: https://github.com/fingolfin/GitHubPagesForGAP/releases/download/v0.1/GitHubPagesForGAP-0.1.tar.bz2
+      url: https://github.com/fingolfin/NormalizInterfaceNormalizInterface-0.1dev.tar.gz
+    - name: tar.bz2
+      url: https://github.com/fingolfin/NormalizInterfaceNormalizInterface-0.1devtar.bz2
 
-abstract: This is a pseudo package that contains no actual  <span class="pkgname">GAP</span> code. Instead, it is a template for other  GAP packages that allows to quickly setup GitHub pages.
+abstract: The NormalizInterface Package ... TODO
 
-status: other
-doc-html: doc/chap0.html
+status: dev
+doc-html: doc/chap0_mj.html
 doc-pdf: doc/manual.pdf
