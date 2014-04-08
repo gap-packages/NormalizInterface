@@ -1,6 +1,10 @@
-LoadPackage("AutoDoc");
+#
+# Generate the manual using AutoDoc
+#
+LoadPackage("AutoDoc", "2014.03.04");
 
-AutoDoc( "NormalizInterface" : scaffold := true,
+SetPackagePath("NormalizInterface", ".");
+AutoDoc("NormalizInterface" : scaffold := true,
         autodoc := rec(
             files := [
                     "doc/intro.autodoc",
@@ -8,6 +12,6 @@ AutoDoc( "NormalizInterface" : scaffold := true,
             )
      );
 
-PrintTo( "VERSION", PackageInfo( "NormalizInterface" )[1].Version );
+PrintTo("VERSION", PackageInfo("NormalizInterface")[1].Version);
 
 QUIT;
