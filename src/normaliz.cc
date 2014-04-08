@@ -624,7 +624,7 @@ static StructInitInfo module = {
 #else
  /* type        = */ MODULE_DYNAMIC,
 #endif
- /* name        = */ "pcql",
+ /* name        = */ "normaliz",
  /* revision_c  = */ 0,
  /* revision_h  = */ 0,
  /* version     = */ 0,
@@ -637,7 +637,7 @@ static StructInitInfo module = {
  /* postRestore = */ 0
 };
 
-#ifndef PCQLSTATIC
+#ifndef NORMALIZSTATIC
 extern "C"
 StructInitInfo * Init__Dynamic ( void )
 {
@@ -646,7 +646,7 @@ StructInitInfo * Init__Dynamic ( void )
 #endif
 
 extern "C"
-StructInitInfo * Init__pcql ( void )
+StructInitInfo * Init__normaliz ( void )
 {
   return &module;
 }
