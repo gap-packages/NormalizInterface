@@ -1,4 +1,46 @@
 The GAP 4 package 'NormalizInterface'
 =====================================
 
+1 Package description
+=====================
+
+Normaliz is a software for computations with rational cones and affine
+monoids. It pursues two main computational goals: finding the Hilbert
+basis, a minimal generating system of the monoid of lattice points of a
+cone; and counting elements degree-wise in a generating function, the
+Hilbert series.
+As a recent extension, Normaliz can handle unbounded polyhedra. The
+Hilbert basis computation can be considered as solving a linear
+diophantine system of inhomogeneous equations, inequalities and
+congruences.
+
+This package encapsulates a libnormaliz cone and gives access to it in the
+GAP enviroment. In this way GAP can be used as interactive interface to
+libnormaliz.
+
+
+
+2 Installation preparation
+==========================
+
+You should use the same gmp version for GAP and libnormaliz. To ensure
+this you can use a system installed gmp for GAP by configuring it with
+
+./configure --with-gmp=system
+
+Next you need Normaliz, go to www.math.uos.de/normaliz and download the
+basic package which includes the source code. Unpack it and follow the 
+instructions for compilation with cmake in source/INSTALL. Remember to use
+the same compiler and gmp version as for GAP. 
+
+
+3 Configure NoramlizInterface
+=============================
+
+autoconf (only for developers? TODO)
+./configure --with-normaliz=<path>
+make
+
+The <path> should specify the path to the normaliz installation directory
+
 TODO

@@ -46,7 +46,7 @@ Persons := [
     IsAuthor      := true,
     IsMaintainer  := true,
     Email         := "csoeger@uos.de",
-    #WWWHome       := "http://",
+    WWWHome       := "http://www.math.uos.de/normaliz",
     PostalAddress := Concatenation(
                        "Institut für Mathematik\n",
                        "Albrechtstr. 28a\n",
