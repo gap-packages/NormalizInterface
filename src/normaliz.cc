@@ -449,7 +449,7 @@ Obj NmzDimension(Obj self, Obj cone)
     if (!IS_CONE(cone))
         ErrorQuit("<cone> must be a normaliz cone",0,0);
     Cone<NMZ_INTEGER_TYPE>* C = GET_CONE(cone);
-    return NmzIntToGAP(C->getDim());
+    return NmzIntToGAP(C->getEmbeddingDim());
     FUNC_END
 }
 
