@@ -619,7 +619,7 @@ static Int InitLibrary( StructInitInfo *module )
 *F  InitInfopl()  . . . . . . . . . . . . . . . . . table of init functions
 */
 static StructInitInfo module = {
-#ifdef PCQLSTATIC
+#ifdef NORMALIZSTATIC
  /* type        = */ MODULE_STATIC,
 #else
  /* type        = */ MODULE_DYNAMIC,
