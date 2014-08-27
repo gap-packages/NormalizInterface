@@ -6,11 +6,10 @@ AC_INIT([NormalizInterface], m4_esyscmd([tr -d '\n' < VERSION]))
 AC_CONFIG_SRCDIR([src/normaliz.cc])
 m4_include([m4/ac_find_gap.m4])
 
-AC_PROG_CXX
-
 dnl ##
 dnl ## C++ is the language 
 dnl ##
+AC_PROG_CXX
 AC_LANG([C++])
 
 dnl ##
