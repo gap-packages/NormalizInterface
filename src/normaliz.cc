@@ -171,7 +171,7 @@ bool GAPIntToNmz(Obj x, mpz_class &out)
 template<typename Integer>
 static bool GAPIntVectorToNmz(vector<Integer>& out, Obj V)
 {
-    if (!IS_DENSE_PLIST(V))
+    if (!IS_PLIST(V) || !IS_DENSE_LIST(V))
         return false;
     const int n = LEN_PLIST(V);
     out.resize(n);
@@ -187,7 +187,7 @@ static bool GAPIntVectorToNmz(vector<Integer>& out, Obj V)
 template<typename Integer>
 static bool GAPIntMatrixToNmz(vector< vector<Integer> >& out, Obj M)
 {
-    if (!IS_DENSE_PLIST(M))
+    if (!IS_PLIST(M) || !IS_DENSE_LIST(M))
         return false;
     const int nr = LEN_PLIST(M);
     out.resize(nr);
@@ -235,7 +235,7 @@ static Obj NmzMatrixToGAP(const vector< vector<Integer> >& in)
 Obj NmzCone(Obj self, Obj input_list)
 {
     FUNC_BEGIN
-    if (!IS_DENSE_PLIST(input_list))
+    if (!IS_PLIST(input_list) || !IS_DENSE_LIST(input_list))
         ErrorQuit("Input argument must be a list",0,0);
 
     map <InputType, vector< vector<NMZ_INTEGER_TYPE> > > input;
@@ -279,7 +279,7 @@ Obj NmzCompute(Obj self, Obj cone, Obj compute_list)
     FUNC_BEGIN
     if (!IS_CONE(cone))
         ErrorQuit("<cone> must be a normaliz cone",0,0);
-    if (!IS_DENSE_PLIST(compute_list))
+    if (!IS_PLIST(compute_list) || !IS_DENSE_LIST(compute_list))
         ErrorQuit("<list> must be a list of strings",0,0);
 
     ConeProperties Props;
