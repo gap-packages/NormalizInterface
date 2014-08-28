@@ -8,3 +8,13 @@ $a^x$
 Liste:
 * ab
 * cd
+
+@Chapter Functions
+
+All functions supplied by this package start with "Nmz".
+
+@Section Create a NmzCone
+
+@InsertChunk Demo example
+
+@Section Use the NmzCone

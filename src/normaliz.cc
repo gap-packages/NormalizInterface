@@ -232,6 +232,16 @@ static Obj NmzMatrixToGAP(const vector< vector<Integer> >& in)
 }
 
 
+/*
+#! @Chapter Functions
+#! @Section Create a NmzCone
+#! @Description
+#! Creates a NmzCone
+#! normaliz input as a list of alternating a string and a integer matrix
+#! @Arguments list 
+#! @Returns NmzCone
+DeclareGlobalFunction("NmzCone");
+*/
 Obj NmzCone(Obj self, Obj input_list)
 {
     FUNC_BEGIN
@@ -332,6 +342,12 @@ Obj NmzHasConeProperty(Obj self, Obj cone, Obj prop)
     FUNC_END
 }
 
+
+/* 
+#! @Description
+#! NmzConeProperty
+DeclareGlobalFunction("NmzConeProperty");
+ */
 Obj NmzConeProperty(Obj self, Obj cone, Obj prop)
 {
     FUNC_BEGIN
