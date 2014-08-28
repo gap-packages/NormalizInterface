@@ -274,28 +274,36 @@ Obj NmzCone(Obj self, Obj input_list)
     FUNC_END
 }
 
-Obj NmzCompute(Obj self, Obj cone, Obj compute_list)
+Obj NmzCompute(Obj self, Obj cone, Obj to_compute)
 {
     FUNC_BEGIN
     if (!IS_CONE(cone))
         ErrorQuit("<cone> must be a normaliz cone",0,0);
-    if (!IS_PLIST(compute_list) || !IS_DENSE_LIST(compute_list))
-        ErrorQuit("<list> must be a list of strings",0,0);
+    if (!IS_STRING_REP(to_compute) &&
+            (!IS_PLIST(to_compute) || !IS_DENSE_LIST(to_compute)) )
+        ErrorQuit("<props> must be a (list of) strings",0,0);
 
     ConeProperties Props;
 
-    const int n = LEN_PLIST(compute_list);
-
-    for (int i=0; i < n; ++i)
-    {
-        Obj prop = ELM_PLIST(compute_list, i+1);
-        if (!IS_STRING_REP(prop))
-        {
-            cerr << "Element " << i+1 << " of the input list must be a type string";
-            return Fail;
-        }
-        string prop_str(CSTR_STRING(prop));
+    if (IS_STRING_REP(to_compute)) {
+        string prop_str(CSTR_STRING(to_compute));
         Props.set( libnormaliz::toConeProperty(prop_str) );
+    }
+    else // we have a list
+    {
+        const int n = LEN_PLIST(to_compute);
+
+        for (int i=0; i < n; ++i)
+        {
+            Obj prop = ELM_PLIST(to_compute, i+1);
+            if (!IS_STRING_REP(prop))
+            {
+                cerr << "Element " << i+1 << " of the input list must be a type string";
+                return Fail;
+            }
+            string prop_str(CSTR_STRING(prop));
+            Props.set( libnormaliz::toConeProperty(prop_str) );
+        }
     }
 
     Cone<NMZ_INTEGER_TYPE>* C = GET_CONE(cone);
@@ -407,8 +415,8 @@ Obj NmzConeProperty(Obj self, Obj cone, Obj prop)
     case libnormaliz::ConeProperty::IsIntegrallyClosed:
         return C->isIntegrallyClosed() ? True : False;
 
-     case libnormaliz::ConeProperty::GeneratorsOfToricRing:
-         return NmzMatrixToGAP(C->getGeneratorsOfToricRing());
+    case libnormaliz::ConeProperty::GeneratorsOfToricRing:
+        return NmzMatrixToGAP(C->getGeneratorsOfToricRing());
 
 //     case libnormaliz::ConeProperty::ReesPrimary:
 //         TODO: Is this needed? No accessor function seems to exist
@@ -416,22 +424,18 @@ Obj NmzConeProperty(Obj self, Obj cone, Obj prop)
     case libnormaliz::ConeProperty::ReesPrimaryMultiplicity:
         return NmzIntToGAP(C->getReesPrimaryMultiplicity());
 
+// the following are very special so we do not support a conversion
 //     case libnormaliz::ConeProperty::StanleyDec:
-//         C->getStanleyDec();  // TODO: implement conversion?
+//         C->getStanleyDec();
 //         break;
-
 //     case libnormaliz::ConeProperty::InclusionExclusionData:
-//         C->getInclusionExclusionData();  // TODO: implement conversion?
+//         C->getInclusionExclusionData();
 //         break;
 
+//     the following properties are compute options and do not return anything
 //     case libnormaliz::ConeProperty::DualMode:
-//         TODO: Is this needed? No accessor function seems to exist
-
 //     case libnormaliz::ConeProperty::ApproximateRatPolytope:
-//         TODO: Is this needed? No accessor function seems to exist
-
 //     case libnormaliz::ConeProperty::DefaultMode:
-//         TODO: Is this needed? No accessor function seems to exist
 
     default:
         // Case not handled. Should signal an error
@@ -440,6 +444,20 @@ Obj NmzConeProperty(Obj self, Obj cone, Obj prop)
 
     return Fail;
 
+    FUNC_END
+}
+
+
+// set the global verbose value in libnormaliz
+// returns the previous value
+Obj NmzVerbose(Obj self, Obj value)
+{
+    FUNC_BEGIN
+    if (value != True && value != False)
+        ErrorQuit("<value> must be a boolean value",0,0);
+    bool old_value = libnormaliz::verbose;
+    libnormaliz::verbose = (value == True);
+    return old_value ? True : False;
     FUNC_END
 }
 
@@ -563,7 +581,8 @@ typedef Obj (* GVarFunc)(/*arguments*/);
 // Table of functions to export
 static StructGVarFunc GVarFuncs [] = {
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzCone, 1, "list"),
-    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzCompute, 2, "cone, list"),
+    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzCompute, 2, "cone, props"),
+    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzVerbose, 1, "value"),
 
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzHasConeProperty, 2, "cone, prop"),
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzConeProperty, 2, "cone, prop"),
