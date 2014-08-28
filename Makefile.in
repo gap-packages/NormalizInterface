@@ -48,7 +48,7 @@ $(top_srcdir)/configure: $(top_srcdir)/configure.ac
 
 lib/cone_property_function.gi: lib/cone_property_function.gd
 
-lib/cone_property_function.gd:
+lib/cone_property_function.gd: cone_property_install_script.sh
 	./cone_property_install_script.sh
 
 .PHONY: all static clean
