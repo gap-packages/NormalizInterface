@@ -36,7 +36,7 @@ NmzEquations(D);
 #! @EndChunk
 
 
-#! @BeginChunk Demo example equation
+#! @BeginChunk Demo example inhom equation
 #! @BeginExample
 P := NmzCone(["inhom_equations",[[1,2,-3,1]], "grading", [[1,1,1]]]);
 #! <a Normaliz cone object>
@@ -47,7 +47,7 @@ NmzIsInhomogeneous(P);
 NmzHilbertBasis(P);
 #! [ [ 1, 1, 1, 0 ], [ 3, 0, 1, 0 ], [ 0, 3, 2, 0 ] ]
 NmzModuleGenerators(P);
-#! [ [ 0, 0, 1, 3 ] ]
+#! [ [ 0, 1, 1, 1 ], [ 2, 0, 1, 1 ] ]
 #! @EndExample
 #! @EndChunk
 

@@ -16,5 +16,7 @@ All functions supplied by this package start with "Nmz".
 @Section Create a NmzCone
 
 @InsertChunk Demo example
+@InsertChunk Demo example equation
+@InsertChunk Demo example inhom equation
 
 @Section Use the NmzCone
