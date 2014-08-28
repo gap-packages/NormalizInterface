@@ -22,7 +22,7 @@ COMPILEOPTIONS="-O3 -Wall -g $(NORMALIZ_CPPFLAGS)"
 #COMPILEOPTIONS="-Wall -g"
 #COMPILEOPTIONS+=""
 
-all: $(BINDIR)/normaliz.so
+all: $(BINDIR)/normaliz.so lib/cone_property_function.gd lib/cone_property_function.gi
 
 
 $(BINDIR)/normaliz.so: src/normaliz.cc src/normaliz.h
@@ -45,5 +45,10 @@ $(top_builddir)/config.status: $(top_srcdir)/configure $(CONFIG_STATUS_DEPENDENC
 
 $(top_srcdir)/configure: $(top_srcdir)/configure.ac
 	cd $(top_srcdir) && autoreconf
+
+lib/cone_property_function.gi: lib/cone_property_function.gd
+
+lib/cone_property_function.gd:
+	./cone_property_install_script.sh
 
 .PHONY: all static clean
