@@ -16,6 +16,7 @@ CPPFLAGS=@CPPFLAGS@
 LDFLAGS=@LDFLAGS@
 NORMALIZ_CPPFLAGS=@NORMALIZ_CPPFLAGS@
 NORMALIZ_LDFLAGS=@NORMALIZ_LDFLAGS@
+NORMALIZ_LDPATH=@NORMALIZ_LDPATH@
 
 COMPILEOPTIONS="-O3 -Wall -g $(NORMALIZ_CPPFLAGS)"
 #COMPILEOPTIONS="-Wall -g"
@@ -28,7 +29,7 @@ $(BINDIR)/normaliz.so: src/normaliz.cc src/normaliz.h
 	mkdir -p $(BINDIR)
 	$(GAPROOT)/$(BINDIR)/gac -p ${COMPILEOPTIONS} -d -o $@ $< \
 	    -L "$(LDFLAGS) $(NORMALIZ_LDFLAGS)" \
-	    -L "-lnormaliz -fopenmp -lstdc++ -lgmpxx -lgmp"
+	    -L "-lnormaliz -Wl,-rpath=$(NORMALIZ_LDPATH)"
 
 clean:
 	rm -rf $(BINDIR)

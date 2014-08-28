@@ -2,8 +2,8 @@ SetPackageInfo( rec(
 
 PackageName := "NormalizInterface",
 Subtitle := "GAP wrapper for normaliz",
-Version := "0.1dev",
-Date    := "??/03/2014",
+Version := "0.1.dev",
+Date    := "26/08/2014",
 
 Persons := [
   rec(
@@ -50,7 +50,8 @@ Persons := [
     PostalAddress := Concatenation(
                        "Institut für Mathematik\n",
                        "Albrechtstr. 28a\n",
-                       "49076 Osnabrück" ),
+                       "49076 Osnabrück\n",
+                       "Germany" ),
     Place         := "Osnabrück",
     Institution   := "University of Osnabrück"
   ),

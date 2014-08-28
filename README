@@ -31,13 +31,15 @@ this you can use a system installed gmp for GAP by configuring it with
 Next you need Normaliz, go to www.math.uos.de/normaliz and download the
 basic package which includes the source code. Unpack it and follow the 
 instructions for compilation with cmake in source/INSTALL. Remember to use
-the same compiler and gmp version as for GAP. 
+the same compiler and gmp version as for GAP.
+Then install normaliz to a path of your choice, it can easily be configured
+with cmake.
 
 
 3 Configure NoramlizInterface
 =============================
 
-autoconf (only for developers? TODO)
+./autogen.sh (only for developers? TODO) (need autoconf and automake)
 ./configure --with-normaliz=<path>
 make
 
