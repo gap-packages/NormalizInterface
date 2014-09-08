@@ -64,7 +64,9 @@ Status         := "dev",
 PackageWWWHome := "https://github.com/fingolfin/NormalizInterface",
 
 ArchiveFormats := ".tar.gz tar.bz2",
-ArchiveURL     := Concatenation( ~.PackageWWWHome, "NormalizInterface-",~.Version),
+ArchiveURL     := Concatenation("https://github.com/fingolfin/NormalizInterface/",
+                                "releases/download/v", ~.Version,
+                                "/NormalizInterface-", ~.Version),
 README_URL     := Concatenation( ~.PackageWWWHome, "README" ),
 PackageInfoURL := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
 
