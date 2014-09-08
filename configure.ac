@@ -1,13 +1,22 @@
 dnl ##
 dnl ## Process this file with autoconf to produce a configure script.
 dnl ## 
+
+dnl ##
+dnl ## Setup autoconf
+dnl ##
 AC_PREREQ([2.68])
 AC_INIT([NormalizInterface], m4_esyscmd([tr -d '\n' < VERSION]))
 AC_CONFIG_SRCDIR([src/normaliz.cc])
 m4_include([m4/ac_find_gap.m4])
 
 dnl ##
-dnl ## C++ is the language 
+dnl ## Get canonical host info
+dnl ##
+AC_CANONICAL_HOST
+
+dnl ##
+dnl ## C++ is the language
 dnl ##
 AC_PROG_CXX
 AC_LANG([C++])
@@ -21,6 +30,10 @@ dnl ##
 dnl ## Locate the GAP root dir
 dnl ##
 AC_FIND_GAP
+
+dnl ##
+dnl ## Locate Normaliz
+dnl ##
 
 AC_ARG_WITH([normaliz],
     [AC_HELP_STRING([--with-normaliz=<path>], [specify root of Normaliz installation])],
