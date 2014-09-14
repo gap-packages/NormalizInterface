@@ -1,4 +1,4 @@
-_NORMALIZ_SO:=Filename(DirectoriesPackagePrograms("NormalizInterface"), "normaliz.so");
+_NORMALIZ_SO:=Filename(DirectoriesPackagePrograms("NormalizInterface"), "NormalizInterface.so");
 if _NORMALIZ_SO <> fail then
     LoadDynamicModule(_NORMALIZ_SO);
 fi;

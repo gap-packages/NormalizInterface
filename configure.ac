@@ -8,12 +8,21 @@ dnl ##
 AC_PREREQ([2.68])
 AC_INIT([NormalizInterface], m4_esyscmd([tr -d '\n' < VERSION]))
 AC_CONFIG_SRCDIR([src/normaliz.cc])
-m4_include([m4/ac_find_gap.m4])
+AC_CONFIG_HEADER([src/pkgconfig.h:cnf/pkgconfig.h.in])
+AC_CONFIG_MACRO_DIR([m4])
+AC_CONFIG_AUX_DIR([cnf])
 
 dnl ##
 dnl ## Get canonical host info
 dnl ##
 AC_CANONICAL_HOST
+
+dnl ##
+dnl ## Setup automake
+dnl ##
+AM_INIT_AUTOMAKE([1.11 -Wall foreign subdir-objects])
+AM_SILENT_RULES([yes])
+AM_PROG_AR
 
 dnl ##
 dnl ## C++ is the language
@@ -22,9 +31,10 @@ AC_PROG_CXX
 AC_LANG([C++])
 
 dnl ##
-dnl ## Checks for system header files.
+dnl ## Setup libtool (for building the GAP kernel extension)
 dnl ##
-AC_CHECK_HEADERS([stdlib.h])
+LT_PREREQ([2.4.2])
+LT_INIT([disable-static dlopen win32-dll])
 
 dnl ##
 dnl ## Locate the GAP root dir
@@ -46,6 +56,30 @@ NORMALIZ_LDFLAGS="-L$NORMALIZ_LDPATH"
 AC_SUBST(NORMALIZ_LDPATH)
 AC_SUBST(NORMALIZ_LDFLAGS)
 AC_SUBST(NORMALIZ_CPPFLAGS)
+
+dnl ##
+dnl ## Detect pointer size to distinguish 32 and 64 bit builds
+dnl ##
+AC_CHECK_SIZEOF([void **])
+
+dnl ##
+dnl ## Detect Windows resp. Cygwin
+dnl ##
+case $host_os in
+  *cygwin* ) CYGWIN=yes;;
+         * ) CYGWIN=no;;
+esac
+AM_CONDITIONAL([SYS_IS_CYGWIN], [test "$CYGWIN" = "yes"])
+if test "$CYGWIN" = "yes"; then
+  AC_DEFINE(SYS_IS_CYGWIN32, 1, are we on CYGWIN?)
+else
+  AC_DEFINE(SYS_IS_CYGWIN32, 0, are we on CYGWIN?)
+fi
+
+dnl ##
+dnl ## Rebuild configure if VERSION file changes
+dnl ##
+AC_SUBST([CONFIG_STATUS_DEPENDENCIES], ['$(top_srcdir)/VERSION'])
 
 dnl ##
 dnl ## Finally, generate the Makefiles and output everything

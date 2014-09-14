@@ -95,8 +95,8 @@ AvailabilityTest := function()
     local path;
     # test for existence of the compiled binary
     path := DirectoriesPackagePrograms("NormalizInterface");
-    if not "normaliz" in SHOW_STAT() and
-       Filename(path, "normaliz.so") = fail then
+    if not "NormalizInterface" in SHOW_STAT() and
+       Filename(path, "NormalizInterface.so") = fail then
       return fail;
     fi;
     return true;
