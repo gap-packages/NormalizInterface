@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/bin/bash -e
 
-property_list="\
+properties="\
 Generators \
 ExtremeRays \
 VerticesOfPolyhedron \
@@ -35,20 +35,45 @@ DefaultMode \
 "
 #IsDeg1Generated \
 
-echo "## This is an automatically generated file" > lib/cone_property_function.gd
-echo "" >> lib/cone_property_function.gd
-echo "" >> lib/cone_property_function.gd
+GD_FILE=lib/cone_property_function.gd
+GI_FILE=lib/cone_property_function.gi
 
-echo "## This is an automatically generated file" > lib/cone_property_function.gi
-echo "" >> lib/cone_property_function.gi
-echo "" >> lib/cone_property_function.gi
+#
+# Create the .gd file
+#
 
-for i in $property_list
-  do
-    sed s/{{PropertyString}}/$i/g < templates/cone_property_function.gd.tpl >> lib/cone_property_function.gd
-    echo "" >> lib/cone_property_function.gd
-    echo "" >> lib/cone_property_function.gd
-    sed s/{{PropertyString}}/$i/g < templates/cone_property_function.gi.tpl >> lib/cone_property_function.gi
-    echo "" >> lib/cone_property_function.gi
-    echo "" >> lib/cone_property_function.gi
+cat > $GD_FILE <<EOF
+## This is an automatically generated file
+
+
+EOF
+
+for prop in $properties ; do
+cat  >> $GD_FILE <<EOF
+#! @Description
+#!  This is an alias for NmzConeProperty( cone, "$prop" );
+#! @Arguments cone
+DeclareGlobalFunction( "Nmz$prop" );
+
+EOF
+done
+
+#
+# Create the .gi file
+#
+
+cat > $GI_FILE <<EOF
+## This is an automatically generated file
+
+
+EOF
+
+for prop in $properties ; do
+cat  >> $GI_FILE <<EOF
+InstallGlobalFunction( Nmz$prop,
+  function(cone)
+    return NmzConeProperty(cone, "$prop" );
+end );
+
+EOF
 done
