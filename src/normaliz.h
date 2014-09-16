@@ -34,11 +34,11 @@ extern "C" {
 #define T_NORMALIZ T_SPARE1
 #endif
 
-#if 1
-#define NMZ_INTEGER_TYPE    long
-#else
-#define NMZ_INTEGER_TYPE    mpz_class
-#endif
+
+enum NmzConeType {
+    NMZ_LONG_INT_CONE_TYPE = 0,
+    NMZ_GMP_CONE_TYPE = 1
+};
 
 #define FUNC_BEGIN try {
 
@@ -53,13 +53,24 @@ extern "C" {
 
 extern Obj TheTypeNormalizCone;
 
-#define SET_CONE(o, p) (ADDR_OBJ(o)[1] = reinterpret_cast<Obj>(p))
-#define GET_CONE(o) (reinterpret_cast<Cone<NMZ_INTEGER_TYPE>*>(ADDR_OBJ(o)[1]))
+template<typename Integer>
+inline void SET_CONE(Obj o, libnormaliz::Cone<Integer>* p) {
+    ADDR_OBJ(o)[1] = reinterpret_cast<Obj>(p);
+}
 
-#define IS_CONE(o) (TNUM_OBJ(o)==T_NORMALIZ && \
-                    (UInt)(ADDR_OBJ(o)[0])==(UInt)TheTypeNormalizCone)
+template<typename Integer>
+inline libnormaliz::Cone<Integer>* GET_CONE(Obj o) {
+    return reinterpret_cast<libnormaliz::Cone<Integer>*>(ADDR_OBJ(o)[1]);
+}
 
-Obj NewCone(libnormaliz::Cone<NMZ_INTEGER_TYPE>*);
+#define IS_CONE(o) (TNUM_OBJ(o) == T_NORMALIZ)
+
+#define IS_LONG_INT_CONE(o) (IS_CONE(o) && ((Int)(ADDR_OBJ(o)[0]) == NMZ_LONG_INT_CONE_TYPE))
+#define IS_GMP_CONE(o) (IS_CONE(o) && ((Int)(ADDR_OBJ(o)[0]) == NMZ_GMP_CONE_TYPE))
+
+
+Obj NewCone(libnormaliz::Cone<long>*);
+Obj NewCone(libnormaliz::Cone<mpz_class>*);
 void NormalizFreeFunc(Obj o);
 Obj NormalizTypeFunc(Obj o);
 

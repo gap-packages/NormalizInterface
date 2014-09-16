@@ -1,30 +1,16 @@
 ##
 InstallMethod( ViewString,
                "for a Normaliz cone object",
-               [ IsNormalizConeObject ],
+               [ IsNormalizLongIntConeObject ],
 function( r )
     # TODO: May print more information when present
-    return "<a Normaliz cone object>";
+    return "<a Normaliz cone object with long int coefficients>";
 end );
 
-
-# InstallGlobalFunction( NmzHilbertBasis,
-#   function(cone)
-#     return NmzConeProperty(cone, "HilbertBasis");
-# end );
-# 
-# BindGlobal("NmzDeg1Elements", function(cone)
-#     return NmzConeProperty(cone, "Deg1Elements");
-# end );
-# 
-# BindGlobal("NmzExtremeRays", function(cone)
-#     return NmzConeProperty(cone, "ExtremeRays");
-# end );
-# 
-# BindGlobal("NmzSupportHyperplanes", function(cone)
-#     return NmzConeProperty(cone, "SupportHyperplanes");
-# end );
-# 
-# BindGlobal("NmzGrading", function(cone)
-#     return NmzConeProperty(cone, "Grading");
-# end );
+InstallMethod( ViewString,
+               "for a Normaliz cone object",
+               [ IsNormalizGMPConeObject ],
+function( r )
+    # TODO: May print more information when present
+    return "<a Normaliz cone object with GMP coefficients>";
+end );
