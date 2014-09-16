@@ -20,7 +20,7 @@ NormalizInterface_la_LDFLAGS += -no-undefined -version-info 0:0:0 -Wl,$(GAPROOT)
 endif
 NormalizInterface_la_LIBADD = -lnormaliz
 
-all-local: NormalizInterface.la lib/cone_property_function.gi
+all-local: NormalizInterface.la lib/cone_property_wrappers.gi
 	$(mkdir_p) $(top_srcdir)/$(BINARCHDIR)
 if SYS_IS_CYGWIN
 	cp .libs/NormalizInterface.dll $(GAPINSTALLLIB)
@@ -44,7 +44,7 @@ clean-doc:
 doc/manual.six: doc/*.xml PackageInfo.g
 	($(GAPROOT)/bin/gap.sh -A makedoc.g)
 
-lib/cone_property_function.gi: lib/cone_property_function.gd
+lib/cone_property_wrappers.gi: lib/cone_property_wrappers.gd
 
-lib/cone_property_function.gd: cone_property_install_script.sh
-	./cone_property_install_script.sh
+lib/cone_property_wrappers.gd: gen_cone_property_wrappers.sh
+	./gen_cone_property_wrappers.sh

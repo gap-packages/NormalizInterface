@@ -35,8 +35,8 @@ DefaultMode \
 "
 #IsDeg1Generated \
 
-GD_FILE=lib/cone_property_function.gd
-GI_FILE=lib/cone_property_function.gi
+GD_FILE=lib/cone_property_wrappers.gd
+GI_FILE=lib/cone_property_wrappers.gi
 
 #
 # Create the .gd file

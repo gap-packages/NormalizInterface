@@ -6,4 +6,4 @@ Unbind(_NORMALIZ_SO);
 
 ReadPackage("NormalizInterface", "lib/normaliz.gd");
 
-ReadPackage("NormalizInterface", "lib/cone_property_function.gd" );
+ReadPackage("NormalizInterface", "lib/cone_property_wrappers.gd" );
