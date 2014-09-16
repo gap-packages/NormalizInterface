@@ -2,6 +2,20 @@
 
 @Section What is the idea of the this package?
 
+Normaliz is a software for computations with rational cones and affine
+monoids. It pursues two main computational goals: finding the Hilbert
+basis, a minimal generating system of the monoid of lattice points of a
+cone; and counting elements degree-wise in a generating function, the
+Hilbert series.
+As a recent extension, Normaliz can handle unbounded polyhedra. The
+Hilbert basis computation can be considered as solving a linear
+diophantine system of inhomogeneous equations, inequalities and
+congruences.
+
+This package encapsulates a libnormaliz cone and gives access to it in the
+GAP enviroment. In this way GAP can be used as interactive interface to
+libnormaliz.
+
 bla
 $a^x$
 
@@ -11,12 +25,48 @@ Liste:
 
 @Chapter Functions
 
-All functions supplied by this package start with "Nmz".
+In this chapter we describe the functions offered by <A>NormalizInterface</A>. All functions supplied by this package start with "Nmz". For examples see the chapter "Examples".
+
 
 @Section Create a NmzCone
 
-@InsertChunk Demo example
-@InsertChunk Demo example equation
-@InsertChunk Demo example inhom equation
+To create a cone object use <A>NmzCone</A>.
+
+The currently possible input types are
+    integral_closure,
+    polyhedron,
+    normalization,
+    polytope,
+    rees_algebra,
+    inequalities,
+    strict_inequalities,
+    signs,
+    strict_signs,
+    equations,
+    congruences,
+    inhom_inequalities,
+    dehomogenization,
+    inhom_equations,
+    inhom_congruences,
+    lattice_ideal,
+    grading,
+    excluded_faces.
+
+See the Normaliz manual of for more details.
+
 
 @Section Use the NmzCone
+
+@Chapter Examples
+
+@Section generators
+
+@InsertChunk Demo example
+
+@Section equations
+@InsertChunk Demo example equation
+
+@Section inhomogeneous equations
+@InsertChunk Demo example inhom equation
+
+@Section combined input
