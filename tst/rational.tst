@@ -8,7 +8,7 @@ gap> cone := NmzCone(["integral_closure", M, "grading", gr]);;
 gap> NmzCompute(cone, ["DefaultMode"]);
 true
 gap> NmzPropFingerprint(cone, "OriginalMonoidGenerators");
-fail
+3
 gap> NmzPropFingerprint(cone, "HilbertBasis");
 8
 gap> NmzPropFingerprint(cone, "Deg1Elements");

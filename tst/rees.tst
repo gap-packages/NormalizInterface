@@ -14,7 +14,7 @@ gap> cone := NmzCone(["rees_algebra", M]);;
 gap> NmzCompute(cone, ["DefaultMode"]);
 true
 gap> NmzPropFingerprint(cone, "OriginalMonoidGenerators");
-fail
+16
 gap> NmzPropFingerprint(cone, "HilbertBasis");
 17
 gap> NmzPropFingerprint(cone, "Deg1Elements");

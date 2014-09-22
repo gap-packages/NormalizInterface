@@ -14,7 +14,7 @@ gap> cone := NmzCone(["normalization", M]);;
 gap> NmzCompute(cone, ["DefaultMode"]);
 true
 gap> NmzPropFingerprint(cone, "OriginalMonoidGenerators");
-fail
+10
 gap> NmzPropFingerprint(cone, "HilbertBasis");
 11
 gap> NmzPropFingerprint(cone, "Deg1Elements");
