@@ -42,7 +42,8 @@ GI_FILE=lib/cone_property_wrappers.gi
 cat > $GD_FILE <<EOF
 ## This is an automatically generated file
 
-
+#! @Chapter Functions
+#! @Section Cone properties
 EOF
 
 for prop in $properties ; do
