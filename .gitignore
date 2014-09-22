@@ -54,4 +54,6 @@ lib/cone_property_function.*
 /Normaliz
 gh-pages/
 
-
+/test-suite.log
+/tst/run-tap.log
+/tst/run-tap.trs

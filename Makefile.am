@@ -20,14 +20,16 @@ NormalizInterface_la_LDFLAGS += -no-undefined -version-info 0:0:0 -Wl,$(GAPROOT)
 endif
 NormalizInterface_la_LIBADD = $(NORMALIZ_LDFLAGS) -lnormaliz
 
-all-local: NormalizInterface.la lib/cone_property_wrappers.gi
+all-local: $(GAPINSTALLLIB) lib/cone_property_wrappers.gi
+	@echo "SUCCESS!"
+
+$(GAPINSTALLLIB): NormalizInterface.la
 	$(mkdir_p) $(BINARCHDIR)
 if SYS_IS_CYGWIN
 	cp .libs/NormalizInterface.dll $(GAPINSTALLLIB)
 else
 	cp .libs/NormalizInterface.so $(GAPINSTALLLIB)
 endif
-	@echo "SUCCESS!"
 
 clean-local: clean-doc
 	rm -rf $(BINARCHDIR)
@@ -65,3 +67,8 @@ BUILT_SOURCES = \
 CLEANFILES = \
 	lib/cone_property_wrappers.gi \
 	lib/cone_property_wrappers.gd
+
+AM_COLOR_TESTS = always
+TESTS_ENVIRONMENT = GAP_EXECUTABLE='$(GAPROOT)/bin/gap.sh'
+TESTS = tst/run-tap.test
+TEST_LOG_DRIVER = $(SHELL) $(top_srcdir)/tst/tap-driver.sh
