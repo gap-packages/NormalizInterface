@@ -7,7 +7,7 @@
 ACLOCAL_AMFLAGS = -I m4
 
 BINARCHDIR = bin/$(GAPARCH)
-GAPINSTALLLIB = $(abs_top_srcdir)/$(BINARCHDIR)/NormalizInterface.so
+GAPINSTALLLIB = $(BINARCHDIR)/NormalizInterface.so
 
 lib_LTLIBRARIES = NormalizInterface.la
 
@@ -21,7 +21,7 @@ endif
 NormalizInterface_la_LIBADD = $(NORMALIZ_LDFLAGS) -lnormaliz
 
 all-local: NormalizInterface.la lib/cone_property_wrappers.gi
-	$(mkdir_p) $(top_srcdir)/$(BINARCHDIR)
+	$(mkdir_p) $(BINARCHDIR)
 if SYS_IS_CYGWIN
 	cp .libs/NormalizInterface.dll $(GAPINSTALLLIB)
 else
@@ -30,9 +30,10 @@ endif
 	@echo "SUCCESS!"
 
 clean-local: clean-doc
+	rm -rf $(BINARCHDIR)
 
 distclean-local: clean-doc
-	rm -rf bin/*
+	rm -rf bin
 
 doc:	doc/manual.six
 
@@ -41,10 +42,26 @@ clean-doc:
 	rm -f doc/NormalizInterface.*
 	rm -f doc/*.{css,html,js,txt,xml}
 
-doc/manual.six: doc/*.xml PackageInfo.g
+DOC_FILES = \
+	PackageInfo.g \
+	doc/*.autodoc \
+	src/normaliz.cc \
+	lib/cone_property_wrappers.gd \
+	lib/normaliz.gd \
+	makedoc.g
+
+doc/manual.six: $(DOC_FILES)
 	($(GAPROOT)/bin/gap.sh -A makedoc.g)
 
 lib/cone_property_wrappers.gi: lib/cone_property_wrappers.gd
 
 lib/cone_property_wrappers.gd: gen_cone_property_wrappers.sh
 	./gen_cone_property_wrappers.sh
+
+BUILT_SOURCES = \
+	lib/cone_property_wrappers.gi \
+	lib/cone_property_wrappers.gd
+
+CLEANFILES = \
+	lib/cone_property_wrappers.gi \
+	lib/cone_property_wrappers.gd
