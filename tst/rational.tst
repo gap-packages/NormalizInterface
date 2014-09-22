@@ -7,7 +7,7 @@ gap> gr := [ [ 0, 0, 1 ] ];;
 gap> cone := NmzCone(["integral_closure", M, "grading", gr]);;
 gap> NmzCompute(cone, ["DefaultMode"]);
 true
-gap> NmzPropFingerprint(cone, "GeneratorsOfToricRing");
+gap> NmzPropFingerprint(cone, "OriginalMonoidGenerators");
 fail
 gap> NmzPropFingerprint(cone, "HilbertBasis");
 8

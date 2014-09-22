@@ -1,5 +1,5 @@
 gap> NmzCompute(cone, ["DefaultMode"]);
-gap> NmzPropFingerprint(cone, "GeneratorsOfToricRing");
+gap> NmzPropFingerprint(cone, "OriginalMonoidGenerators");
 gap> NmzPropFingerprint(cone, "HilbertBasis");
 gap> NmzPropFingerprint(cone, "Deg1Elements");
 gap> # TODO: ReesPrimary

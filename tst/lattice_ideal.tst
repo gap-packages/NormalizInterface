@@ -6,7 +6,7 @@ gap> M := [
 gap> cone := NmzCone(["lattice_ideal", M]);;
 gap> NmzCompute(cone, ["DefaultMode"]);
 true
-gap> NmzPropFingerprint(cone, "GeneratorsOfToricRing");
+gap> NmzPropFingerprint(cone, "OriginalMonoidGenerators");
 6
 gap> NmzPropFingerprint(cone, "HilbertBasis");
 9

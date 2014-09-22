@@ -19,7 +19,7 @@ gap> M := [
 gap> cone := NmzCone(["integral_closure", M]);;
 gap> NmzCompute(cone, ["DefaultMode"]);
 true
-gap> NmzPropFingerprint(cone, "GeneratorsOfToricRing");
+gap> NmzPropFingerprint(cone, "OriginalMonoidGenerators");
 fail
 gap> NmzPropFingerprint(cone, "HilbertBasis");
 17

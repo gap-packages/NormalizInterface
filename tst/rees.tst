@@ -13,7 +13,7 @@ gap> M := [
 gap> cone := NmzCone(["rees_algebra", M]);;
 gap> NmzCompute(cone, ["DefaultMode"]);
 true
-gap> NmzPropFingerprint(cone, "GeneratorsOfToricRing");
+gap> NmzPropFingerprint(cone, "OriginalMonoidGenerators");
 fail
 gap> NmzPropFingerprint(cone, "HilbertBasis");
 17
