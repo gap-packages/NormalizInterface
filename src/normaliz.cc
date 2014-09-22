@@ -438,6 +438,12 @@ static Obj _NmzConeProperty(Obj cone, Obj prop)
     case libnormaliz::ConeProperty::Shift:
         return NmzIntToGAP(C->getShift());
 
+    case libnormaliz::ConeProperty::AffineDim:
+        return NmzIntToGAP(C->getAffineDim());
+
+    case libnormaliz::ConeProperty::RecessionRank:
+        return NmzIntToGAP(C->getRecessionRank());
+
     case libnormaliz::ConeProperty::ModuleRank:
         return NmzIntToGAP(C->getModuleRank());
 
@@ -457,11 +463,11 @@ static Obj _NmzConeProperty(Obj cone, Obj prop)
     case libnormaliz::ConeProperty::Grading:
         return NmzVectorToGAP(C->getGrading());
 
+    case libnormaliz::ConeProperty::Dehomogenization:
+        return NmzVectorToGAP(C->getGrading());
+
     case libnormaliz::ConeProperty::IsPointed:
         return C->isPointed() ? True : False;
-
-//     case libnormaliz::ConeProperty::IsDeg1Generated:
-//         TODO: Is this needed? No accessor function seems to exist
 
     case libnormaliz::ConeProperty::IsDeg1ExtremeRays:
         return C->isDeg1ExtremeRays() ? True : False;
@@ -472,11 +478,11 @@ static Obj _NmzConeProperty(Obj cone, Obj prop)
     case libnormaliz::ConeProperty::IsIntegrallyClosed:
         return C->isIntegrallyClosed() ? True : False;
 
-    case libnormaliz::ConeProperty::GeneratorsOfToricRing:
-        return NmzMatrixToGAP(C->getGeneratorsOfToricRing());
+    case libnormaliz::ConeProperty::OriginalMonoidGenerators:
+        return NmzMatrixToGAP(C->getOriginalMonoidGenerators());
 
-//     case libnormaliz::ConeProperty::ReesPrimary:
-//         TODO: Is this needed? No accessor function seems to exist
+    case libnormaliz::ConeProperty::ReesPrimary:
+        return C->isReesPrimary() ? True : False;
 
     case libnormaliz::ConeProperty::ReesPrimaryMultiplicity:
         return NmzIntToGAP(C->getReesPrimaryMultiplicity());
@@ -494,6 +500,9 @@ static Obj _NmzConeProperty(Obj cone, Obj prop)
 //     case libnormaliz::ConeProperty::ApproximateRatPolytope:
 //     case libnormaliz::ConeProperty::DefaultMode:
 
+    case libnormaliz::ConeProperty::DualMode:
+    case libnormaliz::ConeProperty::DefaultMode:
+        return True;
     default:
         // Case not handled. Should signal an error
         break;

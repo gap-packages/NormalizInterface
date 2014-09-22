@@ -22,15 +22,12 @@ IsPointed \
 IsDeg1ExtremeRays \
 IsDeg1HilbertBasis \
 IsIntegrallyClosed \
-GeneratorsOfToricRing \
+OriginalMonoidGenerators \
 ReesPrimary \
 ReesPrimaryMultiplicity \
-StanleyDec \
 ExcludedFaces \
 Dehomogenization \
-InclusionExclusionData \
 DualMode \
-ApproximateRatPolytope \
 DefaultMode \
 "
 #IsDeg1Generated \
