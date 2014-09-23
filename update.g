@@ -1,3 +1,23 @@
+#
+# GitHubgPagesForGAP - a template for using GitHub Pages within GAP packages
+#
+# Copyright (c) 2013-2014 Max Horn
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+#
+
 # Parse PackageInfo.g and regenerate _data/package.yml from it.
 
 PrintPeopleList := function(stream, people)
@@ -14,10 +34,14 @@ PrintPeopleList := function(stream, people)
 end;
 
 PrintPackageList := function(stream, pkgs)
-    local p;
+    local p, pkginfo;
     for p in pkgs do
         AppendTo(stream, "    - name: \"", p[1], "\"\n");
         AppendTo(stream, "      version: \"", p[2], "\"\n");
+        pkginfo := PackageInfo(p[1]);
+        if Length(pkginfo) > 0 and IsBound(pkginfo[1].PackageWWWHome) then
+            AppendTo(stream, "      url: \"", pkginfo[1].PackageWWWHome, "\"\n");
+        fi;
     od;
     AppendTo(stream, "\n");
 end;
