@@ -17,6 +17,7 @@ HilbertBasis \
 ModuleGenerators \
 Deg1Elements \
 HilbertSeries \
+HilbertFunction \
 Grading \
 IsPointed \
 IsDeg1ExtremeRays \
@@ -30,7 +31,6 @@ Dehomogenization \
 DualMode \
 DefaultMode \
 "
-#IsDeg1Generated \
 
 GD_FILE=lib/cone_property_wrappers.gd
 GI_FILE=lib/cone_property_wrappers.gi
