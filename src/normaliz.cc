@@ -18,6 +18,7 @@
  */
 
 #include "normaliz.h"
+#include "libnormaliz/map_operations.h"
 
 #include <vector>
 #include <iostream>
@@ -244,6 +245,39 @@ static Obj NmzMatrixToGAP(const vector< vector<Integer> >& in)
     return M;
 }
 
+static Obj NmzHilbertSeriesToGAP(const libnormaliz::HilbertSeries& HS)
+{
+    Obj ret;
+    // TODO: return a record instead of an array. For now,
+    // we use an array because it is simpler.
+    ret = NEW_PLIST(T_PLIST, 2);
+    SET_LEN_PLIST(ret, 2);
+    // TODO: return as polynomial
+    AssPlist(ret, 1, NmzVectorToGAP(HS.getNum()));
+    // TODO: return as list of pairs of degree and multiplicity
+    AssPlist(ret, 2, NmzVectorToGAP(libnormaliz::to_vector(HS.getDenom())));
+    return ret;
+}
+
+static Obj NmzHilbertFunctionToGAP(const libnormaliz::HilbertSeries& HS)
+{
+    Obj ret;
+    vector< vector<mpz_class> > HQ = HS.getHilbertQuasiPolynomial();
+    const size_t n = HS.getPeriod();
+    ret = NEW_PLIST(T_PLIST, n+1);
+    SET_LEN_PLIST(ret, n+1);
+
+    for (size_t i=0; i < n; ++i)
+    {
+    // TODO: return as polynomial with rational coefficients
+        SET_ELM_PLIST(ret, i+1, NmzVectorToGAP(HQ[i]));
+        CHANGED_BAG( ret );
+    }
+    // TODO: integrate the denominator into the polynomials
+    AssPlist(ret, n+1, NmzIntToGAP(HS.getHilbertQuasiPolynomialDenom()));
+    return ret;
+}
+
 
 /*
 #! @Chapter Functions
@@ -456,9 +490,13 @@ static Obj _NmzConeProperty(Obj cone, Obj prop)
     case libnormaliz::ConeProperty::Deg1Elements:
         return NmzMatrixToGAP(C->getDeg1Elements());
 
-//     case libnormaliz::ConeProperty::HilbertSeries:
-//         C->getHilbertSeries();   // TODO: implement conversion?
-//         break;
+    case libnormaliz::ConeProperty::HilbertSeries:
+        return NmzHilbertSeriesToGAP(C->getHilbertSeries());
+        break;
+
+    case libnormaliz::ConeProperty::HilbertFunction:
+        return NmzHilbertFunctionToGAP(C->getHilbertSeries());
+        break;
 
     case libnormaliz::ConeProperty::Grading:
         return NmzVectorToGAP(C->getGrading());  // TODO: divide by GradingDenom
