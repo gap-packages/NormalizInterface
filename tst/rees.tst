@@ -24,9 +24,9 @@ gap> NmzPropFingerprint(cone, "ExtremeRays");
 16
 gap> NmzPropFingerprint(cone, "SupportHyperplanes");
 24
-gap> NmzDimension(cone);
+gap> NmzEmbeddingDimension(cone);
 7
-gap> NmzBasisChangeRank(cone);
+gap> NmzRank(cone);
 7
 gap> NmzBasisChangeIndex(cone);
 1

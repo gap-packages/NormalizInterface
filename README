@@ -45,4 +45,10 @@ make
 
 The <path> should specify the path to the normaliz installation directory
 
-TODO
+4 Documentation and tests
+=========================
+
+gap makedoc.g
+gap maketest.g
+
+make check

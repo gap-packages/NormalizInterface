@@ -1,7 +1,7 @@
 #! @BeginChunk Demo example
 #! @BeginExample
 C := NmzCone(["integral_closure",[[2,1],[1,3]]]);
-#! <a Normaliz cone object>
+#! <a Normaliz cone object with long int coefficients>
 NmzHasConeProperty(C,"HilbertBasis");
 #! false
 NmzHasConeProperty(C,"SupportHyperplanes");
@@ -19,13 +19,13 @@ NmzConeProperty(C,"SupportHyperplanes");
 #! @BeginChunk Demo example equation
 #! @BeginExample
 D := NmzCone(["equations",[[1,2,-3]]]);
-#! <a Normaliz cone object>
+#! <a Normaliz cone object with long int coefficients>
 NmzCompute(D,["DualMode","HilbertSeries"]);
 #! true
 NmzHilbertBasis(D);
 #! [ [ 1, 1, 1 ], [ 3, 0, 1 ], [ 0, 3, 2 ] ]
 NmzHilbertSeries(D); # not implemented yet
-#! fail
+#! [ [ 1, -1, 1 ], [ 1, 3 ] ]
 NmzHasConeProperty(D,"SupportHyperplanes");
 #! true
 NmzSupportHyperplanes(D);
@@ -39,7 +39,7 @@ NmzEquations(D);
 #! @BeginChunk Demo example inhom equation
 #! @BeginExample
 P := NmzCone(["inhom_equations",[[1,2,-3,1]], "grading", [[1,1,1]]]);
-#! <a Normaliz cone object>
+#! <a Normaliz cone object with long int coefficients>
 NmzIsInhomogeneous(C);
 #! false
 NmzIsInhomogeneous(P);
