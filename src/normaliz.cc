@@ -430,7 +430,7 @@ Obj NmzHasConeProperty(Obj self, Obj cone, Obj prop)
 DeclareGlobalFunction("NmzConeProperty");
  */
 template<typename Integer>
-static Obj _NmzConeProperty(Obj cone, Obj prop)
+static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
 {
     Cone<Integer>* C = GET_CONE<Integer>(cone);
     libnormaliz::ConeProperty::Enum p = libnormaliz::toConeProperty(CSTR_STRING(prop));
@@ -545,7 +545,7 @@ static Obj _NmzConeProperty(Obj cone, Obj prop)
     return Fail;
 }
 
-Obj NmzConeProperty(Obj self, Obj cone, Obj prop)
+Obj _NmzConeProperty(Obj self, Obj cone, Obj prop)
 {
     FUNC_BEGIN
 
@@ -555,9 +555,9 @@ Obj NmzConeProperty(Obj self, Obj cone, Obj prop)
         ErrorQuit("<prop> must be a string",0,0);
 
     if (IS_LONG_INT_CONE(cone)) {
-        return _NmzConeProperty<long>(cone, prop);
+        return _NmzConePropertyImpl<long>(cone, prop);
     } else {
-        return _NmzConeProperty<mpz_class>(cone, prop);
+        return _NmzConePropertyImpl<mpz_class>(cone, prop);
     }
 
     FUNC_END
@@ -756,7 +756,7 @@ static StructGVarFunc GVarFuncs [] = {
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzVerbose, 1, "value"),
 
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzHasConeProperty, 2, "cone, prop"),
-    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzConeProperty, 2, "cone, prop"),
+    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", _NmzConeProperty, 2, "cone, prop"),
 
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzEmbeddingDimension, 1, "cone"),
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzBasisChange, 1, "cone"),

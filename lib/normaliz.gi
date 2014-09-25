@@ -14,3 +14,12 @@ function( r )
     # TODO: May print more information when present
     return "<a Normaliz cone object with GMP coefficients>";
 end );
+
+InstallMethod( NmzConeProperty,
+               "for a Normaliz cone and a string",
+               [ IsNormalizConeObject, IsString ],
+function( cone, prop )
+    local result;
+    result := _NmzConeProperty(cone, prop);
+    return result;
+end );
