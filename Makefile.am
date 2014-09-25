@@ -72,3 +72,6 @@ AM_COLOR_TESTS = always
 TESTS_ENVIRONMENT = GAP_EXECUTABLE='$(GAPROOT)/bin/gap.sh'
 TESTS = tst/run-tap.test
 TEST_LOG_DRIVER = $(SHELL) $(top_srcdir)/tst/tap-driver.sh
+
+
+.PHONY: doc
