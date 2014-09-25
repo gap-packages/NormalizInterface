@@ -47,6 +47,7 @@ clean-doc:
 DOC_FILES = \
 	PackageInfo.g \
 	doc/*.autodoc \
+	doc/*.xml \
 	src/normaliz.cc \
 	lib/cone_property_wrappers.gd \
 	lib/normaliz.gd \
