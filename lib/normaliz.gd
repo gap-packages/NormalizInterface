@@ -1,11 +1,11 @@
 NormalizObjectFamily := NewFamily( "NormalizObjectFamily" );
 
-DeclareCategory( "IsNormalizConeObject", IsObject );
+DeclareCategory( "IsNormalizCone", IsObject );
 
-DeclareCategory( "IsNormalizLongIntConeObject", IsNormalizConeObject );
-DeclareCategory( "IsNormalizGMPConeObject", IsNormalizConeObject );
+DeclareCategory( "IsNormalizLongIntCone", IsNormalizCone );
+DeclareCategory( "IsNormalizGMPCone", IsNormalizCone );
 
-BindGlobal("TheTypeNormalizLongIntCone", NewType( NormalizObjectFamily, IsNormalizLongIntConeObject ));
-BindGlobal("TheTypeNormalizGMPCone", NewType( NormalizObjectFamily, IsNormalizGMPConeObject ));
+BindGlobal("TheTypeNormalizLongIntCone", NewType( NormalizObjectFamily, IsNormalizLongIntCone ));
+BindGlobal("TheTypeNormalizGMPCone", NewType( NormalizObjectFamily, IsNormalizGMPCone ));
 
-DeclareOperation( "NmzConeProperty", [IsNormalizConeObject, IsString] );
+DeclareOperation( "NmzConeProperty", [IsNormalizCone, IsString] );

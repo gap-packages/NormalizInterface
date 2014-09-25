@@ -1,23 +1,23 @@
 ##
 InstallMethod( ViewString,
-               "for a Normaliz cone object",
-               [ IsNormalizLongIntConeObject ],
+               "for a Normaliz cone",
+               [ IsNormalizLongIntCone ],
 function( r )
     # TODO: May print more information when present
-    return "<a Normaliz cone object with long int coefficients>";
+    return "<a Normaliz cone with long int coefficients>";
 end );
 
 InstallMethod( ViewString,
-               "for a Normaliz cone object",
-               [ IsNormalizGMPConeObject ],
+               "for a Normaliz cone",
+               [ IsNormalizGMPCone ],
 function( r )
     # TODO: May print more information when present
-    return "<a Normaliz cone object with GMP coefficients>";
+    return "<a Normaliz cone with GMP coefficients>";
 end );
 
 InstallMethod( NmzConeProperty,
                "for a Normaliz cone and a string",
-               [ IsNormalizConeObject, IsString ],
+               [ IsNormalizCone, IsString ],
 function( cone, prop )
     local result;
     result := _NmzConeProperty(cone, prop);
