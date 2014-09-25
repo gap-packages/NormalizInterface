@@ -283,7 +283,7 @@ static Obj NmzHilbertFunctionToGAP(const libnormaliz::HilbertSeries& HS)
 #! @Chapter Functions
 #! @Section Create a NmzCone
 #! @Description
-#! Creates a NmzCone. The list argument should contain a even number of elements,
+#! Creates a NmzCone. The list argument should contain an even number of elements,
 #! alternating between a string and a integer matrix. The string has to correspond
 #! to a normaliz input type string and the following matrix will be interpreted as
 #! input of that type.
