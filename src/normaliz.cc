@@ -17,6 +17,10 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 
+/*
+#! @Chapter Functions
+*/
+
 #include "normaliz.h"
 #include "libnormaliz/map_operations.h"
 
@@ -280,14 +284,13 @@ static Obj NmzHilbertFunctionToGAP(const libnormaliz::HilbertSeries& HS)
 
 
 /*
-#! @Chapter Functions
 #! @Section Create a NmzCone
 #! @Description
 #! Creates a NmzCone. The list argument should contain an even number of elements,
 #! alternating between a string and a integer matrix. The string has to correspond
 #! to a normaliz input type string and the following matrix will be interpreted as
 #! input of that type.
-#! @Arguments list 
+#! @Arguments list
 #! @Returns NmzCone
 DeclareGlobalFunction("NmzCone");
 */
@@ -422,8 +425,7 @@ Obj NmzHasConeProperty(Obj self, Obj cone, Obj prop)
 }
 
 
-/* 
-#! @Chapter Functions
+/*
 #! @Section Use a NmzCone
 #! @Description
 #! NmzConeProperty
@@ -565,8 +567,14 @@ Obj _NmzConeProperty(Obj self, Obj cone, Obj prop)
 
 
 
-// set the global verbose value in libnormaliz
-// returns the previous value
+/*
+#! @Section Use a NmzCone
+#! @Arguments verboseFlag
+#! @Returns the previous verbosity
+#! @Description
+#! Set the global verbosity state in libnormaliz
+DeclareGlobalFunction("NmzVerbose");
+*/
 Obj NmzVerbose(Obj self, Obj value)
 {
     FUNC_BEGIN
@@ -578,6 +586,16 @@ Obj NmzVerbose(Obj self, Obj value)
     FUNC_END
 }
 
+/*
+#! @Section Cone properties
+*/
+
+/*
+#! @Arguments cone
+#! @Returns the embedding dimension of the cone
+#! @Description
+DeclareGlobalFunction("NmzEmbeddingDimension");
+*/
 Obj NmzEmbeddingDimension(Obj self, Obj cone)
 {
     FUNC_BEGIN
@@ -593,12 +611,19 @@ Obj NmzEmbeddingDimension(Obj self, Obj cone)
     FUNC_END
 }
 
+/*
+#! @Arguments cone
+#! @Returns TODO
+#! @Description
+#! TODO
+DeclareGlobalFunction("NmzBasisChange");
+*/
 template<typename Integer>
 static Obj _NmzBasisChange(Obj cone)
 {
     Cone<Integer>* C = GET_CONE<Integer>(cone);
     Sublattice_Representation<Integer> bc = C->getBasisChange();
-    
+
     // TODO: return a record instead of an array. For now,
     // we use an array because it is simpler.
     Obj res = NEW_PLIST(T_PLIST, 6);
@@ -626,6 +651,13 @@ Obj NmzBasisChange(Obj self, Obj cone)
     FUNC_END
 }
 
+/*
+#! @Arguments cone
+#! @Returns TODO
+#! @Description
+#! TODO
+DeclareGlobalFunction("NmzRank");
+*/
 Obj NmzRank(Obj self, Obj cone)
 {
     FUNC_BEGIN
@@ -641,6 +673,13 @@ Obj NmzRank(Obj self, Obj cone)
     FUNC_END
 }
 
+/*
+#! @Arguments cone
+#! @Returns TODO
+#! @Description
+#! TODO
+DeclareGlobalFunction("NmzBasisChangeIndex");
+*/
 // TODO: Do we want this?
 Obj NmzBasisChangeIndex(Obj self, Obj cone)
 {
@@ -657,6 +696,13 @@ Obj NmzBasisChangeIndex(Obj self, Obj cone)
     FUNC_END
 }
 
+/*
+#! @Arguments cone
+#! @Returns TODO
+#! @Description
+#! TODO
+DeclareGlobalFunction("NmzGradingDenom");
+*/
 Obj NmzGradingDenom(Obj self, Obj cone)
 {
     FUNC_BEGIN
@@ -674,6 +720,13 @@ Obj NmzGradingDenom(Obj self, Obj cone)
     FUNC_END
 }
 
+/*
+#! @Arguments cone
+#! @Returns TODO
+#! @Description
+#! TODO
+DeclareGlobalFunction("NmzIsInhomogeneous");
+*/
 Obj NmzIsInhomogeneous(Obj self, Obj cone)
 {
     FUNC_BEGIN
@@ -689,6 +742,13 @@ Obj NmzIsInhomogeneous(Obj self, Obj cone)
     FUNC_END
 }
 
+/*
+#! @Arguments cone
+#! @Returns TODO
+#! @Description
+#! TODO
+DeclareGlobalFunction("NmzIsReesPrimary");
+*/
 Obj NmzIsReesPrimary(Obj self, Obj cone)
 {
     FUNC_BEGIN
@@ -704,6 +764,13 @@ Obj NmzIsReesPrimary(Obj self, Obj cone)
     FUNC_END
 }
 
+/*
+#! @Arguments cone
+#! @Returns TODO
+#! @Description
+#! TODO
+DeclareGlobalFunction("NmzEquations");
+*/
 Obj NmzEquations(Obj self, Obj cone)
 {
     FUNC_BEGIN
@@ -721,6 +788,13 @@ Obj NmzEquations(Obj self, Obj cone)
     FUNC_END
 }
 
+/*
+#! @Arguments cone
+#! @Returns TODO
+#! @Description
+#! TODO
+DeclareGlobalFunction("NmzCongruences");
+*/
 Obj NmzCongruences(Obj self, Obj cone)
 {
     FUNC_BEGIN
@@ -782,12 +856,11 @@ static Int InitKernel( StructInitInfo *module )
 
     InitCopyGVar( "TheTypeNormalizLongIntCone", &TheTypeNormalizLongIntCone );
     InitCopyGVar( "TheTypeNormalizGMPCone", &TheTypeNormalizGMPCone );
-       
+
     InfoBags[T_NORMALIZ].name = "NormalizCone";
     InitMarkFuncBags(T_NORMALIZ, &MarkNoSubBags);
     InitFreeFuncBag(T_NORMALIZ, &NormalizFreeFunc);
     TypeObjFuncs[T_NORMALIZ] = &NormalizTypeFunc;
-    
 
     /* return success                                                      */
     return 0;
@@ -838,5 +911,5 @@ StructInitInfo * Init__Dynamic ( void )
 extern "C"
 StructInitInfo * Init__normaliz ( void )
 {
-  return &module;
+    return &module;
 }
