@@ -2,7 +2,7 @@
 
 @Section What is the idea of the this package?
 
-Normaliz is a software for computations with rational cones and affine
+Normaliz <Cite Key="normaliz" /> is a software for computations with rational cones and affine
 monoids. It pursues two main computational goals: finding the Hilbert
 basis, a minimal generating system of the monoid of lattice points of a
 cone; and counting elements degree-wise in a generating function, the
@@ -10,18 +10,11 @@ Hilbert series.
 As a recent extension, Normaliz can handle unbounded polyhedra. The
 Hilbert basis computation can be considered as solving a linear
 diophantine system of inhomogeneous equations, inequalities and
-congruences.
+congruences.  <P/>
 
 This package encapsulates a libnormaliz cone and gives access to it in the
 GAP enviroment. In this way GAP can be used as interactive interface to
-libnormaliz.
-
-bla
-$a^x$
-
-Liste:
-* ab
-* cd
+libnormaliz.  <P/>
 
 @Chapter Functions
 

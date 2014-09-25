@@ -18,6 +18,7 @@
 /doc/*.tex
 /doc/*.toc
 /doc/manual.pdf
+/doc/NormalizInterface-bib.xml.bib
 
 .deps/
 .dirstamp

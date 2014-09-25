@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE file SYSTEM "bibxmlext.dtd">
+<file>
+
+<entry id="GAP4"><manual>
+  <title><C>GAP</C> -- <C>G</C>roups, <C>A</C>lgorithms, and
+                  <C>P</C>rogramming, Version 4.7.5</title>
+  <organization>The GAP Group</organization>
+  <year>2014</year>
+  <note><URL>http://www.gap-system.org</URL></note>
+  <key>GAP</key>
+  <keywords>groups; *; gap; manual</keywords>
+</manual></entry>
+
+<entry id="normaliz"><misc>
+  <author>
+    <name><first>Winfried</first><last>Bruns</last></name>
+    <name><first>Bogdan</first><last>Ichim</last></name>
+    <name><first>Tim</first><last>Römer</last></name>
+    <name><first>Christof</first><last>Söger</last></name>
+  </author>
+  <title><C>Normaliz</C>, a tool for computations in affine monoids, vector configurations, lattice polytopes, and rational cones,
+         <C>V</C>ersion 2.11.2</title>
+  <howpublished><URL>http://www.home.uni-osnabrueck.de/wbruns/normaliz/</URL></howpublished>
+  <year>2014</year>
+</misc></entry>
+
+</file>
