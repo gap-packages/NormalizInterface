@@ -19,7 +19,12 @@ InstallMethod( NmzConeProperty,
                "for a Normaliz cone and a string",
                [ IsNormalizCone, IsString ],
 function( cone, prop )
-    local result;
+    local result, poly, tmp;
     result := _NmzConeProperty(cone, prop);
+    if prop = "HilbertSeries" then
+        poly := UnivariatePolynomial(Integers, result[1], Indeterminate(Integers, "t"));
+        tmp := Collected(result[2]);
+        return [poly, tmp];
+    fi;
     return result;
 end );

@@ -252,13 +252,9 @@ static Obj NmzMatrixToGAP(const vector< vector<Integer> >& in)
 static Obj NmzHilbertSeriesToGAP(const libnormaliz::HilbertSeries& HS)
 {
     Obj ret;
-    // TODO: return a record instead of an array. For now,
-    // we use an array because it is simpler.
     ret = NEW_PLIST(T_PLIST, 2);
     SET_LEN_PLIST(ret, 2);
-    // TODO: return as polynomial
     AssPlist(ret, 1, NmzVectorToGAP(HS.getNum()));
-    // TODO: return as list of pairs of degree and multiplicity
     AssPlist(ret, 2, NmzVectorToGAP(libnormaliz::to_vector(HS.getDenom())));
     return ret;
 }
