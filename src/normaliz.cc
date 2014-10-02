@@ -487,7 +487,11 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
         break;
 
     case libnormaliz::ConeProperty::Grading:
-        return NmzVectorToGAP(C->getGrading());  // TODO: divide by GradingDenom
+        {
+        vector<Integer> grad = C->getGrading();
+        grad.push_back(C->getGradingDenom());
+        return NmzVectorToGAP(grad);
+        }
 
     case libnormaliz::ConeProperty::Dehomogenization:
         return NmzVectorToGAP(C->getDehomogenization());
@@ -664,53 +668,6 @@ Obj NmzRank(Obj self, Obj cone)
 #! @Returns TODO
 #! @Description
 #! TODO
-DeclareGlobalFunction("NmzBasisChangeIndex");
-*/
-// TODO: Do we want this?
-Obj NmzBasisChangeIndex(Obj self, Obj cone)
-{
-    FUNC_BEGIN
-    if (!IS_CONE(cone))
-        ErrorQuit("<cone> must be a normaliz cone", 0, 0);
-    if (IS_LONG_INT_CONE(cone)) {
-        Cone<long>* C = GET_CONE<long>(cone);
-        return NmzIntToGAP(C->getBasisChange().get_index());
-    } else {
-        Cone<mpz_class>* C = GET_CONE<mpz_class>(cone);
-        return NmzIntToGAP(C->getBasisChange().get_index());
-    }
-    FUNC_END
-}
-
-/*
-#! @Arguments cone
-#! @Returns TODO
-#! @Description
-#! TODO
-DeclareGlobalFunction("NmzGradingDenom");
-*/
-Obj NmzGradingDenom(Obj self, Obj cone)
-{
-    FUNC_BEGIN
-    if (!IS_CONE(cone))
-        ErrorQuit("<cone> must be a normaliz cone", 0, 0);
-    if (IS_LONG_INT_CONE(cone)) {
-        Cone<long>* C = GET_CONE<long>(cone);
-        C->compute(ConeProperties(libnormaliz::ConeProperty::Grading));
-        return NmzIntToGAP(C->getGradingDenom());
-    } else {
-        Cone<mpz_class>* C = GET_CONE<mpz_class>(cone);
-        C->compute(ConeProperties(libnormaliz::ConeProperty::Grading));
-        return NmzIntToGAP(C->getGradingDenom());
-    }
-    FUNC_END
-}
-
-/*
-#! @Arguments cone
-#! @Returns TODO
-#! @Description
-#! TODO
 DeclareGlobalFunction("NmzIsInhomogeneous");
 */
 Obj NmzIsInhomogeneous(Obj self, Obj cone)
@@ -821,8 +778,6 @@ static StructGVarFunc GVarFuncs[] = {
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzEmbeddingDimension, 1, "cone"),
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzBasisChange, 1, "cone"),
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzRank, 1, "cone"),
-    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzBasisChangeIndex, 1, "cone"),
-    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzGradingDenom, 1, "cone"),
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzIsInhomogeneous, 1, "cone"),
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzIsReesPrimary, 1, "cone"),
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzEquations, 1, "cone"),

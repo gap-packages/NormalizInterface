@@ -21,6 +21,12 @@ InstallMethod( NmzConeProperty,
 function( cone, prop )
     local result, t, poly, tmp, denom;
     result := _NmzConeProperty(cone, prop);
+    if prop = "Grading" then
+        tmp := Length(result);
+        denom := result[tmp];
+        result := result{[1..(tmp-1)]};
+        return result / denom;
+    fi;
     if prop = "HilbertSeries" then
         t := Indeterminate(Integers, "t");
         poly := UnivariatePolynomial(Integers, result[1], t);

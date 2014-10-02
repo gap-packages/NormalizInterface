@@ -25,7 +25,6 @@ gap> NmzPropFingerprint(cone, "HilbertBasis");
 17
 gap> NmzPropFingerprint(cone, "Deg1Elements");
 16
-gap> # TODO: ReesPrimary
 gap> NmzPropFingerprint(cone, "ExtremeRays");
 16
 gap> NmzPropFingerprint(cone, "SupportHyperplanes");
@@ -34,8 +33,6 @@ gap> NmzEmbeddingDimension(cone);
 7
 gap> NmzRank(cone);
 7
-gap> NmzBasisChangeIndex(cone);
-1
 gap> NmzPropFingerprint(cone, "IsIntegrallyClosed");
 false
 gap> NmzPropFingerprint(cone, "TriangulationSize");

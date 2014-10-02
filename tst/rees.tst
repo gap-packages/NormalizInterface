@@ -28,8 +28,6 @@ gap> NmzEmbeddingDimension(cone);
 7
 gap> NmzRank(cone);
 7
-gap> NmzBasisChangeIndex(cone);
-1
 gap> NmzPropFingerprint(cone, "IsIntegrallyClosed");
 false
 gap> NmzPropFingerprint(cone, "TriangulationSize");
