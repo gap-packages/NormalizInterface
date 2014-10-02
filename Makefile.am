@@ -42,7 +42,8 @@ doc:	doc/manual.six
 clean-doc:
 	rm -f doc/manual.*
 	rm -f doc/NormalizInterface.*
-	rm -f doc/*.{css,html,js,txt,xml}
+	rm -f doc/*.{bib,css,html,js,txt}
+	find doc/ -type f -name *.xml -and \( -not -name 'NormalizInterface-bib.xml' \) -delete
 
 DOC_FILES = \
 	PackageInfo.g \
