@@ -268,11 +268,9 @@ static Obj NmzHilbertFunctionToGAP(const libnormaliz::HilbertSeries& HS)
     SET_LEN_PLIST(ret, n+1);
 
     for (size_t i = 0; i < n; ++i) {
-    // TODO: return as polynomial with rational coefficients
         SET_ELM_PLIST(ret, i+1, NmzVectorToGAP(HQ[i]));
         CHANGED_BAG( ret );
     }
-    // TODO: integrate the denominator into the polynomials
     AssPlist(ret, n+1, NmzIntToGAP(HS.getHilbertQuasiPolynomialDenom()));
     return ret;
 }
