@@ -77,11 +77,6 @@ else
 fi
 
 dnl ##
-dnl ## Rebuild configure if VERSION file changes
-dnl ##
-AC_SUBST([CONFIG_STATUS_DEPENDENCIES], ['$(top_srcdir)/VERSION'])
-
-dnl ##
 dnl ## Finally, generate the Makefiles and output everything
 dnl ##
 AC_CONFIG_FILES([Makefile])
