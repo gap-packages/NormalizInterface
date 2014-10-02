@@ -51,6 +51,7 @@ DOC_FILES = \
 	src/normaliz.cc \
 	lib/cone_property_wrappers.gd \
 	lib/normaliz.gd \
+    examples/*.g \
 	makedoc.g
 
 doc/manual.six: $(DOC_FILES)
