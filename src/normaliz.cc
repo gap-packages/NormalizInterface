@@ -87,7 +87,9 @@ static Obj MpzToGAP(const mpz_t x)
     Obj res;
     Int size = x->_mp_size;
     int sign;
-    if (size < 0) {
+    if (size == 0) {
+        return INTOBJ_INT(0);
+    } else if (size < 0) {
         size = -size;
         sign = -1;
     } else {
