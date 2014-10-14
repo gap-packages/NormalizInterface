@@ -2,7 +2,6 @@ gap> NmzCompute(cone, ["DefaultMode"]);
 gap> NmzPropFingerprint(cone, "OriginalMonoidGenerators");
 gap> NmzPropFingerprint(cone, "HilbertBasis");
 gap> NmzPropFingerprint(cone, "Deg1Elements");
-gap> # TODO: ReesPrimary
 gap> NmzPropFingerprint(cone, "ExtremeRays");
 gap> NmzPropFingerprint(cone, "SupportHyperplanes");
 gap> NmzEmbeddingDimension(cone);
@@ -15,3 +14,5 @@ gap> NmzPropFingerprint(cone, "Grading");
 gap> NmzPropFingerprint(cone, "IsDeg1ExtremeRays");
 gap> NmzPropFingerprint(cone, "IsDeg1HilbertBasis");
 gap> NmzPropFingerprint(cone, "Multiplicity");
+gap> NmzPropFingerprint(cone, "HilbertSeries");
+gap> NmzPropFingerprint(cone, "HilbertFunction");

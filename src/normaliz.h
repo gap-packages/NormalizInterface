@@ -1,6 +1,6 @@
 /*
  * NormalizInterface: GAP wrapper for normaliz
- * Copyright (C) 2014  TODO
+ * Copyright (C) 2014  Sebastian Gutsche, Max Horn, Christof Söger
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License

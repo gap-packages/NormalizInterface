@@ -25,28 +25,6 @@ In this chapter we describe the functions offered by <A>NormalizInterface</A>. A
 
 To create a cone object use <A>NmzCone</A>.
 
-The currently possible input types are
-    integral_closure,
-    polyhedron,
-    normalization,
-    polytope,
-    rees_algebra,
-    inequalities,
-    strict_inequalities,
-    signs,
-    strict_signs,
-    equations,
-    congruences,
-    inhom_inequalities,
-    dehomogenization,
-    inhom_equations,
-    inhom_congruences,
-    lattice_ideal,
-    grading,
-    excluded_faces.
-
-See the Normaliz manual of for more details.
-
 
 @Section Use the NmzCone
 
@@ -63,3 +41,15 @@ See the Normaliz manual of for more details.
 @InsertChunk Demo example inhom equation
 
 @Section combined input
+Normaliz also allows the combination of different kinds of input, e.g. multiple constraint types, or additional data like a grading.
+
+Suppose that you have a 3 by 3 ``square'' of nonnegative integers
+such that the 3 numbers in all rows, all columns, and both
+diagonals sum to the same constant $\mathcal{M}$. Sometimes
+such squares are called magic and $\mathcal M$ is the
+magic constant. This leads to a linear system of
+equations.
+The magic constant is a natural choice for the grading.
+Additionally we force here the 4 corner to have even value by adding congruences.
+
+@InsertChunk Demo example 3x3magiceven
