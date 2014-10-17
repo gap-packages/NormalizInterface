@@ -18,6 +18,8 @@ This package encapsulates a libnormaliz cone and gives access to it in the
 GAP enviroment. In this way GAP can be used as interactive interface to
 libnormaliz.
 
+For more information on Normaliz visit www.math.uos.de/normaliz and
+especially have a look at the manual.
 
 
 2 Installation preparation
@@ -26,29 +28,33 @@ libnormaliz.
 You should use the same gmp version for GAP and libnormaliz. To ensure
 this you can use a system installed gmp for GAP by configuring it with
 
-./configure --with-gmp=system
+    ./configure --with-gmp=system
 
-Next you need Normaliz, go to www.math.uos.de/normaliz and download the
-basic package which includes the source code. Unpack it and follow the 
-instructions for compilation with cmake in source/INSTALL. Remember to use
-the same compiler and gmp version as for GAP.
-Then install normaliz to a path of your choice, it can easily be configured
-with cmake.
+and build it. Next you need Normaliz, the easiest way is to clone the master
+branch from the Normaliz github repository with the command
+
+    git clone https://github.com/csoeger/Normaliz Normaliz.git
+
+into this directory. After that you can run the script "build-normaliz.sh".
+Once it completed successfully, you can then build NormalizInterface
+like this:
+
+    ./autogen.sh (need autoconf and automake) (only for developers? TODO)
+    ./configure --with-gaproot=GAPDIR --with-normaliz=$PWD/Normaliz.git/DST
+    make
+
+If you need to customize the normaliz compilation have a look at
+Normaliz.git/source/INSTALL. Remember to use the same compiler and gmp
+version as for GAP.
 
 
-3 Configure NoramlizInterface
-=============================
-
-./autogen.sh (only for developers? TODO) (need autoconf and automake)
-./configure --with-normaliz=<path>
-make
-
-The <path> should specify the path to the normaliz installation directory
-
-4 Documentation and tests
+3 Documentation and tests
 =========================
 
-gap makedoc.g
-gap maketest.g
+Generate the documentation:
+(The documentation is still incomplete.)
+    make doc
 
-make check
+run automatic tests:
+    make check
+    gap maketest.g
