@@ -765,12 +765,12 @@ Obj NmzCongruences(Obj self, Obj cone)
 }
 
 
-typedef Obj (* GVarFunc)(/*arguments*/);
+typedef Obj (* GVarFuncType)(/*arguments*/);
 
 #define GVAR_FUNC_TABLE_ENTRY(srcfile, name, nparam, params) \
   {#name, nparam, \
    params, \
-   (GVarFunc)name, \
+   (GVarFuncType)name, \
    srcfile ":Func" #name }
 
 // Table of functions to export
