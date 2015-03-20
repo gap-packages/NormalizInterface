@@ -170,6 +170,7 @@ bool GAPIntToNmz(Obj x, long &out)
                 return false;   // overflow
             if (TNUM_OBJ(x) == T_INTNEG)
                 out = -out;
+                return true;
         }
     }
     return false;
