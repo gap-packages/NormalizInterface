@@ -523,18 +523,32 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
     case libnormaliz::ConeProperty::ReesPrimaryMultiplicity:
         return NmzIntToGAP(C->getReesPrimaryMultiplicity());
 
-// the following are very special so we do not support a conversion
-//     case libnormaliz::ConeProperty::StanleyDec:
-//         C->getStanleyDec();
-//         break;
     case libnormaliz::ConeProperty::InclusionExclusionData:
         return NmzTriangleListToGAP<long>(C->getInclusionExclusionData());
 
+    // the following is special and we do not support a conversion
+    // (if you really need this, contact the developers)
+    case libnormaliz::ConeProperty::StanleyDec:
+        //C->getStanleyDec();
+        break;
+
+    // the following are not yet supported, but we'd like to
+    case libnormaliz::ConeProperty::IsDeg1Generated:        // TODO
+    case libnormaliz::ConeProperty::GeneratorsOfToricRing:  // TODO
+    case libnormaliz::ConeProperty::ExcludedFaces:          // TODO
+    case libnormaliz::ConeProperty::ApproximateRatPolytope: // TODO
+
+#ifdef NORMALIZ_3
+    case libnormaliz::ConeProperty::BottomDecomposition:    // TODO
+    case libnormaliz::ConeProperty::KeepOrder:              // TODO
+    case libnormaliz::ConeProperty::ClassGroup:             // TODO
+#endif
 
 //  the following properties are compute options and do not return anything
     case libnormaliz::ConeProperty::DualMode:
     case libnormaliz::ConeProperty::DefaultMode:
         return True;
+
     default:
         // Case not handled. Should signal an error
         break;
