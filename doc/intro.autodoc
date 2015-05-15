@@ -54,3 +54,12 @@ The magic constant is a natural choice for the grading.
 Additionally we force here the 4 corner to have even value by adding congruences.
 
 @InsertChunk Demo example 3x3magiceven
+
+
+@Chapter Installing NormalizInterface
+
+@Section TODO
+
+TODO
+
+This should be turned into an appendix -- does AutoDoc support that yet?
