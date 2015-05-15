@@ -611,15 +611,8 @@ Obj NmzEmbeddingDimension(Obj self, Obj cone)
     FUNC_END
 }
 
-/*
-#! @Arguments cone
-#! @Returns TODO
-#! @Description
-#! TODO
-DeclareGlobalFunction("NmzBasisChange");
-*/
 template<typename Integer>
-static Obj _NmzBasisChange(Obj cone)
+static Obj _NmzBasisChangeIntern(Obj cone)
 {
     Cone<Integer>* C = GET_CONE<Integer>(cone);
     Sublattice_Representation<Integer> bc = C->getBasisChange();
@@ -638,15 +631,15 @@ static Obj _NmzBasisChange(Obj cone)
     return res;
 }
 
-Obj NmzBasisChange(Obj self, Obj cone)
+Obj _NmzBasisChange(Obj self, Obj cone)
 {
     FUNC_BEGIN
     if (!IS_CONE(cone))
         ErrorQuit("<cone> must be a normaliz cone", 0, 0);
     if (IS_LONG_INT_CONE(cone)) {
-        return _NmzBasisChange<long>(cone);
+        return _NmzBasisChangeIntern<long>(cone);
     } else {
-        return _NmzBasisChange<mpz_class>(cone);
+        return _NmzBasisChangeIntern<mpz_class>(cone);
     }
     FUNC_END
 }
@@ -786,7 +779,7 @@ static StructGVarFunc GVarFuncs[] = {
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", _NmzConeProperty, 2, "cone, prop"),
 
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzEmbeddingDimension, 1, "cone"),
-    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzBasisChange, 1, "cone"),
+    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", _NmzBasisChange, 1, "cone"),
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzRank, 1, "cone"),
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzIsInhomogeneous, 1, "cone"),
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzIsReesPrimary, 1, "cone"),

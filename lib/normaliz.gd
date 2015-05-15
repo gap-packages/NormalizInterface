@@ -9,3 +9,9 @@ BindGlobal("TheTypeNormalizLongIntCone", NewType( NormalizObjectFamily, IsNormal
 BindGlobal("TheTypeNormalizGMPCone", NewType( NormalizObjectFamily, IsNormalizGMPCone ));
 
 DeclareOperation( "NmzConeProperty", [IsNormalizCone, IsString] );
+
+#! @Arguments cone
+#! @Returns a record describing the basis change
+#! @Description
+#! TODO
+DeclareOperation( "NmzBasisChange", [IsNormalizCone] );
