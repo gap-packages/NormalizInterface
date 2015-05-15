@@ -424,14 +424,6 @@ Obj NmzHasConeProperty(Obj self, Obj cone, Obj prop)
     FUNC_END
 }
 
-
-/*
-#! @Section Use a NmzCone
-#! @Arguments cone prop
-#! @Description
-#! NmzConeProperty
-DeclareGlobalFunction("NmzConeProperty");
- */
 template<typename Integer>
 static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
 {

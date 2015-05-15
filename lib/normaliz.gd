@@ -8,6 +8,10 @@ DeclareCategory( "IsNormalizGMPCone", IsNormalizCone );
 BindGlobal("TheTypeNormalizLongIntCone", NewType( NormalizObjectFamily, IsNormalizLongIntCone ));
 BindGlobal("TheTypeNormalizGMPCone", NewType( NormalizObjectFamily, IsNormalizGMPCone ));
 
+#! @Arguments cone, property
+#! @Returns true if successful, otherwise false
+#! @Description
+#! TODO
 DeclareOperation( "NmzConeProperty", [IsNormalizCone, IsString] );
 
 #! @Arguments cone
