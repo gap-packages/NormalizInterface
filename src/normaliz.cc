@@ -36,6 +36,7 @@ using libnormaliz::Type::InputType;
 using std::map;
 using std::vector;
 using std::string;
+using std::pair;
 
 using std::cerr;
 using std::endl;
@@ -131,7 +132,13 @@ Obj NmzIntToGAP(Integer x)
 }
 
 template<>
-Obj NmzIntToGAP(size_t x)
+Obj NmzIntToGAP(libnormaliz::key_t x)   // key_t = unsigned int
+{
+    return ObjInt_UInt(x);
+}
+
+template<>
+Obj NmzIntToGAP(size_t x)               // size_t = unsigned long
 {
     return ObjInt_UInt(x);
 }
@@ -276,6 +283,28 @@ static Obj NmzHilbertFunctionToGAP(const libnormaliz::HilbertSeries& HS)
     }
     AssPlist(ret, n+1, NmzIntToGAP(HS.getHilbertQuasiPolynomialDenom()));
     return ret;
+}
+
+template<typename Integer>
+static Obj NmzTriangleListToGAP(const vector< pair<vector<libnormaliz::key_t>, Integer> >& in)
+{
+    Obj M;
+    const size_t n = in.size();
+    M = NEW_PLIST(T_PLIST, n);
+    SET_LEN_PLIST(M, n);
+    for (size_t i = 0; i < n; ++i) {
+        // convert the pair
+        Obj pair = NEW_PLIST(T_PLIST, 2);
+        SET_LEN_PLIST(pair, 2);
+        SET_ELM_PLIST(pair, 1, NmzVectorToGAP<libnormaliz::key_t>(in[i].first));
+        SET_ELM_PLIST(pair, 2, NmzIntToGAP(in[i].second));
+        CHANGED_BAG( pair );
+        
+        SET_ELM_PLIST(M, i+1, pair);
+        CHANGED_BAG( M );
+    }
+    CHANGED_BAG( M );
+    return M;
 }
 
 
@@ -440,9 +469,8 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
     case libnormaliz::ConeProperty::TriangulationDetSum:
         return NmzIntToGAP(C->getTriangulationDetSum());
 
-//     case libnormaliz::ConeProperty::Triangulation:
-//         C->getTriangulation();   // TODO: implement conversion?
-//         break;
+    case libnormaliz::ConeProperty::Triangulation:
+        return NmzTriangleListToGAP<Integer>(C->getTriangulation());
 
     case libnormaliz::ConeProperty::Multiplicity:
         {
@@ -514,9 +542,9 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
 //     case libnormaliz::ConeProperty::StanleyDec:
 //         C->getStanleyDec();
 //         break;
-//     case libnormaliz::ConeProperty::InclusionExclusionData:
-//         C->getInclusionExclusionData();
-//         break;
+    case libnormaliz::ConeProperty::InclusionExclusionData:
+        return NmzTriangleListToGAP<long>(C->getInclusionExclusionData());
+
 
 //  the following properties are compute options and do not return anything
     case libnormaliz::ConeProperty::DualMode:
