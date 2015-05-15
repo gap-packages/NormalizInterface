@@ -25,7 +25,7 @@ gap> M := [
 > [ 1,  1,  1,  1,  1,  0, -2 ],
 > [ 1,  1,  0,  1,  1,  1, -2 ],
 > ];;
-gap> cone := NmzCone(["hyperplanes", M]);;
+gap> cone := NmzCone(["inequalities", M]);;
 gap> NmzCompute(cone, ["DefaultMode"]);
 true
 gap> NmzPropFingerprint(cone, "OriginalMonoidGenerators");
