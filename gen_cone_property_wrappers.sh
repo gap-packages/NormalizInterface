@@ -1,35 +1,35 @@
 #!/bin/bash -e
 
 properties="\
-Generators \
-ExtremeRays \
-VerticesOfPolyhedron \
-SupportHyperplanes \
-TriangulationSize \
-TriangulationDetSum \
-Triangulation \
-Multiplicity \
-Shift \
-RecessionRank \
 AffineDim \
-ModuleRank \
-HilbertBasis \
-ModuleGenerators \
+DefaultMode \
 Deg1Elements \
-HilbertSeries \
-HilbertFunction \
+Dehomogenization \
+DualMode \
+ExcludedFaces \
+ExtremeRays \
+Generators \
 Grading \
-IsPointed \
+HilbertBasis \
+HilbertFunction \
+HilbertSeries \
 IsDeg1ExtremeRays \
 IsDeg1HilbertBasis \
 IsIntegrallyClosed \
+IsPointed \
+ModuleGenerators \
+ModuleRank \
+Multiplicity \
 OriginalMonoidGenerators \
+RecessionRank \
 ReesPrimary \
 ReesPrimaryMultiplicity \
-ExcludedFaces \
-Dehomogenization \
-DualMode \
-DefaultMode \
+Shift \
+SupportHyperplanes \
+Triangulation \
+TriangulationDetSum \
+TriangulationSize \
+VerticesOfPolyhedron \
 "
 
 GD_FILE=lib/cone_property_wrappers.gd
@@ -68,10 +68,7 @@ EOF
 
 for prop in $properties ; do
 cat  >> $GI_FILE <<EOF
-InstallGlobalFunction( Nmz$prop,
-  function(cone)
-    return NmzConeProperty(cone, "$prop" );
-end );
+InstallGlobalFunction( Nmz$prop, cone -> NmzConeProperty(cone, "$prop" ) );
 
 EOF
 done
