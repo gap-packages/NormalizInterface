@@ -424,6 +424,58 @@ Obj NmzHasConeProperty(Obj self, Obj cone, Obj prop)
     FUNC_END
 }
 
+/*
+#! @Arguments cone
+#! @Returns a list of strings representing the known (computed) cone properties
+#! @Description
+#! Given a Normaliz cone object, return a list of all properties already
+#! computed for the cone.
+#!
+#! TODO: add an example
+DeclareGlobalFunction("NmzKnownConeProperties");
+*/
+Obj NmzKnownConeProperties(Obj self, Obj cone)
+{
+    FUNC_BEGIN
+
+    if (!IS_CONE(cone))
+        ErrorQuit("<cone> must be a normaliz cone", 0, 0);
+
+    size_t n = 0;
+    Obj M = NEW_PLIST(T_PLIST, libnormaliz::ConeProperty::EnumSize);
+
+    // FIXME: This code could be a lot simpler if there was
+    // a Cone method for reading the value of is_Computed.
+    for (int i = 0; i < libnormaliz::ConeProperty::EnumSize; ++i) {
+        libnormaliz::ConeProperty::Enum p = (libnormaliz::ConeProperty::Enum)i;
+
+        bool isComputed;
+
+        if (IS_LONG_INT_CONE(cone)) {
+            Cone<long>* C = GET_CONE<long>(cone);
+            isComputed = C->isComputed(p);
+        } else {
+            Cone<mpz_class>* C = GET_CONE<mpz_class>(cone);
+            isComputed = C->isComputed(p);
+        }
+
+        if (isComputed) {
+            string prop_name(libnormaliz::toString(p));
+
+            Obj prop_name_gap;
+            C_NEW_STRING(prop_name_gap, prop_name.size(), prop_name.c_str());
+
+            n++;    // Increment counter
+            SET_ELM_PLIST(M, n, prop_name_gap);
+            CHANGED_BAG(M);
+        }
+    }
+    SET_LEN_PLIST(M, n);
+    return M;
+
+    FUNC_END
+}
+
 template<typename Integer>
 static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
 {
@@ -787,6 +839,7 @@ static StructGVarFunc GVarFuncs[] = {
 
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzHasConeProperty, 2, "cone, prop"),
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", _NmzConeProperty, 2, "cone, prop"),
+    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzKnownConeProperties, 1, "cone"),
 
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzEmbeddingDimension, 1, "cone"),
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", _NmzBasisChange, 1, "cone"),
