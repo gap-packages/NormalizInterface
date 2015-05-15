@@ -62,6 +62,36 @@ end );
 #
 #
 #
+InstallGlobalFunction("NmzCone", function(arg)
+    local func, opts_rec, opts_list, cone;
+    opts_rec := rec(
+        gmp := ValueOption("gmp"),
+    );
+    if Length(arg) = 1 then
+        if IsList(arg[1]) then
+            opts_list := arg[1];
+        #elif IsRecord(arg[1]) then
+        #   TODO
+        else
+            # TODO: better error message
+            Error("Unsupported input");
+        fi;
+    else
+        opts_list := arg;
+    fi;
+    
+    if opts_rec.gmp = true then
+        cone := NmzGMPCone(opts_list);
+    else
+        cone := NmzLongIntCone(opts_list);
+    fi;
+    return cone;
+end);
+
+
+#
+#
+#
 InstallGlobalFunction("NmzCompute", function(arg)
     local cone, propsToCompute;
     if not Length(arg) in [1,2] then

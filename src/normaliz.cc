@@ -279,23 +279,6 @@ static Obj NmzHilbertFunctionToGAP(const libnormaliz::HilbertSeries& HS)
 }
 
 
-/*
-#! @Section Create a NmzCone
-#! @Description
-#! Creates a NmzCone. The list argument should contain an even number of elements,
-#! alternating between a string and a integer matrix. The string has to correspond
-#! to a normaliz input type string and the following matrix will be interpreted as
-#! input of that type.
-#! Currently the following strings are recognized:
-#! integral_closure, polyhedron, normalization, polytope, rees_algebra,
-#! inequalities, strict_inequalities, signs, strict_signs, equations, congruences,
-#! inhom_inequalities, inhom_equations, inhom_congruences, dehomogenization,
-#! lattice_ideal, grading, excluded_faces.
-#! See the Normaliz manual for a detailed description.
-#! @Arguments list
-#! @Returns NmzCone
-DeclareGlobalFunction("NmzCone");
-*/
 template<typename Integer>
 static Obj _NmzCone(Obj input_list)
 {
@@ -330,7 +313,7 @@ static Obj _NmzCone(Obj input_list)
 
 }
 
-Obj NmzCone(Obj self, Obj input_list)
+Obj NmzLongIntCone(Obj self, Obj input_list)
 {
     FUNC_BEGIN
     if (!IS_PLIST(input_list) || !IS_DENSE_LIST(input_list))
@@ -769,7 +752,7 @@ typedef Obj (* GVarFuncType)(/*arguments*/);
 
 // Table of functions to export
 static StructGVarFunc GVarFuncs[] = {
-    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzCone, 1, "list"),
+    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzLongIntCone, 1, "list"),
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzGMPCone, 1, "list"),
 
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", _NmzCompute, 2, "cone, props"),
