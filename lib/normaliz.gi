@@ -59,3 +59,36 @@ function( cone )
 end );
 
 
+#
+#
+#
+InstallGlobalFunction("NmzCompute", function(arg)
+    local cone, propsToCompute;
+    if not Length(arg) in [1,2] then
+        Error("Wrong number of arguments, expected 1 or 2");
+        return fail;
+    fi;
+    cone := arg[1];
+    if not IsNormalizCone(cone) then
+        Error("First argument must be a normaliz cone object");
+        return fail;
+    fi;
+    if Length(arg) = 1 then
+        propsToCompute := [];
+        if ValueOption("dual") = true then Add(propsToCompute, "DualMode"); fi;
+        if ValueOption("DualMode") = true then Add(propsToCompute, "DualMode"); fi;
+        if ValueOption("HilbertBasis") = true then Add(propsToCompute, "HilbertBasis"); fi;
+        # TODO: add more option names? or just support arbitrary ones, by using
+        # iterating over the (undocumented!) OptionsStack???
+        if Length(propsToCompute) = 0 then
+            propsToCompute := [ "DefaultMode" ];
+        fi;
+    else
+        if IsString(arg[2]) then
+            propsToCompute := [arg[2]];
+        else
+            propsToCompute := arg[2];
+        fi;
+    fi;
+    return _NmzCompute(cone, propsToCompute);
+end);

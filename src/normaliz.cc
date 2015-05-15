@@ -352,7 +352,7 @@ Obj NmzGMPCone(Obj self, Obj input_list)
     FUNC_END
 }
 
-Obj NmzCompute(Obj self, Obj cone, Obj to_compute)
+Obj _NmzCompute(Obj self, Obj cone, Obj to_compute)
 {
     FUNC_BEGIN
     if (!IS_CONE(cone))
@@ -772,7 +772,7 @@ static StructGVarFunc GVarFuncs[] = {
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzCone, 1, "list"),
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzGMPCone, 1, "list"),
 
-    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzCompute, 2, "cone, props"),
+    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", _NmzCompute, 2, "cone, props"),
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzVerbose, 1, "value"),
 
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzHasConeProperty, 2, "cone, prop"),

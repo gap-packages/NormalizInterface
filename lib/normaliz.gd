@@ -15,3 +15,9 @@ DeclareOperation( "NmzConeProperty", [IsNormalizCone, IsString] );
 #! @Description
 #! TODO
 DeclareOperation( "NmzBasisChange", [IsNormalizCone] );
+
+#! @Arguments cone[, options]
+#! @Returns true if successful, otherwise false
+#! @Description
+#! TODO
+DeclareGlobalFunction( "NmzCompute" );
