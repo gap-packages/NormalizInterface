@@ -49,7 +49,7 @@ EOF
 for prop in $properties ; do
 cat  >> $GD_FILE <<EOF
 #! @Description
-#!  This is an alias for NmzConeProperty( cone, "$prop" );
+#!  This is an alias for <C>NmzConeProperty( cone, "$prop" );</C>
 #! @Arguments cone
 DeclareGlobalFunction( "Nmz$prop" );
 

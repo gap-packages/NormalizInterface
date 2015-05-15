@@ -25,8 +25,9 @@ In this chapter we describe the functions offered by <A>NormalizInterface</A>. A
 
 To create a cone object use <A>NmzCone</A>.
 
+@Section Use a NmzCone
 
-@Section Use the NmzCone
+@Section Cone properties
 
 @Chapter Examples
 

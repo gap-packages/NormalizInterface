@@ -19,6 +19,7 @@
 
 /*
 #! @Chapter Functions
+#! @Section YOU FORGOT TO SET A SECTION
 */
 
 #include "normaliz.h"
@@ -425,6 +426,7 @@ Obj NmzHasConeProperty(Obj self, Obj cone, Obj prop)
 }
 
 /*
+#! @Section Use a NmzCone
 #! @Arguments cone
 #! @Returns a list of strings representing the known (computed) cone properties
 #! @Description
