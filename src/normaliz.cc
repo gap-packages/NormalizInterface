@@ -757,28 +757,6 @@ Obj NmzIsInhomogeneous(Obj self, Obj cone)
 #! @Returns TODO
 #! @Description
 #! TODO
-DeclareGlobalFunction("NmzIsReesPrimary");
-*/
-Obj NmzIsReesPrimary(Obj self, Obj cone)
-{
-    FUNC_BEGIN
-    if (!IS_CONE(cone))
-        ErrorQuit("<cone> must be a normaliz cone", 0, 0);
-    if (IS_LONG_INT_CONE(cone)) {
-        Cone<long>* C = GET_CONE<long>(cone);
-        return C->isReesPrimary() ? True : False;
-    } else {
-        Cone<mpz_class>* C = GET_CONE<mpz_class>(cone);
-        return C->isReesPrimary() ? True : False;
-    }
-    FUNC_END
-}
-
-/*
-#! @Arguments cone
-#! @Returns TODO
-#! @Description
-#! TODO
 DeclareGlobalFunction("NmzEquations");
 */
 Obj NmzEquations(Obj self, Obj cone)
@@ -847,7 +825,6 @@ static StructGVarFunc GVarFuncs[] = {
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", _NmzBasisChange, 1, "cone"),
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzRank, 1, "cone"),
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzIsInhomogeneous, 1, "cone"),
-    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzIsReesPrimary, 1, "cone"),
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzEquations, 1, "cone"),
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzCongruences, 1, "cone"),
 

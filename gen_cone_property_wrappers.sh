@@ -56,6 +56,10 @@ DeclareGlobalFunction( "Nmz$prop" );
 EOF
 done
 
+cat  >> $GD_FILE <<EOF
+DeclareSynonym( "NmzIsReesPrimary", NmzReesPrimary );
+EOF
+
 #
 # Create the .gi file
 #
