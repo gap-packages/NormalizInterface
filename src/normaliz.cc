@@ -369,38 +369,31 @@ Obj _NmzCompute(Obj self, Obj cone, Obj to_compute)
     FUNC_BEGIN
     if (!IS_CONE(cone))
         ErrorQuit("<cone> must be a normaliz cone", 0, 0);
-    if (!IS_STRING_REP(to_compute) &&
-            (!IS_PLIST(to_compute) || !IS_DENSE_LIST(to_compute)) )
-        ErrorQuit("<props> must be a (list of) strings", 0, 0);
+    if (!IS_PLIST(to_compute) || !IS_DENSE_LIST(to_compute))
+        ErrorQuit("<props> must be a list of strings", 0, 0);
 
-    ConeProperties Props;
+    ConeProperties propsToCompute;
+    // we have a list
+    const int n = LEN_PLIST(to_compute);
 
-    if (IS_STRING_REP(to_compute)) {
-        string prop_str(CSTR_STRING(to_compute));
-        Props.set( libnormaliz::toConeProperty(prop_str) );
-    } else {
-        // we have a list
-        const int n = LEN_PLIST(to_compute);
-
-        for (int i = 0; i < n; ++i) {
-            Obj prop = ELM_PLIST(to_compute, i+1);
-            if (!IS_STRING_REP(prop)) {
-                cerr << "Element " << i+1 << " of the input list must be a type string";
-                return Fail;
-            }
-            string prop_str(CSTR_STRING(prop));
-            Props.set( libnormaliz::toConeProperty(prop_str) );
+    for (int i = 0; i < n; ++i) {
+        Obj prop = ELM_PLIST(to_compute, i+1);
+        if (!IS_STRING_REP(prop)) {
+            cerr << "Element " << i+1 << " of the input list must be a type string";
+            return Fail;
         }
+        string prop_str(CSTR_STRING(prop));
+        propsToCompute.set( libnormaliz::toConeProperty(prop_str) );
     }
 
     ConeProperties notComputed;
 
     if (IS_LONG_INT_CONE(cone)) {
         Cone<long>* C = GET_CONE<long>(cone);
-        notComputed = C->compute(Props);
+        notComputed = C->compute(propsToCompute);
     } else {
         Cone<mpz_class>* C = GET_CONE<mpz_class>(cone);
-        notComputed = C->compute(Props);
+        notComputed = C->compute(propsToCompute);
     }
 
     // Cone.compute returns the not computed properties
