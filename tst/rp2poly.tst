@@ -11,33 +11,96 @@ gap> M := [
 > [ 0, 0, 1, 1, 0, 1 ],
 > ];;
 gap> cone := NmzCone(["normalization", M]);;
-gap> NmzCompute(cone, ["DefaultMode"]);
+gap> NmzCompute(cone);
 true
-gap> NmzPropFingerprint(cone, "OriginalMonoidGenerators");
-10
-gap> NmzPropFingerprint(cone, "HilbertBasis");
-11
-gap> NmzPropFingerprint(cone, "Deg1Elements");
-10
-gap> NmzPropFingerprint(cone, "ExtremeRays");
-10
-gap> NmzPropFingerprint(cone, "SupportHyperplanes");
-22
-gap> NmzEmbeddingDimension(cone);
-6
-gap> NmzRank(cone);
-6
-gap> NmzPropFingerprint(cone, "IsIntegrallyClosed");
-false
-gap> NmzPropFingerprint(cone, "TriangulationSize");
-18
-gap> NmzPropFingerprint(cone, "TriangulationDetSum");
-21
-gap> NmzPropFingerprint(cone, "Grading");
-[ 1/3, 1/3, 1/3, 1/3, 1/3, 1/3 ]
-gap> NmzPropFingerprint(cone, "IsDeg1ExtremeRays");
-true
-gap> NmzPropFingerprint(cone, "IsDeg1HilbertBasis");
-false
-gap> NmzPropFingerprint(cone, "Multiplicity");
-21
+gap> NmzPrintConeProperties(cone);
+Generators = 
+[ [  1,  1,  1,  0,  0,  0 ],
+  [  1,  1,  0,  1,  0,  0 ],
+  [  1,  0,  1,  0,  1,  0 ],
+  [  1,  0,  0,  1,  0,  1 ],
+  [  1,  0,  0,  0,  1,  1 ],
+  [  0,  1,  1,  0,  0,  1 ],
+  [  0,  1,  0,  1,  1,  0 ],
+  [  0,  1,  0,  0,  1,  1 ],
+  [  0,  0,  1,  1,  1,  0 ],
+  [  0,  0,  1,  1,  0,  1 ] ]
+ExtremeRays = 
+[ [  1,  1,  1,  0,  0,  0 ],
+  [  1,  1,  0,  1,  0,  0 ],
+  [  1,  0,  1,  0,  1,  0 ],
+  [  1,  0,  0,  1,  0,  1 ],
+  [  1,  0,  0,  0,  1,  1 ],
+  [  0,  1,  1,  0,  0,  1 ],
+  [  0,  1,  0,  1,  1,  0 ],
+  [  0,  1,  0,  0,  1,  1 ],
+  [  0,  0,  1,  1,  1,  0 ],
+  [  0,  0,  1,  1,  0,  1 ] ]
+SupportHyperplanes = 
+[ [  -1,   2,  -1,   2,   2,  -1 ],
+  [  -1,  -1,   2,   2,   2,  -1 ],
+  [  -2,   1,   1,   1,   1,   1 ],
+  [  -1,   2,   2,  -1,  -1,   2 ],
+  [  -1,  -1,   2,   2,  -1,   2 ],
+  [   0,   0,   0,   1,   0,   0 ],
+  [   0,   0,   1,   0,   0,   0 ],
+  [   1,  -2,   1,   1,   1,   1 ],
+  [   2,  -1,  -1,   2,  -1,   2 ],
+  [   2,  -1,   2,  -1,   2,  -1 ],
+  [  -1,   2,  -1,  -1,   2,   2 ],
+  [   2,   2,  -1,   2,  -1,  -1 ],
+  [   2,   2,   2,  -1,  -1,  -1 ],
+  [   2,  -1,  -1,  -1,   2,   2 ],
+  [   0,   0,   0,   0,   0,   1 ],
+  [   1,   1,   1,   1,  -2,   1 ],
+  [   0,   0,   0,   0,   1,   0 ],
+  [   1,   1,   1,   1,   1,  -2 ],
+  [   0,   1,   0,   0,   0,   0 ],
+  [   1,   1,   1,  -2,   1,   1 ],
+  [   1,   1,  -2,   1,   1,   1 ],
+  [   1,   0,   0,   0,   0,   0 ] ]
+TriangulationSize = 18
+TriangulationDetSum = 21
+Multiplicity = 21
+HilbertBasis = 
+[ [  1,  1,  1,  0,  0,  0 ],
+  [  1,  1,  0,  1,  0,  0 ],
+  [  1,  0,  1,  0,  1,  0 ],
+  [  1,  0,  0,  1,  0,  1 ],
+  [  1,  0,  0,  0,  1,  1 ],
+  [  0,  1,  1,  0,  0,  1 ],
+  [  0,  1,  0,  1,  1,  0 ],
+  [  0,  1,  0,  0,  1,  1 ],
+  [  0,  0,  1,  1,  1,  0 ],
+  [  0,  0,  1,  1,  0,  1 ],
+  [  1,  1,  1,  1,  1,  1 ] ]
+Deg1Elements = 
+[ [  1,  1,  1,  0,  0,  0 ],
+  [  1,  1,  0,  1,  0,  0 ],
+  [  1,  0,  1,  0,  1,  0 ],
+  [  1,  0,  0,  1,  0,  1 ],
+  [  1,  0,  0,  0,  1,  1 ],
+  [  0,  1,  1,  0,  0,  1 ],
+  [  0,  1,  0,  1,  1,  0 ],
+  [  0,  1,  0,  0,  1,  1 ],
+  [  0,  0,  1,  1,  1,  0 ],
+  [  0,  0,  1,  1,  0,  1 ] ]
+HilbertSeries = [ t^4+4*t^3+11*t^2+4*t+1, [ [ 1, 6 ] ] ]
+HilbertFunction = [ 7/40*t^5+7/8*t^4+53/24*t^3+25/8*t^2+157/60*t+1 ]
+Grading = [ 1/3, 1/3, 1/3, 1/3, 1/3, 1/3 ]
+IsPointed = true
+IsDeg1ExtremeRays = true
+IsDeg1HilbertBasis = false
+IsIntegrallyClosed = false
+OriginalMonoidGenerators = 
+[ [  1,  1,  1,  0,  0,  0 ],
+  [  1,  1,  0,  1,  0,  0 ],
+  [  1,  0,  1,  0,  1,  0 ],
+  [  1,  0,  0,  1,  0,  1 ],
+  [  1,  0,  0,  0,  1,  1 ],
+  [  0,  1,  1,  0,  0,  1 ],
+  [  0,  1,  0,  1,  1,  0 ],
+  [  0,  1,  0,  0,  1,  1 ],
+  [  0,  0,  1,  1,  1,  0 ],
+  [  0,  0,  1,  1,  0,  1 ] ]
+DefaultMode = true
