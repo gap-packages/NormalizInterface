@@ -2,21 +2,26 @@
 
 properties="\
 AffineDim \
+ApproximateRatPolytope \
+BottomDecomposition \
+ClassGroup \
 DefaultMode \
 Deg1Elements \
 Dehomogenization \
-DualMode \
 ExcludedFaces \
 ExtremeRays \
 Generators \
+GeneratorsOfToricRing \
 Grading \
 HilbertBasis \
 HilbertFunction \
 HilbertSeries \
+InclusionExclusionData \
 IsDeg1ExtremeRays \
 IsDeg1HilbertBasis \
 IsIntegrallyClosed \
 IsPointed \
+KeepOrder \
 ModuleGenerators \
 ModuleRank \
 Multiplicity \
@@ -31,6 +36,12 @@ TriangulationDetSum \
 TriangulationSize \
 VerticesOfPolyhedron \
 "
+
+# The following cone properties are omitted on purpose:
+# DefaultMode       -- not really a cone property
+# DualMode          -- not really a cone property
+# IsDeg1Generated   -- not really a cone property
+# StanleyDec        -- data conversion not supported at this time
 
 GD_FILE=lib/cone_property_wrappers.gd
 GI_FILE=lib/cone_property_wrappers.gi
