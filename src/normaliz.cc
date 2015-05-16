@@ -300,7 +300,7 @@ static Obj NmzTriangleListToGAP(const vector< pair<vector<libnormaliz::key_t>, I
         SET_ELM_PLIST(pair, 1, NmzVectorToGAP<libnormaliz::key_t>(in[i].first));
         SET_ELM_PLIST(pair, 2, NmzIntToGAP(in[i].second));
         CHANGED_BAG( pair );
-        
+
         SET_ELM_PLIST(M, i+1, pair);
         CHANGED_BAG( M );
     }
@@ -520,11 +520,11 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
     case libnormaliz::ConeProperty::Shift:
         return NmzIntToGAP(C->getShift());
 
-    case libnormaliz::ConeProperty::AffineDim:
-        return NmzIntToGAP(C->getAffineDim());
-
     case libnormaliz::ConeProperty::RecessionRank:
         return NmzIntToGAP(C->getRecessionRank());
+
+    case libnormaliz::ConeProperty::AffineDim:
+        return NmzIntToGAP(C->getAffineDim());
 
     case libnormaliz::ConeProperty::ModuleRank:
         return NmzIntToGAP(C->getModuleRank());
@@ -553,9 +553,6 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
         return NmzVectorToGAP(grad);
         }
 
-    case libnormaliz::ConeProperty::Dehomogenization:
-        return NmzVectorToGAP(C->getDehomogenization());
-
     case libnormaliz::ConeProperty::IsPointed:
         return C->isPointed() ? True : False;
 
@@ -571,37 +568,47 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
     case libnormaliz::ConeProperty::OriginalMonoidGenerators:
         return NmzMatrixToGAP(C->getOriginalMonoidGenerators());
 
+    case libnormaliz::ConeProperty::GeneratorsOfToricRing:
+        return NmzMatrixToGAP(C->getGeneratorsOfToricRing());
+
     case libnormaliz::ConeProperty::ReesPrimary:
         return C->isReesPrimary() ? True : False;
 
     case libnormaliz::ConeProperty::ReesPrimaryMultiplicity:
         return NmzIntToGAP(C->getReesPrimaryMultiplicity());
 
-    case libnormaliz::ConeProperty::InclusionExclusionData:
-        return NmzTriangleListToGAP<long>(C->getInclusionExclusionData());
-
-    // the following is special and we do not support a conversion
-    // (if you really need this, contact the developers)
+    // StanleyDec is special and we do not support the required conversion at
+    // this time. If you really need this, contact the developers.
     case libnormaliz::ConeProperty::StanleyDec:
         //C->getStanleyDec();
         break;
 
-    // the following are not yet supported, but we'd like to
-    case libnormaliz::ConeProperty::IsDeg1Generated:        // TODO
-    case libnormaliz::ConeProperty::GeneratorsOfToricRing:  // TODO
-    case libnormaliz::ConeProperty::ExcludedFaces:          // TODO
-    case libnormaliz::ConeProperty::ApproximateRatPolytope: // TODO
+    case libnormaliz::ConeProperty::ExcludedFaces:
+        return NmzMatrixToGAP(C->getExcludedFaces());
+
+    case libnormaliz::ConeProperty::Dehomogenization:
+        return NmzVectorToGAP(C->getDehomogenization());
+
+    case libnormaliz::ConeProperty::InclusionExclusionData:
+        return NmzTriangleListToGAP<long>(C->getInclusionExclusionData());
 
 #ifdef NORMALIZ_3
-    case libnormaliz::ConeProperty::BottomDecomposition:    // TODO
-    case libnormaliz::ConeProperty::KeepOrder:              // TODO
-    case libnormaliz::ConeProperty::ClassGroup:             // TODO
+    case libnormaliz::ConeProperty::ClassGroup:
+        return NmzVectorToGAP(C->getClassGroup());
 #endif
+
+    case libnormaliz::ConeProperty::IsDeg1Generated:
+        break;  // TODO: only used by full cone ?!?
 
 //  the following properties are compute options and do not return anything
     case libnormaliz::ConeProperty::DualMode:
     case libnormaliz::ConeProperty::DefaultMode:
-        return True;
+    case libnormaliz::ConeProperty::ApproximateRatPolytope:
+#ifdef NORMALIZ_3
+    case libnormaliz::ConeProperty::BottomDecomposition:
+    case libnormaliz::ConeProperty::KeepOrder:
+#endif
+        return True;    // FIXME: appropriate value?
 
     default:
         // Case not handled. Should signal an error
@@ -681,8 +688,6 @@ static Obj _NmzBasisChangeIntern(Obj cone)
     Cone<Integer>* C = GET_CONE<Integer>(cone);
     Sublattice_Representation<Integer> bc = C->getBasisChange();
 
-    // TODO: return a record instead of an array. For now,
-    // we use an array because it is simpler.
     Obj res = NEW_PLIST(T_PLIST, 6);
     SET_LEN_PLIST(res, 6);
     AssPlist(res, 1, NmzIntToGAP(bc.get_dim()));
