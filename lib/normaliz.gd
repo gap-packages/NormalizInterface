@@ -12,20 +12,9 @@ BindGlobal("TheTypeNormalizLongIntCone", NewType( NormalizObjectFamily, IsNormal
 BindGlobal("TheTypeNormalizGMPCone", NewType( NormalizObjectFamily, IsNormalizGMPCone ));
 
 
-
+#
 #! @Section Use a NmzCone
-#! @Arguments cone, property
-#! @Returns true if successful, otherwise false
-#! @Description
-#! TODO
-DeclareOperation( "NmzConeProperty", [IsNormalizCone, IsString] );
-
-#! @Section Cone properties
-#! @Arguments cone
-#! @Returns a record describing the basis change
-#! @Description
-#! TODO
-DeclareOperation( "NmzBasisChange", [IsNormalizCone] );
+#
 
 #! @Section Use a NmzCone
 #! @Arguments cone[, options]
@@ -33,6 +22,28 @@ DeclareOperation( "NmzBasisChange", [IsNormalizCone] );
 #! @Description
 #! TODO
 DeclareGlobalFunction( "NmzCompute" );
+
+#! @Arguments cone, property
+#! @Returns true if successful, otherwise false
+#! @Description
+#! TODO
+DeclareOperation( "NmzConeProperty", [IsNormalizCone, IsString] );
+
+#! @Arguments cone
+#! @Description
+#! Print an overview of all known properties of the given cone,
+#! as well as their values.
+DeclareGlobalFunction( "NmzPrintConeProperties" );
+
+#
+#! @Section Cone properties
+#
+
+#! @Arguments cone
+#! @Returns a record describing the basis change
+#! @Description
+#! TODO
+DeclareOperation( "NmzBasisChange", [IsNormalizCone] );
 
 
 #! @Section Create a NmzCone

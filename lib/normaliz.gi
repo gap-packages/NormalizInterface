@@ -22,9 +22,7 @@ function( cone, prop )
     local result, t, poly, tmp, denom;
     result := _NmzConeProperty(cone, prop);
     if prop = "Grading" then
-        tmp := Length(result);
-        denom := result[tmp];
-        result := result{[1..(tmp-1)]};
+        denom := Remove(result);
         return result / denom;
     fi;
     if prop = "HilbertSeries" then
@@ -41,6 +39,23 @@ function( cone, prop )
     fi;
     return result;
 end );
+
+InstallGlobalFunction("NmzPrintConeProperties", function(cone)
+    local prop, val;
+    if not IsNormalizCone(cone) then
+        Error("First argument must be a Normaliz cone object");
+        return;
+    fi;
+    for prop in NmzKnownConeProperties(cone) do
+        val := NmzConeProperty(cone, prop);
+        Print(prop," = ");
+        if IsMatrix(val) then
+            Print("\n");
+        fi;
+        Display(val);
+    od;
+end);
+
 
 InstallMethod( NmzBasisChange,
                "for a Normaliz cone",
@@ -88,6 +103,10 @@ InstallGlobalFunction("NmzCone", function(arg)
     return cone;
 end);
 
+# TODO: extend NmzCone to allow this syntax:
+##cone := NmzCone(rec(integral_closure := M, grading := [ 0, 0, 1 ]));;
+
+
 
 #
 #
@@ -100,7 +119,7 @@ InstallGlobalFunction("NmzCompute", function(arg)
     fi;
     cone := arg[1];
     if not IsNormalizCone(cone) then
-        Error("First argument must be a normaliz cone object");
+        Error("First argument must be a Normaliz cone object");
         return fail;
     fi;
     if Length(arg) = 1 then
