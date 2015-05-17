@@ -17,9 +17,9 @@ ExtremeRays =
   [  -1,  -1,   3 ],
   [   1,  -2,   4 ] ]
 SupportHyperplanes = 
-[ [   2,   7,   3 ],
-  [  -8,   2,   3 ],
-  [   1,  -1,   0 ] ]
+[ [  -8,   2,   3 ],
+  [   1,  -1,   0 ],
+  [   2,   7,   3 ] ]
 TriangulationSize = 1
 TriangulationDetSum = 15
 Multiplicity = 5/8
@@ -51,3 +51,4 @@ OriginalMonoidGenerators =
   [  -1,  -1,   3 ],
   [   1,  -2,   4 ] ]
 DefaultMode = true
+ClassGroup = [ 0, 3, 15 ]
