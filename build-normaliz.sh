@@ -3,7 +3,7 @@
 # This helper script compiles Normaliz for you.
 # Before using it the first time, clone the "master" branch of
 # the Normaliz git repository:
-#    git clone https://github.com/csoeger/Normaliz Normaliz.git
+#    git clone https://github.com/Normaliz/Normaliz Normaliz.git
 #
 # After that you can run this script ("build-normaliz.sh").
 #

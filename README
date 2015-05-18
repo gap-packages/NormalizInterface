@@ -1,8 +1,8 @@
 The GAP 4 package 'NormalizInterface'
 =====================================
 
-1 Package description
-=====================
+Package description
+===================
 
 Normaliz is a software for computations with rational cones and affine
 monoids. It pursues two main computational goals: finding the Hilbert
@@ -22,8 +22,8 @@ For more information on Normaliz visit www.math.uos.de/normaliz and
 especially have a look at the manual.
 
 
-2 Installation preparation
-==========================
+Installation preparation
+========================
 
 You should use the same gmp version for GAP and libnormaliz. To ensure
 this you can use a system installed gmp for GAP by configuring it with
@@ -47,9 +47,12 @@ If you need to customize the normaliz compilation have a look at
 Normaliz.git/source/INSTALL. Remember to use the same compiler and gmp
 version as for GAP.
 
+To be able to run the tests of NormalizInterface install also the gap package
+io. For that go to the pkg/io-x.x.x/ directory and do "./configure" and "make".
+See the io package README for more information.
 
-3 Documentation and tests
-=========================
+Documentation and tests
+=======================
 
 Generate the documentation:
 (The documentation is still incomplete.)
@@ -58,3 +61,11 @@ Generate the documentation:
 run automatic tests:
     make check
     gap maketest.g
+
+
+Bug reports and feature requests
+================================
+
+Please submit bug reports and feature requests via our GitHub issue tracker:
+
+  https://github.com/fingolfin/NormalizInterface
