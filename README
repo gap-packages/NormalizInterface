@@ -39,7 +39,7 @@ into this directory. After that you can run the script "build-normaliz.sh".
 Once it completed successfully, you can then build NormalizInterface
 like this:
 
-    ./autogen.sh (need autoconf and automake) (only for developers? TODO)
+    ./autogen.sh (need autoconf and automake) (only for developers TODO)
     ./configure --with-gaproot=GAPDIR --with-normaliz=$PWD/Normaliz.git/DST
     make
 

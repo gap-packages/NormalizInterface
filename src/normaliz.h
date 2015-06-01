@@ -34,6 +34,10 @@ extern "C" {
 #define T_NORMALIZ T_SPARE1
 #endif
 
+// old versions of libnormaliz (before 2.99.1) did not include such a define
+#ifndef NMZ_RELEASE
+#define NMZ_RELEASE 21200
+#endif
 
 enum NmzConeType {
     NMZ_LONG_INT_CONE_TYPE = 0,

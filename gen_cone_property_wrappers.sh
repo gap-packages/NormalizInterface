@@ -2,8 +2,6 @@
 
 properties="\
 AffineDim \
-ApproximateRatPolytope \
-BottomDecomposition \
 ClassGroup \
 DefaultMode \
 Deg1Elements \
@@ -21,7 +19,6 @@ IsDeg1ExtremeRays \
 IsDeg1HilbertBasis \
 IsIntegrallyClosed \
 IsPointed \
-KeepOrder \
 ModuleGenerators \
 ModuleRank \
 Multiplicity \
@@ -38,10 +35,13 @@ VerticesOfPolyhedron \
 "
 
 # The following cone properties are omitted on purpose:
-# DefaultMode       -- not really a cone property
-# DualMode          -- not really a cone property
-# IsDeg1Generated   -- not really a cone property
-# StanleyDec        -- data conversion not supported at this time
+# ApproximateRatPolytope -- not really a cone property
+# BottomDecomposition    -- not really a cone property
+# DefaultMode            -- not really a cone property
+# DualMode               -- not really a cone property
+# KeepOrder              -- not really a cone property
+# IsDeg1Generated        -- output not supported by cone
+# StanleyDec             -- data conversion not supported at this time
 
 GD_FILE=lib/cone_property_wrappers.gd
 GI_FILE=lib/cone_property_wrappers.gi
