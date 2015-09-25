@@ -263,10 +263,11 @@ static Obj NmzMatrixToGAP(const vector< vector<Integer> >& in)
 static Obj NmzHilbertSeriesToGAP(const libnormaliz::HilbertSeries& HS)
 {
     Obj ret;
-    ret = NEW_PLIST(T_PLIST, 2);
-    SET_LEN_PLIST(ret, 2);
+    ret = NEW_PLIST(T_PLIST, 3);
+    SET_LEN_PLIST(ret, 3);
     AssPlist(ret, 1, NmzVectorToGAP(HS.getNum()));
     AssPlist(ret, 2, NmzVectorToGAP(libnormaliz::to_vector(HS.getDenom())));
+    AssPlist(ret, 3, NmzIntToGAP(HS.getShift()));
     return ret;
 }
 
@@ -470,6 +471,27 @@ Obj NmzKnownConeProperties(Obj self, Obj cone)
             n++;    // Increment counter
             SET_ELM_PLIST(M, n, prop_name_gap);
             CHANGED_BAG(M);
+            if (p == libnormaliz::ConeProperty::HilbertSeries) {
+                if (IS_LONG_INT_CONE(cone)) {
+                    Cone<long>* C = GET_CONE<long>(cone);
+                    C->getHilbertSeries().computeHilbertQuasiPolynomial();
+                    isComputed = C->getHilbertSeries().isHilbertQuasiPolynomialComputed();
+                } else {
+                    Cone<mpz_class>* C = GET_CONE<mpz_class>(cone);
+                    C->getHilbertSeries().computeHilbertQuasiPolynomial();
+                    isComputed = C->getHilbertSeries().isHilbertQuasiPolynomialComputed();
+                }
+                if (isComputed) {
+                    string prop_name("HilbertFunction");
+
+                    Obj prop_name_gap;
+                    C_NEW_STRING(prop_name_gap, prop_name.size(), prop_name.c_str());
+
+                    n++;    // Increment counter
+                    SET_ELM_PLIST(M, n, prop_name_gap);
+                    CHANGED_BAG(M);
+                }
+            }
         }
     }
     SET_LEN_PLIST(M, n);
@@ -482,6 +504,13 @@ template<typename Integer>
 static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
 {
     Cone<Integer>* C = GET_CONE<Integer>(cone);
+    // there is no ConeProperty HilbertFunction, it is part of the HilbertSeries
+    // FIXME better way?
+    if (string(CSTR_STRING(prop)) == string("HilbertFunction")) {
+        C->compute(ConeProperties(libnormaliz::ConeProperty::HilbertSeries));
+        return NmzHilbertFunctionToGAP(C->getHilbertSeries());
+    }
+
     libnormaliz::ConeProperty::Enum p = libnormaliz::toConeProperty(CSTR_STRING(prop));
 
     ConeProperties notComputed = C->compute(ConeProperties(p));
@@ -517,9 +546,6 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
         return MpqClassToGAP(mult);
         }
 
-    case libnormaliz::ConeProperty::Shift:
-        return NmzIntToGAP(C->getShift());
-
     case libnormaliz::ConeProperty::RecessionRank:
         return NmzIntToGAP(C->getRecessionRank());
 
@@ -540,10 +566,6 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
 
     case libnormaliz::ConeProperty::HilbertSeries:
         return NmzHilbertSeriesToGAP(C->getHilbertSeries());
-        break;
-
-    case libnormaliz::ConeProperty::HilbertFunction:
-        return NmzHilbertFunctionToGAP(C->getHilbertSeries());
         break;
 
     case libnormaliz::ConeProperty::Grading:
@@ -601,8 +623,8 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
 //  the following properties are compute options and do not return anything
     case libnormaliz::ConeProperty::DualMode:
     case libnormaliz::ConeProperty::DefaultMode:
-    case libnormaliz::ConeProperty::ApproximateRatPolytope:
 #if NMZ_RELEASE >= 29900
+    case libnormaliz::ConeProperty::Approximate:
     case libnormaliz::ConeProperty::BottomDecomposition:
     case libnormaliz::ConeProperty::KeepOrder:
 #endif

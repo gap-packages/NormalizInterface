@@ -3,13 +3,11 @@
 properties="\
 AffineDim \
 ClassGroup \
-DefaultMode \
 Deg1Elements \
 Dehomogenization \
 ExcludedFaces \
 ExtremeRays \
 Generators \
-GeneratorsOfToricRing \
 Grading \
 HilbertBasis \
 HilbertFunction \
@@ -20,13 +18,13 @@ IsDeg1HilbertBasis \
 IsIntegrallyClosed \
 IsPointed \
 ModuleGenerators \
+ModuleGeneratorsOverOriginalMonoid \
 ModuleRank \
 Multiplicity \
 OriginalMonoidGenerators \
 RecessionRank \
-ReesPrimary \
+IsReesPrimary \
 ReesPrimaryMultiplicity \
-Shift \
 SupportHyperplanes \
 Triangulation \
 TriangulationDetSum \
@@ -35,12 +33,11 @@ VerticesOfPolyhedron \
 "
 
 # The following cone properties are omitted on purpose:
-# ApproximateRatPolytope -- not really a cone property
+# Approximate            -- not really a cone property
 # BottomDecomposition    -- not really a cone property
 # DefaultMode            -- not really a cone property
 # DualMode               -- not really a cone property
 # KeepOrder              -- not really a cone property
-# IsDeg1Generated        -- output not supported by cone
 # StanleyDec             -- data conversion not supported at this time
 
 GD_FILE=lib/cone_property_wrappers.gd
@@ -66,10 +63,6 @@ DeclareGlobalFunction( "Nmz$prop" );
 
 EOF
 done
-
-cat  >> $GD_FILE <<EOF
-DeclareSynonym( "NmzIsReesPrimary", NmzReesPrimary );
-EOF
 
 #
 # Create the .gi file

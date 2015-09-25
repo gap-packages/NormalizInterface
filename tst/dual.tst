@@ -133,23 +133,5 @@ Grading = [ 1, 1, 1, 1, 1, 1, -2 ]
 IsPointed = true
 IsDeg1ExtremeRays = true
 IsDeg1HilbertBasis = false
-IsIntegrallyClosed = false
-OriginalMonoidGenerators = 
-[ [  0,  0,  0,  0,  0,  1,  0 ],
-  [  0,  0,  0,  0,  1,  0,  0 ],
-  [  0,  0,  0,  1,  0,  0,  0 ],
-  [  0,  0,  1,  0,  0,  0,  0 ],
-  [  0,  1,  0,  0,  0,  0,  0 ],
-  [  1,  0,  0,  0,  0,  0,  0 ],
-  [  0,  1,  1,  0,  0,  1,  1 ],
-  [  0,  1,  0,  1,  1,  0,  1 ],
-  [  1,  1,  0,  1,  0,  0,  1 ],
-  [  1,  1,  1,  0,  0,  0,  1 ],
-  [  0,  0,  1,  1,  1,  0,  1 ],
-  [  1,  0,  1,  0,  1,  0,  1 ],
-  [  0,  0,  1,  1,  0,  1,  1 ],
-  [  1,  0,  0,  1,  0,  1,  1 ],
-  [  0,  1,  0,  0,  1,  1,  1 ],
-  [  1,  0,  0,  0,  1,  1,  1 ] ]
-DefaultMode = true
+Sublattice = fail
 ClassGroup = [ 17 ]

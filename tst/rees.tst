@@ -136,6 +136,6 @@ OriginalMonoidGenerators =
   [  0,  1,  0,  0,  1,  1,  1 ],
   [  0,  0,  1,  1,  1,  0,  1 ],
   [  0,  0,  1,  1,  0,  1,  1 ] ]
-ReesPrimary = false
-DefaultMode = true
+IsReesPrimary = false
+Sublattice = fail
 ClassGroup = [ 17 ]
