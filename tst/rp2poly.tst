@@ -86,7 +86,7 @@ Deg1Elements =
   [  1,  1,  0,  1,  0,  0 ],
   [  1,  1,  1,  0,  0,  0 ] ]
 HilbertSeries = [ t^4+4*t^3+11*t^2+4*t+1, [ [ 1, 6 ] ] ]
-HilbertFunction = [ 7/40*t^5+7/8*t^4+53/24*t^3+25/8*t^2+157/60*t+1 ]
+HilbertQuasiPolynomial = [ 7/40*t^5+7/8*t^4+53/24*t^3+25/8*t^2+157/60*t+1 ]
 Grading = [ 1/3, 1/3, 1/3, 1/3, 1/3, 1/3 ]
 IsPointed = true
 IsDeg1ExtremeRays = true

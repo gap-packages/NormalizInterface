@@ -10,7 +10,7 @@ ExtremeRays \
 Generators \
 Grading \
 HilbertBasis \
-HilbertFunction \
+HilbertQuasiPolynomial \
 HilbertSeries \
 InclusionExclusionData \
 IsDeg1ExtremeRays \

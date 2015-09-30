@@ -271,7 +271,7 @@ static Obj NmzHilbertSeriesToGAP(const libnormaliz::HilbertSeries& HS)
     return ret;
 }
 
-static Obj NmzHilbertFunctionToGAP(const libnormaliz::HilbertSeries& HS)
+static Obj NmzHilbertQuasiPolynomialToGAP(const libnormaliz::HilbertSeries& HS)
 {
     Obj ret;
     vector< vector<mpz_class> > HQ = HS.getHilbertQuasiPolynomial();
@@ -482,7 +482,7 @@ Obj NmzKnownConeProperties(Obj self, Obj cone)
                     isComputed = C->getHilbertSeries().isHilbertQuasiPolynomialComputed();
                 }
                 if (isComputed) {
-                    string prop_name("HilbertFunction");
+                    string prop_name("HilbertQuasiPolynomial");
 
                     Obj prop_name_gap;
                     C_NEW_STRING(prop_name_gap, prop_name.size(), prop_name.c_str());
@@ -504,11 +504,11 @@ template<typename Integer>
 static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
 {
     Cone<Integer>* C = GET_CONE<Integer>(cone);
-    // there is no ConeProperty HilbertFunction, it is part of the HilbertSeries
+    // there is no ConeProperty HilbertQuasiPolynomial, it is part of the HilbertSeries
     // FIXME better way?
-    if (string(CSTR_STRING(prop)) == string("HilbertFunction")) {
+    if (string(CSTR_STRING(prop)) == string("HilbertQuasiPolynomial")) {
         C->compute(ConeProperties(libnormaliz::ConeProperty::HilbertSeries));
-        return NmzHilbertFunctionToGAP(C->getHilbertSeries());
+        return NmzHilbertQuasiPolynomialToGAP(C->getHilbertSeries());
     }
 
     libnormaliz::ConeProperty::Enum p = libnormaliz::toConeProperty(CSTR_STRING(prop));

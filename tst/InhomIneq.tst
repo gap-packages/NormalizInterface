@@ -12,5 +12,5 @@ gap> InhomIneq := NmzCone(["inhom_inequalities", M, "grading", [[1,0]] ]);
 <a Normaliz cone with long int coefficients>
 gap> NmzHilbertSeries(InhomIneq);
 [ 1+t^-1, [ [ 1, 1 ] ] ]
-gap> NmzHilbertFunction(InhomIneq);
+gap> NmzHilbertQuasiPolynomial(InhomIneq);
 [ 2 ]

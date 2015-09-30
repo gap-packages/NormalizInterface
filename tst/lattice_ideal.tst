@@ -50,7 +50,7 @@ Deg1Elements =
   [  2,  4,  1 ],
   [  3,  5,  2 ] ]
 HilbertSeries = [ 3*t^2+6*t+1, [ [ 1, 3 ] ] ]
-HilbertFunction = [ 5*t^2+3*t+1 ]
+HilbertQuasiPolynomial = [ 5*t^2+3*t+1 ]
 Grading = [ -2, 1, 1 ]
 IsPointed = true
 IsDeg1ExtremeRays = true

@@ -28,7 +28,7 @@ NmzHilbertBasis(Magic3x3even);
 NmzHilbertSeries(Magic3x3even);
 #! [ t^3+3*t^2-t+1, [ [ 1, 1 ], [ 2, 2 ] ] ]
 
-NmzHilbertFunction(Magic3x3even);
+NmzHilbertQuasiPolynomial(Magic3x3even);
 #! [ 1/2*t^2+t+1, 1/2*t^2-1/2 ]
 
 #! @EndExample

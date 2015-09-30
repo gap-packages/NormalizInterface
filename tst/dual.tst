@@ -127,7 +127,7 @@ Deg1Elements =
   [  1,  1,  0,  1,  0,  0,  1 ],
   [  1,  1,  1,  0,  0,  0,  1 ] ]
 HilbertSeries = [ 6*t^4+25*t^3+31*t^2+9*t+1, [ [ 1, 7 ] ] ]
-HilbertFunction = [ 1/10*t^6+41/60*t^5+13/6*t^4+49/12*t^3+71/15*t^2+97/30*t+1 
+HilbertQuasiPolynomial = [ 1/10*t^6+41/60*t^5+13/6*t^4+49/12*t^3+71/15*t^2+97/30*t+1 
  ]
 Grading = [ 1, 1, 1, 1, 1, 1, -2 ]
 IsPointed = true

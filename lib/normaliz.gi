@@ -38,7 +38,7 @@ function( cone, prop )
         tmp := Collected(result[2]);
         return [poly, tmp];
     fi;
-    if prop = "HilbertFunction" then
+    if prop = "HilbertQuasiPolynomial" then
         t := Indeterminate(Rationals, "t");
         denom := Remove(result);
         poly := List(result, coeffs -> UnivariatePolynomial(Rationals, coeffs, t));
