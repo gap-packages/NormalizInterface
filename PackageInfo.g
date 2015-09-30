@@ -61,10 +61,10 @@ Status         := "dev",
 #CommunicatedBy := "name (place)",
 #AcceptDate     := "mm/yyyy",
 
-PackageWWWHome := "https://github.com/fingolfin/NormalizInterface",
+PackageWWWHome := "https://github.com/gap-packages/NormalizInterface",
 
 ArchiveFormats := ".tar.gz tar.bz2",
-ArchiveURL     := Concatenation("https://github.com/fingolfin/NormalizInterface/",
+ArchiveURL     := Concatenation("https://github.com/gap-packages/NormalizInterface/",
                                 "releases/download/v", ~.Version,
                                 "/NormalizInterface-", ~.Version),
 README_URL     := Concatenation( ~.PackageWWWHome, "README" ),
