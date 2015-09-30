@@ -1,6 +1,6 @@
 name: NormalizInterface
-version: 0.1dev
-date: ??/03/2014
+version: 0.3
+date: 15/05/2015
 description: GAP wrapper for normaliz
 
 authors:
@@ -9,7 +9,7 @@ authors:
     - name: Max Horn
       url: http://www.quendi.de/math
     - name: Christof Söger
-      url: mailto:csoeger@uos.de
+      url: http://www.math.uos.de/normaliz
 
 maintainers:
     - name: Sebastian Gutsche
@@ -17,19 +17,19 @@ maintainers:
     - name: Max Horn
       url: http://www.quendi.de/math
     - name: Christof Söger
-      url: mailto:csoeger@uos.de
+      url: http://www.math.uos.de/normaliz
 
 GAP: ">= 4.7"
 
-www: https://github.com/fingolfin/NormalizInterface
-readme: https://github.com/fingolfin/NormalizInterfaceREADME
-packageinfo: https://github.com/fingolfin/NormalizInterfacePackageInfo.g
+www: https://github.com/gap-packages/NormalizInterface
+readme: https://github.com/gap-packages/NormalizInterfaceREADME
+packageinfo: https://github.com/gap-packages/NormalizInterfacePackageInfo.g
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/fingolfin/NormalizInterfaceNormalizInterface-0.1dev.tar.gz
+      url: https://github.com/gap-packages/NormalizInterface/releases/download/v0.3/NormalizInterface-0.3.tar.gz
     - name: tar.bz2
-      url: https://github.com/fingolfin/NormalizInterfaceNormalizInterface-0.1devtar.bz2
+      url: https://github.com/gap-packages/NormalizInterface/releases/download/v0.3/NormalizInterface-0.3tar.bz2
 
 abstract: The NormalizInterface Package ... TODO
 
