@@ -62,13 +62,12 @@ Status         := "dev",
 #AcceptDate     := "mm/yyyy",
 
 PackageWWWHome := "https://github.com/gap-packages/NormalizInterface",
-
-ArchiveFormats := ".tar.gz tar.bz2",
+README_URL     := Concatenation( ~.PackageWWWHome, "/README" ),
+PackageInfoURL := Concatenation( ~.PackageWWWHome, "/PackageInfo.g" ),
 ArchiveURL     := Concatenation("https://github.com/gap-packages/NormalizInterface/",
                                 "releases/download/v", ~.Version,
                                 "/NormalizInterface-", ~.Version),
-README_URL     := Concatenation( ~.PackageWWWHome, "README" ),
-PackageInfoURL := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
+ArchiveFormats := ".tar.gz .tar.bz2",
 
 AbstractHTML   := Concatenation(
                "The NormalizInterface Package ... ",
