@@ -33,7 +33,7 @@ this you can use a system installed gmp for GAP by configuring it with
 and build it. Next you need Normaliz, the easiest way is to clone the master
 branch from the Normaliz github repository with the command
 
-    git clone https://github.com/csoeger/Normaliz Normaliz.git
+    git clone https://github.com/Normaliz/Normaliz Normaliz.git
 
 into this directory. After that you can run the script "build-normaliz.sh".
 Once it completed successfully, you can then build NormalizInterface
