@@ -16,6 +16,8 @@
 
 cd Normaliz.git
 
+rm -rf DST
+rm -rf BUILD
 mkdir -p DST
 mkdir -p BUILD
 
