@@ -22,7 +22,6 @@ endif
 NormalizInterface_la_LIBADD = $(NORMALIZ_LDFLAGS) -lnormaliz
 
 all-local: $(GAPINSTALLLIB)
-	@echo "SUCCESS!"
 
 $(GAPINSTALLLIB): NormalizInterface.la
 	$(mkdir_p) $(BINARCHDIR)
