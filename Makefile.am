@@ -12,6 +12,7 @@ GAPINSTALLLIB = $(BINARCHDIR)/NormalizInterface.so
 lib_LTLIBRARIES = NormalizInterface.la
 
 NormalizInterface_la_SOURCES = src/normaliz.cc
+NormalizInterface_la_CXXFLAGS = -Wall
 NormalizInterface_la_CPPFLAGS = $(GAP_CPPFLAGS) -DCONFIG_H $(NORMALIZ_CPPFLAGS)
 NormalizInterface_la_LDFLAGS = -R$(NORMALIZ_LDPATH)
 NormalizInterface_la_LDFLAGS += -module -avoid-version
