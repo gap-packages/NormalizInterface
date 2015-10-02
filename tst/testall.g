@@ -3,6 +3,7 @@ TEST_SETTING := rec(
     verbose := true,
     rewriteToFile := false,
     pkg := "NormalizInterface",
+    abort := false,
 );
 
 if IsBound(GAPInfo.SystemEnvironment.AUTOMAKE_TESTS) then
@@ -12,23 +13,26 @@ fi;
 
 if TEST_SETTING.automake then
     if LoadPackage("io") = fail then
-        Error("Could not load package: 'IO'!");
-        # FIXME: Error() here leads to "make check" hanging!
+        # Signal to TAP driver that there was an error
+        Print("\nBail out! io package not available\n");
+        TEST_SETTING.abort := true;
+    else
+        # HACK to make sure GAP loads the right version of the package
+        SetPackagePath(TEST_SETTING.pkg, ".");
     fi;
-
-    # HACK to make sure GAP loads the right version of the
-    # package
-    SetPackagePath(TEST_SETTING.pkg, ".");
 fi;
 
-if LoadPackage(TEST_SETTING.pkg) = fail then
+
+if not TEST_SETTING.abort and LoadPackage(TEST_SETTING.pkg) = fail then
     if TEST_SETTING.automake then
-        Print("Could not load package '",TEST_SETTING.pkg,"'\n");
-        IO_exit(99); # make check: FAILED
+        Print("\nBail out! Could not load package '",TEST_SETTING.pkg,"'\n");
+        TEST_SETTING.abort := true;
+    else
+        Error("Could not load package '",TEST_SETTING.pkg,"'\n");
     fi;
-    Error("Could not load package '",TEST_SETTING.pkg,"'\n");
 fi;
 
+if not TEST_SETTING.abort then
 CallFuncList(function()
     local d, HasSuffix, tests, success, i, test, opt;
 
@@ -88,3 +92,6 @@ CallFuncList(function()
     fi;
 
 end, []);
+fi;
+
+QUIT;
