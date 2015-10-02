@@ -20,7 +20,7 @@ NormalizInterface_la_LDFLAGS += -no-undefined -version-info 0:0:0 -Wl,$(GAPROOT)
 endif
 NormalizInterface_la_LIBADD = $(NORMALIZ_LDFLAGS) -lnormaliz
 
-all-local: $(GAPINSTALLLIB) lib/cone_property_wrappers.gi
+all-local: $(GAPINSTALLLIB)
 	@echo "SUCCESS!"
 
 $(GAPINSTALLLIB): NormalizInterface.la
@@ -57,19 +57,6 @@ DOC_FILES = \
 
 doc/manual.six: $(DOC_FILES)
 	($(GAPROOT)/bin/gap.sh -A makedoc.g)
-
-lib/cone_property_wrappers.gi: lib/cone_property_wrappers.gd
-
-lib/cone_property_wrappers.gd: gen_cone_property_wrappers.sh
-	./gen_cone_property_wrappers.sh
-
-BUILT_SOURCES = \
-	lib/cone_property_wrappers.gi \
-	lib/cone_property_wrappers.gd
-
-CLEANFILES = \
-	lib/cone_property_wrappers.gi \
-	lib/cone_property_wrappers.gd
 
 AM_COLOR_TESTS = always
 TESTS_ENVIRONMENT = GAP_EXECUTABLE='$(GAPROOT)/bin/gap.sh'

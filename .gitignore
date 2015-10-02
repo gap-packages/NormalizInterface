@@ -31,7 +31,6 @@
 /config.log
 /config.status
 /configure
-/lib/
 /libtool
 /m4/libtool.m4
 /m4/ltoptions.m4
@@ -49,7 +48,6 @@ src/*.lo
 
 /doc/*.xml
 
-lib/cone_property_function.*
 /Normaliz2.*
 /Normaliz.git
 /Normaliz
