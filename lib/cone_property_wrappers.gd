@@ -2,148 +2,153 @@
 
 #! @Chapter Functions
 #! @Section Cone properties
-#! @Description
-#!  This is an alias for <C>NmzConeProperty( cone, "AffineDim" );</C>
+
 #! @Arguments cone
+#! @Description
+#!  This is an alias for <C>NmzConeProperty( cone, "AffineDim" );</C> see <Ref Func="NmzConeProperty"/>
 DeclareGlobalFunction( "NmzAffineDim" );
 
-#! @Description
-#!  This is an alias for <C>NmzConeProperty( cone, "ClassGroup" );</C>
 #! @Arguments cone
+#! @Description
+#!  This is an alias for <C>NmzConeProperty( cone, "ClassGroup" );</C> see <Ref Func="NmzConeProperty"/>
 DeclareGlobalFunction( "NmzClassGroup" );
 
-#! @Description
-#!  This is an alias for <C>NmzConeProperty( cone, "Deg1Elements" );</C>
 #! @Arguments cone
+#! @Description
+#!  This is an alias for <C>NmzConeProperty( cone, "Deg1Elements" );</C> see <Ref Func="NmzConeProperty"/>
 DeclareGlobalFunction( "NmzDeg1Elements" );
 
-#! @Description
-#!  This is an alias for <C>NmzConeProperty( cone, "Dehomogenization" );</C>
 #! @Arguments cone
+#! @Description
+#!  This is an alias for <C>NmzConeProperty( cone, "Dehomogenization" );</C> see <Ref Func="NmzConeProperty"/>
 DeclareGlobalFunction( "NmzDehomogenization" );
 
-#! @Description
-#!  This is an alias for <C>NmzConeProperty( cone, "ExcludedFaces" );</C>
 #! @Arguments cone
+#! @Description
+#!  This is an alias for <C>NmzConeProperty( cone, "ExcludedFaces" );</C> see <Ref Func="NmzConeProperty"/>
 DeclareGlobalFunction( "NmzExcludedFaces" );
 
-#! @Description
-#!  This is an alias for <C>NmzConeProperty( cone, "ExtremeRays" );</C>
 #! @Arguments cone
+#! @Description
+#!  This is an alias for <C>NmzConeProperty( cone, "ExtremeRays" );</C> see <Ref Func="NmzConeProperty"/>
 DeclareGlobalFunction( "NmzExtremeRays" );
 
-#! @Description
-#!  This is an alias for <C>NmzConeProperty( cone, "Generators" );</C>
 #! @Arguments cone
+#! @Description
+#!  This is an alias for <C>NmzConeProperty( cone, "Generators" );</C> see <Ref Func="NmzConeProperty"/>
 DeclareGlobalFunction( "NmzGenerators" );
 
-#! @Description
-#!  This is an alias for <C>NmzConeProperty( cone, "Grading" );</C>
 #! @Arguments cone
+#! @Description
+#!  This is an alias for <C>NmzConeProperty( cone, "Grading" );</C> see <Ref Func="NmzConeProperty"/>
 DeclareGlobalFunction( "NmzGrading" );
 
-#! @Description
-#!  This is an alias for <C>NmzConeProperty( cone, "HilbertBasis" );</C>
 #! @Arguments cone
+#! @Description
+#!  This is an alias for <C>NmzConeProperty( cone, "HilbertBasis" );</C> see <Ref Func="NmzConeProperty"/>
 DeclareGlobalFunction( "NmzHilbertBasis" );
 
-#! @Description
-#!  This is an alias for <C>NmzConeProperty( cone, "HilbertQuasiPolynomial" );</C>
 #! @Arguments cone
+#! @Description
+#!  This is an alias for <C>NmzConeProperty( cone, "HilbertQuasiPolynomial" );</C> see <Ref Func="NmzConeProperty"/>
 DeclareGlobalFunction( "NmzHilbertQuasiPolynomial" );
 
-#! @Description
-#!  This is an alias for <C>NmzConeProperty( cone, "HilbertSeries" );</C>
 #! @Arguments cone
+#! @Description
+#!  This is an alias for <C>NmzConeProperty( cone, "HilbertSeries" );</C> see <Ref Func="NmzConeProperty"/>
 DeclareGlobalFunction( "NmzHilbertSeries" );
 
-#! @Description
-#!  This is an alias for <C>NmzConeProperty( cone, "InclusionExclusionData" );</C>
 #! @Arguments cone
+#! @Description
+#!  This is an alias for <C>NmzConeProperty( cone, "InclusionExclusionData" );</C> see <Ref Func="NmzConeProperty"/>
 DeclareGlobalFunction( "NmzInclusionExclusionData" );
 
-#! @Description
-#!  This is an alias for <C>NmzConeProperty( cone, "IsDeg1ExtremeRays" );</C>
 #! @Arguments cone
+#! @Description
+#!  This is an alias for <C>NmzConeProperty( cone, "IsDeg1ExtremeRays" );</C> see <Ref Func="NmzConeProperty"/>
 DeclareGlobalFunction( "NmzIsDeg1ExtremeRays" );
 
-#! @Description
-#!  This is an alias for <C>NmzConeProperty( cone, "IsDeg1HilbertBasis" );</C>
 #! @Arguments cone
+#! @Description
+#!  This is an alias for <C>NmzConeProperty( cone, "IsDeg1HilbertBasis" );</C> see <Ref Func="NmzConeProperty"/>
 DeclareGlobalFunction( "NmzIsDeg1HilbertBasis" );
 
-#! @Description
-#!  This is an alias for <C>NmzConeProperty( cone, "IsIntegrallyClosed" );</C>
 #! @Arguments cone
+#! @Description
+#!  This is an alias for <C>NmzConeProperty( cone, "IsIntegrallyClosed" );</C> see <Ref Func="NmzConeProperty"/>
 DeclareGlobalFunction( "NmzIsIntegrallyClosed" );
 
-#! @Description
-#!  This is an alias for <C>NmzConeProperty( cone, "IsPointed" );</C>
 #! @Arguments cone
+#! @Description
+#!  This is an alias for <C>NmzConeProperty( cone, "IsPointed" );</C> see <Ref Func="NmzConeProperty"/>
 DeclareGlobalFunction( "NmzIsPointed" );
 
-#! @Description
-#!  This is an alias for <C>NmzConeProperty( cone, "ModuleGenerators" );</C>
 #! @Arguments cone
+#! @Description
+#!  This is an alias for <C>NmzConeProperty( cone, "ModuleGenerators" );</C> see <Ref Func="NmzConeProperty"/>
 DeclareGlobalFunction( "NmzModuleGenerators" );
 
-#! @Description
-#!  This is an alias for <C>NmzConeProperty( cone, "ModuleGeneratorsOverOriginalMonoid" );</C>
 #! @Arguments cone
+#! @Description
+#!  This is an alias for <C>NmzConeProperty( cone, "ModuleGeneratorsOverOriginalMonoid" );</C> see <Ref Func="NmzConeProperty"/>
 DeclareGlobalFunction( "NmzModuleGeneratorsOverOriginalMonoid" );
 
-#! @Description
-#!  This is an alias for <C>NmzConeProperty( cone, "ModuleRank" );</C>
 #! @Arguments cone
+#! @Description
+#!  This is an alias for <C>NmzConeProperty( cone, "ModuleRank" );</C> see <Ref Func="NmzConeProperty"/>
 DeclareGlobalFunction( "NmzModuleRank" );
 
-#! @Description
-#!  This is an alias for <C>NmzConeProperty( cone, "Multiplicity" );</C>
 #! @Arguments cone
+#! @Description
+#!  This is an alias for <C>NmzConeProperty( cone, "Multiplicity" );</C> see <Ref Func="NmzConeProperty"/>
 DeclareGlobalFunction( "NmzMultiplicity" );
 
-#! @Description
-#!  This is an alias for <C>NmzConeProperty( cone, "OriginalMonoidGenerators" );</C>
 #! @Arguments cone
+#! @Description
+#!  This is an alias for <C>NmzConeProperty( cone, "OriginalMonoidGenerators" );</C> see <Ref Func="NmzConeProperty"/>
 DeclareGlobalFunction( "NmzOriginalMonoidGenerators" );
 
-#! @Description
-#!  This is an alias for <C>NmzConeProperty( cone, "RecessionRank" );</C>
 #! @Arguments cone
+#! @Description
+#!  This is an alias for <C>NmzConeProperty( cone, "RecessionRank" );</C> see <Ref Func="NmzConeProperty"/>
 DeclareGlobalFunction( "NmzRecessionRank" );
 
-#! @Description
-#!  This is an alias for <C>NmzConeProperty( cone, "IsReesPrimary" );</C>
 #! @Arguments cone
+#! @Description
+#!  This is an alias for <C>NmzConeProperty( cone, "IsReesPrimary" );</C> see <Ref Func="NmzConeProperty"/>
 DeclareGlobalFunction( "NmzIsReesPrimary" );
 
-#! @Description
-#!  This is an alias for <C>NmzConeProperty( cone, "ReesPrimaryMultiplicity" );</C>
 #! @Arguments cone
+#! @Description
+#!  This is an alias for <C>NmzConeProperty( cone, "ReesPrimaryMultiplicity" );</C> see <Ref Func="NmzConeProperty"/>
 DeclareGlobalFunction( "NmzReesPrimaryMultiplicity" );
 
-#! @Description
-#!  This is an alias for <C>NmzConeProperty( cone, "SupportHyperplanes" );</C>
 #! @Arguments cone
+#! @Returns the equations
+#! @Description
+#! The equations cut out the linear space generated by the cone.
+#! Together with the support hyperplanes and the congruences it describes the
+#! lattice points of the cone.
+#!  This is an alias for <C>NmzConeProperty( cone, "SupportHyperplanes" );</C> see <Ref Func="NmzConeProperty"/>
 DeclareGlobalFunction( "NmzSupportHyperplanes" );
 
-#! @Description
-#!  This is an alias for <C>NmzConeProperty( cone, "Triangulation" );</C>
 #! @Arguments cone
+#! @Description
+#!  This is an alias for <C>NmzConeProperty( cone, "Triangulation" );</C> see <Ref Func="NmzConeProperty"/>
 DeclareGlobalFunction( "NmzTriangulation" );
 
-#! @Description
-#!  This is an alias for <C>NmzConeProperty( cone, "TriangulationDetSum" );</C>
 #! @Arguments cone
+#! @Description
+#!  This is an alias for <C>NmzConeProperty( cone, "TriangulationDetSum" );</C> see <Ref Func="NmzConeProperty"/>
 DeclareGlobalFunction( "NmzTriangulationDetSum" );
 
-#! @Description
-#!  This is an alias for <C>NmzConeProperty( cone, "TriangulationSize" );</C>
 #! @Arguments cone
+#! @Description
+#!  This is an alias for <C>NmzConeProperty( cone, "TriangulationSize" );</C> see <Ref Func="NmzConeProperty"/>
 DeclareGlobalFunction( "NmzTriangulationSize" );
 
-#! @Description
-#!  This is an alias for <C>NmzConeProperty( cone, "VerticesOfPolyhedron" );</C>
 #! @Arguments cone
+#! @Description
+#!  This is an alias for <C>NmzConeProperty( cone, "VerticesOfPolyhedron" );</C> see <Ref Func="NmzConeProperty"/>
 DeclareGlobalFunction( "NmzVerticesOfPolyhedron" );
 

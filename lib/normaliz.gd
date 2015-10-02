@@ -17,17 +17,17 @@ BindGlobal("TheTypeNormalizGMPCone", NewType( NormalizObjectFamily, IsNormalizGM
 #
 
 #! @Section Use a NmzCone
-#! @Arguments cone[, options]
-#! @Returns true if successful, otherwise false
+#! @Arguments TODO
+#! @Returns TODO
 #! @Description
 #! TODO
 DeclareGlobalFunction( "NmzCompute" );
 
 #! @Arguments cone, property
-#! @Returns true if successful, otherwise false
+#! @Returns TODO
 #! @Description
 #! TODO
-DeclareOperation( "NmzConeProperty", [IsNormalizCone, IsString] );
+DeclareGlobalFunction( "NmzConeProperty" );
 
 #! @Arguments cone
 #! @Description
@@ -45,7 +45,7 @@ DeclareGlobalFunction( "NmzPrintConeProperties" );
 #! The result record consists of Embedding A, Projection B, and Annihilator c.
 #! They represent the mapping into the effective lattice  Z^r --> Z^n, v |-> vA
 #! and the inverse operation Z^n --> Z^r, u |-> (uB)/c.
-DeclareOperation( "NmzBasisChange", [IsNormalizCone] );
+DeclareGlobalFunction( "NmzBasisChange" );
 
 
 #! @Section Create a NmzCone

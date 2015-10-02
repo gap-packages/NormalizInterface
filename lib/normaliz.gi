@@ -15,9 +15,7 @@ function( r )
     return "<a Normaliz cone with GMP coefficients>";
 end );
 
-InstallMethod( NmzConeProperty,
-               "for a Normaliz cone and a string",
-               [ IsNormalizCone, IsString ],
+InstallGlobalFunction( NmzConeProperty,
 function( cone, prop )
     local result, t, shift, poly, tmp, denom;
     result := _NmzConeProperty(cone, prop);
@@ -64,16 +62,14 @@ InstallGlobalFunction("NmzPrintConeProperties", function(cone)
 end);
 
 
-InstallMethod( NmzBasisChange,
-               "for a Normaliz cone",
-               [ IsNormalizCone ],
+InstallGlobalFunction( NmzBasisChange,
 function( cone )
     local result;
     result := _NmzBasisChange(cone);
     return rec(
-        Embedding := result[4],
-        Projection := result[5],
-        Annihilator := result[6],
+        Embedding := result[1],
+        Projection := result[2],
+        Annihilator := result[3],
         );
 end );
 
