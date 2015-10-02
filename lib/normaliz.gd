@@ -61,7 +61,8 @@ DeclareOperation( "NmzBasisChange", [IsNormalizCone] );
 #! integral_closure, polyhedron, normalization, polytope, rees_algebra,
 #! inequalities, strict_inequalities, signs, strict_signs, equations, congruences,
 #! inhom_inequalities, inhom_equations, inhom_congruences, dehomogenization,
-#! lattice_ideal, grading, excluded_faces.
+#! lattice_ideal, grading, excluded_faces, lattice, saturation, cone, offset,
+#! vertices, support_hyperplanes, cone_and_lattice.
 #!
 #! See the Normaliz manual for a detailed description.
 #!
