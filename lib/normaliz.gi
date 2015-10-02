@@ -71,12 +71,9 @@ function( cone )
     local result;
     result := _NmzBasisChange(cone);
     return rec(
-        dim := result[1],
-        rank := result[2],
-        index := result[3],
-        A := result[4],
-        B := result[5],
-        c := result[6],
+        Embedding := result[4],
+        Projection := result[5],
+        Annihilator := result[6],
         );
 end );
 

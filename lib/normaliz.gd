@@ -42,7 +42,9 @@ DeclareGlobalFunction( "NmzPrintConeProperties" );
 #! @Arguments cone
 #! @Returns a record describing the basis change
 #! @Description
-#! TODO
+#! The result record consists of Embedding A, Projection B, and Annihilator c.
+#! They represent the mapping into the effective lattice  Z^r --> Z^n, v |-> vA
+#! and the inverse operation Z^n --> Z^r, u |-> (uB)/c.
 DeclareOperation( "NmzBasisChange", [IsNormalizCone] );
 
 

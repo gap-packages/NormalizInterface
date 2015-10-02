@@ -760,15 +760,13 @@ static Obj _NmzBasisChangeIntern(Obj cone)
 #if NMZ_RELEASE >= 29901
     Sublattice_Representation<Integer> bc = C->getSublattice();
 
-    Obj res = NEW_PLIST(T_PLIST, 6);
-    SET_LEN_PLIST(res, 6);
-    AssPlist(res, 1, NmzIntToGAP(bc.getDim()));
-    AssPlist(res, 2, NmzIntToGAP(bc.getRank()));
-    AssPlist(res, 3, NmzIntToGAP(C->getIndex())); //TODO so nicht in Ordnung!
-    AssPlist(res, 4, NmzMatrixToGAP(bc.getEmbedding()));
-    AssPlist(res, 5, NmzMatrixToGAP(bc.getProjection()));
-    AssPlist(res, 6, NmzIntToGAP(bc.getAnnihilator()));
-    // bc.getCongruences() is already covered by NmzCongruences
+    Obj res = NEW_PLIST(T_PLIST, 3);
+    SET_LEN_PLIST(res, 3);
+    AssPlist(res, 1, NmzMatrixToGAP(bc.getEmbedding()));
+    AssPlist(res, 2, NmzMatrixToGAP(bc.getProjection()));
+    AssPlist(res, 3, NmzIntToGAP(bc.getAnnihilator()));
+    // Dim, Rank, Equations and Congruences are already coverd by special functions
+    // The index is not always computed and not so relevant
 #else
     Sublattice_Representation<Integer> bc = C->getBasisChange();
 
