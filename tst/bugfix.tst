@@ -4,7 +4,7 @@
 # Fixed by adding a special case for zero to MpzToGAP.
 #
 gap> C := NmzCone(["integral_closure",[[1,2],[3,1]],"grading",[[1,1]]]);
-<a Normaliz cone with long int coefficients>
+<a Normaliz cone>
 gap> _NmzConeProperty(C,"HilbertSeries");
 [ [ 1, -1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 1 ], [ 1, 12 ], 0]
 gap> NmzHilbertSeries(C);

@@ -15,7 +15,7 @@ Magic3x3even := NmzCone(["equations",
   [0, 0, 0,   0, 0, 0,   0, 0, 1,  2] ],
 "grading",
 [ [1, 1, 1,   0, 0, 0,   0, 0, 0] ] ] );
-#! <a Normaliz cone with long int coefficients>
+#! <a Normaliz cone>
 
 NmzHilbertBasis(Magic3x3even);
 #! [ [ 0, 4, 2, 4, 2, 0, 2, 0, 4 ], [ 2, 0, 4, 4, 2, 0, 0, 4, 2 ],
