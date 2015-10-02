@@ -1,18 +1,10 @@
 ##
 InstallMethod( ViewString,
                "for a Normaliz cone",
-               [ IsNormalizLongIntCone ],
+               [ IsNormalizCone ],
 function( r )
     # TODO: May print more information when present
-    return "<a Normaliz cone with long int coefficients>";
-end );
-
-InstallMethod( ViewString,
-               "for a Normaliz cone",
-               [ IsNormalizGMPCone ],
-function( r )
-    # TODO: May print more information when present
-    return "<a Normaliz cone with GMP coefficients>";
+    return "<a Normaliz cone>";
 end );
 
 InstallGlobalFunction( NmzConeProperty,
@@ -79,9 +71,6 @@ end );
 #
 InstallGlobalFunction("NmzCone", function(arg)
     local func, opts_rec, opts_list, cone;
-    opts_rec := rec(
-        gmp := ValueOption("gmp"),
-    );
     if Length(arg) = 1 then
         if IsList(arg[1]) then
             opts_list := arg[1];
@@ -95,11 +84,7 @@ InstallGlobalFunction("NmzCone", function(arg)
         opts_list := arg;
     fi;
     
-    if opts_rec.gmp = true then
-        cone := NmzGMPCone(opts_list);
-    else
-        cone := NmzLongIntCone(opts_list);
-    fi;
+    cone := _NmzCone(opts_list);
     return cone;
 end);
 

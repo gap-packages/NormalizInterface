@@ -42,26 +42,13 @@ using std::pair;
 using std::cerr;
 using std::endl;
 
-Obj TheTypeNormalizLongIntCone;
-Obj TheTypeNormalizGMPCone;
+Obj TheTypeNormalizCone;
 
-
-Obj NewCone(Cone<long>* C)
-{
-    Obj o;
-    o = NewBag(T_NORMALIZ, 2*sizeof(Obj));
-
-    ADDR_OBJ(o)[0] = (Obj)NMZ_LONG_INT_CONE_TYPE;
-    SET_CONE<long>(o, C);
-    return o;
-}
 
 Obj NewCone(Cone<mpz_class>* C)
 {
     Obj o;
-    o = NewBag(T_NORMALIZ, 2 * sizeof(Obj));
-
-    ADDR_OBJ(o)[0] = (Obj)NMZ_GMP_CONE_TYPE;
+    o = NewBag(T_NORMALIZ, 1 * sizeof(Obj));
     SET_CONE<mpz_class>(o, C);
     return o;
 }
@@ -69,19 +56,13 @@ Obj NewCone(Cone<mpz_class>* C)
 /* Free function */
 void NormalizFreeFunc(Obj o)
 {
-    if (IS_LONG_INT_CONE(o))
-        delete GET_CONE<long>(o);
-    else
-        delete GET_CONE<mpz_class>(o);
+    delete GET_CONE<mpz_class>(o);
 }
 
 /* Type object function for the object */
 Obj NormalizTypeFunc(Obj o)
 {
-    if (IS_LONG_INT_CONE(o))
-        return TheTypeNormalizLongIntCone;
-    else
-        return TheTypeNormalizGMPCone;
+    return TheTypeNormalizCone;
 }
 
 static Obj MpzToGAP(const mpz_t x)
@@ -311,7 +292,7 @@ static Obj NmzTriangleListToGAP(const vector< pair<vector<libnormaliz::key_t>, I
 
 
 template<typename Integer>
-static Obj _NmzCone(Obj input_list)
+static Obj _NmzConeIntern(Obj input_list)
 {
     map <InputType, vector< vector<Integer> > > input;
     const int n = LEN_PLIST(input_list);
@@ -344,24 +325,13 @@ static Obj _NmzCone(Obj input_list)
 
 }
 
-Obj NmzLongIntCone(Obj self, Obj input_list)
+Obj _NmzCone(Obj self, Obj input_list)
 {
     FUNC_BEGIN
     if (!IS_PLIST(input_list) || !IS_DENSE_LIST(input_list))
         ErrorQuit("Input argument must be a list", 0, 0);
 
-    return _NmzCone<long>(input_list);
-
-    FUNC_END
-}
-
-Obj NmzGMPCone(Obj self, Obj input_list)
-{
-    FUNC_BEGIN
-    if (!IS_PLIST(input_list) || !IS_DENSE_LIST(input_list))
-        ErrorQuit("Input argument must be a list", 0, 0);
-
-    return _NmzCone<mpz_class>(input_list);
+    return _NmzConeIntern<mpz_class>(input_list);
 
     FUNC_END
 }
@@ -388,15 +358,8 @@ Obj _NmzCompute(Obj self, Obj cone, Obj to_compute)
         propsToCompute.set( libnormaliz::toConeProperty(prop_str) );
     }
 
-    ConeProperties notComputed;
-
-    if (IS_LONG_INT_CONE(cone)) {
-        Cone<long>* C = GET_CONE<long>(cone);
-        notComputed = C->compute(propsToCompute);
-    } else {
-        Cone<mpz_class>* C = GET_CONE<mpz_class>(cone);
-        notComputed = C->compute(propsToCompute);
-    }
+    Cone<mpz_class>* C = GET_CONE<mpz_class>(cone);
+    ConeProperties notComputed = C->compute(propsToCompute);
 
     // Cone.compute returns the not computed properties
     // we return a bool, true when everything requested was computed
@@ -424,13 +387,8 @@ Obj NmzHasConeProperty(Obj self, Obj cone, Obj prop)
 
     libnormaliz::ConeProperty::Enum p = libnormaliz::toConeProperty(CSTR_STRING(prop));
 
-    if (IS_LONG_INT_CONE(cone)) {
-        Cone<long>* C = GET_CONE<long>(cone);
-        return C->isComputed(p) ? True : False;
-    } else {
-        Cone<mpz_class>* C = GET_CONE<mpz_class>(cone);
-        return C->isComputed(p) ? True : False;
-    }
+    Cone<mpz_class>* C = GET_CONE<mpz_class>(cone);
+    return C->isComputed(p) ? True : False;
 
     FUNC_END
 }
@@ -461,15 +419,8 @@ Obj NmzKnownConeProperties(Obj self, Obj cone)
     for (int i = 0; i < libnormaliz::ConeProperty::EnumSize; ++i) {
         libnormaliz::ConeProperty::Enum p = (libnormaliz::ConeProperty::Enum)i;
 
-        bool isComputed;
-
-        if (IS_LONG_INT_CONE(cone)) {
-            Cone<long>* C = GET_CONE<long>(cone);
-            isComputed = C->isComputed(p);
-        } else {
-            Cone<mpz_class>* C = GET_CONE<mpz_class>(cone);
-            isComputed = C->isComputed(p);
-        }
+        Cone<mpz_class>* C = GET_CONE<mpz_class>(cone);
+        bool isComputed = C->isComputed(p);
 
         if (isComputed) {
             string prop_name(libnormaliz::toString(p));
@@ -481,15 +432,10 @@ Obj NmzKnownConeProperties(Obj self, Obj cone)
             SET_ELM_PLIST(M, n, prop_name_gap);
             CHANGED_BAG(M);
             if (p == libnormaliz::ConeProperty::HilbertSeries) {
-                if (IS_LONG_INT_CONE(cone)) {
-                    Cone<long>* C = GET_CONE<long>(cone);
-                    C->getHilbertSeries().computeHilbertQuasiPolynomial();
-                    isComputed = C->getHilbertSeries().isHilbertQuasiPolynomialComputed();
-                } else {
-                    Cone<mpz_class>* C = GET_CONE<mpz_class>(cone);
-                    C->getHilbertSeries().computeHilbertQuasiPolynomial();
-                    isComputed = C->getHilbertSeries().isHilbertQuasiPolynomialComputed();
-                }
+                Cone<mpz_class>* C = GET_CONE<mpz_class>(cone);
+                C->getHilbertSeries().computeHilbertQuasiPolynomial();
+                isComputed = C->getHilbertSeries().isHilbertQuasiPolynomialComputed();
+
                 if (isComputed) {
                     string prop_name("HilbertQuasiPolynomial");
 
@@ -648,11 +594,7 @@ Obj _NmzConeProperty(Obj self, Obj cone, Obj prop)
     if (!IS_STRING_REP(prop))
         ErrorQuit("<prop> must be a string", 0, 0);
 
-    if (IS_LONG_INT_CONE(cone)) {
-        return _NmzConePropertyImpl<long>(cone, prop);
-    } else {
-        return _NmzConePropertyImpl<mpz_class>(cone, prop);
-    }
+    return _NmzConePropertyImpl<mpz_class>(cone, prop);
 
     FUNC_END
 }
@@ -696,13 +638,8 @@ Obj NmzSetVerbose(Obj self, Obj cone, Obj value)
         ErrorQuit("<value> must be a boolean value", 0, 0);
     bool old_value;
 
-    if (IS_LONG_INT_CONE(cone)) {
-        Cone<long>* C = GET_CONE<long>(cone);
-        old_value = C->setVerbose(value == True);
-    } else {
-        Cone<mpz_class>* C = GET_CONE<mpz_class>(cone);
-        old_value = C->setVerbose(value == True);
-    }
+    Cone<mpz_class>* C = GET_CONE<mpz_class>(cone);
+    old_value = C->setVerbose(value == True);
     return old_value ? True : False;
     FUNC_END
 }
@@ -725,13 +662,8 @@ Obj NmzEmbeddingDimension(Obj self, Obj cone)
     FUNC_BEGIN
     if (!IS_CONE(cone))
         ErrorQuit("<cone> must be a normaliz cone", 0, 0);
-    if (IS_LONG_INT_CONE(cone)) {
-        Cone<long>* C = GET_CONE<long>(cone);
-        return NmzIntToGAP(C->getEmbeddingDim());
-    } else {
-        Cone<mpz_class>* C = GET_CONE<mpz_class>(cone);
-        return NmzIntToGAP(C->getEmbeddingDim());
-    }
+    Cone<mpz_class>* C = GET_CONE<mpz_class>(cone);
+    return NmzIntToGAP(C->getEmbeddingDim());
     FUNC_END
 }
 
@@ -756,11 +688,7 @@ Obj _NmzBasisChange(Obj self, Obj cone)
     FUNC_BEGIN
     if (!IS_CONE(cone))
         ErrorQuit("<cone> must be a normaliz cone", 0, 0);
-    if (IS_LONG_INT_CONE(cone)) {
-        return _NmzBasisChangeIntern<long>(cone);
-    } else {
-        return _NmzBasisChangeIntern<mpz_class>(cone);
-    }
+    return _NmzBasisChangeIntern<mpz_class>(cone);
     FUNC_END
 }
 
@@ -777,13 +705,8 @@ Obj NmzRank(Obj self, Obj cone)
     FUNC_BEGIN
     if (!IS_CONE(cone))
         ErrorQuit("<cone> must be a normaliz cone", 0, 0);
-    if (IS_LONG_INT_CONE(cone)) {
-        Cone<long>* C = GET_CONE<long>(cone);
-        return NmzIntToGAP(C->getSublattice().getRank());
-    } else {
-        Cone<mpz_class>* C = GET_CONE<mpz_class>(cone);
-        return NmzIntToGAP(C->getSublattice().getRank());
-    }
+    Cone<mpz_class>* C = GET_CONE<mpz_class>(cone);
+    return NmzIntToGAP(C->getSublattice().getRank());
     FUNC_END
 }
 
@@ -799,13 +722,8 @@ Obj NmzIsInhomogeneous(Obj self, Obj cone)
     FUNC_BEGIN
     if (!IS_CONE(cone))
         ErrorQuit("<cone> must be a normaliz cone", 0, 0);
-    if (IS_LONG_INT_CONE(cone)) {
-        Cone<long>* C = GET_CONE<long>(cone);
-        return C->isInhomogeneous() ? True : False;
-    } else {
-        Cone<mpz_class>* C = GET_CONE<mpz_class>(cone);
-        return C->isInhomogeneous() ? True : False;
-    }
+    Cone<mpz_class>* C = GET_CONE<mpz_class>(cone);
+    return C->isInhomogeneous() ? True : False;
     FUNC_END
 }
 
@@ -824,15 +742,9 @@ Obj NmzEquations(Obj self, Obj cone)
     FUNC_BEGIN
     if (!IS_CONE(cone))
         ErrorQuit("<cone> must be a normaliz cone", 0, 0);
-    if (IS_LONG_INT_CONE(cone)) {
-        Cone<long>* C = GET_CONE<long>(cone);
-        C->compute(ConeProperties(libnormaliz::ConeProperty::SupportHyperplanes));
-        return NmzMatrixToGAP(C->getSublattice().getEquations());
-    } else {
-        Cone<mpz_class>* C = GET_CONE<mpz_class>(cone);
-        C->compute(ConeProperties(libnormaliz::ConeProperty::SupportHyperplanes));
-        return NmzMatrixToGAP(C->getSublattice().getEquations());
-    }
+    Cone<mpz_class>* C = GET_CONE<mpz_class>(cone);
+    C->compute(ConeProperties(libnormaliz::ConeProperty::SupportHyperplanes));
+    return NmzMatrixToGAP(C->getSublattice().getEquations());
     FUNC_END
 }
 
@@ -850,15 +762,9 @@ Obj NmzCongruences(Obj self, Obj cone)
     FUNC_BEGIN
     if (!IS_CONE(cone))
         ErrorQuit("<cone> must be a normaliz cone", 0, 0);
-    if (IS_LONG_INT_CONE(cone)) {
-        Cone<long>* C = GET_CONE<long>(cone);
-        C->compute(ConeProperties(libnormaliz::ConeProperty::SupportHyperplanes));
-        return NmzMatrixToGAP(C->getSublattice().getCongruences());
-    } else {
-        Cone<mpz_class>* C = GET_CONE<mpz_class>(cone);
-        C->compute(ConeProperties(libnormaliz::ConeProperty::SupportHyperplanes));
-        return NmzMatrixToGAP(C->getSublattice().getCongruences());
-    }
+    Cone<mpz_class>* C = GET_CONE<mpz_class>(cone);
+    C->compute(ConeProperties(libnormaliz::ConeProperty::SupportHyperplanes));
+    return NmzMatrixToGAP(C->getSublattice().getCongruences());
     FUNC_END
 }
 
@@ -873,8 +779,7 @@ typedef Obj (* GVarFuncType)(/*arguments*/);
 
 // Table of functions to export
 static StructGVarFunc GVarFuncs[] = {
-    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzLongIntCone, 1, "list"),
-    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzGMPCone, 1, "list"),
+    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", _NmzCone, 1, "list"),
 
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", _NmzCompute, 2, "cone, props"),
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzSetVerboseDefault, 1, "value"),
@@ -903,8 +808,7 @@ static Int InitKernel( StructInitInfo *module )
     /* init filters and functions                                          */
     InitHdlrFuncsFromTable( GVarFuncs );
 
-    InitCopyGVar( "TheTypeNormalizLongIntCone", &TheTypeNormalizLongIntCone );
-    InitCopyGVar( "TheTypeNormalizGMPCone", &TheTypeNormalizGMPCone );
+    InitCopyGVar( "TheTypeNormalizCone", &TheTypeNormalizCone );
 
     InfoBags[T_NORMALIZ].name = "NormalizCone";
     InitMarkFuncBags(T_NORMALIZ, &MarkNoSubBags);

@@ -44,11 +44,6 @@ extern "C" {
     static_assert(false, "Your normaliz version is to old! Update to 3.0.0 or newer.");
 #endif
 
-enum NmzConeType {
-    NMZ_LONG_INT_CONE_TYPE = 0,
-    NMZ_GMP_CONE_TYPE = 1
-};
-
 #define FUNC_BEGIN try {
 
 #define FUNC_END \
@@ -64,22 +59,17 @@ extern Obj TheTypeNormalizCone;
 
 template<typename Integer>
 inline void SET_CONE(Obj o, libnormaliz::Cone<Integer>* p) {
-    ADDR_OBJ(o)[1] = reinterpret_cast<Obj>(p);
+    ADDR_OBJ(o)[0] = reinterpret_cast<Obj>(p);
 }
 
 template<typename Integer>
 inline libnormaliz::Cone<Integer>* GET_CONE(Obj o) {
-    return reinterpret_cast<libnormaliz::Cone<Integer>*>(ADDR_OBJ(o)[1]);
+    return reinterpret_cast<libnormaliz::Cone<Integer>*>(ADDR_OBJ(o)[0]);
 }
 
 #define IS_CONE(o) (TNUM_OBJ(o) == T_NORMALIZ)
 
-#define IS_LONG_INT_CONE(o) (IS_CONE(o) && ((Int)(ADDR_OBJ(o)[0]) == NMZ_LONG_INT_CONE_TYPE))
-#define IS_GMP_CONE(o) (IS_CONE(o) && ((Int)(ADDR_OBJ(o)[0]) == NMZ_GMP_CONE_TYPE))
 
-
-Obj NewCone(libnormaliz::Cone<long>*);
-Obj NewCone(libnormaliz::Cone<mpz_class>*);
 void NormalizFreeFunc(Obj o);
 Obj NormalizTypeFunc(Obj o);
 

@@ -5,11 +5,7 @@ NormalizObjectFamily := NewFamily( "NormalizObjectFamily" );
 
 DeclareCategory( "IsNormalizCone", IsObject );
 
-DeclareCategory( "IsNormalizLongIntCone", IsNormalizCone );
-DeclareCategory( "IsNormalizGMPCone", IsNormalizCone );
-
-BindGlobal("TheTypeNormalizLongIntCone", NewType( NormalizObjectFamily, IsNormalizLongIntCone ));
-BindGlobal("TheTypeNormalizGMPCone", NewType( NormalizObjectFamily, IsNormalizGMPCone ));
+BindGlobal("TheTypeNormalizCone", NewType( NormalizObjectFamily, IsNormalizCone ));
 
 
 #
@@ -67,10 +63,4 @@ DeclareGlobalFunction( "NmzBasisChange" );
 #! See the Normaliz manual for a detailed description.
 #!
 #! @InsertChunk NmzCone example
-#!
-#! It is also possible to create a cone object using multi-precision GMP
-#! integers, which results in slower computations but allows handling some
-#! examples that are not supported with machine integers. To do this,
-#! specify the <C>gmp</C> option as in the following example.
-#! @InsertChunk NmzCone GMP example
 DeclareGlobalFunction( "NmzCone" );
