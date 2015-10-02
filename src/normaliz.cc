@@ -599,11 +599,7 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
     case libnormaliz::ConeProperty::OriginalMonoidGenerators:
         return NmzMatrixToGAP(C->getOriginalMonoidGenerators());
 
-#if NMZ_RELEASE >= 29900
     case libnormaliz::ConeProperty::IsReesPrimary:
-#else
-    case libnormaliz::ConeProperty::ReesPrimary:
-#endif
         return C->isReesPrimary() ? True : False;
 
     case libnormaliz::ConeProperty::ReesPrimaryMultiplicity:
@@ -624,19 +620,15 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
     case libnormaliz::ConeProperty::InclusionExclusionData:
         return NmzTriangleListToGAP<long>(C->getInclusionExclusionData());
 
-#if NMZ_RELEASE >= 29900
     case libnormaliz::ConeProperty::ClassGroup:
         return NmzVectorToGAP(C->getClassGroup());
-#endif
 
 //  the following properties are compute options and do not return anything
     case libnormaliz::ConeProperty::DualMode:
     case libnormaliz::ConeProperty::DefaultMode:
-#if NMZ_RELEASE >= 29900
     case libnormaliz::ConeProperty::Approximate:
     case libnormaliz::ConeProperty::BottomDecomposition:
     case libnormaliz::ConeProperty::KeepOrder:
-#endif
         return True;    // FIXME: appropriate value?
 
     default:
@@ -683,13 +675,7 @@ Obj NmzSetVerboseDefault(Obj self, Obj value)
     FUNC_BEGIN
     if (value != True && value != False)
         ErrorQuit("<value> must be a boolean value", 0, 0);
-#if NMZ_RELEASE >= 29900
     return libnormaliz::setVerboseDefault(value == True) ? True : False;
-#else
-    bool old_value = libnormaliz::verbose;
-    libnormaliz::verbose = (value == True);
-    return old_value ? True : False;
-#endif
     FUNC_END
 }
 /*
@@ -710,7 +696,6 @@ Obj NmzSetVerbose(Obj self, Obj cone, Obj value)
         ErrorQuit("<value> must be a boolean value", 0, 0);
     bool old_value;
 
-#if NMZ_RELEASE >= 29900
     if (IS_LONG_INT_CONE(cone)) {
         Cone<long>* C = GET_CONE<long>(cone);
         old_value = C->setVerbose(value == True);
@@ -719,9 +704,6 @@ Obj NmzSetVerbose(Obj self, Obj cone, Obj value)
         old_value = C->setVerbose(value == True);
     }
     return old_value ? True : False;
-#else
-    ErrorQuit("Only supported with newer normaliz versions!",0,0);
-#endif
     FUNC_END
 }
 
@@ -757,7 +739,6 @@ template<typename Integer>
 static Obj _NmzBasisChangeIntern(Obj cone)
 {
     Cone<Integer>* C = GET_CONE<Integer>(cone);
-#if NMZ_RELEASE >= 29901
     Sublattice_Representation<Integer> bc = C->getSublattice();
 
     Obj res = NEW_PLIST(T_PLIST, 3);
@@ -767,19 +748,6 @@ static Obj _NmzBasisChangeIntern(Obj cone)
     AssPlist(res, 3, NmzIntToGAP(bc.getAnnihilator()));
     // Dim, Rank, Equations and Congruences are already coverd by special functions
     // The index is not always computed and not so relevant
-#else
-    Sublattice_Representation<Integer> bc = C->getBasisChange();
-
-    Obj res = NEW_PLIST(T_PLIST, 6);
-    SET_LEN_PLIST(res, 6);
-    AssPlist(res, 1, NmzIntToGAP(bc.get_dim()));
-    AssPlist(res, 2, NmzIntToGAP(bc.get_rank()));
-    AssPlist(res, 3, NmzIntToGAP(bc.get_index()));
-    AssPlist(res, 4, NmzMatrixToGAP(bc.get_A().get_elements()));
-    AssPlist(res, 5, NmzMatrixToGAP(bc.get_B().get_elements()));
-    AssPlist(res, 6, NmzIntToGAP(bc.get_c()));
-    // bc.get_congruences() is already covered by NmzCongruences
-#endif
     return res;
 }
 
@@ -811,18 +779,10 @@ Obj NmzRank(Obj self, Obj cone)
         ErrorQuit("<cone> must be a normaliz cone", 0, 0);
     if (IS_LONG_INT_CONE(cone)) {
         Cone<long>* C = GET_CONE<long>(cone);
-#if NMZ_RELEASE >= 29901
         return NmzIntToGAP(C->getSublattice().getRank());
-#else
-        return NmzIntToGAP(C->getBasisChange().get_rank());
-#endif
     } else {
         Cone<mpz_class>* C = GET_CONE<mpz_class>(cone);
-#if NMZ_RELEASE >= 29901
         return NmzIntToGAP(C->getSublattice().getRank());
-#else
-        return NmzIntToGAP(C->getBasisChange().get_rank());
-#endif
     }
     FUNC_END
 }
@@ -867,19 +827,11 @@ Obj NmzEquations(Obj self, Obj cone)
     if (IS_LONG_INT_CONE(cone)) {
         Cone<long>* C = GET_CONE<long>(cone);
         C->compute(ConeProperties(libnormaliz::ConeProperty::SupportHyperplanes));
-#if NMZ_RELEASE >= 29901
         return NmzMatrixToGAP(C->getSublattice().getEquations());
-#else
-        return NmzMatrixToGAP(C->getEquations());
-#endif
     } else {
         Cone<mpz_class>* C = GET_CONE<mpz_class>(cone);
         C->compute(ConeProperties(libnormaliz::ConeProperty::SupportHyperplanes));
-#if NMZ_RELEASE >= 29901
         return NmzMatrixToGAP(C->getSublattice().getEquations());
-#else
-        return NmzMatrixToGAP(C->getEquations());
-#endif
     }
     FUNC_END
 }
@@ -901,19 +853,11 @@ Obj NmzCongruences(Obj self, Obj cone)
     if (IS_LONG_INT_CONE(cone)) {
         Cone<long>* C = GET_CONE<long>(cone);
         C->compute(ConeProperties(libnormaliz::ConeProperty::SupportHyperplanes));
-#if NMZ_RELEASE >= 29901
         return NmzMatrixToGAP(C->getSublattice().getCongruences());
-#else
-        return NmzMatrixToGAP(C->getCongruences());
-#endif
     } else {
         Cone<mpz_class>* C = GET_CONE<mpz_class>(cone);
         C->compute(ConeProperties(libnormaliz::ConeProperty::SupportHyperplanes));
-#if NMZ_RELEASE >= 29901
         return NmzMatrixToGAP(C->getSublattice().getCongruences());
-#else
-        return NmzMatrixToGAP(C->getCongruences());
-#endif
     }
     FUNC_END
 }

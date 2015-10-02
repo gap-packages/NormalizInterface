@@ -29,6 +29,7 @@ extern "C" {
 #include "src/compiled.h"          /* GAP headers                */
 }
 #include "libnormaliz/cone.h"
+#include <assert.h>
 
 #ifndef T_NORMALIZ
 #define T_NORMALIZ T_SPARE1
@@ -36,7 +37,11 @@ extern "C" {
 
 // old versions of libnormaliz (before 2.99.1) did not include such a define
 #ifndef NMZ_RELEASE
-#define NMZ_RELEASE 21200
+    static_assert(false,
+       "Your normaliz version (unknown) is to old! Update to 3.0.0 or newer.");
+#endif
+#if NMZ_RELEASE < 30000
+    static_assert(false, "Your normaliz version is to old! Update to 3.0.0 or newer.");
 #endif
 
 enum NmzConeType {
