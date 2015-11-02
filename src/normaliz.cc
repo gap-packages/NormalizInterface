@@ -44,6 +44,7 @@ using std::endl;
 
 Obj TheTypeNormalizCone;
 
+Int T_NORMALIZ = 0;
 
 Obj NewCone(Cone<mpz_class>* C)
 {
@@ -810,10 +811,17 @@ static Int InitKernel( StructInitInfo *module )
 
     InitCopyGVar( "TheTypeNormalizCone", &TheTypeNormalizCone );
 
+#if 1
+    // GAP >= 4.8:
+    T_NORMALIZ = RegisterPackageTNUM("NormalizCone", NormalizTypeFunc);
+#else
+    // GAP < 4.8:
+    T_NORMALIZ = T_SPARE1;  // HACK
     InfoBags[T_NORMALIZ].name = "NormalizCone";
+    TypeObjFuncs[T_NORMALIZ] = &NormalizTypeFunc;
+#endif
     InitMarkFuncBags(T_NORMALIZ, &MarkNoSubBags);
     InitFreeFuncBag(T_NORMALIZ, &NormalizFreeFunc);
-    TypeObjFuncs[T_NORMALIZ] = &NormalizTypeFunc;
 
     /* return success                                                      */
     return 0;
