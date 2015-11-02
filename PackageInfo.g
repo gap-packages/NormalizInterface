@@ -69,9 +69,11 @@ ArchiveURL     := Concatenation("https://github.com/gap-packages/NormalizInterfa
                                 "/NormalizInterface-", ~.Version),
 ArchiveFormats := ".tar.gz .tar.bz2",
 
-AbstractHTML   := Concatenation(
-               "The NormalizInterface Package ... ",
-               "TODO"),
+AbstractHTML :=
+  "The <span class=\"pkgname\">NormalizInterface</span> package provides\
+  a GAP interface to Normaliz, enabling direct access to the complete\
+  functionality of Normaliz.",
+
 
 PackageDoc := rec(
   BookName  := "NormalizInterface",

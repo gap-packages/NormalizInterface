@@ -370,6 +370,7 @@ Obj _NmzCompute(Obj self, Obj cone, Obj to_compute)
 
 
 /*
+#! @Section Use a NmzCone
 #! @Arguments cone property
 #! @Returns whether the cone has already computed the given property
 #! @Description

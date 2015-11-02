@@ -14,24 +14,24 @@ Hilbert basis computation can be considered as solving a linear
 diophantine system of inhomogeneous equations, inequalities and
 congruences.
 
-This package encapsulates a libnormaliz cone and gives access to it in the
-GAP enviroment. In this way GAP can be used as interactive interface to
-libnormaliz.
+This package allows creating libnormaliz cone objects from within GAP,
+and gives access to it in the GAP enviroment. In this way GAP can be
+used as interactive interface to libnormaliz.
 
-For more information on Normaliz visit www.math.uos.de/normaliz and
+For more information on Normaliz visit http://www.math.uos.de/normaliz and
 especially have a look at the manual.
 
 
 Installation preparation
 ========================
 
-You should use the same gmp version for GAP and libnormaliz. To ensure
-this you can use a system installed gmp for GAP by configuring it with
+You should use the same GMP version for GAP and libnormaliz. To ensure
+this you can use a system installed GMP for GAP by configuring it with
 
     ./configure --with-gmp=system
 
 and build it. Next you need Normaliz, the easiest way is to clone the master
-branch from the Normaliz github repository with the command
+branch from the Normaliz GitHub repository with the command
 
     git clone https://github.com/Normaliz/Normaliz Normaliz.git
 
@@ -39,7 +39,7 @@ into this directory. After that you can run the script "build-normaliz.sh".
 Once it completed successfully, you can then build NormalizInterface
 like this:
 
-    ./autogen.sh (need autoconf and automake) (only for developers TODO)
+    ./autogen.sh (need autoconf and automake)
     ./configure --with-gaproot=GAPDIR --with-normaliz=$PWD/Normaliz.git/DST
     make
 
@@ -50,6 +50,7 @@ version as for GAP.
 To be able to run the tests of NormalizInterface install also the gap package
 io. For that go to the pkg/io-x.x.x/ directory and do "./configure" and "make".
 See the io package README for more information.
+
 
 Documentation and tests
 =======================
