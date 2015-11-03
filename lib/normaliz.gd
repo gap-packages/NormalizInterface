@@ -13,10 +13,17 @@ BindGlobal("TheTypeNormalizCone", NewType( NormalizObjectFamily, IsNormalizCone 
 #
 
 #! @Section Use a NmzCone
-#! @Arguments TODO
-#! @Returns TODO
+#! @Arguments cone[, propnames]
+#! @Returns a boolean indicating success
 #! @Description
-#! TODO
+#! Start computing properties of the given cone.
+#! The first parameter indicates a cone object, the second parameter
+#! is either a single string, or a list of strings, which indicate
+#! what should be computed
+#!
+#! The single parameter version is equivalent to
+#! <C>NmzCone(cone, ["DefaultMode"])</C>.
+#! @InsertChunk NmzCompute example
 DeclareGlobalFunction( "NmzCompute" );
 
 #! @Arguments cone, property
@@ -38,9 +45,13 @@ DeclareGlobalFunction( "NmzPrintConeProperties" );
 #! @Arguments cone
 #! @Returns a record describing the basis change
 #! @Description
-#! The result record consists of Embedding A, Projection B, and Annihilator c.
-#! They represent the mapping into the effective lattice  Z^r --> Z^n, v |-> vA
-#! and the inverse operation Z^n --> Z^r, u |-> (uB)/c.
+#! The result record <C>r</C> has three components:
+#! <C>r.Embedding</C>, <C>r.Projection</C>, and <C>r.Annihilator</C>,
+#! where the embedding <C>A</C> and the projection <C>B</C>
+#! are matrices, and the annihilator <C>c</C> is an integer.
+#! They represent the mapping into the effective lattice
+#! <M>Z^r \to Z^n, v \mapsto vA</M>
+#! and the inverse operation <M>Z^n \to Z^r, u \mapsto (uB)/c</M>.
 DeclareGlobalFunction( "NmzBasisChange" );
 
 
@@ -54,11 +65,33 @@ DeclareGlobalFunction( "NmzBasisChange" );
 #! interpreted as input of that type.
 #!
 #! Currently the following strings are recognized:
-#! integral_closure, polyhedron, normalization, polytope, rees_algebra,
-#! inequalities, strict_inequalities, signs, strict_signs, equations, congruences,
-#! inhom_inequalities, inhom_equations, inhom_congruences, dehomogenization,
-#! lattice_ideal, grading, excluded_faces, lattice, saturation, cone, offset,
-#! vertices, support_hyperplanes, cone_and_lattice.
+#! <List>
+#! <Item><C>integral_closure</C>,</Item>
+#! <Item><C>polyhedron</C>,</Item>
+#! <Item><C>normalization</C>,</Item>
+#! <Item><C>polytope</C>,</Item>
+#! <Item><C>rees_algebra</C>,</Item>
+#! <Item><C>inequalities</C>,</Item>
+#! <Item><C>strict_inequalities</C>,</Item>
+#! <Item><C>signs</C>,</Item>
+#! <Item><C>strict_signs</C>,</Item>
+#! <Item><C>equations</C>,</Item>
+#! <Item><C>congruences</C>,</Item>
+#! <Item><C>inhom_inequalities</C>,</Item>
+#! <Item><C>inhom_equations</C>,</Item>
+#! <Item><C>inhom_congruences</C>,</Item>
+#! <Item><C>dehomogenization</C>,</Item>
+#! <Item><C>lattice_ideal</C>,</Item>
+#! <Item><C>grading</C>,</Item>
+#! <Item><C>excluded_faces</C>,</Item>
+#! <Item><C>lattice</C>,</Item>
+#! <Item><C>saturation</C>,</Item>
+#! <Item><C>cone</C>,</Item>
+#! <Item><C>offset</C>,</Item>
+#! <Item><C>vertices</C>,</Item>
+#! <Item><C>support_hyperplanes</C>,</Item>
+#! <Item><C>cone_and_lattice</C>.</Item>
+#! </List>
 #!
 #! See the Normaliz manual for a detailed description.
 #!
