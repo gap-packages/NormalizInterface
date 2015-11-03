@@ -3,7 +3,7 @@ SetPackageInfo( rec(
 PackageName := "NormalizInterface",
 Subtitle := "GAP wrapper for normaliz",
 Version := "0.3",
-Date    := "15/05/2015", # dd/mm/yyyy format
+Date    := "03/11/2015", # dd/mm/yyyy format
 
 Persons := [
   rec(

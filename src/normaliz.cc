@@ -120,11 +120,13 @@ Obj NmzIntToGAP(libnormaliz::key_t x)   // key_t = unsigned int
     return ObjInt_UInt(x);
 }
 
+#ifdef SYS_IS_64_BIT
 template<>
 Obj NmzIntToGAP(size_t x)               // size_t = unsigned long
 {
     return ObjInt_UInt(x);
 }
+#endif
 
 template<>
 Obj NmzIntToGAP(long x)
