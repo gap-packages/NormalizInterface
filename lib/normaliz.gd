@@ -33,7 +33,7 @@ DeclareGlobalFunction( "NmzCompute" );
 #! @Returns the result of the computation, type depends on the property
 #! @Description
 #! Triggers the computation of the property of the cone and returns the result.
-#! If the property was already known it is not recomputed.
+#! If the property was already known, it is not recomputed.
 #! Currently the following strings are recognized as properties:
 #! <List>
 #! <Item><C>Generators</C> see <Ref Func="NmzGenerators"/>,</Item>
