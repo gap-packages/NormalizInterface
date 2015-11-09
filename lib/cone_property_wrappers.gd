@@ -186,7 +186,7 @@ DeclareGlobalFunction( "NmzSupportHyperplanes" );
 #! @Arguments cone
 #! Returns the triangulation
 #! @Description
-#! It is given as a list of pairs representing the maximal simplicial cones in the triangulation. The first pair entry is the key of the simplex, i.e. the indices of the generators with respect th the generators obtained by <Ref Func="NmzGenerators"/> (counting from 1). The second pair is the absolute value of the determinant of the generator matrix.
+#! It is given as a list of pairs representing the maximal simplicial cones in the triangulation. The first pair entry is the key of the simplex, i.e. the indices of the generators with respect th the generators obtained by <Ref Func="NmzGenerators"/> (counting from 0). The second pair entry is the absolute value of the determinant of the generator matrix.
 #!  This is an alias for <C>NmzConeProperty( cone, "Triangulation" );</C> see <Ref Func="NmzConeProperty"/>
 DeclareGlobalFunction( "NmzTriangulation" );
 
