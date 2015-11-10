@@ -1,6 +1,6 @@
 @Chapter Introduction
 
-@Section What is the idea of the this package?
+@Section What is the purpose of the this package?
 
 Normaliz <Cite Key="normaliz" /> is a software for computations with rational cones and affine
 monoids. It pursues two main computational goals: finding the Hilbert
