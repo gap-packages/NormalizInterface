@@ -44,7 +44,7 @@ using std::endl;
 
 Obj TheTypeNormalizCone;
 
-Int T_NORMALIZ = 0;
+UInt T_NORMALIZ = 0;
 
 Obj NewCone(Cone<mpz_class>* C)
 {

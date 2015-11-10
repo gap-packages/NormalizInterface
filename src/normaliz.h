@@ -32,7 +32,7 @@ extern "C" {
 #include <assert.h>
 
 // the TNUM used for NormalizInterface objects,
-extern Int T_NORMALIZ;
+extern UInt T_NORMALIZ;
 
 // old versions of libnormaliz (before 2.99.1) did not include such a define
 #ifndef NMZ_RELEASE
