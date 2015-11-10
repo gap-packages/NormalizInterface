@@ -133,5 +133,5 @@ Grading = [ 1, 1, 1, 1, 1, 1, -2 ]
 IsPointed = true
 IsDeg1ExtremeRays = true
 IsDeg1HilbertBasis = false
-Sublattice = fail
+Sublattice = true
 ClassGroup = [ 17 ]

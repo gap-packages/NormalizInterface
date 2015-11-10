@@ -50,5 +50,5 @@ OriginalMonoidGenerators =
 [ [   1,   1,   2 ],
   [  -1,  -1,   3 ],
   [   1,  -2,   4 ] ]
-Sublattice = fail
+Sublattice = true
 ClassGroup = [ 0, 3, 15 ]
