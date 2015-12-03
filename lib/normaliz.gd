@@ -21,8 +21,7 @@ BindGlobal("TheTypeNormalizCone", NewType( NormalizObjectFamily, IsNormalizCone 
 #! is either a single string, or a list of strings, which indicate
 #! what should be computed.
 #!
-# TODO better newline
-#! <List> </List>
+#! <Br></Br>
 #! The single parameter version is equivalent to
 #! <C>NmzCone(cone, ["DefaultMode"])</C>.
 #! See <Ref Func="NmzConeProperty"/> for a list of recognized properties.
@@ -83,8 +82,7 @@ DeclareGlobalFunction( "NmzCompute" );
 #!
 #! All the properties above can be given to <Ref Func="NmzCompute"/>. There you can
 #! combine different properties, e.g. give some properties that you would like to know and add some compute options.
-# TODO better newline
-#! <List> </List>
+#! <Br></Br>
 #! See the Normaliz manual for a detailed description.
 #!
 DeclareGlobalFunction( "NmzConeProperty" );
@@ -111,8 +109,7 @@ DeclareGlobalFunction( "NmzPrintConeProperties" );
 #! <M>Z^n \to Z^r, u \mapsto (uB)/c</M>
 #! and the inverse operation
 #! <M>Z^r \to Z^n, v \mapsto vA</M>.
-# TODO better newline
-#! <List> </List>
+#! <Br></Br>
 #! This is part of the cone property <Q>Sublattice</Q>.
 DeclareGlobalFunction( "NmzBasisChange" );
 
