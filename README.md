@@ -59,6 +59,7 @@ Generate the documentation:
     make doc
 
 run automatic tests:
+    
     make check
     gap maketest.g
 
