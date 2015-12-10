@@ -105,10 +105,9 @@ DeclareGlobalFunction( "NmzPrintConeProperties" );
 #! where the embedding <C>A</C> and the projection <C>B</C>
 #! are matrices, and the annihilator <C>c</C> is an integer.
 #! They represent the mapping into the effective lattice
-# TODO better rep of the maps
-#! <M>Z^n \to Z^r, u \mapsto (uB)/c</M>
+#! <M>\mathbb{Z}^n \to \mathbb{Z}^r, u \mapsto (uB)/c</M>
 #! and the inverse operation
-#! <M>Z^r \to Z^n, v \mapsto vA</M>.
+#! <M>\mathbb{Z}^r \to \mathbb{Z}^n, v \mapsto vA</M>.
 #! <Br></Br>
 #! This is part of the cone property <Q>Sublattice</Q>.
 DeclareGlobalFunction( "NmzBasisChange" );
