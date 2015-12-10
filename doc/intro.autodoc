@@ -18,7 +18,9 @@ libnormaliz.  <P/>
 
 @Chapter Functions
 
-In this chapter we describe the functions offered by <A>NormalizInterface</A>. All functions supplied by this package start with "Nmz". For examples see the chapter "Examples".
+In this chapter we describe the functions offered by <A>NormalizInterface</A>.
+All functions supplied by this package start with "Nmz".
+For examples see the chapter <Ref Chap="Chapter_Examples" Style="Text"/>.
 
 
 @Section Create a NmzCone
