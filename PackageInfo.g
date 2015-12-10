@@ -2,8 +2,8 @@ SetPackageInfo( rec(
 
 PackageName := "NormalizInterface",
 Subtitle := "GAP wrapper for normaliz",
-Version := "0.1dev",
-Date    := "??/03/2014",
+Version := "0.3",
+Date    := "10/12/2015", # dd/mm/yyyy format
 
 Persons := [
   rec(
@@ -46,11 +46,12 @@ Persons := [
     IsAuthor      := true,
     IsMaintainer  := true,
     Email         := "csoeger@uos.de",
-    #WWWHome       := "http://",
+    WWWHome       := "http://www.math.uos.de/normaliz",
     PostalAddress := Concatenation(
                        "Institut für Mathematik\n",
                        "Albrechtstr. 28a\n",
-                       "49076 Osnabrück" ),
+                       "49076 Osnabrück\n",
+                       "Germany" ),
     Place         := "Osnabrück",
     Institution   := "University of Osnabrück"
   ),
@@ -60,16 +61,19 @@ Status         := "dev",
 #CommunicatedBy := "name (place)",
 #AcceptDate     := "mm/yyyy",
 
-PackageWWWHome := "https://github.com/fingolfin/NormalizInterface",
+PackageWWWHome := "https://github.com/gap-packages/NormalizInterface",
+README_URL     := Concatenation( ~.PackageWWWHome, "/README.md" ),
+PackageInfoURL := Concatenation( ~.PackageWWWHome, "/PackageInfo.g" ),
+ArchiveURL     := Concatenation("https://github.com/gap-packages/NormalizInterface/",
+                                "releases/download/v", ~.Version,
+                                "/NormalizInterface-", ~.Version),
+ArchiveFormats := ".tar.gz .tar.bz2",
 
-ArchiveFormats := ".tar.gz tar.bz2",
-ArchiveURL     := Concatenation( ~.PackageWWWHome, "NormalizInterface-",~.Version),
-README_URL     := Concatenation( ~.PackageWWWHome, "README" ),
-PackageInfoURL := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
+AbstractHTML :=
+  "The <span class=\"pkgname\">NormalizInterface</span> package provides\
+  a GAP interface to Normaliz, enabling direct access to the complete\
+  functionality of Normaliz.",
 
-AbstractHTML   := Concatenation(
-               "The NormalizInterface Package ... ",
-               "TODO"),
 
 PackageDoc := rec(
   BookName  := "NormalizInterface",
@@ -82,7 +86,7 @@ PackageDoc := rec(
 ),
 
 Dependencies := rec(
-  GAP                    := ">= 4.7",
+  GAP                    := ">= 4.8",
   NeededOtherPackages    := [ ],
   SuggestedOtherPackages := [ ],
   ExternalConditions     := [ ]
@@ -92,8 +96,8 @@ AvailabilityTest := function()
     local path;
     # test for existence of the compiled binary
     path := DirectoriesPackagePrograms("NormalizInterface");
-    if not "normaliz" in SHOW_STAT() and
-       Filename(path, "normaliz.so") = fail then
+    if not "NormalizInterface" in SHOW_STAT() and
+       Filename(path, "NormalizInterface.so") = fail then
       return fail;
     fi;
     return true;

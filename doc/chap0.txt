@@ -6,10 +6,10 @@
                            [1X [5XGAP[105X wrapper for normaliz [101X
   
   
-                                     0.1dev
+                                      0.3
   
   
-                                   ??/03/2014
+                                   10/12/2015
   
   
                                Sebastian Gutsche
@@ -42,9 +42,11 @@
   
   Christof Söger
       Email:    [7Xmailto:csoeger@uos.de[107X
+      Homepage: [7Xhttp://www.math.uos.de/normaliz[107X
       Address:  [33X[0;14YInstitut für Mathematik[133X
                 [33X[0;14YAlbrechtstr. 28a[133X
                 [33X[0;14Y49076 Osnabrück[133X
+                [33X[0;14YGermany[133X
   
   
   
@@ -54,7 +56,86 @@
   [1XContents (NormalizInterface)[101X
   
   1 [33X[0;0YIntroduction[133X
-    1.1 [33X[0;0YWhat is the idea of the this package?[133X
+    1.1 [33X[0;0YWhat is the purpose of the this package?[133X
+  2 [33X[0;0YFunctions[133X
+    2.1 [33X[0;0YCreate a NmzCone[133X
+      2.1-1 NmzCone
+    2.2 [33X[0;0YUse a NmzCone[133X
+      2.2-1 NmzHasConeProperty
+      2.2-2 NmzKnownConeProperties
+      2.2-3 NmzSetVerboseDefault
+      2.2-4 NmzSetVerbose
+      2.2-5 NmzCompute
+      2.2-6 NmzConeProperty
+      2.2-7 NmzPrintConeProperties
+    2.3 [33X[0;0YCone properties[133X
+      2.3-1 NmzEmbeddingDimension
+      2.3-2 NmzRank
+      2.3-3 NmzIsInhomogeneous
+      2.3-4 NmzEquations
+      2.3-5 NmzCongruences
+      2.3-6 NmzAffineDim
+      2.3-7 NmzClassGroup
+      2.3-8 NmzDeg1Elements
+      2.3-9 NmzDehomogenization
+      2.3-10 NmzExcludedFaces
+      2.3-11 NmzExtremeRays
+      2.3-12 NmzGenerators
+      2.3-13 NmzGrading
+      2.3-14 NmzHilbertBasis
+      2.3-15 NmzHilbertQuasiPolynomial
+      2.3-16 NmzHilbertSeries
+      2.3-17 NmzInclusionExclusionData
+      2.3-18 NmzIsDeg1ExtremeRays
+      2.3-19 NmzIsDeg1HilbertBasis
+      2.3-20 NmzIsIntegrallyClosed
+      2.3-21 NmzIsPointed
+      2.3-22 NmzModuleGenerators
+      2.3-23 NmzModuleGeneratorsOverOriginalMonoid
+      2.3-24 NmzModuleRank
+      2.3-25 NmzMultiplicity
+      2.3-26 NmzOriginalMonoidGenerators
+      2.3-27 NmzRecessionRank
+      2.3-28 NmzIsReesPrimary
+      2.3-29 NmzReesPrimaryMultiplicity
+      2.3-30 NmzSupportHyperplanes
+      2.3-31 NmzTriangulation
+      2.3-32 NmzTriangulationDetSum
+      2.3-33 NmzTriangulationSize
+      2.3-34 NmzVerticesOfPolyhedron
+      2.3-35 NmzBasisChange
+  3 [33X[0;0YExamples[133X
+    3.1 [33X[0;0YGenerators[133X
+    3.2 [33X[0;0YSystem of Equations[133X
+    3.3 [33X[0;0YSystem of Inhomogeneous Equations[133X
+    3.4 [33X[0;0YCombined Input[133X
+    3.5 [33X[0;0YUsing the dual mode[133X
+  4 [33X[0;0YInstalling NormalizInterface[133X
+    4.1 [33X[0;0YTODO[133X
+  5 [33X[0;0YNormalizInterface automatic generated documentation[133X
+    5.1 [33X[0;0YNormalizInterface automatic generated documentation of global
+    functions[133X
+      5.1-1 NmzGenerators
+      5.1-2 NmzExtremeRays
+      5.1-3 NmzSupportHyperplanes
+      5.1-4 NmzTriangulationSize
+      5.1-5 NmzTriangulationDetSum
+      5.1-6 NmzTriangulation
+      5.1-7 NmzMultiplicity
+      5.1-8 NmzHilbertBasis
+      5.1-9 NmzDeg1Elements
+      5.1-10 NmzHilbertSeries
+      5.1-11 NmzGrading
+      5.1-12 NmzIsPointed
+      5.1-13 NmzIsDeg1Generated
+      5.1-14 NmzIsDeg1ExtremeRays
+      5.1-15 NmzIsDeg1HilbertBasis
+      5.1-16 NmzIsIntegrallyClosed
+      5.1-17 NmzGeneratorsOfToricRing
+      5.1-18 NmzReesPrimary
+      5.1-19 NmzReesPrimaryMultiplicity
+      5.1-20 NmzStanleyDec
+      5.1-21 NmzDualMode
   
   
   [32X
