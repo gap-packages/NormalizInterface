@@ -55,7 +55,7 @@ See the io package README for more information.
 ## Documentation and tests
 
 Generate the documentation:
-(The documentation is still incomplete.)
+    
     make doc
 
 run automatic tests:
