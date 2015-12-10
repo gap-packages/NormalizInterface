@@ -3,7 +3,7 @@ SetPackageInfo( rec(
 PackageName := "NormalizInterface",
 Subtitle := "GAP wrapper for normaliz",
 Version := "0.3",
-Date    := "03/11/2015", # dd/mm/yyyy format
+Date    := "10/12/2015", # dd/mm/yyyy format
 
 Persons := [
   rec(
@@ -62,7 +62,7 @@ Status         := "dev",
 #AcceptDate     := "mm/yyyy",
 
 PackageWWWHome := "https://github.com/gap-packages/NormalizInterface",
-README_URL     := Concatenation( ~.PackageWWWHome, "/README" ),
+README_URL     := Concatenation( ~.PackageWWWHome, "/README.md" ),
 PackageInfoURL := Concatenation( ~.PackageWWWHome, "/PackageInfo.g" ),
 ArchiveURL     := Concatenation("https://github.com/gap-packages/NormalizInterface/",
                                 "releases/download/v", ~.Version,
