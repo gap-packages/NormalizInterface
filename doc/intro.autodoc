@@ -58,7 +58,7 @@ to have even value by adding congruences.
 
 @Section Using the dual mode
 For solving systems of equations and inequalities it is often faster to use
-the dual normaliz algorithm. We demonstrate how to use it with an
+the dual Normaliz algorithm. We demonstrate how to use it with an
 inhomogeneous system of equations and inequalities.
 
 The input consists of a system of 8 inhomogeneous equations in R^3. The first

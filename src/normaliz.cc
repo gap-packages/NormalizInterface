@@ -1,5 +1,5 @@
 /*
- * NormalizInterface: GAP wrapper for normaliz
+ * NormalizInterface: GAP wrapper for Normaliz
  * Copyright (C) 2014  Sebastian Gutsche, Max Horn, Christof Söger
  *
  * This program is free software; you can redistribute it and/or
@@ -343,7 +343,7 @@ Obj _NmzCompute(Obj self, Obj cone, Obj to_compute)
 {
     FUNC_BEGIN
     if (!IS_CONE(cone))
-        ErrorQuit("<cone> must be a normaliz cone", 0, 0);
+        ErrorQuit("<cone> must be a Normaliz cone", 0, 0);
     if (!IS_PLIST(to_compute) || !IS_DENSE_LIST(to_compute))
         ErrorQuit("<props> must be a list of strings", 0, 0);
 
@@ -386,7 +386,7 @@ Obj NmzHasConeProperty(Obj self, Obj cone, Obj prop)
     FUNC_BEGIN
 
     if (!IS_CONE(cone))
-        ErrorQuit("<cone> must be a normaliz cone", 0, 0);
+        ErrorQuit("<cone> must be a Normaliz cone", 0, 0);
     if (!IS_STRING_REP(prop))
         ErrorQuit("<prop> must be a string", 0, 0);
 
@@ -414,7 +414,7 @@ Obj NmzKnownConeProperties(Obj self, Obj cone)
     FUNC_BEGIN
 
     if (!IS_CONE(cone))
-        ErrorQuit("<cone> must be a normaliz cone", 0, 0);
+        ErrorQuit("<cone> must be a Normaliz cone", 0, 0);
 
     size_t n = 0;
     Obj M = NEW_PLIST(T_PLIST, libnormaliz::ConeProperty::EnumSize);
@@ -599,7 +599,7 @@ Obj _NmzConeProperty(Obj self, Obj cone, Obj prop)
     FUNC_BEGIN
 
     if (!IS_CONE(cone))
-        ErrorQuit("<cone> must be a normaliz cone", 0, 0);
+        ErrorQuit("<cone> must be a Normaliz cone", 0, 0);
     if (!IS_STRING_REP(prop))
         ErrorQuit("<prop> must be a string", 0, 0);
 
@@ -642,7 +642,7 @@ Obj NmzSetVerbose(Obj self, Obj cone, Obj value)
 {
     FUNC_BEGIN
     if (!IS_CONE(cone))
-        ErrorQuit("<cone> must be a normaliz cone", 0, 0);
+        ErrorQuit("<cone> must be a Normaliz cone", 0, 0);
     if (value != True && value != False)
         ErrorQuit("<value> must be a boolean value", 0, 0);
     bool old_value;
@@ -670,7 +670,7 @@ Obj NmzEmbeddingDimension(Obj self, Obj cone)
 {
     FUNC_BEGIN
     if (!IS_CONE(cone))
-        ErrorQuit("<cone> must be a normaliz cone", 0, 0);
+        ErrorQuit("<cone> must be a Normaliz cone", 0, 0);
     Cone<mpz_class>* C = GET_CONE<mpz_class>(cone);
     return NmzIntToGAP(C->getEmbeddingDim());
     FUNC_END
@@ -696,7 +696,7 @@ Obj _NmzBasisChange(Obj self, Obj cone)
 {
     FUNC_BEGIN
     if (!IS_CONE(cone))
-        ErrorQuit("<cone> must be a normaliz cone", 0, 0);
+        ErrorQuit("<cone> must be a Normaliz cone", 0, 0);
     return _NmzBasisChangeIntern<mpz_class>(cone);
     FUNC_END
 }
@@ -715,7 +715,7 @@ Obj NmzRank(Obj self, Obj cone)
 {
     FUNC_BEGIN
     if (!IS_CONE(cone))
-        ErrorQuit("<cone> must be a normaliz cone", 0, 0);
+        ErrorQuit("<cone> must be a Normaliz cone", 0, 0);
     Cone<mpz_class>* C = GET_CONE<mpz_class>(cone);
     return NmzIntToGAP(C->getSublattice().getRank());
     FUNC_END
@@ -732,7 +732,7 @@ Obj NmzIsInhomogeneous(Obj self, Obj cone)
 {
     FUNC_BEGIN
     if (!IS_CONE(cone))
-        ErrorQuit("<cone> must be a normaliz cone", 0, 0);
+        ErrorQuit("<cone> must be a Normaliz cone", 0, 0);
     Cone<mpz_class>* C = GET_CONE<mpz_class>(cone);
     return C->isInhomogeneous() ? True : False;
     FUNC_END
@@ -754,7 +754,7 @@ Obj NmzEquations(Obj self, Obj cone)
 {
     FUNC_BEGIN
     if (!IS_CONE(cone))
-        ErrorQuit("<cone> must be a normaliz cone", 0, 0);
+        ErrorQuit("<cone> must be a Normaliz cone", 0, 0);
     Cone<mpz_class>* C = GET_CONE<mpz_class>(cone);
     C->compute(ConeProperties(libnormaliz::ConeProperty::SupportHyperplanes));
     return NmzMatrixToGAP(C->getSublattice().getEquations());
@@ -777,7 +777,7 @@ Obj NmzCongruences(Obj self, Obj cone)
 {
     FUNC_BEGIN
     if (!IS_CONE(cone))
-        ErrorQuit("<cone> must be a normaliz cone", 0, 0);
+        ErrorQuit("<cone> must be a Normaliz cone", 0, 0);
     Cone<mpz_class>* C = GET_CONE<mpz_class>(cone);
     C->compute(ConeProperties(libnormaliz::ConeProperty::SupportHyperplanes));
     return NmzMatrixToGAP(C->getSublattice().getCongruences());
@@ -863,7 +863,7 @@ static StructInitInfo module = {
 #else
  /* type        = */ MODULE_DYNAMIC,
 #endif
- /* name        = */ "normaliz",
+ /* name        = */ "Normaliz",
  /* revision_c  = */ 0,
  /* revision_h  = */ 0,
  /* version     = */ 0,

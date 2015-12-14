@@ -81,7 +81,7 @@ AC_SUBST(NORMALIZ_LDPATH)
 AC_SUBST(NORMALIZ_LDFLAGS)
 AC_SUBST(NORMALIZ_CPPFLAGS)
 
-dnl ## Make sure normaliz can be used and its version is at least >= 3.0.0
+dnl ## Make sure Normaliz can be used and its version is at least >= 3.0.0
 
 old_CPPFLAGS="$CPPFLAGS"
 old_LDFLAGS="$LDFLAGS"
@@ -92,7 +92,7 @@ AC_CHECK_HEADER([libnormaliz/cone.h], [], [AC_MSG_ERROR([could not use libnormal
 AC_MSG_CHECKING([for Normaliz >= 3.0.0])
 AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[@%:@include "libnormaliz/cone.h"]],
                [[#if !defined(NMZ_RELEASE) || NMZ_RELEASE < 30000
-               #error normaliz too old
+               #error Normaliz too old
                #endif
                return 0;]])],
        ac_normaliz=yes,ac_normaliz=no)

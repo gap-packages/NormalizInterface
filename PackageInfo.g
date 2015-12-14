@@ -1,7 +1,7 @@
 SetPackageInfo( rec(
 
 PackageName := "NormalizInterface",
-Subtitle := "GAP wrapper for normaliz",
+Subtitle := "GAP wrapper for Normaliz",
 Version := "0.3",
 Date    := "10/12/2015", # dd/mm/yyyy format
 
@@ -81,7 +81,7 @@ PackageDoc := rec(
   HTMLStart := "doc/chap0_mj.html",
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
-  LongTitle := "GAP wrapper for normaliz",
+  LongTitle := "GAP wrapper for Normaliz",
   Autoload  := true
 ),
 
