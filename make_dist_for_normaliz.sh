@@ -19,18 +19,8 @@ git archive --format=tar --output=tmp/NormalizInterface.tar --prefix=NormalizInt
 cd tmp
 tar xf NormalizInterface.tar
 cd NormalizInterface
-gap -A -q -b <<EOF
-# HACK
-MakeReadWriteGlobal("SetPackageInfo");
-SetPackageInfo:=function(pkg)
-  PrintTo("VERSION",pkg.Version);
-end;;
-Read("PackageInfo.g");
-QUIT;
-EOF
 
 version=$(cat VERSION)
-rm VERSION
 
 gap -A <<GAPInput
 SetPackagePath("NormalizInterface", ".");
@@ -100,6 +90,6 @@ cp -f ../PackageInfo.g README.md .
 
 cp -f ../doc/*.{css,html,js,txt} doc/
 gap update.g
-git add PackageInfo.g README.md README_layouted.md doc/ _data/package.yml
+git add PackageInfo.g README.md doc/ _data/package.yml
 git commit -m "New version of website"
 git push --set-upstream gap gh-pages
