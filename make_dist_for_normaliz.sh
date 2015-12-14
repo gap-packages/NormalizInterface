@@ -97,12 +97,6 @@ rm json_data
 cd gh-pages
 git add *tar.gz
 cp -f ../PackageInfo.g README.md .
-cat > README_layouted.md <<EOF
----
-layout: default
----
-EOF
-cat ../README.md >> README_layouted.md
 
 cp -f ../doc/*.{css,html,js,txt} doc/
 gap update.g
