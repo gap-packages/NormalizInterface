@@ -44,10 +44,6 @@ oauth_token=$(cat ~/.github_shell_token)
 tag_response=$(curl -X GET https://api.github.com/repos/gap-packages/NormalizInterface/releases/tags/v${version}?access_token=${oauth_token} | grep "Not Found")
 echo "Tag response: ${tag_response}"
 if [ -n "$tag_response" ]; then
-    delete_releases=$(python ${current_dir}/delete_old_releases.py NormalizInterface ${current_dir}/json_data)
-    for rel_id in $delete_releases; do
-        curl -X DELETE https://api.github.com/repos/gap-packages/NormalizInterface/releases/${rel_id}?access_token=${oauth_token}
-    done
     
     release_response=$(curl -H "Content-Type: application/json" -X POST --data \
     '{ "tag_name": "'v${version}'", "target_commitish": "master", "name": "'v${version}'", "body": "Release for 'NormalizInterface'", "draft": false, "prerelease": false }' \
