@@ -376,8 +376,7 @@ Obj _NmzCompute(Obj self, Obj cone, Obj to_compute)
 #! @Arguments cone property
 #! @Returns whether the cone has already computed the given property
 #! @Description
-#! Accepts all Normaliz ConeProperty possibilities, see also
-#! <Ref Func="NmzCompute"/>
+#! See <Ref Func="NmzConeProperty"/> for a list of recognized properties.
 #!
 #! @InsertChunk NmzHasConeProperty example
 DeclareGlobalFunction("NmzHasConeProperty");
@@ -688,7 +687,7 @@ static Obj _NmzBasisChangeIntern(Obj cone)
     AssPlist(res, 1, NmzMatrixToGAP(bc.getEmbedding()));
     AssPlist(res, 2, NmzMatrixToGAP(bc.getProjection()));
     AssPlist(res, 3, NmzIntToGAP(bc.getAnnihilator()));
-    // Dim, Rank, Equations and Congruences are already coverd by special functions
+    // Dim, Rank, Equations and Congruences are already covered by special functions
     // The index is not always computed and not so relevant
     return res;
 }

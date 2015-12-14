@@ -13,13 +13,13 @@ diophantine system of inhomogeneous equations, inequalities and
 congruences.  <P/>
 
 This package encapsulates a libnormaliz cone and gives access to it in the
-GAP enviroment. In this way GAP can be used as interactive interface to
+&GAP; environment. In this way &GAP; can be used as interactive interface to
 libnormaliz.  <P/>
 
 @Chapter Functions
 
 In this chapter we describe the functions offered by <A>NormalizInterface</A>.
-All functions supplied by this package start with "Nmz".
+All functions supplied by this package start with <Q>Nmz</Q>.
 For examples see the chapter <Ref Chap="Chapter_Examples" Style="Text"/>.
 
 
@@ -37,40 +37,42 @@ To create a cone object use <A>NmzCone</A>.
 
 @InsertChunk Demo example
 
-@Section System of Equations
+@Section System of equations
 @InsertChunk Demo example equation
 
-@Section System of Inhomogeneous Equations
+@Section System of inhomogeneous equations
 @InsertChunk Demo example inhom equation
 
-@Section Combined Input
-Normaliz also allows the combination of different kinds of input, e.g. multiple constraint types, or additional data like a grading.
+@Section Combined input
+Normaliz also allows the combination of different kinds of input, e.g.
+multiple constraint types, or additional data like a grading.
 
-Suppose that you have a 3 by 3 ``square'' of nonnegative integers
-such that the 3 numbers in all rows, all columns, and both
-diagonals sum to the same constant $M$. Sometimes
-such squares are called magic and $M$ is the
-magic constant. This leads to a linear system of
-equations.
-The magic constant is a natural choice for the grading.
-Additionally we force here the 4 corner to have even value by adding congruences.
+Suppose that you have a 3 by 3 <Q>square</Q> of nonnegative integers such that
+the 3 numbers in all rows, all columns, and both diagonals sum to the same
+constant <M>M</M>. Sometimes such squares are called magic and <M>M</M> is the
+magic constant. This leads to a linear system of equations. The magic constant
+is a natural choice for the grading. Additionally we force here the 4 corner
+to have even value by adding congruences.
 
 @InsertChunk Demo example 3x3magiceven
 
 @Section Using the dual mode
-For solving systems of equations and inequalities it is often faster to use the
-dual normaliz algorithm. We demonstrate how to use it with an inhomogeneous system
-of equations and inequalities.
+For solving systems of equations and inequalities it is often faster to use
+the dual normaliz algorithm. We demonstrate how to use it with an
+inhomogeneous system of equations and inequalities.
 
-The input consits of a system of 8 inhomogeneous equations in R^3. The first row of the matrix M encodes the inequality $8x + 8y + 8z + 7 >= 0$. Additionally we say that $x, y, z$ should be non-negative by giving the sign vector and use the total degree.
+The input consists of a system of 8 inhomogeneous equations in R^3. The first
+row of the matrix M encodes the inequality <M>8x + 8y + 8z + 7 \geq 0</M>.
+Additionally we say that <M>x, y, z</M> should be non-negative by giving the
+sign vector and use the total degree.
 @InsertChunk example dual
 
-As result we get the Hilbert basis of the cone of the solutions to the homogeneous system and the module generators which are the base solutions to the inhomogenous system.
+As result we get the Hilbert basis of the cone of the solutions to the
+homogeneous system and the module generators which are the base
+solutions to the inhomogeneous system.
 
 @Chapter Installing NormalizInterface
 
 @Section TODO
 
-TODO
-
-This should be turned into an appendix -- does AutoDoc support that yet?
+TODO: This should be turned into an appendix -- does AutoDoc support that yet?

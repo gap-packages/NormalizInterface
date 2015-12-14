@@ -20,8 +20,8 @@ BindGlobal("TheTypeNormalizCone", NewType( NormalizObjectFamily, IsNormalizCone 
 #! The first parameter indicates a cone object, the second parameter
 #! is either a single string, or a list of strings, which indicate
 #! what should be computed.
+#! <P/>
 #!
-#! <Br></Br>
 #! The single parameter version is equivalent to
 #! <C>NmzCone(cone, ["DefaultMode"])</C>.
 #! See <Ref Func="NmzConeProperty"/> for a list of recognized properties.
@@ -70,19 +70,19 @@ DeclareGlobalFunction( "NmzCompute" );
 #! <Ref Func="NmzCongruences"/>, and <Ref Func="NmzBasisChange"/>.</Item>
 #! </List>
 #!
-#! Additionally also the following compute options are accepted as property. They modifey what and how should be computed, and return True after a successful computation.
+#! Additionally also the following compute options are accepted as property. They modify what and how should be computed, and return True after a successful computation.
 #! <List>
 #! <Item><C>Approximate</C> approximate the rational polytope by an integral polytope, currently only useful in combination with <C>Deg1Elements</C>.</Item>
 #! <Item><C>BottomDecomposition</C> use the best possible triangulation (with respect to the sum of determinants) using the given generators.</Item>
 #! <Item><C>DefaultMode</C> try to compute what is possible and do not throw an exception when something cannot be computed.</Item>
 #! <Item><C>DualMode</C>activates the dual algorithm for the computation of the Hilbert basis and degree
-#! 1 elements. Includes <C>HilbertBasis</C>, unless <C>Deg1Elements</C> is set. Often a good choise if you start from constraints.</Item>
+#! 1 elements. Includes <C>HilbertBasis</C>, unless <C>Deg1Elements</C> is set. Often a good choice if you start from constraints.</Item>
 #! <Item><C>KeepOrder</C> forbids to reorder the generators. Blocks <C>BottomDecomposition</C>.</Item>
 #! </List>
 #!
 #! All the properties above can be given to <Ref Func="NmzCompute"/>. There you can
 #! combine different properties, e.g. give some properties that you would like to know and add some compute options.
-#! <Br></Br>
+#! <P/>
 #! See the Normaliz manual for a detailed description.
 #!
 DeclareGlobalFunction( "NmzConeProperty" );
@@ -108,7 +108,7 @@ DeclareGlobalFunction( "NmzPrintConeProperties" );
 #! <M>\mathbb{Z}^n \to \mathbb{Z}^r, u \mapsto (uB)/c</M>
 #! and the inverse operation
 #! <M>\mathbb{Z}^r \to \mathbb{Z}^n, v \mapsto vA</M>.
-#! <Br></Br>
+#! <P/>
 #! This is part of the cone property <Q>Sublattice</Q>.
 DeclareGlobalFunction( "NmzBasisChange" );
 
@@ -119,7 +119,7 @@ DeclareGlobalFunction( "NmzBasisChange" );
 #! @Description
 #! Creates a NmzCone. The <A>list</A> argument should contain an even number of
 #! elements, alternating between a string and a integer matrix. The string has to
-#! correspond to a normaliz input type string and the following matrix will be
+#! correspond to a Normaliz input type string and the following matrix will be
 #! interpreted as input of that type.
 #!
 #! Currently the following strings are recognized:

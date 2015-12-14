@@ -83,7 +83,7 @@ InstallGlobalFunction("NmzCone", function(arg)
     else
         opts_list := arg;
     fi;
-    
+
     cone := _NmzCone(opts_list);
     return cone;
 end);
