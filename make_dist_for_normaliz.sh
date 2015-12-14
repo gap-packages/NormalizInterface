@@ -3,6 +3,14 @@
 # This script needs a github shell access token in the file ~/.github_shell_token
 # It also needs the gap remote of the gh-pages repo to be the gap-system repository
 
+if [ ! -d gh-pages ]; then
+    
+    git clone --branch gh-pages git@github.com:gap-packages/NormalizInterface.git gh-pages
+    cd gh-pages
+    git branch -u origin/gh-pages
+    cd ..
+fi
+
 current_dir=$(pwd)
 
 function jsonval {
@@ -37,7 +45,6 @@ rm -rf public_html
 echo "Going back"
 
 cd ..
-
 
 oauth_token=$(cat ~/.github_shell_token)
 
@@ -87,5 +94,5 @@ cp -f ../PackageInfo.g README.md .
 cp -f ../doc/*.{css,html,js,txt} doc/
 gap update.g
 git add PackageInfo.g README.md doc/ _data/package.yml
-git commit -m "New version of website"
+git commit -m "New version of website: Version ${version}"
 git push --set-upstream gap gh-pages
