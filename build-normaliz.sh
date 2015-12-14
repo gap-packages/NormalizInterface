@@ -58,7 +58,7 @@ fi
 
 if [ ! -d Normaliz.git ]; then
     echo "Fetching Normaliz source code"
-    git clone https://github.com/Normaliz/Normaliz Normaliz.git
+    git clone --depth 1 --branch v3.0.0 -- https://github.com/Normaliz/Normaliz Normaliz.git
 fi
 cd Normaliz.git
 
