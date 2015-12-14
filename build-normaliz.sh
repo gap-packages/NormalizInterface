@@ -56,11 +56,14 @@ else
     # the GMP_DIR variable manually.
 fi
 
+NORMALIZ_VERSION=v3.0.0
+
 if [ ! -d Normaliz.git ]; then
     echo "Fetching Normaliz source code"
-    git clone --depth 1 --branch v3.0.0 -- https://github.com/Normaliz/Normaliz Normaliz.git
+    git clone --depth 1 --branch $NORMALIZ_VERSION -- https://github.com/Normaliz/Normaliz Normaliz.git
 fi
 cd Normaliz.git
+git checkout $NORMALIZ_VERSION
 
 rm -rf DST
 rm -rf BUILD
