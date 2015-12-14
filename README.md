@@ -22,32 +22,52 @@ especially have a look at the manual.
 
 ## Installation preparation
 
-You should use the same GMP version for GAP and libnormaliz. To ensure
-this you can use a system installed GMP for GAP by configuring it with
+NormalizInterface supports GAP 4.8.0 or later, and Normaliz 3.0.0 or later.
 
+For technical reasons, installing and using NormalizInterface requires
+that your version of GAP is compiled in a special way. Specifically, GAP
+must be compiled against the exact same version of the GMP library as
+Normaliz. By default, GAP compiles its own version of GMP; however, we
+cannot use that, as it lacks C++ support, which is required by Normaliz.
+
+Thus as the very first step, please install a version of GMP in your
+system. On most Linux and BSD distributions, there should be a GMP
+package available with your system's package manager. On Mac OS X, you
+can install GMP via Fink, MacPorts or Homebrew.
+
+Next, make sure your GAP installation is compiled against the system
+wide GMP installation. To do so, switch to the GAP root directory, and
+enter the following commands:
+
+    make clean
     ./configure --with-gmp=system
+    make
 
-and build it. Next you need Normaliz, the easiest way is to clone the master
-branch from the Normaliz GitHub repository with the command
+Next you need to compile a recent version of Normaliz. This requires the
+presence of several further system software packages, which you install
+via your system's package manager. At least the following are required:
 
-    git clone https://github.com/Normaliz/Normaliz Normaliz.git
+ * git
+ * cmake
+ * boost
 
-into this directory. After that you can run the script
+Once you have installed these, you can build Normaliz by using
+the build_normaliz.sh script we provide. It takes a single,
+optional parameter: the location of the GAP root directory.
     
-    ./build_normaliz.sh
+    ./build_normaliz.sh GAPDIR
 
 Once it completed successfully, you can then build NormalizInterface
 like this:
 
-    ./autogen.sh (need autoconf and automake)
-    ./configure --with-gaproot=GAPDIR --with-normaliz=$PWD/Normaliz.git/DST
+    ./configure --with-gaproot=GAPDIR
     make
 
-If you need to customize the normaliz compilation have a look at
-Normaliz.git/source/INSTALL. Remember to use the same compiler and gmp
+If you need to customize the normaliz compilation, please have a look at
+Normaliz.git/source/INSTALL. Remember to use the same compiler and GMP
 version as for GAP.
 
-To be able to run the tests of NormalizInterface install also the gap package
+To be able to run the tests of NormalizInterface install also the GAP package
 io. For that go to the pkg/io-x.x.x/ directory and do "./configure" and "make".
 See the io package README for more information.
 

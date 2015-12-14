@@ -72,7 +72,7 @@ dnl ##
 AC_ARG_WITH([normaliz],
     [AC_HELP_STRING([--with-normaliz=<path>], [specify root of Normaliz installation])],
     [NORMALIZ="$with_normaliz"],
-    [AC_MSG_ERROR([Must use --with-normaliz])]
+    [NORMALIZ="$PWD/Normaliz.git/DST"]
 )
 NORMALIZ_CPPFLAGS="-I$NORMALIZ/include"
 NORMALIZ_LDPATH="$NORMALIZ/lib"
