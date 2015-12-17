@@ -52,10 +52,10 @@ via your system's package manager. At least the following are required:
  * boost
 
 Once you have installed these, you can build Normaliz by using
-the build_normaliz.sh script we provide. It takes a single,
+the build-normaliz.sh script we provide. It takes a single,
 optional parameter: the location of the GAP root directory.
     
-    ./build_normaliz.sh GAPDIR
+    ./build-normaliz.sh GAPDIR
 
 Once it completed successfully, you can then build NormalizInterface
 like this:
