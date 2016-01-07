@@ -9,17 +9,13 @@ TEST_SETTING := rec(
 if IsBound(GAPInfo.SystemEnvironment.AUTOMAKE_TESTS) then
     TEST_SETTING.automake := true;
     TEST_SETTING.verbose := false;
-fi;
 
-if TEST_SETTING.automake then
-    if LoadPackage("io") = fail then
-        # Signal to TAP driver that there was an error
-        Print("\nBail out! io package not available\n");
-        TEST_SETTING.abort := true;
-    else
-        # HACK to make sure GAP loads the right version of the package
-        SetPackagePath(TEST_SETTING.pkg, ".");
-    fi;
+    # abort immediately upon any error, instead of getting stuck
+    # in a break loop
+    OnBreak := function() QUIT_GAP(1); end;
+
+    # HACK to make sure GAP loads the right version of the package
+    SetPackagePath(TEST_SETTING.pkg, ".");
 fi;
 
 
@@ -85,13 +81,13 @@ CallFuncList(function()
 
     if TEST_SETTING.automake then
         #if success then
-            IO_exit(0); # make check: PASSED
+            QUIT_GAP(0); # make check: PASSED
         #else
-            #IO_exit(1); # make check: FAILED
+            #QUIT_GAP(1); # make check: FAILED
         #fi;
     fi;
 
 end, []);
 fi;
 
-QUIT;
+QUIT_GAP();
