@@ -6,7 +6,7 @@
                            [1X [5XGAP[105X wrapper for Normaliz [101X
   
   
-                                     0.9.1
+                                     0.9.2
   
   
                                    07/01/2016
@@ -111,7 +111,7 @@
     3.4 [33X[0;0YCombined input[133X
     3.5 [33X[0;0YUsing the dual mode[133X
   4 [33X[0;0YInstalling NormalizInterface[133X
-    4.1 [33X[0;0YTODO[133X
+    4.1 [33X[0;0YCompiling[133X
   
   
   [32X

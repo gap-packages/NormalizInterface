@@ -25,18 +25,62 @@
 <p id="mathjaxlink" class="pcenter"><a href="chap4.html">[MathJax off]</a></p>
 <p><a id="X7DA4E7697F7D5F0C" name="X7DA4E7697F7D5F0C"></a></p>
 <div class="ChapSects"><a href="chap4_mj.html#X7DA4E7697F7D5F0C">4 <span class="Heading">Installing NormalizInterface</span></a>
-<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X7F563317817BF1E2">4.1 <span class="Heading">TODO</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap4_mj.html#X7CD1A8937DFB78BF">4.1 <span class="Heading">Compiling</span></a>
 </span>
 </div>
 </div>
 
 <h3>4 <span class="Heading">Installing NormalizInterface</span></h3>
 
-<p><a id="X7F563317817BF1E2" name="X7F563317817BF1E2"></a></p>
+<p><a id="X7CD1A8937DFB78BF" name="X7CD1A8937DFB78BF"></a></p>
 
-<h4>4.1 <span class="Heading">TODO</span></h4>
+<h4>4.1 <span class="Heading">Compiling</span></h4>
 
-<p>TODO: This should be turned into an appendix -- does AutoDoc support that yet?</p>
+<p>NormalizInterface supports GAP 4.8.0 or later, and Normaliz 3.0.0 or later.</p>
+
+<p>For technical reasons, installing and using NormalizInterface requires that your version of GAP is compiled in a special way. Specifically, GAP must be compiled against the exact same version of the GMP library as Normaliz. By default, GAP compiles its own version of GMP; however, we cannot use that, as it lacks C++ support, which is required by Normaliz.</p>
+
+<p>Thus as the very first step, please install a version of GMP in your system. On most Linux and BSD distributions, there should be a GMP package available with your system's package manager. On Mac OS X, you can install GMP via Fink, MacPorts or Homebrew.</p>
+
+<p>Next, make sure your GAP installation is compiled against the system wide GMP installation. To do so, switch to the GAP root directory, and enter the following commands:</p>
+
+
+<div class="example"><pre>
+make clean
+./configure --with-gmp=system
+make
+</pre></div>
+
+<p>Next you need to compile a recent version of Normaliz. This requires the presence of several further system software packages, which you install via your system's package manager. At least the following are required:</p>
+
+
+<ul>
+<li><p>git</p>
+
+</li>
+<li><p>cmake</p>
+
+</li>
+<li><p>boost</p>
+
+</li>
+</ul>
+<p>Once you have installed these, you can build Normaliz by using the build-normaliz.sh script we provide. It takes a single, optional parameter: the location of the GAP root directory.</p>
+
+
+<div class="example"><pre>
+./build-normaliz.sh GAPDIR
+</pre></div>
+
+<p>Once it completed successfully, you can then build NormalizInterface like this:</p>
+
+
+<div class="example"><pre>
+./configure --with-gaproot=GAPDIR
+make
+</pre></div>
+
+<p>If you need to customize the normaliz compilation, please have a look at Normaliz.git/source/INSTALL. Remember to use the same compiler and GMP version as for GAP.</p>
 
 
 <div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib_mj.html">[Next Chapter]</a>&nbsp;  </div>

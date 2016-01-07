@@ -1,5 +1,5 @@
 name: NormalizInterface
-version: 0.9.1
+version: 0.9.2
 date: 07/01/2016
 description: GAP wrapper for Normaliz
 
@@ -27,9 +27,9 @@ packageinfo: https://github.com/gap-packages/NormalizInterface/PackageInfo.g
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/gap-packages/NormalizInterface/releases/download/v0.9.1/NormalizInterface-0.9.1.tar.gz
+      url: https://github.com/gap-packages/NormalizInterface/releases/download/v0.9.2/NormalizInterface-0.9.2.tar.gz
     - name: .tar.bz2
-      url: https://github.com/gap-packages/NormalizInterface/releases/download/v0.9.1/NormalizInterface-0.9.1.tar.bz2
+      url: https://github.com/gap-packages/NormalizInterface/releases/download/v0.9.2/NormalizInterface-0.9.2.tar.bz2
 
 abstract: The <span class="pkgname">NormalizInterface</span> package provides  a GAP interface to Normaliz, enabling direct access to the complete  functionality of Normaliz.
 

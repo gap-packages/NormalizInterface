@@ -2,8 +2,58 @@
   [1X4 [33X[0;0YInstalling NormalizInterface[133X[101X
   
   
-  [1X4.1 [33X[0;0YTODO[133X[101X
+  [1X4.1 [33X[0;0YCompiling[133X[101X
   
-  [33X[0;0YTODO:  This  should  be turned into an appendix -- does AutoDoc support that
-  yet?[133X
+  [33X[0;0YNormalizInterface supports GAP 4.8.0 or later, and Normaliz 3.0.0 or later.[133X
+  
+  [33X[0;0YFor  technical reasons, installing and using NormalizInterface requires that
+  your  version of GAP is compiled in a special way. Specifically, GAP must be
+  compiled  against  the exact same version of the GMP library as Normaliz. By
+  default,  GAP  compiles its own version of GMP; however, we cannot use that,
+  as it lacks C++ support, which is required by Normaliz.[133X
+  
+  [33X[0;0YThus as the very first step, please install a version of GMP in your system.
+  On most Linux and BSD distributions, there should be a GMP package available
+  with  your  system's  package  manager. On Mac OS X, you can install GMP via
+  Fink, MacPorts or Homebrew.[133X
+  
+  [33X[0;0YNext,  make  sure  your GAP installation is compiled against the system wide
+  GMP  installation. To do so, switch to the GAP root directory, and enter the
+  following commands:[133X
+  
+  [4X[32X[104X
+    [4Xmake clean[104X
+    [4X./configure --with-gmp=system[104X
+    [4Xmake[104X
+  [4X[32X[104X
+  
+  [33X[0;0YNext  you  need  to  compile a recent version of Normaliz. This requires the
+  presence  of several further system software packages, which you install via
+  your system's package manager. At least the following are required:[133X
+  
+  [30X    [33X[0;6Ygit[133X
+  
+  [30X    [33X[0;6Ycmake[133X
+  
+  [30X    [33X[0;6Yboost[133X
+  
+  [33X[0;0YOnce  you  have  installed  these,  you  can  build  Normaliz  by  using the
+  build-normaliz.sh  script we provide. It takes a single, optional parameter:
+  the location of the GAP root directory.[133X
+  
+  [4X[32X[104X
+    [4X./build-normaliz.sh GAPDIR[104X
+  [4X[32X[104X
+  
+  [33X[0;0YOnce  it  completed  successfully, you can then build NormalizInterface like
+  this:[133X
+  
+  [4X[32X[104X
+    [4X./configure --with-gaproot=GAPDIR[104X
+    [4Xmake[104X
+  [4X[32X[104X
+  
+  [33X[0;0YIf  you  need  to  customize the normaliz compilation, please have a look at
+  Normaliz.git/source/INSTALL.  Remember  to  use  the  same  compiler and GMP
+  version as for GAP.[133X
   
