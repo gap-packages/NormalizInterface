@@ -57,3 +57,6 @@ gh-pages/
 /test-suite.log
 /tst/run-tap.log
 /tst/run-tap.trs
+
+/tmp/
+/misc
