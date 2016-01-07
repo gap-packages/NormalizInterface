@@ -73,6 +73,63 @@ solutions to the inhomogeneous system.
 
 @Chapter Installing NormalizInterface
 
-@Section TODO
+@Section Compiling
 
-TODO: This should be turned into an appendix -- does AutoDoc support that yet?
+NormalizInterface supports GAP 4.8.0 or later, and Normaliz 3.0.0 or later.
+<P/>
+
+For technical reasons, installing and using NormalizInterface requires
+that your version of GAP is compiled in a special way. Specifically, GAP
+must be compiled against the exact same version of the GMP library as
+Normaliz. By default, GAP compiles its own version of GMP; however, we
+cannot use that, as it lacks C++ support, which is required by Normaliz.
+<P/>
+
+Thus as the very first step, please install a version of GMP in your
+system. On most Linux and BSD distributions, there should be a GMP
+package available with your system's package manager. On Mac OS X, you
+can install GMP via Fink, MacPorts or Homebrew.
+<P/>
+
+Next, make sure your GAP installation is compiled against the system
+wide GMP installation. To do so, switch to the GAP root directory, and
+enter the following commands:
+<P/>
+
+<Listing><![CDATA[
+    make clean
+    ./configure --with-gmp=system
+    make
+]]></Listing>
+
+Next you need to compile a recent version of Normaliz. This requires the
+presence of several further system software packages, which you install
+via your system's package manager. At least the following are required:
+<P/>
+
+ * git
+ * cmake
+ * boost
+
+Once you have installed these, you can build Normaliz by using
+the build-normaliz.sh script we provide. It takes a single,
+optional parameter: the location of the GAP root directory.
+<P/>
+
+<Listing><![CDATA[
+    ./build-normaliz.sh GAPDIR
+]]></Listing>
+
+Once it completed successfully, you can then build NormalizInterface
+like this:
+<P/>
+
+<Listing><![CDATA[
+    ./configure --with-gaproot=GAPDIR
+    make
+]]></Listing>
+
+If you need to customize the normaliz compilation, please have a look at
+Normaliz.git/source/INSTALL. Remember to use the same compiler and GMP
+version as for GAP.
+<P/>
