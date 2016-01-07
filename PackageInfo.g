@@ -1,9 +1,9 @@
 SetPackageInfo( rec(
 
 PackageName := "NormalizInterface",
-Subtitle := "GAP wrapper for normaliz",
-Version := "0.3",
-Date    := "15/05/2015", # dd/mm/yyyy format
+Subtitle := "GAP wrapper for Normaliz",
+Version := "0.9.1",
+Date    := "07/01/2016", # dd/mm/yyyy format
 
 Persons := [
   rec(
@@ -62,17 +62,18 @@ Status         := "dev",
 #AcceptDate     := "mm/yyyy",
 
 PackageWWWHome := "https://github.com/gap-packages/NormalizInterface",
-
-ArchiveFormats := ".tar.gz tar.bz2",
+README_URL     := Concatenation( ~.PackageWWWHome, "/README.md" ),
+PackageInfoURL := Concatenation( ~.PackageWWWHome, "/PackageInfo.g" ),
 ArchiveURL     := Concatenation("https://github.com/gap-packages/NormalizInterface/",
                                 "releases/download/v", ~.Version,
                                 "/NormalizInterface-", ~.Version),
-README_URL     := Concatenation( ~.PackageWWWHome, "README" ),
-PackageInfoURL := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
+ArchiveFormats := ".tar.gz .tar.bz2",
 
-AbstractHTML   := Concatenation(
-               "The NormalizInterface Package ... ",
-               "TODO"),
+AbstractHTML :=
+  "The <span class=\"pkgname\">NormalizInterface</span> package provides\
+  a GAP interface to Normaliz, enabling direct access to the complete\
+  functionality of Normaliz.",
+
 
 PackageDoc := rec(
   BookName  := "NormalizInterface",
@@ -80,12 +81,12 @@ PackageDoc := rec(
   HTMLStart := "doc/chap0_mj.html",
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
-  LongTitle := "GAP wrapper for normaliz",
+  LongTitle := "GAP wrapper for Normaliz",
   Autoload  := true
 ),
 
 Dependencies := rec(
-  GAP                    := ">= 4.7",
+  GAP                    := ">= 4.8",
   NeededOtherPackages    := [ ],
   SuggestedOtherPackages := [ ],
   ExternalConditions     := [ ]

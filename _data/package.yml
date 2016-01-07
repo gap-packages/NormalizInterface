@@ -1,7 +1,7 @@
 name: NormalizInterface
-version: 0.3
-date: 15/05/2015
-description: GAP wrapper for normaliz
+version: 0.9.1
+date: 07/01/2016
+description: GAP wrapper for Normaliz
 
 authors:
     - name: Sebastian Gutsche
@@ -19,19 +19,19 @@ maintainers:
     - name: Christof Söger
       url: http://www.math.uos.de/normaliz
 
-GAP: ">= 4.7"
+GAP: ">= 4.8"
 
 www: https://github.com/gap-packages/NormalizInterface
-readme: https://github.com/gap-packages/NormalizInterfaceREADME
-packageinfo: https://github.com/gap-packages/NormalizInterfacePackageInfo.g
+readme: https://github.com/gap-packages/NormalizInterface/README.md
+packageinfo: https://github.com/gap-packages/NormalizInterface/PackageInfo.g
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/gap-packages/NormalizInterface/releases/download/v0.3/NormalizInterface-0.3.tar.gz
-    - name: tar.bz2
-      url: https://github.com/gap-packages/NormalizInterface/releases/download/v0.3/NormalizInterface-0.3tar.bz2
+      url: https://github.com/gap-packages/NormalizInterface/releases/download/v0.9.1/NormalizInterface-0.9.1.tar.gz
+    - name: .tar.bz2
+      url: https://github.com/gap-packages/NormalizInterface/releases/download/v0.9.1/NormalizInterface-0.9.1.tar.bz2
 
-abstract: The NormalizInterface Package ... TODO
+abstract: The <span class="pkgname">NormalizInterface</span> package provides  a GAP interface to Normaliz, enabling direct access to the complete  functionality of Normaliz.
 
 status: dev
 doc-html: doc/chap0_mj.html

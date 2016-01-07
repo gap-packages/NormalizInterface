@@ -1,0 +1,12 @@
+  
+  
+  [1XReferences[101X
+  
+  [[20XBIRS14[120X] [16XBruns, W., Ichim, B., Römer, T. and Söger, C.[116X, [17XNormaliz, a tool for
+  computations  in  affine  monoids, vector configurations, lattice polytopes,
+  and        rational        cones,        Version        2.11.2[117X       (2014),
+  http://www.home.uni-osnabrueck.de/wbruns/normaliz/.
+  
+  
+  
+  [32X
