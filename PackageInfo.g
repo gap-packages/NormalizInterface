@@ -61,7 +61,7 @@ Status         := "dev",
 #CommunicatedBy := "name (place)",
 #AcceptDate     := "mm/yyyy",
 
-PackageWWWHome := "https://github.com/gap-packages/NormalizInterface",
+PackageWWWHome := "https://gap-packages.github.io/NormalizInterface",
 README_URL     := Concatenation( ~.PackageWWWHome, "/README.md" ),
 PackageInfoURL := Concatenation( ~.PackageWWWHome, "/PackageInfo.g" ),
 ArchiveURL     := Concatenation("https://github.com/gap-packages/NormalizInterface/",
