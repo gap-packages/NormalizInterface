@@ -2,8 +2,8 @@ SetPackageInfo( rec(
 
 PackageName := "NormalizInterface",
 Subtitle := "GAP wrapper for Normaliz",
-Version := "0.9.2",
-Date    := "07/01/2016", # dd/mm/yyyy format
+Version := "0.9.3",
+Date    := "10/01/2016", # dd/mm/yyyy format
 
 Persons := [
   rec(
@@ -61,7 +61,7 @@ Status         := "dev",
 #CommunicatedBy := "name (place)",
 #AcceptDate     := "mm/yyyy",
 
-PackageWWWHome := "https://github.com/gap-packages/NormalizInterface",
+PackageWWWHome := "https://gap-packages.github.io/NormalizInterface",
 README_URL     := Concatenation( ~.PackageWWWHome, "/README.md" ),
 PackageInfoURL := Concatenation( ~.PackageWWWHome, "/PackageInfo.g" ),
 ArchiveURL     := Concatenation("https://github.com/gap-packages/NormalizInterface/",
@@ -69,10 +69,15 @@ ArchiveURL     := Concatenation("https://github.com/gap-packages/NormalizInterfa
                                 "/NormalizInterface-", ~.Version),
 ArchiveFormats := ".tar.gz .tar.bz2",
 
+SourceRepository := rec( Type := "git", URL := "https://github.com/gap-packages/NormalizInterface" ),
+IssueTrackerURL := "https://github.com/gap-packages/NormalizInterface/issues",
+
 AbstractHTML :=
-  "The <span class=\"pkgname\">NormalizInterface</span> package provides\
-  a GAP interface to Normaliz, enabling direct access to the complete\
-  functionality of Normaliz.",
+  "The <span class='pkgname'>NormalizInterface</span> package provides\
+  a GAP interface to <a href='http://www.home.uni-osnabrueck.de/wbruns/normaliz/'>Normaliz</a>,\
+  enabling direct access to the complete functionality of Normaliz, such as\
+  computations in affine monoids, vector configurations, lattice polytopes, and rational cones.\
+  ",
 
 
 PackageDoc := rec(
