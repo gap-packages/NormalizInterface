@@ -1,5 +1,9 @@
 This file describes changes in the NormalizInterface package.
 
+0.9.3 (2016-01-10)
+  - Fixes and changes in PackageInfo.g
+  - Tweak README.md to autolink URLs in it
+
 0.9.2 (2016-01-07)
   - Fix installation instructions in manual
 
