@@ -70,9 +70,11 @@ ArchiveURL     := Concatenation("https://github.com/gap-packages/NormalizInterfa
 ArchiveFormats := ".tar.gz .tar.bz2",
 
 AbstractHTML :=
-  "The <span class=\"pkgname\">NormalizInterface</span> package provides\
-  a GAP interface to Normaliz, enabling direct access to the complete\
-  functionality of Normaliz.",
+  "The <span class='pkgname'>NormalizInterface</span> package provides\
+  a GAP interface to <a href='http://www.home.uni-osnabrueck.de/wbruns/normaliz/'>Normaliz</a>,\
+  enabling direct access to the complete functionality of Normaliz, such as\
+  computations in affine monoids, vector configurations, lattice polytopes, and rational cones.\
+  ",
 
 
 PackageDoc := rec(
