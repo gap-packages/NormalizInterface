@@ -69,6 +69,9 @@ ArchiveURL     := Concatenation("https://github.com/gap-packages/NormalizInterfa
                                 "/NormalizInterface-", ~.Version),
 ArchiveFormats := ".tar.gz .tar.bz2",
 
+SourceRepository := rec( Type := "git", URL := "https://github.com/gap-packages/NormalizInterface" ),
+IssueTrackerURL := "https://github.com/gap-packages/NormalizInterface/issues",
+
 AbstractHTML :=
   "The <span class='pkgname'>NormalizInterface</span> package provides\
   a GAP interface to <a href='http://www.home.uni-osnabrueck.de/wbruns/normaliz/'>Normaliz</a>,\
