@@ -85,3 +85,13 @@ run automatic tests:
 Please submit bug reports and feature requests via our GitHub issue tracker:
 
   <https://github.com/gap-packages/NormalizInterface/issues>
+
+
+## License
+
+NormalizInterface is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+For details see the file COPYING.
