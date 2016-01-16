@@ -1,6 +1,6 @@
 name: NormalizInterface
-version: 0.9.3
-date: 10/01/2016
+version: 0.9.4
+date: 16/01/2016
 description: GAP wrapper for Normaliz
 
 authors:
@@ -19,17 +19,17 @@ maintainers:
     - name: Christof Söger
       url: http://www.math.uos.de/normaliz
 
-GAP: ">= 4.8"
+GAP: ">= 4.8.1"
 
 www: https://gap-packages.github.io/NormalizInterface
-readme: https://gap-packages.github.io/NormalizInterface/README.md
+readme: https://gap-packages.github.io/NormalizInterface/README
 packageinfo: https://gap-packages.github.io/NormalizInterface/PackageInfo.g
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/gap-packages/NormalizInterface/releases/download/v0.9.3/NormalizInterface-0.9.3.tar.gz
+      url: https://github.com/gap-packages/NormalizInterface/releases/download/v0.9.4/NormalizInterface-0.9.4.tar.gz
     - name: .tar.bz2
-      url: https://github.com/gap-packages/NormalizInterface/releases/download/v0.9.3/NormalizInterface-0.9.3.tar.bz2
+      url: https://github.com/gap-packages/NormalizInterface/releases/download/v0.9.4/NormalizInterface-0.9.4.tar.bz2
 
 abstract: The <span class='pkgname'>NormalizInterface</span> package provides  a GAP interface to <a href='http://www.home.uni-osnabrueck.de/wbruns/normaliz/'>Normaliz</a>,  enabling direct access to the complete functionality of Normaliz, such as  computations in affine monoids, vector configurations, lattice polytopes, and rational cones.  
 

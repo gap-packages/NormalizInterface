@@ -2,8 +2,8 @@ SetPackageInfo( rec(
 
 PackageName := "NormalizInterface",
 Subtitle := "GAP wrapper for Normaliz",
-Version := "0.9.3",
-Date    := "10/01/2016", # dd/mm/yyyy format
+Version := "0.9.4",
+Date    := "16/01/2016", # dd/mm/yyyy format
 
 Persons := [
   rec(
@@ -61,16 +61,18 @@ Status         := "dev",
 #CommunicatedBy := "name (place)",
 #AcceptDate     := "mm/yyyy",
 
-PackageWWWHome := "https://gap-packages.github.io/NormalizInterface",
-README_URL     := Concatenation( ~.PackageWWWHome, "/README.md" ),
-PackageInfoURL := Concatenation( ~.PackageWWWHome, "/PackageInfo.g" ),
-ArchiveURL     := Concatenation("https://github.com/gap-packages/NormalizInterface/",
-                                "releases/download/v", ~.Version,
-                                "/NormalizInterface-", ~.Version),
+SourceRepository := rec(
+    Type := "git",
+    URL := Concatenation( "https://github.com/gap-packages/", ~.PackageName ),
+),
+IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
+PackageWWWHome  := Concatenation( "https://gap-packages.github.io/", ~.PackageName ),
+README_URL      := Concatenation( ~.PackageWWWHome, "/README" ),
+PackageInfoURL  := Concatenation( ~.PackageWWWHome, "/PackageInfo.g" ),
+ArchiveURL      := Concatenation( ~.SourceRepository.URL,
+                                 "/releases/download/v", ~.Version,
+                                 "/", ~.PackageName ,"-", ~.Version ),
 ArchiveFormats := ".tar.gz .tar.bz2",
-
-SourceRepository := rec( Type := "git", URL := "https://github.com/gap-packages/NormalizInterface" ),
-IssueTrackerURL := "https://github.com/gap-packages/NormalizInterface/issues",
 
 AbstractHTML :=
   "The <span class='pkgname'>NormalizInterface</span> package provides\
@@ -91,7 +93,7 @@ PackageDoc := rec(
 ),
 
 Dependencies := rec(
-  GAP                    := ">= 4.8",
+  GAP                    := ">= 4.8.1",
   NeededOtherPackages    := [ ],
   SuggestedOtherPackages := [ ],
   ExternalConditions     := [ ]
