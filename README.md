@@ -24,28 +24,13 @@ especially have a look at the manual.
 
 NormalizInterface supports GAP 4.8.2 or later, and Normaliz 3.0.0 or later.
 
-For technical reasons, installing and using NormalizInterface requires
-that your version of GAP is compiled in a special way. Specifically, GAP
-must be compiled against the exact same version of the GMP library as
-Normaliz. By default, GAP compiles its own version of GMP; however, we
-cannot use that, as it lacks C++ support, which is required by Normaliz.
-
-Thus as the very first step, please install a version of GMP in your
-system. On most Linux and BSD distributions, there should be a GMP
-package available with your system's package manager. On Mac OS X, you
-can install GMP via Fink, MacPorts or Homebrew.
-
-Next, make sure your GAP installation is compiled against the system
-wide GMP installation. To do so, switch to the GAP root directory, and
-enter the following commands:
-
-    make clean
-    ./configure --with-gmp=system
-    make
-
-Next you need to compile a recent version of Normaliz. This requires the
-presence of several further system software packages, which you install
-via your system's package manager. At least the following are required:
+Assuming you have a suitable version installed, you still need to
+compile Normaliz. There is a complicating factor, however: Normaliz
+must be compiled against the exact same version of the GMP library
+as GAP. The easiest way to do that is to run the script we provide
+to you for just that.  This requires the presence of several further
+system software packages, which you could for example install via
+your system's package manager. At least the following are required:
 
  * git
  * cmake
