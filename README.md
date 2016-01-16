@@ -13,16 +13,16 @@ diophantine system of inhomogeneous equations, inequalities and
 congruences.
 
 This package allows creating libnormaliz cone objects from within GAP,
-and gives access to it in the GAP enviroment. In this way GAP can be
+and gives access to it in the GAP environment. In this way GAP can be
 used as interactive interface to libnormaliz.
 
 For more information on Normaliz visit <http://www.math.uos.de/normaliz> and
 especially have a look at the manual.
 
 
-## Installation preparation
+## Installation
 
-NormalizInterface supports GAP 4.8.0 or later, and Normaliz 3.0.0 or later.
+NormalizInterface supports GAP 4.8.2 or later, and Normaliz 3.0.0 or later.
 
 For technical reasons, installing and using NormalizInterface requires
 that your version of GAP is compiled in a special way. Specifically, GAP
@@ -54,7 +54,7 @@ via your system's package manager. At least the following are required:
 Once you have installed these, you can build Normaliz by using
 the build-normaliz.sh script we provide. It takes a single,
 optional parameter: the location of the GAP root directory.
-    
+
     ./build-normaliz.sh GAPDIR
 
 Once it completed successfully, you can then build NormalizInterface
@@ -63,7 +63,7 @@ like this:
     ./configure --with-gaproot=GAPDIR
     make
 
-If you need to customize the normaliz compilation, please have a look at
+If you need to customize the Normaliz compilation, please have a look at
 Normaliz.git/source/INSTALL. Remember to use the same compiler and GMP
 version as for GAP.
 
@@ -71,11 +71,11 @@ version as for GAP.
 ## Documentation and tests
 
 Generate the documentation:
-    
+
     make doc
 
 run automatic tests:
-    
+
     make check
     gap maketest.g
 
