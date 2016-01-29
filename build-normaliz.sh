@@ -19,6 +19,12 @@ else
     GAPDIR=../..
 fi
 
+# make path absolut
+SCRIPTDIR=$PWD
+cd $GAPDIR
+GAPDIR=$PWD
+cd $SCRIPTDIR
+
 # check for presence of GAP and determine value of GAParch
 if [ ! -f "$GAPDIR/sysinfo.gap" ]; then
     echo "ERROR: could not locate GAP in directory $GAPDIR"
