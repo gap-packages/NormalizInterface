@@ -37,6 +37,8 @@ InstallGlobalFunction( NmzModuleGenerators, cone -> NmzConeProperty(cone, "Modul
 
 InstallGlobalFunction( NmzModuleGeneratorsOverOriginalMonoid, cone -> NmzConeProperty(cone, "ModuleGeneratorsOverOriginalMonoid" ) );
 
+InstallGlobalFunction( NmzMaximalSubspace, cone -> NmzConeProperty(cone, "MaximalSubspace" ) );
+
 InstallGlobalFunction( NmzModuleRank, cone -> NmzConeProperty(cone, "ModuleRank" ) );
 
 InstallGlobalFunction( NmzMultiplicity, cone -> NmzConeProperty(cone, "Multiplicity" ) );

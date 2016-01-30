@@ -518,6 +518,9 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
     case libnormaliz::ConeProperty::HilbertBasis:
         return NmzMatrixToGAP(C->getHilbertBasis());
 
+    case libnormaliz::ConeProperty::MaximalSubspace:
+        return NmzMatrixToGAP(C->getMaximalSubspace());
+
     case libnormaliz::ConeProperty::ModuleGenerators:
         return NmzMatrixToGAP(C->getModuleGenerators());
 

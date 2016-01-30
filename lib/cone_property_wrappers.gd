@@ -131,6 +131,12 @@ DeclareGlobalFunction( "NmzIsIntegrallyClosed" );
 DeclareGlobalFunction( "NmzIsPointed" );
 
 #! @Arguments cone
+#! @Returns a matrix whose rows generate the maximale linear subspace
+#! @Description
+#! This is an alias for <C>NmzConeProperty( cone, "MaximalSubspace" );</C> see <Ref Func="NmzConeProperty"/>.
+DeclareGlobalFunction( "NmzMaximalSubspace" );
+
+#! @Arguments cone
 #! @Returns a matrix whose rows are the module generators
 #! @Description
 #! This is an alias for <C>NmzConeProperty( cone, "ModuleGenerators" );</C> see <Ref Func="NmzConeProperty"/>.
