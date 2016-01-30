@@ -64,12 +64,18 @@ fi
 
 NORMALIZ_VERSION=v3.0.0
 
+# needs git 1.8 or newer
 if [ ! -d Normaliz.git ]; then
     echo "Fetching Normaliz source code"
     git clone --depth 1 --branch $NORMALIZ_VERSION -- https://github.com/Normaliz/Normaliz Normaliz.git
 fi
 cd Normaliz.git
-git checkout $NORMALIZ_VERSION
+# get a new version
+if [ `git describe --tags` != $NORMALIZ_VERSION ]; then
+    git fetch origin $NORMALIZ_VERSION
+    git fetch origin
+    git checkout $NORMALIZ_VERSION
+fi
 
 rm -rf DST
 rm -rf BUILD
