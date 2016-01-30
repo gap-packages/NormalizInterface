@@ -62,7 +62,7 @@ else
     # the GMP_DIR variable manually.
 fi
 
-NORMALIZ_VERSION=v3.0.0
+NORMALIZ_VERSION=v3.0.90
 
 # needs git 1.8 or newer
 if [ ! -d Normaliz.git ]; then

@@ -135,3 +135,4 @@ IsDeg1ExtremeRays = true
 IsDeg1HilbertBasis = false
 Sublattice = true
 ClassGroup = [ 17 ]
+MaximalSubspace = fail

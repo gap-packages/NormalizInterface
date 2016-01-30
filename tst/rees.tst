@@ -139,3 +139,4 @@ OriginalMonoidGenerators =
 IsReesPrimary = false
 Sublattice = true
 ClassGroup = [ 17 ]
+MaximalSubspace = fail

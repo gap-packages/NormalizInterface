@@ -27,13 +27,14 @@ NmzCompute(cone, ["SupportHyperplanes", "IsPointed"]);
 #! true
 NmzKnownConeProperties(cone);
 #! [ "Generators", "ExtremeRays", "SupportHyperplanes", "IsPointed",
-#!   "IsDeg1ExtremeRays", "OriginalMonoidGenerators", "Sublattice" ]
+#!   "IsDeg1ExtremeRays", "OriginalMonoidGenerators", "Sublattice",
+#!   "MaximalSubspace" ]
 NmzCompute(cone);
 #! true
 NmzKnownConeProperties(cone);
 #! [ "Generators", "ExtremeRays", "SupportHyperplanes", "TriangulationSize",
 #!   "TriangulationDetSum", "HilbertBasis", "IsPointed", "IsDeg1ExtremeRays",
 #!   "IsIntegrallyClosed", "OriginalMonoidGenerators", "Sublattice",
-#!   "ClassGroup" ]
+#!   "ClassGroup", "MaximalSubspace"]
 #! @EndExample
 #! @EndChunk
