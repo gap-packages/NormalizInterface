@@ -1,5 +1,9 @@
 This file describes changes in the NormalizInterface package.
 
+0.9.5 (2016-02-01)
+  - improve build-normaliz.sh
+  - upgrade to Normaliz version 3.0.90
+
 0.9.4 (2016-01-16)
   - README: update installation instructions
   - README: explicitly state that the license is GPL v2 or later
