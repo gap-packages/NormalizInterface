@@ -3,7 +3,7 @@
   [1XIndex[101X
   
   [2XNmzAffineDim[102X  2.3-6
-  [2XNmzBasisChange[102X  2.3-35
+  [2XNmzBasisChange[102X  2.3-36
   [2XNmzClassGroup[102X  2.3-7
   [2XNmzCompute[102X  2.2-5
   [2XNmzCone[102X  2.1-1
@@ -27,24 +27,25 @@
   [2XNmzIsInhomogeneous[102X  2.3-3
   [2XNmzIsIntegrallyClosed[102X  2.3-20
   [2XNmzIsPointed[102X  2.3-21
-  [2XNmzIsReesPrimary[102X  2.3-28
+  [2XNmzIsReesPrimary[102X  2.3-29
   [2XNmzKnownConeProperties[102X  2.2-2
-  [2XNmzModuleGenerators[102X  2.3-22
-  [2XNmzModuleGeneratorsOverOriginalMonoid[102X  2.3-23
-  [2XNmzModuleRank[102X  2.3-24
-  [2XNmzMultiplicity[102X  2.3-25
-  [2XNmzOriginalMonoidGenerators[102X  2.3-26
+  [2XNmzMaximalSubspace[102X  2.3-22
+  [2XNmzModuleGenerators[102X  2.3-23
+  [2XNmzModuleGeneratorsOverOriginalMonoid[102X  2.3-24
+  [2XNmzModuleRank[102X  2.3-25
+  [2XNmzMultiplicity[102X  2.3-26
+  [2XNmzOriginalMonoidGenerators[102X  2.3-27
   [2XNmzPrintConeProperties[102X  2.2-7
   [2XNmzRank[102X  2.3-2
-  [2XNmzRecessionRank[102X  2.3-27
-  [2XNmzReesPrimaryMultiplicity[102X  2.3-29
+  [2XNmzRecessionRank[102X  2.3-28
+  [2XNmzReesPrimaryMultiplicity[102X  2.3-30
   [2XNmzSetVerbose[102X  2.2-4
   [2XNmzSetVerboseDefault[102X  2.2-3
-  [2XNmzSupportHyperplanes[102X  2.3-30
-  [2XNmzTriangulation[102X  2.3-31
-  [2XNmzTriangulationDetSum[102X  2.3-32
-  [2XNmzTriangulationSize[102X  2.3-33
-  [2XNmzVerticesOfPolyhedron[102X  2.3-34
+  [2XNmzSupportHyperplanes[102X  2.3-31
+  [2XNmzTriangulation[102X  2.3-32
+  [2XNmzTriangulationDetSum[102X  2.3-33
+  [2XNmzTriangulationSize[102X  2.3-34
+  [2XNmzVerticesOfPolyhedron[102X  2.3-35
   [5XNormalizInterface[105X  .-1
   
   

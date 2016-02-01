@@ -6,10 +6,10 @@
                            [1X [5XGAP[105X wrapper for Normaliz [101X
   
   
-                                     0.9.4
+                                     0.9.5
   
   
-                                   16/01/2016
+                                   01/02/2016
   
   
                                Sebastian Gutsche
@@ -90,20 +90,21 @@
       2.3-19 NmzIsDeg1HilbertBasis
       2.3-20 NmzIsIntegrallyClosed
       2.3-21 NmzIsPointed
-      2.3-22 NmzModuleGenerators
-      2.3-23 NmzModuleGeneratorsOverOriginalMonoid
-      2.3-24 NmzModuleRank
-      2.3-25 NmzMultiplicity
-      2.3-26 NmzOriginalMonoidGenerators
-      2.3-27 NmzRecessionRank
-      2.3-28 NmzIsReesPrimary
-      2.3-29 NmzReesPrimaryMultiplicity
-      2.3-30 NmzSupportHyperplanes
-      2.3-31 NmzTriangulation
-      2.3-32 NmzTriangulationDetSum
-      2.3-33 NmzTriangulationSize
-      2.3-34 NmzVerticesOfPolyhedron
-      2.3-35 NmzBasisChange
+      2.3-22 NmzMaximalSubspace
+      2.3-23 NmzModuleGenerators
+      2.3-24 NmzModuleGeneratorsOverOriginalMonoid
+      2.3-25 NmzModuleRank
+      2.3-26 NmzMultiplicity
+      2.3-27 NmzOriginalMonoidGenerators
+      2.3-28 NmzRecessionRank
+      2.3-29 NmzIsReesPrimary
+      2.3-30 NmzReesPrimaryMultiplicity
+      2.3-31 NmzSupportHyperplanes
+      2.3-32 NmzTriangulation
+      2.3-33 NmzTriangulationDetSum
+      2.3-34 NmzTriangulationSize
+      2.3-35 NmzVerticesOfPolyhedron
+      2.3-36 NmzBasisChange
   3 [33X[0;0YExamples[133X
     3.1 [33X[0;0YGenerators[133X
     3.2 [33X[0;0YSystem of equations[133X

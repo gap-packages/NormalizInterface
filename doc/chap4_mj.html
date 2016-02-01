@@ -46,10 +46,10 @@
 
 
 <div class="example"><pre>
-make clean
-./configure --with-gmp=system
-make
-</pre></div>
+ make clean
+ ./configure --with-gmp=system
+ make
+ </pre></div>
 
 <p>Next you need to compile a recent version of Normaliz. This requires the presence of several further system software packages, which you install via your system's package manager. At least the following are required:</p>
 
@@ -69,16 +69,16 @@ make
 
 
 <div class="example"><pre>
-./build-normaliz.sh GAPDIR
-</pre></div>
+ ./build-normaliz.sh GAPDIR
+ </pre></div>
 
 <p>Once it completed successfully, you can then build NormalizInterface like this:</p>
 
 
 <div class="example"><pre>
-./configure --with-gaproot=GAPDIR
-make
-</pre></div>
+ ./configure --with-gaproot=GAPDIR
+ make
+ </pre></div>
 
 <p>If you need to customize the normaliz compilation, please have a look at Normaliz.git/source/INSTALL. Remember to use the same compiler and GMP version as for GAP.</p>
 
