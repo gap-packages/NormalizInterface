@@ -148,7 +148,8 @@ DeclareGlobalFunction( "NmzBasisChange" );
 #! <Item><C>offset</C>,</Item>
 #! <Item><C>vertices</C>,</Item>
 #! <Item><C>support_hyperplanes</C>,</Item>
-#! <Item><C>cone_and_lattice</C>.</Item>
+#! <Item><C>cone_and_lattice</C>,</Item>
+#! <Item><C>subspace</C>.</Item>
 #! </List>
 #!
 #! See the Normaliz manual for a detailed description.
