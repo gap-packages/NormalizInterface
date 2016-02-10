@@ -16,8 +16,9 @@ This package allows creating libnormaliz cone objects from within GAP,
 and gives access to it in the GAP environment. In this way GAP can be
 used as interactive interface to libnormaliz.
 
-For more information on Normaliz visit <http://www.math.uos.de/normaliz> and
-especially have a look at the manual.
+For more information on Normaliz visit
+<https://www.normaliz.uni-osnabrueck.de/>
+and especially have a look at the manual.
 
 
 ## Installation
