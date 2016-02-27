@@ -1,5 +1,9 @@
 This file describes changes in the NormalizInterface package.
 
+0.9.6 (2016-02-27)
+  - upgrade to Normaliz version 3.1.0
+  - fix wrong file permissions in package archive
+
 0.9.5 (2016-02-01)
   - improve build-normaliz.sh
   - upgrade to Normaliz version 3.0.90
