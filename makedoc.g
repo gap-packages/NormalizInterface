@@ -6,9 +6,9 @@ if fail = LoadPackage("AutoDoc", ">= 2016.01.21") then
 fi;
 
 AutoDoc(rec(
-    maketest := rec ( commands := [ "LoadPackage(\"NormalizInterface\");" ] ),
+    maketest := rec( commands := [ "LoadPackage(\"NormalizInterface\");" ] ),
     scaffold := rec( bib := "NormalizInterface-bib.xml" ),
-    autodoc := rec( files := [ "doc/intro.autodoc", "src/normaliz.cc", ] ),
+    autodoc := rec( files := [ "doc/intro.autodoc", "src/normaliz.cc" ] ),
 ));
 PrintTo("VERSION", GAPInfo.PackageInfoCurrent.Version);
 
