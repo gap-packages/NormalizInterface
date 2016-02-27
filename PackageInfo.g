@@ -2,8 +2,8 @@ SetPackageInfo( rec(
 
 PackageName := "NormalizInterface",
 Subtitle := "GAP wrapper for Normaliz",
-Version := "0.9.5",
-Date    := "01/02/2016", # dd/mm/yyyy format
+Version := "0.9.6",
+Date    := "27/02/2016", # dd/mm/yyyy format
 
 Persons := [
   rec(
@@ -46,7 +46,7 @@ Persons := [
     IsAuthor      := true,
     IsMaintainer  := true,
     Email         := "csoeger@uos.de",
-    WWWHome       := "http://www.math.uos.de/normaliz",
+    WWWHome       := "https://www.normaliz.uni-osnabrueck.de",
     PostalAddress := Concatenation(
                        "Institut für Mathematik\n",
                        "Albrechtstr. 28a\n",
@@ -71,7 +71,7 @@ README_URL      := Concatenation( ~.PackageWWWHome, "/README" ),
 PackageInfoURL  := Concatenation( ~.PackageWWWHome, "/PackageInfo.g" ),
 ArchiveURL      := Concatenation( ~.SourceRepository.URL,
                                  "/releases/download/v", ~.Version,
-                                 "/", ~.PackageName ,"-", ~.Version ),
+                                 "/", ~.PackageName, "-", ~.Version ),
 ArchiveFormats := ".tar.gz .tar.bz2",
 
 AbstractHTML :=

@@ -6,10 +6,10 @@
                            [1X [5XGAP[105X wrapper for Normaliz [101X
   
   
-                                     0.9.5
+                                     0.9.6
   
   
-                                   01/02/2016
+                                   27/02/2016
   
   
                                Sebastian Gutsche
@@ -42,7 +42,7 @@
   
   Christof Söger
       Email:    [7Xmailto:csoeger@uos.de[107X
-      Homepage: [7Xhttp://www.math.uos.de/normaliz[107X
+      Homepage: [7Xhttps://www.normaliz.uni-osnabrueck.de[107X
       Address:  [33X[0;14YInstitut für Mathematik[133X
                 [33X[0;14YAlbrechtstr. 28a[133X
                 [33X[0;14Y49076 Osnabrück[133X

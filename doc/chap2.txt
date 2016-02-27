@@ -69,7 +69,9 @@
   
   [30X    [33X[0;6Y[10Xsupport_hyperplanes[110X,[133X
   
-  [30X    [33X[0;6Y[10Xcone_and_lattice[110X.[133X
+  [30X    [33X[0;6Y[10Xcone_and_lattice[110X,[133X
+  
+  [30X    [33X[0;6Y[10Xsubspace[110X.[133X
   
   [33X[0;0YSee the Normaliz manual for a detailed description.[133X
   

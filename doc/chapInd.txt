@@ -46,7 +46,6 @@
   [2XNmzTriangulationDetSum[102X  2.3-33
   [2XNmzTriangulationSize[102X  2.3-34
   [2XNmzVerticesOfPolyhedron[102X  2.3-35
-  [5XNormalizInterface[105X  .-1
   
   
   -------------------------------------------------------
