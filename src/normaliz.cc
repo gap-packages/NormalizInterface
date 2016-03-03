@@ -66,6 +66,24 @@ Obj NormalizTypeFunc(Obj o)
     return TheTypeNormalizCone;
 }
 
+Obj NormalizCopyFunc(Obj o, Int mut)
+{
+    // Cone objects are mathematically immutable, so
+    // we don't need to do anything,
+    return o;
+}
+
+void NormalizCleanFunc(Obj o)
+{
+}
+
+Int NormalizIsMutableObjFuncs(Obj o)
+{
+    // Cone objects are mathematically immutable.
+    return 0L;
+}
+
+
 static Obj MpzToGAP(const mpz_t x)
 {
     Obj res;
@@ -837,6 +855,10 @@ static Int InitKernel( StructInitInfo *module )
 #endif
     InitMarkFuncBags(T_NORMALIZ, &MarkNoSubBags);
     InitFreeFuncBag(T_NORMALIZ, &NormalizFreeFunc);
+
+    CopyObjFuncs[ T_NORMALIZ ] = &NormalizCopyFunc;
+    CleanObjFuncs[ T_NORMALIZ ] = &NormalizCleanFunc;
+    IsMutableObjFuncs[ T_NORMALIZ ] = &NormalizIsMutableObjFuncs;
 
     /* return success                                                      */
     return 0;
