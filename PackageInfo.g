@@ -72,7 +72,7 @@ PackageInfoURL  := Concatenation( ~.PackageWWWHome, "/PackageInfo.g" ),
 ArchiveURL      := Concatenation( ~.SourceRepository.URL,
                                  "/releases/download/v", ~.Version,
                                  "/", ~.PackageName, "-", ~.Version ),
-ArchiveFormats := ".tar.gz .tar.bz2",
+ArchiveFormats  := ".tar.gz .tar.bz2",
 
 AbstractHTML :=
   "The <span class='pkgname'>NormalizInterface</span> package provides\
@@ -105,6 +105,8 @@ AvailabilityTest := function()
     path := DirectoriesPackagePrograms("NormalizInterface");
     if not "NormalizInterface" in SHOW_STAT() and
        Filename(path, "NormalizInterface.so") = fail then
+       LogPackageLoadingMessage( PACKAGE_WARNING,
+           [ "kernel functions for NormalizInterface not available." ] );
       return fail;
     fi;
     return true;
