@@ -12,7 +12,10 @@ if IsBound(GAPInfo.SystemEnvironment.AUTOMAKE_TESTS) then
 
     # abort immediately upon any error, instead of getting stuck
     # in a break loop
-    OnBreak := function() QUIT_GAP(1); end;
+    OnBreak := function()
+        Print("#I  Errors detected while testing package ", TEST_SETTING.pkg, "\n");
+        QUIT_GAP(1);
+    end;
 
     # HACK to make sure GAP loads the right version of the package
     SetPackagePath(TEST_SETTING.pkg, ".");
@@ -78,6 +81,12 @@ CallFuncList(function()
             success := false;
         fi;
     od;
+
+    if success then
+        Print("#I  No errors detected while testing package ", TEST_SETTING.pkg, "\n");
+    else
+        Print("#I  Errors detected while testing package ", TEST_SETTING.pkg, "\n");
+    fi;
 
     if TEST_SETTING.automake then
         #if success then
