@@ -97,14 +97,12 @@ static Obj MpzToGAP(const mpz_t x)
     } else {
         sign = +1;
     }
-#ifdef SYS_IS_64_BIT
     if (size == 1) {
         if (sign > 0)
             return ObjInt_UInt(x->_mp_d[0]);
         else
             return AInvInt(ObjInt_UInt(x->_mp_d[0]));
     }
-#endif
     size = sizeof(mp_limb_t) * size;
     if (sign > 0)
         res = NewBag(T_INTPOS, size);
