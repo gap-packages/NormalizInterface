@@ -28,6 +28,18 @@
 #include <vector>
 #include <iostream>
 
+// Paranoia check
+#ifdef SYS_IS_64_BIT
+  #if GMP_LIMB_BITS != 64
+    #error GAP compiled in 64 bit mode, but GMP limbs are not 64 bit
+  #endif
+#else
+  #if GMP_LIMB_BITS != 32
+    #error GAP compiled in 32 bit mode, but GMP limbs are not 32 bit
+  #endif
+#endif
+
+
 using libnormaliz::Cone;
 //using libnormaliz::ConeProperty;
 using libnormaliz::ConeProperties;
