@@ -1,3 +1,6 @@
+gap> START_TEST("NormalizInterface: rees.tst");
+
+#
 gap> M := [
 > [ 1, 1, 1, 0, 0, 0 ],
 > [ 1, 1, 0, 1, 0, 0 ],
@@ -140,3 +143,6 @@ IsReesPrimary = false
 Sublattice = true
 ClassGroup = [ 17 ]
 MaximalSubspace = [ ]
+
+#
+gap> STOP_TEST("rees.tst", 0);

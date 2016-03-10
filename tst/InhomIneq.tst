@@ -1,3 +1,5 @@
+gap> START_TEST("NormalizInterface: InhomIneq.tst");
+
 #
 # Test a Hilbert series with negative shift
 #
@@ -14,3 +16,6 @@ gap> NmzHilbertSeries(InhomIneq);
 [ 1+t^-1, [ [ 1, 1 ] ] ]
 gap> NmzHilbertQuasiPolynomial(InhomIneq);
 [ 2 ]
+
+#
+gap> STOP_TEST("InhomIneq.tst", 0);

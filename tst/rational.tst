@@ -1,3 +1,6 @@
+gap> START_TEST("NormalizInterface: rational.tst");
+
+#
 gap> M := [
 > [  1,  1,  2 ],
 > [ -1, -1,  3 ],
@@ -53,3 +56,6 @@ OriginalMonoidGenerators =
 Sublattice = true
 ClassGroup = [ 0, 3, 15 ]
 MaximalSubspace = [ ]
+
+#
+gap> STOP_TEST("rational.tst", 0);

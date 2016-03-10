@@ -1,3 +1,6 @@
+gap> START_TEST("NormalizInterface: dual.tst");
+
+#
 gap> # Based on dual.in
 gap> M := [
 > [ 0,  0,  0,  1,  0,  0,  0 ],
@@ -136,3 +139,6 @@ IsDeg1HilbertBasis = false
 Sublattice = true
 ClassGroup = [ 17 ]
 MaximalSubspace = [ ]
+
+#
+gap> STOP_TEST("dual.tst", 0);

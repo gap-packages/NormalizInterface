@@ -1,3 +1,6 @@
+gap> START_TEST("NormalizInterface: rp2poly.tst");
+
+#
 gap> M := [
 > [ 1, 1, 1, 0, 0, 0 ],
 > [ 1, 1, 0, 1, 0, 0 ],
@@ -106,3 +109,6 @@ OriginalMonoidGenerators =
 Sublattice = true
 ClassGroup = [ 16 ]
 MaximalSubspace = [ ]
+
+#
+gap> STOP_TEST("rp2poly.tst", 0);

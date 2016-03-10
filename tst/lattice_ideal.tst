@@ -1,3 +1,6 @@
+gap> START_TEST("NormalizInterface: lattice_ideal.tst");
+
+#
 gap> M := [
 > [ 2, 1,  0, -1, -1,  -1 ],
 > [ 1, 0, -1,  2, -1,  -1 ],
@@ -66,3 +69,6 @@ OriginalMonoidGenerators =
 Sublattice = true
 ClassGroup = [ 2 ]
 MaximalSubspace = [ ]
+
+#
+gap> STOP_TEST("lattice_ideal.tst", 0);

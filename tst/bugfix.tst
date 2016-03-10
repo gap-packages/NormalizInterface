@@ -1,3 +1,5 @@
+gap> START_TEST("NormalizInterface: bugfix.tst");
+
 #
 # We used to incorrectly convert integer value "0" (zero) from type mpz_t
 # to GAP integers, leading to bogus outputs in e.g. the following example.
@@ -9,3 +11,6 @@ gap> _NmzConeProperty(C,"HilbertSeries");
 [ [ 1, -1, 1, 1, 0, 0, 1, 0, 1, 0, 0, 1 ], [ 1, 12 ], 0]
 gap> NmzHilbertSeries(C);
 [ t^11+t^8+t^6+t^3+t^2-t+1, [ [ 1, 1 ], [ 12, 1 ] ] ]
+
+#
+gap> STOP_TEST("bugfix.tst", 0);

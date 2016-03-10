@@ -1,3 +1,6 @@
+gap> START_TEST("NormalizInterface: rproj2.tst");
+
+#
 gap> M := [
 > [ 1, 0, 0, 0, 0, 0, 0 ],
 > [ 0, 1, 0, 0, 0, 0, 0 ],
@@ -145,3 +148,6 @@ OriginalMonoidGenerators =
 Sublattice = true
 ClassGroup = [ 17 ]
 MaximalSubspace = [ ]
+
+#
+gap> STOP_TEST("rproj2.tst", 0);
