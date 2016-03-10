@@ -2,8 +2,8 @@ SetPackageInfo( rec(
 
 PackageName := "NormalizInterface",
 Subtitle := "GAP wrapper for Normaliz",
-Version := "0.9.6",
-Date    := "27/02/2016", # dd/mm/yyyy format
+Version := "0.9.7",
+Date    := "10/03/2016", # dd/mm/yyyy format
 
 Persons := [
   rec(
@@ -72,7 +72,7 @@ PackageInfoURL  := Concatenation( ~.PackageWWWHome, "/PackageInfo.g" ),
 ArchiveURL      := Concatenation( ~.SourceRepository.URL,
                                  "/releases/download/v", ~.Version,
                                  "/", ~.PackageName, "-", ~.Version ),
-ArchiveFormats := ".tar.gz .tar.bz2",
+ArchiveFormats  := ".tar.gz .tar.bz2",
 
 AbstractHTML :=
   "The <span class='pkgname'>NormalizInterface</span> package provides\
@@ -105,6 +105,8 @@ AvailabilityTest := function()
     path := DirectoriesPackagePrograms("NormalizInterface");
     if not "NormalizInterface" in SHOW_STAT() and
        Filename(path, "NormalizInterface.so") = fail then
+       LogPackageLoadingMessage( PACKAGE_WARNING,
+           [ "kernel functions for NormalizInterface not available." ] );
       return fail;
     fi;
     return true;
