@@ -110,17 +110,17 @@ static Obj MpzToGAP(const mpz_t x)
         sign = +1;
     }
     if (size == 1) {
+        res = ObjInt_UInt(x->_mp_d[0]);
+        if (sign < 0)
+            res = AInvInt(res);
+    } else {
+        size = sizeof(mp_limb_t) * size;
         if (sign > 0)
-            return ObjInt_UInt(x->_mp_d[0]);
+            res = NewBag(T_INTPOS, size);
         else
-            return AInvInt(ObjInt_UInt(x->_mp_d[0]));
+            res = NewBag(T_INTNEG, size);
+        memcpy(ADDR_INT(res), x->_mp_d, size);
     }
-    size = sizeof(mp_limb_t) * size;
-    if (sign > 0)
-        res = NewBag(T_INTPOS, size);
-    else
-        res = NewBag(T_INTNEG, size);
-    memcpy(ADDR_INT(res), x->_mp_d, size);
     return res;
 }
 
@@ -190,7 +190,7 @@ bool GAPIntToNmz(Obj x, long &out)
                 return false;   // overflow
             if (TNUM_OBJ(x) == T_INTNEG)
                 out = -out;
-                return true;
+            return true;
         }
     }
     return false;
