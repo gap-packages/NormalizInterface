@@ -1,5 +1,14 @@
 This file describes changes in the NormalizInterface package.
 
+0.9.7 (2016-03-10)
+  - fix a bug in the conversion between GAP and Normaliz integer values,
+    which could lead to wrong results for integers with absolute value
+    roughly between 2^32 and 2^60
+  - fix crash when using StructuralCopy on a cone (issue #38)
+  - fix printing of certain integers on 32bit systems (issue #36)
+  - give better diagnostics when loading NormalizInterface fails due
+    to its kernel extension missing
+
 0.9.6 (2016-02-27)
   - upgrade to Normaliz version 3.1.0
   - fix wrong file permissions in package archive
