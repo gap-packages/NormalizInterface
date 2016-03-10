@@ -199,11 +199,23 @@ bool GAPIntToNmz(Obj x, long &out)
 template<>
 bool GAPIntToNmz(Obj x, mpz_class &out)
 {
+    mpz_ptr m = out.get_mpz_t();
+
     if (IS_INTOBJ(x)) {
-        out = (int)INT_INTOBJ(x);
+        mpz_realloc2(m, 1 * GMP_NUMB_BITS);
+
+        if (INT_INTOBJ(x) == 0) {
+            mpz_set_ui(m, 0);
+        } else if (INT_INTOBJ(x) >= 0) {
+            m->_mp_d[0] = INT_INTOBJ(x);
+            m->_mp_size = 1;
+        } else {
+            m->_mp_d[0] = -INT_INTOBJ(x);
+            m->_mp_size = -1;
+        }
+
         return true;
     } else if (TNUM_OBJ(x) == T_INTPOS || TNUM_OBJ(x) == T_INTNEG) {
-        mpz_ptr m = out.get_mpz_t();
         UInt size = SIZE_INT(x);
         mpz_realloc2(m, size * GMP_NUMB_BITS);
         memcpy(m->_mp_d, ADDR_INT(x), sizeof(mp_limb_t) * size);
