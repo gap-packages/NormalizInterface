@@ -6,10 +6,10 @@
                            [1X [5XGAP[105X wrapper for Normaliz [101X
   
   
-                                     0.9.7
+                                     0.9.8
   
   
-                                   10/03/2016
+                                   07/05/2016
   
   
                                Sebastian Gutsche
