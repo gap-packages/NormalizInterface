@@ -89,6 +89,12 @@ mkdir -p BUILD
 #
 #  GMP_DIR=/some/path BOOST_ROOT=/another/path ./build-normaliz.sh $GAPROOT
 
+# If GAP was build for 32 bit, also do it for normaliz
+if [ $GAParch_abi = "32-bit" ]; then
+    echo "GAP was build for 32 bit"
+    export CXXFLAGS="-m32"
+fi
+
 PREFIX="$PWD/DST"
 cd BUILD
 cmake -DCMAKE_INSTALL_PREFIX:PATH="$PREFIX" ../source
