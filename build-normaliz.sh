@@ -49,7 +49,6 @@ if [ -f "$GAP_GMP/MAKE_CHECK_PASSED" -a  -f "$GAP_GMP/include/gmp.h" ]; then
     fi
 else
     echo "GAP was built with external GMP"
-    GMP_FLAG=system
     # TODO: actually, now we should figure out somehow which
     # external GMP library was used to build GAP. But that's not really
     # possible: While we could e.g. scan the "internal" sysinfo.gap
@@ -64,7 +63,7 @@ else
     # the GMP_DIR variable manually.
 fi
 
-NORMALIZ_VERSION=v3.2.1
+NORMALIZ_VERSION=v3.3.0
 
 # needs git 1.8 or newer
 if [ ! -d Normaliz.git ]; then
@@ -99,6 +98,10 @@ fi
 
 PREFIX="$PWD/DST"
 ./bootstrap.sh
-./configure --prefix=$PREFIX --with-gmp=$GMP_FLAG
+if [ "x$GMP_FLAG" != "x" ]; then
+  ./configure --prefix=$PREFIX --with-gmp=$GMP_FLAG
+else
+  ./configure --prefix=$PREFIX
+fi
 make
 make install
