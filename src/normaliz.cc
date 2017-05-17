@@ -644,6 +644,9 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
         return NmzVectorToGAP(grad);
         }
 
+    case libnormaliz::ConeProperty::GradingDenom:
+        return NmzIntToGAP( C->getGradingDenom() );
+
     case libnormaliz::ConeProperty::IsPointed:
         return C->isPointed() ? True : False;
 
