@@ -57,9 +57,11 @@ extern UInt T_NORMALIZ;
         ErrorQuit( "computation interrupted", 0, 0 ); \
         return 0; \
     } catch (libnormaliz::NormalizException& e) { \
+        signal( SIGINT, current_interpreter_sigint_handler ); \
         ErrorQuit("Normaliz exeption thrown",0,0); \
         return Fail; \
     } catch (...) { \
+        signal( SIGINT, current_interpreter_sigint_handler ); \
         ErrorQuit("unknown exeption thrown",0,0); \
         return Fail; \
     }
