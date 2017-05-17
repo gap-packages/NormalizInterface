@@ -262,6 +262,14 @@ DeclareGlobalFunction("NmzRank");
 #! This value is always known directly after the creation of the cone.
 DeclareGlobalFunction("NmzIsInhomogeneous");
 
+#! @Arguments cone
+#! @Returns the embedding dimension of the cone
+#! @Description
+#! The embedding dimension is the dimension of the space in which the
+#! computation is done. It is the number of components of the output vectors.
+#! This value is always known directly after the creation of the cone.
+DeclareGlobalFunction("NmzEmbeddingDimension");
+
 ## Automatically generated methods
 
 #! @Description

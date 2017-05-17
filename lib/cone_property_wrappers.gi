@@ -87,3 +87,4 @@ InstallGlobalFunction( NmzConeDecomposition, cone -> NmzConeProperty(cone, "Cone
 
 InstallGlobalFunction( NmzHilbertQuasiPolynomial, cone -> NmzConeProperty(cone, "HilbertQuasiPolynomial" ) );
 
+InstallGlobalFunction( NmzEmbeddingDimension, cone -> NmzConeProperty(cone, "EmbeddingDim" ) );
