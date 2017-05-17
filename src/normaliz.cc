@@ -54,6 +54,12 @@ using std::pair;
 using std::cerr;
 using std::endl;
 
+void signal_handler( int signal ){
+    libnormaliz::nmz_interrupted = true;
+}
+
+sighandler_t current_interpreter_sigint_handler;
+
 Obj TheTypeNormalizCone;
 
 UInt T_NORMALIZ = 0;
@@ -284,6 +290,30 @@ static Obj NmzMatrixToGAP(const vector< vector<Integer> >& in)
     return M;
 }
 
+static Obj NmzBoolMatrixToGAP(const vector< vector<bool> >& in)
+{
+    Obj M;
+    Obj N;
+    const size_t m = in.size();
+    size_t n;
+    M = NEW_PLIST(T_PLIST, m);
+    SET_LEN_PLIST(M, m);
+    for (size_t i = 0; i < m; ++i) {
+        n = in[i].size();
+        N = NEW_PLIST( T_PLIST, n );
+        SET_LEN_PLIST( N, n );
+        for( size_t j = 0; j < n; ++j ){
+            SET_ELM_PLIST(N, j+1, in[i][j] ? True : False );
+            CHANGED_BAG( N );
+        }
+        SET_ELM_PLIST( M, i+1, N );
+        CHANGED_BAG( M );
+    }
+    CHANGED_BAG( M );
+    return M;
+}
+
+// TODO: HSOP
 static Obj NmzHilbertSeriesToGAP(const libnormaliz::HilbertSeries& HS)
 {
     Obj ret;
@@ -292,6 +322,19 @@ static Obj NmzHilbertSeriesToGAP(const libnormaliz::HilbertSeries& HS)
     AssPlist(ret, 1, NmzVectorToGAP(HS.getNum()));
     AssPlist(ret, 2, NmzVectorToGAP(libnormaliz::to_vector(HS.getDenom())));
     AssPlist(ret, 3, NmzIntToGAP(HS.getShift()));
+    return ret;
+}
+
+template<typename Integer>
+static Obj NmzWeightedEhrhartSeriesToPyList(const std::pair<libnormaliz::HilbertSeries,Integer>& HS)
+{   
+    Obj ret;
+    ret = NEW_PLIST(T_PLIST, 4);
+    SET_LEN_PLIST(ret, 4);
+    AssPlist(ret, 1, NmzVectorToGAP(HS.first.getNum()));
+    AssPlist(ret, 2, NmzVectorToGAP(libnormaliz::to_vector(HS.first.getDenom())));
+    AssPlist(ret, 3, NmzIntToGAP(HS.first.getShift()));
+    AssPlist(ret, 4, NmzIntToGAP(HS.second));
     return ret;
 }
 
@@ -308,6 +351,20 @@ static Obj NmzHilbertQuasiPolynomialToGAP(const libnormaliz::HilbertSeries& HS)
         CHANGED_BAG( ret );
     }
     AssPlist(ret, n+1, NmzIntToGAP(HS.getHilbertQuasiPolynomialDenom()));
+    return ret;
+}
+
+static Obj NmzWeightedEhrhartQuasiPolynomialToGAP(const libnormaliz::IntegrationData& int_data)
+{
+    Obj ret;
+    vector< vector<mpz_class> > ehrhart_qp = int_data.getWeightedEhrhartQuasiPolynomial();
+    const size_t n = ehrhart_qp.size();
+    ret = NEW_PLIST(T_PLIST, n+1);
+    for (size_t i = 0; i < n; ++i) {
+        SET_ELM_PLIST(ret, i+1 , NmzVectorToGAP(ehrhart_qp[i]));
+        CHANGED_BAG( ret );
+    }
+    AssPlist(ret, n+1, NmzIntToGAP(int_data.getWeightedEhrhartQuasiPolynomialDenom()));
     return ret;
 }
 
@@ -402,7 +459,9 @@ Obj _NmzCompute(Obj self, Obj cone, Obj to_compute)
     }
 
     Cone<mpz_class>* C = GET_CONE<mpz_class>(cone);
+    current_interpreter_sigint_handler = signal( SIGINT, signal_handler );
     ConeProperties notComputed = C->compute(propsToCompute);
+    signal( SIGINT, current_interpreter_sigint_handler );
 
     // Cone.compute returns the not computed properties
     // we return a bool, true when everything requested was computed
@@ -506,14 +565,15 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
     Cone<Integer>* C = GET_CONE<Integer>(cone);
     // there is no ConeProperty HilbertQuasiPolynomial, it is part of the HilbertSeries
     // FIXME better way?
-    if (string(CSTR_STRING(prop)) == string("HilbertQuasiPolynomial")) {
-        C->compute(ConeProperties(libnormaliz::ConeProperty::HilbertSeries));
-        return NmzHilbertQuasiPolynomialToGAP(C->getHilbertSeries());
-    }
+//     if (string(CSTR_STRING(prop)) == string("HilbertQuasiPolynomial")) {
+//         C->compute(ConeProperties(libnormaliz::ConeProperty::HilbertSeries));
+//         return NmzHilbertQuasiPolynomialToGAP(C->getHilbertSeries());
+//     }
 
     libnormaliz::ConeProperty::Enum p = libnormaliz::toConeProperty(CSTR_STRING(prop));
-
+    current_interpreter_sigint_handler = signal( SIGINT, signal_handler );
     ConeProperties notComputed = C->compute(ConeProperties(p));
+    signal( SIGINT, current_interpreter_sigint_handler );
     if (notComputed.any()) {
         return Fail;
     }
@@ -546,6 +606,12 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
         return MpqClassToGAP(mult);
         }
 
+    case libnormaliz::ConeProperty::Integral:
+        return MpqClassToGAP(C->getIntegral());
+
+    case libnormaliz::ConeProperty::VirtualMultiplicity:
+        return MpqClassToGAP(C->getVirtualMultiplicity());
+
     case libnormaliz::ConeProperty::RecessionRank:
         return NmzIntToGAP(C->getRecessionRank());
 
@@ -577,6 +643,9 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
         grad.push_back(C->getGradingDenom());
         return NmzVectorToGAP(grad);
         }
+
+    case libnormaliz::ConeProperty::GradingDenom:
+        return NmzIntToGAP( C->getGradingDenom() );
 
     case libnormaliz::ConeProperty::IsPointed:
         return C->isPointed() ? True : False;
@@ -617,21 +686,73 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
     case libnormaliz::ConeProperty::ClassGroup:
         return NmzVectorToGAP(C->getClassGroup());
 
+    case libnormaliz::ConeProperty::IsInhomogeneous:
+        return C->isInhomogeneous() ? True : False;
+
+    case libnormaliz::ConeProperty::Equations:
+        return NmzMatrixToGAP(C->getSublattice().getEquations());
+    
+    case libnormaliz::ConeProperty::Congruences:
+        return NmzMatrixToGAP(C->getSublattice().getCongruences());
+    
+    case libnormaliz::ConeProperty::EmbeddingDim:
+        return NmzIntToGAP(C->getEmbeddingDim());
+    
+    case libnormaliz::ConeProperty::Rank:
+        return NmzIntToGAP(C->getRank());
+    
     case libnormaliz::ConeProperty::Sublattice:
-        C->compute(p);
-        return C->isComputed(p) ? True : False;
+        return _NmzBasisChangeIntern(C);
+    
+    case libnormaliz::ConeProperty::IntegerHull:
+    {   
+        Cone<Integer>* hull = new Cone<Integer>( C->getIntegerHullCone() );
+        return NewCone( hull ); 
+    }
+    
+    case libnormaliz::ConeProperty::HilbertQuasiPolynomial:
+        return NmzHilbertQuasiPolynomialToGAP(C->getHilbertSeries());
+    
+    case libnormaliz::ConeProperty::WeightedEhrhartQuasiPolynomial:
+        return NmzWeightedEhrhartQuasiPolynomialToGAP(C->getIntData());
+    
+    case libnormaliz::ConeProperty::IsTriangulationNested:
+        return C->isTriangulationNested() ? True : False;
+        
+    case libnormaliz::ConeProperty::IsTriangulationPartial:
+        return C->isTriangulationPartial() ? True : False;
+    
+    case libnormaliz::ConeProperty::ConeDecomposition:
+        return NmzBoolMatrixToGAP(C->getOpenFacets());
+    
+    case libnormaliz::ConeProperty::ExternalIndex:
+        return NmzIntToGAP(C->getSublattice().getExternalIndex());
+    
+    case libnormaliz::ConeProperty::InternalIndex:
+        return NmzIntToGAP(C->getIndex());
+    
+    case libnormaliz::ConeProperty::WitnessNotIntegrallyClosed:
+        return NmzVectorToGAP(C->getWitnessNotIntegrallyClosed());
+    
+    case libnormaliz::ConeProperty::UnitGroupIndex:
+        return NmzIntToGAP(C->getUnitGroupIndex()); 
 
 //  the following properties are compute options and do not return anything
-    case libnormaliz::ConeProperty::DualMode:
     case libnormaliz::ConeProperty::DefaultMode:
     case libnormaliz::ConeProperty::Approximate:
     case libnormaliz::ConeProperty::BottomDecomposition:
     case libnormaliz::ConeProperty::KeepOrder:
-        return True;    // FIXME: appropriate value?
+    case libnormaliz::ConeProperty::NoBottomDec:
+    case libnormaliz::ConeProperty::PrimalMode:
+    case libnormaliz::ConeProperty::Symmetrize:
+    case libnormaliz::ConeProperty::NoSymmetrization:
+    case libnormaliz::ConeProperty::BigInt:
+    case libnormaliz::ConeProperty::NoNestedTri:
+    case libnormaliz::ConeProperty::HSOP:
+        ErrorQuit("Cone property is input only", 0, 0);
 
     default:
-        // Case not handled. Should signal an error
-        break;
+        ErrorQuit("Unknown cone property", 0, 0);
     }
 
     return Fail;
@@ -700,29 +821,10 @@ Obj NmzSetVerbose(Obj self, Obj cone, Obj value)
 #! @Section Cone properties
 */
 
-/*
-#! @Arguments cone
-#! @Returns the embedding dimension of the cone
-#! @Description
-#! The embedding dimension is the dimension of the space in which the
-#! computation is done. It is the number of components of the output vectors.
-#! This value is always known directly after the creation of the cone.
-DeclareGlobalFunction("NmzEmbeddingDimension");
-*/
-Obj NmzEmbeddingDimension(Obj self, Obj cone)
-{
-    FUNC_BEGIN
-    if (!IS_CONE(cone))
-        ErrorQuit("<cone> must be a Normaliz cone", 0, 0);
-    Cone<mpz_class>* C = GET_CONE<mpz_class>(cone);
-    return NmzIntToGAP(C->getEmbeddingDim());
-    FUNC_END
-}
 
 template<typename Integer>
-static Obj _NmzBasisChangeIntern(Obj cone)
+static Obj _NmzBasisChangeIntern(Cone<Integer>* C)
 {
-    Cone<Integer>* C = GET_CONE<Integer>(cone);
     Sublattice_Representation<Integer> bc = C->getSublattice();
 
     Obj res = NEW_PLIST(T_PLIST, 3);
@@ -735,94 +837,16 @@ static Obj _NmzBasisChangeIntern(Obj cone)
     return res;
 }
 
-Obj _NmzBasisChange(Obj self, Obj cone)
-{
-    FUNC_BEGIN
-    if (!IS_CONE(cone))
-        ErrorQuit("<cone> must be a Normaliz cone", 0, 0);
-    return _NmzBasisChangeIntern<mpz_class>(cone);
-    FUNC_END
-}
-
-/*
-#! @Arguments cone
-#! @Returns the rank of the cone
-#! @Description
-#! The rank is the rank of the lattice generated by the lattice points of the cone.
-#! <P/>
-#! This is part of the cone property <Q>Sublattice</Q>.
-DeclareGlobalFunction("NmzRank");
-*/
-Obj NmzRank(Obj self, Obj cone)
-{
-    FUNC_BEGIN
-    if (!IS_CONE(cone))
-        ErrorQuit("<cone> must be a Normaliz cone", 0, 0);
-    Cone<mpz_class>* C = GET_CONE<mpz_class>(cone);
-    return NmzIntToGAP(C->getSublattice().getRank());
-    FUNC_END
-}
-
-/*
-#! @Arguments cone
-#! @Returns whether the cone is inhomogeneous
-#! @Description
-#! This value is always known directly after the creation of the cone.
-DeclareGlobalFunction("NmzIsInhomogeneous");
-*/
-Obj NmzIsInhomogeneous(Obj self, Obj cone)
-{
-    FUNC_BEGIN
-    if (!IS_CONE(cone))
-        ErrorQuit("<cone> must be a Normaliz cone", 0, 0);
-    Cone<mpz_class>* C = GET_CONE<mpz_class>(cone);
-    return C->isInhomogeneous() ? True : False;
-    FUNC_END
-}
-
-/*
-#! @Arguments cone
-#! @Returns a matrix whose rows represent the equations
-#! @Description
-#! The equations cut out the linear space generated by the cone.
-#! Together with the support hyperplanes and the congruences it describes the
-#! lattice points of the cone.
-#! <P/>
-#! This is part of the cone property <Q>Sublattice</Q>.
-DeclareGlobalFunction("NmzEquations");
-*/
-Obj NmzEquations(Obj self, Obj cone)
-{
-    FUNC_BEGIN
-    if (!IS_CONE(cone))
-        ErrorQuit("<cone> must be a Normaliz cone", 0, 0);
-    Cone<mpz_class>* C = GET_CONE<mpz_class>(cone);
-    C->compute(ConeProperties(libnormaliz::ConeProperty::SupportHyperplanes));
-    return NmzMatrixToGAP(C->getSublattice().getEquations());
-    FUNC_END
-}
+// Obj _NmzBasisChange(Obj self, Obj cone)
+// {
+//     FUNC_BEGIN
+//     if (!IS_CONE(cone))
+//         ErrorQuit("<cone> must be a Normaliz cone", 0, 0);
+//     return _NmzBasisChangeIntern<mpz_class>(cone);
+//     FUNC_END
+// }
 
 
-/*
-#! @Arguments cone
-#! @Returns a matrix whose rows represent the congruences
-#! @Description
-#! Together with the support hyperplanes and the equations it describes the
-#! lattice points of the cone.
-#! <P/>
-#! This is part of the cone property <Q>Sublattice</Q>.
-DeclareGlobalFunction("NmzCongruences");
-*/
-Obj NmzCongruences(Obj self, Obj cone)
-{
-    FUNC_BEGIN
-    if (!IS_CONE(cone))
-        ErrorQuit("<cone> must be a Normaliz cone", 0, 0);
-    Cone<mpz_class>* C = GET_CONE<mpz_class>(cone);
-    C->compute(ConeProperties(libnormaliz::ConeProperty::SupportHyperplanes));
-    return NmzMatrixToGAP(C->getSublattice().getCongruences());
-    FUNC_END
-}
 
 
 typedef Obj (* GVarFuncType)(/*arguments*/);
@@ -844,13 +868,6 @@ static StructGVarFunc GVarFuncs[] = {
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzHasConeProperty, 2, "cone, prop"),
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", _NmzConeProperty, 2, "cone, prop"),
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzKnownConeProperties, 1, "cone"),
-
-    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzEmbeddingDimension, 1, "cone"),
-    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", _NmzBasisChange, 1, "cone"),
-    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzRank, 1, "cone"),
-    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzIsInhomogeneous, 1, "cone"),
-    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzEquations, 1, "cone"),
-    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzCongruences, 1, "cone"),
 
     { 0 } /* Finish with an empty entry */
 
@@ -881,7 +898,12 @@ static Int InitKernel( StructInitInfo *module )
     CopyObjFuncs[ T_NORMALIZ ] = &NormalizCopyFunc;
     CleanObjFuncs[ T_NORMALIZ ] = &NormalizCleanFunc;
     IsMutableObjFuncs[ T_NORMALIZ ] = &NormalizIsMutableObjFuncs;
-
+    
+    //Setup the signal handler
+    current_interpreter_sigint_handler = signal( SIGINT, signal_handler );
+    signal( SIGINT, current_interpreter_sigint_handler );
+    
+    
     /* return success                                                      */
     return 0;
 }

@@ -57,7 +57,7 @@ end);
 InstallGlobalFunction( NmzBasisChange,
 function( cone )
     local result;
-    result := _NmzBasisChange(cone);
+    result := NmzConeProperty( cone, "Sublattice" );
     return rec(
         Embedding := result[1],
         Projection := result[2],

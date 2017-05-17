@@ -1,29 +1,65 @@
 ## This is an automatically generated file
 
 
-InstallGlobalFunction( NmzAffineDim, cone -> NmzConeProperty(cone, "AffineDim" ) );
-
-InstallGlobalFunction( NmzClassGroup, cone -> NmzConeProperty(cone, "ClassGroup" ) );
-
-InstallGlobalFunction( NmzDeg1Elements, cone -> NmzConeProperty(cone, "Deg1Elements" ) );
-
-InstallGlobalFunction( NmzDehomogenization, cone -> NmzConeProperty(cone, "Dehomogenization" ) );
-
-InstallGlobalFunction( NmzExcludedFaces, cone -> NmzConeProperty(cone, "ExcludedFaces" ) );
+InstallGlobalFunction( NmzGenerators, cone -> NmzConeProperty(cone, "Generators" ) );
 
 InstallGlobalFunction( NmzExtremeRays, cone -> NmzConeProperty(cone, "ExtremeRays" ) );
 
-InstallGlobalFunction( NmzGenerators, cone -> NmzConeProperty(cone, "Generators" ) );
+InstallGlobalFunction( NmzVerticesOfPolyhedron, cone -> NmzConeProperty(cone, "VerticesOfPolyhedron" ) );
 
-InstallGlobalFunction( NmzGrading, cone -> NmzConeProperty(cone, "Grading" ) );
+InstallGlobalFunction( NmzSupportHyperplanes, cone -> NmzConeProperty(cone, "SupportHyperplanes" ) );
 
 InstallGlobalFunction( NmzHilbertBasis, cone -> NmzConeProperty(cone, "HilbertBasis" ) );
 
-InstallGlobalFunction( NmzHilbertQuasiPolynomial, cone -> NmzConeProperty(cone, "HilbertQuasiPolynomial" ) );
+InstallGlobalFunction( NmzModuleGenerators, cone -> NmzConeProperty(cone, "ModuleGenerators" ) );
 
-InstallGlobalFunction( NmzHilbertSeries, cone -> NmzConeProperty(cone, "HilbertSeries" ) );
+InstallGlobalFunction( NmzDeg1Elements, cone -> NmzConeProperty(cone, "Deg1Elements" ) );
 
-InstallGlobalFunction( NmzInclusionExclusionData, cone -> NmzConeProperty(cone, "InclusionExclusionData" ) );
+InstallGlobalFunction( NmzModuleGeneratorsOverOriginalMonoid, cone -> NmzConeProperty(cone, "ModuleGeneratorsOverOriginalMonoid" ) );
+
+InstallGlobalFunction( NmzSublattice, cone -> NmzConeProperty(cone, "Sublattice" ) );
+
+InstallGlobalFunction( NmzExcludedFaces, cone -> NmzConeProperty(cone, "ExcludedFaces" ) );
+
+InstallGlobalFunction( NmzOriginalMonoidGenerators, cone -> NmzConeProperty(cone, "OriginalMonoidGenerators" ) );
+
+InstallGlobalFunction( NmzMaximalSubspace, cone -> NmzConeProperty(cone, "MaximalSubspace" ) );
+
+InstallGlobalFunction( NmzEquations, cone -> NmzConeProperty(cone, "Equations" ) );
+
+InstallGlobalFunction( NmzGrading, cone -> NmzConeProperty(cone, "Grading" ) );
+
+InstallGlobalFunction( NmzDehomogenization, cone -> NmzConeProperty(cone, "Dehomogenization" ) );
+
+InstallGlobalFunction( NmzWitnessNotIntegrallyClosed, cone -> NmzConeProperty(cone, "WitnessNotIntegrallyClosed" ) );
+
+InstallGlobalFunction( NmzTriangulationSize, cone -> NmzConeProperty(cone, "TriangulationSize" ) );
+
+InstallGlobalFunction( NmzTriangulationDetSum, cone -> NmzConeProperty(cone, "TriangulationDetSum" ) );
+
+InstallGlobalFunction( NmzReesPrimaryMultiplicity, cone -> NmzConeProperty(cone, "ReesPrimaryMultiplicity" ) );
+
+InstallGlobalFunction( NmzGradingDenom, cone -> NmzConeProperty(cone, "GradingDenom" ) );
+
+InstallGlobalFunction( NmzUnitGroupIndex, cone -> NmzConeProperty(cone, "UnitGroupIndex" ) );
+
+InstallGlobalFunction( NmzInternalIndex, cone -> NmzConeProperty(cone, "InternalIndex" ) );
+
+InstallGlobalFunction( NmzExternalIndex, cone -> NmzConeProperty(cone, "ExternalIndex" ) );
+
+InstallGlobalFunction( NmzMultiplicity, cone -> NmzConeProperty(cone, "Multiplicity" ) );
+
+InstallGlobalFunction( NmzRecessionRank, cone -> NmzConeProperty(cone, "RecessionRank" ) );
+
+InstallGlobalFunction( NmzAffineDim, cone -> NmzConeProperty(cone, "AffineDim" ) );
+
+InstallGlobalFunction( NmzModuleRank, cone -> NmzConeProperty(cone, "ModuleRank" ) );
+
+InstallGlobalFunction( NmzRank, cone -> NmzConeProperty(cone, "Rank" ) );
+
+InstallGlobalFunction( NmzEmbeddingDim, cone -> NmzConeProperty(cone, "EmbeddingDim" ) );
+
+InstallGlobalFunction( NmzIsPointed, cone -> NmzConeProperty(cone, "IsPointed" ) );
 
 InstallGlobalFunction( NmzIsDeg1ExtremeRays, cone -> NmzConeProperty(cone, "IsDeg1ExtremeRays" ) );
 
@@ -31,33 +67,24 @@ InstallGlobalFunction( NmzIsDeg1HilbertBasis, cone -> NmzConeProperty(cone, "IsD
 
 InstallGlobalFunction( NmzIsIntegrallyClosed, cone -> NmzConeProperty(cone, "IsIntegrallyClosed" ) );
 
-InstallGlobalFunction( NmzIsPointed, cone -> NmzConeProperty(cone, "IsPointed" ) );
-
-InstallGlobalFunction( NmzModuleGenerators, cone -> NmzConeProperty(cone, "ModuleGenerators" ) );
-
-InstallGlobalFunction( NmzModuleGeneratorsOverOriginalMonoid, cone -> NmzConeProperty(cone, "ModuleGeneratorsOverOriginalMonoid" ) );
-
-InstallGlobalFunction( NmzMaximalSubspace, cone -> NmzConeProperty(cone, "MaximalSubspace" ) );
-
-InstallGlobalFunction( NmzModuleRank, cone -> NmzConeProperty(cone, "ModuleRank" ) );
-
-InstallGlobalFunction( NmzMultiplicity, cone -> NmzConeProperty(cone, "Multiplicity" ) );
-
-InstallGlobalFunction( NmzOriginalMonoidGenerators, cone -> NmzConeProperty(cone, "OriginalMonoidGenerators" ) );
-
-InstallGlobalFunction( NmzRecessionRank, cone -> NmzConeProperty(cone, "RecessionRank" ) );
-
 InstallGlobalFunction( NmzIsReesPrimary, cone -> NmzConeProperty(cone, "IsReesPrimary" ) );
 
-InstallGlobalFunction( NmzReesPrimaryMultiplicity, cone -> NmzConeProperty(cone, "ReesPrimaryMultiplicity" ) );
-
-InstallGlobalFunction( NmzSupportHyperplanes, cone -> NmzConeProperty(cone, "SupportHyperplanes" ) );
+InstallGlobalFunction( NmzIsInhomogeneous, cone -> NmzConeProperty(cone, "IsInhomogeneous" ) );
 
 InstallGlobalFunction( NmzTriangulation, cone -> NmzConeProperty(cone, "Triangulation" ) );
 
-InstallGlobalFunction( NmzTriangulationDetSum, cone -> NmzConeProperty(cone, "TriangulationDetSum" ) );
+InstallGlobalFunction( NmzHilbertSeries, cone -> NmzConeProperty(cone, "HilbertSeries" ) );
 
-InstallGlobalFunction( NmzTriangulationSize, cone -> NmzConeProperty(cone, "TriangulationSize" ) );
+InstallGlobalFunction( NmzInclusionExclusionData, cone -> NmzConeProperty(cone, "InclusionExclusionData" ) );
 
-InstallGlobalFunction( NmzVerticesOfPolyhedron, cone -> NmzConeProperty(cone, "VerticesOfPolyhedron" ) );
+InstallGlobalFunction( NmzStanleyDec, cone -> NmzConeProperty(cone, "StanleyDec" ) );
 
+InstallGlobalFunction( NmzClassGroup, cone -> NmzConeProperty(cone, "ClassGroup" ) );
+
+InstallGlobalFunction( NmzIntegerHull, cone -> NmzConeProperty(cone, "IntegerHull" ) );
+
+InstallGlobalFunction( NmzConeDecomposition, cone -> NmzConeProperty(cone, "ConeDecomposition" ) );
+
+InstallGlobalFunction( NmzHilbertQuasiPolynomial, cone -> NmzConeProperty(cone, "HilbertQuasiPolynomial" ) );
+
+InstallGlobalFunction( NmzEmbeddingDimension, cone -> NmzConeProperty(cone, "EmbeddingDim" ) );

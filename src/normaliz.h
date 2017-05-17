@@ -31,25 +31,37 @@ extern "C" {
 #include "libnormaliz/cone.h"
 #include <assert.h>
 
+#include <csignal>
+using std::signal;
+
+typedef void (*sighandler_t)(int);
+
 // the TNUM used for NormalizInterface objects,
 extern UInt T_NORMALIZ;
 
 // old versions of libnormaliz (before 2.99.1) did not include such a define
 #ifndef NMZ_RELEASE
     static_assert(false,
-       "Your Normaliz version (unknown) is to old! Update to 3.0.0 or newer.");
+       "Your Normaliz version (unknown) is to old! Update to 3.3.0 or newer.");
 #endif
-#if NMZ_RELEASE < 30000
-    static_assert(false, "Your Normaliz version is to old! Update to 3.0.0 or newer.");
+#if NMZ_RELEASE < 30300
+    static_assert(false, "Your Normaliz version is to old! Update to 3.3.0 or newer.");
 #endif
 
 #define FUNC_BEGIN try {
 
 #define FUNC_END \
+    } catch (libnormaliz::InterruptException& e ) {\
+        signal(SIGINT,current_interpreter_sigint_handler);\
+        libnormaliz::nmz_interrupted = false; \
+        ErrorQuit( "computation interrupted", 0, 0 ); \
+        return 0; \
     } catch (libnormaliz::NormalizException& e) { \
+        signal( SIGINT, current_interpreter_sigint_handler ); \
         ErrorQuit("Normaliz exeption thrown",0,0); \
         return Fail; \
     } catch (...) { \
+        signal( SIGINT, current_interpreter_sigint_handler ); \
         ErrorQuit("unknown exeption thrown",0,0); \
         return Fail; \
     }

@@ -41,7 +41,8 @@ if [ -f "$GAP_GMP/MAKE_CHECK_PASSED" -a  -f "$GAP_GMP/include/gmp.h" ]; then
     echo "GAP was built with its own GMP"
     if [ -f "$GAP_GMP/include/gmpxx.h" ]; then
         echo "GAP's GMP includes C++ support"
-        export GMP_DIR="$GAP_GMP"
+#         export GMP_DIR="$GAP_GMP"
+        GMP_FLAG="$GAP_GMP"
     else
         echo "ERROR: GAP's GMP was built without C++ support"
         exit 1
@@ -62,7 +63,7 @@ else
     # the GMP_DIR variable manually.
 fi
 
-NORMALIZ_VERSION=v3.1.1
+NORMALIZ_VERSION=v3.3.0
 
 # needs git 1.8 or newer
 if [ ! -d Normaliz.git ]; then
@@ -78,9 +79,7 @@ if [ `git describe --tags` != $NORMALIZ_VERSION ]; then
 fi
 
 rm -rf DST
-rm -rf BUILD
 mkdir -p DST
-mkdir -p BUILD
 
 # The cmake build process honors environment variables like
 # GMP_DIR and BOOST_ROOT. So if you need to tell the build
@@ -95,8 +94,14 @@ if [ $GAParch_abi = "32-bit" ]; then
     export CXXFLAGS="-m32"
 fi
 
+## use the libtool build system
+
 PREFIX="$PWD/DST"
-cd BUILD
-cmake -DCMAKE_INSTALL_PREFIX:PATH="$PREFIX" ../source
+./bootstrap.sh
+if [ "x$GMP_FLAG" != "x" ]; then
+  ./configure --prefix=$PREFIX --with-gmp=$GMP_FLAG
+else
+  ./configure --prefix=$PREFIX
+fi
 make
 make install
