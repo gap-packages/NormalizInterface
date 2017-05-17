@@ -31,6 +31,11 @@ extern "C" {
 #include "libnormaliz/cone.h"
 #include <assert.h>
 
+#include <csignal>
+using std::signal;
+
+typedef void (*sighandler_t)(int);
+
 // the TNUM used for NormalizInterface objects,
 extern UInt T_NORMALIZ;
 
@@ -46,6 +51,11 @@ extern UInt T_NORMALIZ;
 #define FUNC_BEGIN try {
 
 #define FUNC_END \
+    } catch (libnormaliz::InterruptException& e ) {\
+        signal(SIGINT,current_interpreter_sigint_handler);\
+        libnormaliz::nmz_interrupted = false; \
+        ErrorQuit( "computation interrupted", 0, 0 ); \
+        return 0; \
     } catch (libnormaliz::NormalizException& e) { \
         ErrorQuit("Normaliz exeption thrown",0,0); \
         return Fail; \

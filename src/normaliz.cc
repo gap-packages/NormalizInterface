@@ -54,6 +54,12 @@ using std::pair;
 using std::cerr;
 using std::endl;
 
+void signal_handler( int signal ){
+    libnormaliz::nmz_interrupted = true;
+}
+
+sighandler_t current_interpreter_sigint_handler;
+
 Obj TheTypeNormalizCone;
 
 UInt T_NORMALIZ = 0;
@@ -563,8 +569,9 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
 //     }
 
     libnormaliz::ConeProperty::Enum p = libnormaliz::toConeProperty(CSTR_STRING(prop));
-
+    current_interpreter_sigint_handler = signal( SIGINT, signal_handler );
     ConeProperties notComputed = C->compute(ConeProperties(p));
+    signal( SIGINT, current_interpreter_sigint_handler );
     if (notComputed.any()) {
         return Fail;
     }
