@@ -459,7 +459,9 @@ Obj _NmzCompute(Obj self, Obj cone, Obj to_compute)
     }
 
     Cone<mpz_class>* C = GET_CONE<mpz_class>(cone);
+    current_interpreter_sigint_handler = signal( SIGINT, signal_handler );
     ConeProperties notComputed = C->compute(propsToCompute);
+    signal( SIGINT, current_interpreter_sigint_handler );
 
     // Cone.compute returns the not computed properties
     // we return a bool, true when everything requested was computed
@@ -910,7 +912,12 @@ static Int InitKernel( StructInitInfo *module )
     CopyObjFuncs[ T_NORMALIZ ] = &NormalizCopyFunc;
     CleanObjFuncs[ T_NORMALIZ ] = &NormalizCleanFunc;
     IsMutableObjFuncs[ T_NORMALIZ ] = &NormalizIsMutableObjFuncs;
-
+    
+    //Setup the signal handler
+    current_interpreter_sigint_handler = signal( SIGINT, signal_handler );
+    signal( SIGINT, current_interpreter_sigint_handler );
+    
+    
     /* return success                                                      */
     return 0;
 }
