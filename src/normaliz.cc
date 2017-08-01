@@ -22,7 +22,15 @@
 #! @Section YOU FORGOT TO SET A SECTION
 */
 
-#include "normaliz.h"
+#include <gmp.h>
+
+extern "C" {
+#include "src/compiled.h"          /* GAP headers                */
+}
+#include "libnormaliz/cone.h"
+#include <assert.h>
+
+
 #include "libnormaliz/map_operations.h"
 
 #include <vector>
@@ -30,6 +38,45 @@
 
 #include <csignal>
 using std::signal;
+
+typedef void (*sighandler_t)(int);
+
+// the TNUM used for NormalizInterface objects,
+extern UInt T_NORMALIZ;
+
+// old versions of libnormaliz (before 2.99.1) did not include such a define
+#if !defined(NMZ_RELEASE) || NMZ_RELEASE < 30300
+#error Your Normaliz version is to old! Update to 3.3.0 or newer.
+#endif
+
+#define FUNC_BEGIN try {
+
+#define FUNC_END \
+    } catch (std::exception& e) { \
+        ErrorQuit(e.what(),0,0); \
+        return Fail; \
+    }
+
+#define SIGNAL_HANDLER_BEGIN \
+    sighandler_t current_interpreter_sigint_handler = signal( SIGINT, signal_handler ); \
+    try{
+
+#define SIGNAL_HANDLER_END \
+    } catch (libnormaliz::InterruptException& e ) {\
+        signal(SIGINT,current_interpreter_sigint_handler);\
+        libnormaliz::nmz_interrupted = false; \
+        ErrorQuit( "computation interrupted", 0, 0 ); \
+        return 0; \
+    } catch (...) { \
+        signal(SIGINT,current_interpreter_sigint_handler);\
+        throw;\
+    } \
+    signal(SIGINT,current_interpreter_sigint_handler);
+
+extern Obj TheTypeNormalizCone;
+
+#define IS_CONE(o) (TNUM_OBJ(o) == T_NORMALIZ)
+
 
 // Paranoia check
 #ifdef SYS_IS_64_BIT
@@ -66,6 +113,16 @@ void signal_handler(int signal)
 Obj TheTypeNormalizCone;
 
 UInt T_NORMALIZ = 0;
+
+template<typename Integer>
+inline void SET_CONE(Obj o, libnormaliz::Cone<Integer>* p) {
+    ADDR_OBJ(o)[0] = reinterpret_cast<Obj>(p);
+}
+
+template<typename Integer>
+inline libnormaliz::Cone<Integer>* GET_CONE(Obj o) {
+    return reinterpret_cast<libnormaliz::Cone<Integer>*>(ADDR_OBJ(o)[0]);
+}
 
 Obj NewCone(Cone<mpz_class>* C)
 {
