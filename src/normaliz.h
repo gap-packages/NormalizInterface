@@ -44,11 +44,8 @@ extern UInt T_NORMALIZ;
 #define FUNC_BEGIN try {
 
 #define FUNC_END \
-    } catch (libnormaliz::NormalizException& e) { \
-        ErrorQuit("Normaliz exeption thrown",0,0); \
-        return Fail; \
-    } catch (...) { \
-        ErrorQuit("unknown exeption thrown",0,0); \
+    } catch (std::exception& e) { \
+        ErrorQuit(e.what(),0,0); \
         return Fail; \
     }
 

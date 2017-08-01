@@ -433,23 +433,22 @@ static Obj _NmzConeIntern(Obj input_list)
 
 Obj _NmzCone(Obj self, Obj input_list)
 {
-    FUNC_BEGIN
     if (!IS_PLIST(input_list) || !IS_DENSE_LIST(input_list))
         ErrorQuit("Input argument must be a list", 0, 0);
 
+    FUNC_BEGIN
     return _NmzConeIntern<mpz_class>(input_list);
-
     FUNC_END
 }
 
 Obj _NmzCompute(Obj self, Obj cone, Obj to_compute)
 {
-    FUNC_BEGIN
     if (!IS_CONE(cone))
         ErrorQuit("<cone> must be a Normaliz cone", 0, 0);
     if (!IS_PLIST(to_compute) || !IS_DENSE_LIST(to_compute))
         ErrorQuit("<props> must be a list of strings", 0, 0);
 
+    FUNC_BEGIN
     ConeProperties propsToCompute;
     // we have a list
     const int n = LEN_PLIST(to_compute);
@@ -490,12 +489,12 @@ DeclareGlobalFunction("NmzHasConeProperty");
 */
 Obj NmzHasConeProperty(Obj self, Obj cone, Obj prop)
 {
-    FUNC_BEGIN
-
     if (!IS_CONE(cone))
         ErrorQuit("<cone> must be a Normaliz cone", 0, 0);
     if (!IS_STRING_REP(prop))
         ErrorQuit("<prop> must be a string", 0, 0);
+
+    FUNC_BEGIN
 
     libnormaliz::ConeProperty::Enum p = libnormaliz::toConeProperty(CSTR_STRING(prop));
 
@@ -518,10 +517,10 @@ DeclareGlobalFunction("NmzKnownConeProperties");
 */
 Obj NmzKnownConeProperties(Obj self, Obj cone)
 {
-    FUNC_BEGIN
-
     if (!IS_CONE(cone))
         ErrorQuit("<cone> must be a Normaliz cone", 0, 0);
+
+    FUNC_BEGIN
 
     size_t n = 0;
     Obj M = NEW_PLIST(T_PLIST, libnormaliz::ConeProperty::EnumSize);
@@ -755,10 +754,10 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
     case libnormaliz::ConeProperty::BigInt:
     case libnormaliz::ConeProperty::NoNestedTri:
     case libnormaliz::ConeProperty::HSOP:
-        ErrorQuit("Cone property is input only", 0, 0);
+        throw "cone property is input-only";
 
     default:
-        ErrorQuit("Unknown cone property", 0, 0);
+        throw "unknown cone property";
     }
 
     return Fail;
@@ -766,15 +765,13 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
 
 Obj _NmzConeProperty(Obj self, Obj cone, Obj prop)
 {
-    FUNC_BEGIN
-
     if (!IS_CONE(cone))
         ErrorQuit("<cone> must be a Normaliz cone", 0, 0);
     if (!IS_STRING_REP(prop))
         ErrorQuit("<prop> must be a string", 0, 0);
 
+    FUNC_BEGIN
     return _NmzConePropertyImpl<mpz_class>(cone, prop);
-
     FUNC_END
 }
 
@@ -793,9 +790,9 @@ DeclareGlobalFunction("NmzSetVerboseDefault");
 */
 Obj NmzSetVerboseDefault(Obj self, Obj value)
 {
-    FUNC_BEGIN
     if (value != True && value != False)
         ErrorQuit("<value> must be a boolean value", 0, 0);
+    FUNC_BEGIN
     return libnormaliz::setVerboseDefault(value == True) ? True : False;
     FUNC_END
 }
@@ -810,13 +807,13 @@ DeclareGlobalFunction("NmzSetVerbose");
 */
 Obj NmzSetVerbose(Obj self, Obj cone, Obj value)
 {
-    FUNC_BEGIN
     if (!IS_CONE(cone))
         ErrorQuit("<cone> must be a Normaliz cone", 0, 0);
     if (value != True && value != False)
         ErrorQuit("<value> must be a boolean value", 0, 0);
     bool old_value;
 
+    FUNC_BEGIN
     Cone<mpz_class>* C = GET_CONE<mpz_class>(cone);
     old_value = C->setVerbose(value == True);
     return old_value ? True : False;
