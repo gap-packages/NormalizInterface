@@ -470,6 +470,8 @@ static Obj NmzTriangleListToGAP(const vector< pair<vector<libnormaliz::key_t>, I
 template<typename Integer>
 static Obj _NmzConeIntern(Obj input_list)
 {
+    bool has_polynomial_input = false;
+    string polynomial;
     map <InputType, vector< vector<Integer> > > input;
     const int n = LEN_PLIST(input_list);
     if (n&1) {
@@ -483,8 +485,15 @@ static Obj _NmzConeIntern(Obj input_list)
             return Fail;
         }
         string type_str(CSTR_STRING(type));
-
         Obj M = ELM_PLIST(input_list, i+2);
+        if (type_str.compare("polynomial") == 0) {
+            if (!IS_STRING_REP(M)) {
+                cerr << "Element " << i+2 << " of the input list must be a string" << endl;
+            }
+            polynomial = string(CSTR_STRING(M));
+            has_polynomial_input = true;
+            continue;
+        }
         vector<vector<Integer> > Mat;
         bool okay = GAPIntMatrixToNmz(Mat, M);
         if (!okay) {
@@ -496,6 +505,9 @@ static Obj _NmzConeIntern(Obj input_list)
     }
 
     Cone<Integer>* C = new Cone<Integer>(input);
+    if (has_polynomial_input) {
+        C->setPolynomial(polynomial);
+    }
     Obj Cone = NewCone(C);
     return Cone;
 
