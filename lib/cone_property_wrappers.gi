@@ -1,6 +1,3 @@
-## This is an automatically generated file
-
-
 InstallGlobalFunction( NmzAffineDim, cone -> NmzConeProperty(cone, "AffineDim" ) );
 
 InstallGlobalFunction( NmzClassGroup, cone -> NmzConeProperty(cone, "ClassGroup" ) );
@@ -33,11 +30,13 @@ InstallGlobalFunction( NmzIsIntegrallyClosed, cone -> NmzConeProperty(cone, "IsI
 
 InstallGlobalFunction( NmzIsPointed, cone -> NmzConeProperty(cone, "IsPointed" ) );
 
+InstallGlobalFunction( NmzIsReesPrimary, cone -> NmzConeProperty(cone, "IsReesPrimary" ) );
+
+InstallGlobalFunction( NmzMaximalSubspace, cone -> NmzConeProperty(cone, "MaximalSubspace" ) );
+
 InstallGlobalFunction( NmzModuleGenerators, cone -> NmzConeProperty(cone, "ModuleGenerators" ) );
 
 InstallGlobalFunction( NmzModuleGeneratorsOverOriginalMonoid, cone -> NmzConeProperty(cone, "ModuleGeneratorsOverOriginalMonoid" ) );
-
-InstallGlobalFunction( NmzMaximalSubspace, cone -> NmzConeProperty(cone, "MaximalSubspace" ) );
 
 InstallGlobalFunction( NmzModuleRank, cone -> NmzConeProperty(cone, "ModuleRank" ) );
 
@@ -46,8 +45,6 @@ InstallGlobalFunction( NmzMultiplicity, cone -> NmzConeProperty(cone, "Multiplic
 InstallGlobalFunction( NmzOriginalMonoidGenerators, cone -> NmzConeProperty(cone, "OriginalMonoidGenerators" ) );
 
 InstallGlobalFunction( NmzRecessionRank, cone -> NmzConeProperty(cone, "RecessionRank" ) );
-
-InstallGlobalFunction( NmzIsReesPrimary, cone -> NmzConeProperty(cone, "IsReesPrimary" ) );
 
 InstallGlobalFunction( NmzReesPrimaryMultiplicity, cone -> NmzConeProperty(cone, "ReesPrimaryMultiplicity" ) );
 
@@ -60,4 +57,3 @@ InstallGlobalFunction( NmzTriangulationDetSum, cone -> NmzConeProperty(cone, "Tr
 InstallGlobalFunction( NmzTriangulationSize, cone -> NmzConeProperty(cone, "TriangulationSize" ) );
 
 InstallGlobalFunction( NmzVerticesOfPolyhedron, cone -> NmzConeProperty(cone, "VerticesOfPolyhedron" ) );
-
