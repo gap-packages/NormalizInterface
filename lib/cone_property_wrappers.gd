@@ -317,3 +317,13 @@ DeclareGlobalFunction( "NmzIntegerHull" );
 #!  This is an alias for NmzConeProperty( cone, "ConeDecomposition" );
 #! @Arguments cone
 DeclareGlobalFunction( "NmzConeDecomposition" );
+
+#! @Description
+#!  This is an alias for NmzConeProperty( cone, "NmzWeightedEhrhartSeries" );
+#! @Arguments cone
+DeclareGlobalFunction( "NmzWeightedEhrhartSeries" );
+
+#! @Description
+#!  This is an alias for NmzConeProperty( cone, "NmzWeightedEhrhartQuasiPolynomial" );
+#! @Arguments cone
+DeclareGlobalFunction( "NmzWeightedEhrhartQuasiPolynomial" );

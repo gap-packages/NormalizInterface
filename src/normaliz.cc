@@ -332,7 +332,7 @@ static Obj NmzHilbertSeriesToGAP(const libnormaliz::HilbertSeries& HS)
 }
 
 template<typename Integer>
-static Obj NmzWeightedEhrhartSeriesToPyList(const std::pair<libnormaliz::HilbertSeries,Integer>& HS)
+static Obj NmzWeightedEhrhartSeriesToGAP(const std::pair<libnormaliz::HilbertSeries,Integer>& HS)
 {   
     Obj ret;
     ret = NEW_PLIST(T_PLIST, 4);
@@ -647,6 +647,9 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
         return NmzVectorToGAP(grad);
         }
 
+    case libnormaliz::ConeProperty::GradingDenom:
+        return NmzIntToGAP( C->getGradingDenom() );
+
     case libnormaliz::ConeProperty::IsPointed:
         return C->isPointed() ? True : False;
 
@@ -733,6 +736,12 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
     
     case libnormaliz::ConeProperty::WitnessNotIntegrallyClosed:
         return NmzVectorToGAP(C->getWitnessNotIntegrallyClosed());
+    
+    case libnormaliz::ConeProperty::UnitGroupIndex:
+        return NmzIntToGAP(C->getUnitGroupIndex());
+    
+    case libnormaliz::ConeProperty::WeightedEhrhartSeries:
+        return NmzWeightedEhrhartSeriesToGAP(C->getWeightedEhrhartSeries());
 
 //  the following properties are compute options and do not return anything
     case libnormaliz::ConeProperty::DefaultMode:

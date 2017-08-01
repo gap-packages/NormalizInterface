@@ -4,6 +4,8 @@ InstallGlobalFunction( NmzClassGroup, cone -> NmzConeProperty(cone, "ClassGroup"
 
 InstallGlobalFunction( NmzConeDecomposition, cone -> NmzConeProperty(cone, "ConeDecomposition" ) );
 
+InstallGlobalFunction( NmzCongruences, cone -> NmzConeProperty(cone, "Congruences" ) );
+
 InstallGlobalFunction( NmzDeg1Elements, cone -> NmzConeProperty(cone, "Deg1Elements" ) );
 
 InstallGlobalFunction( NmzDehomogenization, cone -> NmzConeProperty(cone, "Dehomogenization" ) );
@@ -83,5 +85,9 @@ InstallGlobalFunction( NmzTriangulationSize, cone -> NmzConeProperty(cone, "Tria
 InstallGlobalFunction( NmzUnitGroupIndex, cone -> NmzConeProperty(cone, "UnitGroupIndex" ) );
 
 InstallGlobalFunction( NmzVerticesOfPolyhedron, cone -> NmzConeProperty(cone, "VerticesOfPolyhedron" ) );
+
+InstallGlobalFunction( NmzWeightedEhrhartQuasiPolynomial, cone -> NmzConeProperty( cone, "WeightedEhrhartQuasiPolynomial" ) );
+
+InstallGlobalFunction( NmzWeightedEhrhartSeries, cone -> NmzConeProperty( cone, "WeightedEhrhartSeries" ) );
 
 InstallGlobalFunction( NmzWitnessNotIntegrallyClosed, cone -> NmzConeProperty(cone, "WitnessNotIntegrallyClosed" ) );
