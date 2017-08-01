@@ -28,6 +28,9 @@
 #include <vector>
 #include <iostream>
 
+#include <csignal>
+using std::signal;
+
 // Paranoia check
 #ifdef SYS_IS_64_BIT
   #if GMP_LIMB_BITS != 64
@@ -53,6 +56,12 @@ using std::pair;
 
 using std::cerr;
 using std::endl;
+
+void signal_handler(int signal)
+{
+    libnormaliz::nmz_interrupted = true;
+}
+
 
 Obj TheTypeNormalizCone;
 
@@ -456,7 +465,11 @@ Obj _NmzCompute(Obj self, Obj cone, Obj to_compute)
     }
 
     Cone<mpz_class>* C = GET_CONE<mpz_class>(cone);
-    ConeProperties notComputed = C->compute(propsToCompute);
+    
+    ConeProperties notComputed;
+    SIGNAL_HANDLER_BEGIN
+    notComputed = C->compute(propsToCompute);
+    SIGNAL_HANDLER_END
 
     // Cone.compute returns the not computed properties
     // we return a bool, true when everything requested was computed
@@ -560,8 +573,10 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
     Cone<Integer>* C = GET_CONE<Integer>(cone);
 
     libnormaliz::ConeProperty::Enum p = libnormaliz::toConeProperty(CSTR_STRING(prop));
-
-    ConeProperties notComputed = C->compute(ConeProperties(p));
+    ConeProperties notComputed;
+    SIGNAL_HANDLER_BEGIN
+    notComputed = C->compute(ConeProperties(p));
+    SIGNAL_HANDLER_END
     if (notComputed.any()) {
         return Fail;
     }
@@ -825,7 +840,10 @@ Obj NmzEmbeddingDimension(Obj self, Obj cone)
 template<typename Integer>
 static Obj _NmzBasisChangeIntern(Cone<Integer>* C)
 {
-    Sublattice_Representation<Integer> bc = C->getSublattice();
+    Sublattice_Representation<Integer> bc;
+    SIGNAL_HANDLER_BEGIN
+    bc = C->getSublattice();
+    SIGNAL_HANDLER_END
 
     Obj res = NEW_PLIST(T_PLIST, 3);
     SET_LEN_PLIST(res, 3);
@@ -882,7 +900,7 @@ static Int InitKernel( StructInitInfo *module )
     CopyObjFuncs[ T_NORMALIZ ] = &NormalizCopyFunc;
     CleanObjFuncs[ T_NORMALIZ ] = &NormalizCleanFunc;
     IsMutableObjFuncs[ T_NORMALIZ ] = &NormalizIsMutableObjFuncs;
-
+    
     /* return success                                                      */
     return 0;
 }
