@@ -818,24 +818,6 @@ Obj NmzSetVerbose(Obj self, Obj cone, Obj value)
 #! @Section Cone properties
 */
 
-/*
-#! @Arguments cone
-#! @Returns the embedding dimension of the cone
-#! @Description
-#! The embedding dimension is the dimension of the space in which the
-#! computation is done. It is the number of components of the output vectors.
-#! This value is always known directly after the creation of the cone.
-DeclareGlobalFunction("NmzEmbeddingDimension");
-*/
-Obj NmzEmbeddingDimension(Obj self, Obj cone)
-{
-    FUNC_BEGIN
-    if (!IS_CONE(cone))
-        ErrorQuit("<cone> must be a Normaliz cone", 0, 0);
-    Cone<mpz_class>* C = GET_CONE<mpz_class>(cone);
-    return NmzIntToGAP(C->getEmbeddingDim());
-    FUNC_END
-}
 
 template<typename Integer>
 static Obj _NmzBasisChangeIntern(Cone<Integer>* C)
@@ -875,8 +857,6 @@ static StructGVarFunc GVarFuncs[] = {
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzHasConeProperty, 2, "cone, prop"),
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", _NmzConeProperty, 2, "cone, prop"),
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzKnownConeProperties, 1, "cone"),
-
-    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzEmbeddingDimension, 1, "cone"),
 
     { 0 } /* Finish with an empty entry */
 

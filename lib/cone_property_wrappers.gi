@@ -10,6 +10,8 @@ InstallGlobalFunction( NmzDehomogenization, cone -> NmzConeProperty(cone, "Dehom
 
 InstallGlobalFunction( NmzEmbeddingDim, cone -> NmzConeProperty(cone, "EmbeddingDim" ) );
 
+InstallGlobalFunction( NmzEmbeddingDimension, cone -> NmzConeProperty(cone, "EmbeddingDim" ) );
+
 InstallGlobalFunction( NmzEquations, cone -> NmzConeProperty(cone, "Equations" ) );
 
 InstallGlobalFunction( NmzExcludedFaces, cone -> NmzConeProperty(cone, "ExcludedFaces" ) );
