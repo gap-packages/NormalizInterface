@@ -475,20 +475,18 @@ static Obj _NmzConeIntern(Obj input_list)
     map <InputType, vector< vector<Integer> > > input;
     const int n = LEN_PLIST(input_list);
     if (n&1) {
-        cerr << "Input list must have even number of elements" << endl;
-        return Fail;
+        throw std::runtime_error("Input list must have even number of elements");
     }
     for (int i = 0; i < n; i += 2) {
         Obj type = ELM_PLIST(input_list, i+1);
         if (!IS_STRING_REP(type)) {
-            cerr << "Element " << i+1 << " of the input list must be a type string" << endl;
-            return Fail;
+            throw std::runtime_error("Element " + std::to_string(i+1) + " of the input list must be a type string");
         }
         string type_str(CSTR_STRING(type));
         Obj M = ELM_PLIST(input_list, i+2);
         if (type_str.compare("polynomial") == 0) {
             if (!IS_STRING_REP(M)) {
-                cerr << "Element " << i+2 << " of the input list must be a string" << endl;
+                throw std::runtime_error("Element " + std::to_string(i+2) + " of the input list must be a string");
             }
             polynomial = string(CSTR_STRING(M));
             has_polynomial_input = true;
@@ -497,8 +495,7 @@ static Obj _NmzConeIntern(Obj input_list)
         vector<vector<Integer> > Mat;
         bool okay = GAPIntMatrixToNmz(Mat, M);
         if (!okay) {
-            cerr << "Element " << i+2 << " of the input list must integer matrix" << endl;
-            return Fail;
+            throw std::runtime_error("Element " + std::to_string(i+2) + " of the input list must integer matrix");
         }
 
         input[libnormaliz::to_type(type_str)] = Mat;
@@ -538,8 +535,7 @@ Obj _NmzCompute(Obj self, Obj cone, Obj to_compute)
     for (int i = 0; i < n; ++i) {
         Obj prop = ELM_PLIST(to_compute, i+1);
         if (!IS_STRING_REP(prop)) {
-            cerr << "Element " << i+1 << " of the input list must be a type string";
-            return Fail;
+            throw std::runtime_error("Element " + std::to_string(i+1) + " of the input list must be a type string");
         }
         string prop_str(CSTR_STRING(prop));
         propsToCompute.set( libnormaliz::toConeProperty(prop_str) );
