@@ -284,6 +284,33 @@ static Obj NmzMatrixToGAP(const vector< vector<Integer> >& in)
     return M;
 }
 
+static Obj NmzBoolMatrixToGAP(const vector< vector<bool> >& in)
+{
+    Obj M;
+    Obj N;
+    const size_t m = in.size();
+    size_t n;
+    // TODO: Use BLIST instead
+    M = NEW_PLIST(T_PLIST, m);
+    SET_LEN_PLIST(M, m);
+    for (size_t i = 0; i < m; ++i) {
+        n = in[i].size();
+        N = NEW_PLIST( T_PLIST, n );
+        SET_LEN_PLIST( N, n );
+        for( size_t j = 0; j < n; ++j ){
+            SET_ELM_PLIST(N, j+1, in[i][j] ? True : False );
+        }
+        SET_ELM_PLIST( M, i+1, N );
+        CHANGED_BAG( M );
+    }
+    CHANGED_BAG( M );
+    return M;
+}
+
+/* TODO: HSOP
+ *       There are two representations for Hilbert series in Normaliz, standard and HSOP. 
+ *       Currently, only the standard representation is returned.
+ */
 static Obj NmzHilbertSeriesToGAP(const libnormaliz::HilbertSeries& HS)
 {
     Obj ret;
@@ -292,6 +319,19 @@ static Obj NmzHilbertSeriesToGAP(const libnormaliz::HilbertSeries& HS)
     AssPlist(ret, 1, NmzVectorToGAP(HS.getNum()));
     AssPlist(ret, 2, NmzVectorToGAP(libnormaliz::to_vector(HS.getDenom())));
     AssPlist(ret, 3, NmzIntToGAP(HS.getShift()));
+    return ret;
+}
+
+template<typename Integer>
+static Obj NmzWeightedEhrhartSeriesToPyList(const std::pair<libnormaliz::HilbertSeries,Integer>& HS)
+{   
+    Obj ret;
+    ret = NEW_PLIST(T_PLIST, 4);
+    SET_LEN_PLIST(ret, 4);
+    AssPlist(ret, 1, NmzVectorToGAP(HS.first.getNum()));
+    AssPlist(ret, 2, NmzVectorToGAP(libnormaliz::to_vector(HS.first.getDenom())));
+    AssPlist(ret, 3, NmzIntToGAP(HS.first.getShift()));
+    AssPlist(ret, 4, NmzIntToGAP(HS.second));
     return ret;
 }
 
@@ -308,6 +348,20 @@ static Obj NmzHilbertQuasiPolynomialToGAP(const libnormaliz::HilbertSeries& HS)
         CHANGED_BAG( ret );
     }
     AssPlist(ret, n+1, NmzIntToGAP(HS.getHilbertQuasiPolynomialDenom()));
+    return ret;
+}
+
+static Obj NmzWeightedEhrhartQuasiPolynomialToPyList(const libnormaliz::IntegrationData& int_data)
+{
+    Obj ret;
+    vector< vector<mpz_class> > ehrhart_qp = int_data.getWeightedEhrhartQuasiPolynomial();
+    const size_t n = ehrhart_qp.size();
+    ret = NEW_PLIST(T_PLIST, n+1);
+    for (size_t i = 0; i < n; ++i) {
+        SET_ELM_PLIST(ret, i+1 , NmzVectorToGAP(ehrhart_qp[i]));
+        CHANGED_BAG( ret );
+    }
+    AssPlist(ret, n+1, NmzIntToGAP(int_data.getWeightedEhrhartQuasiPolynomialDenom()));
     return ret;
 }
 
@@ -504,12 +558,6 @@ template<typename Integer>
 static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
 {
     Cone<Integer>* C = GET_CONE<Integer>(cone);
-    // there is no ConeProperty HilbertQuasiPolynomial, it is part of the HilbertSeries
-    // FIXME better way?
-    if (string(CSTR_STRING(prop)) == string("HilbertQuasiPolynomial")) {
-        C->compute(ConeProperties(libnormaliz::ConeProperty::HilbertSeries));
-        return NmzHilbertQuasiPolynomialToGAP(C->getHilbertSeries());
-    }
 
     libnormaliz::ConeProperty::Enum p = libnormaliz::toConeProperty(CSTR_STRING(prop));
 
@@ -545,6 +593,12 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
         mpq_class mult = C->getMultiplicity();
         return MpqClassToGAP(mult);
         }
+
+    case libnormaliz::ConeProperty::Integral:
+        return MpqClassToGAP(C->getIntegral());
+
+    case libnormaliz::ConeProperty::VirtualMultiplicity:
+        return MpqClassToGAP(C->getVirtualMultiplicity());
 
     case libnormaliz::ConeProperty::RecessionRank:
         return NmzIntToGAP(C->getRecessionRank());
@@ -617,21 +671,64 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
     case libnormaliz::ConeProperty::ClassGroup:
         return NmzVectorToGAP(C->getClassGroup());
 
+    case libnormaliz::ConeProperty::IsInhomogeneous:
+        return C->isInhomogeneous() ? True : False;
+
+    case libnormaliz::ConeProperty::Equations:
+        return NmzMatrixToGAP(C->getSublattice().getEquations());
+    
+    case libnormaliz::ConeProperty::Congruences:
+        return NmzMatrixToGAP(C->getSublattice().getCongruences());
+    
+    case libnormaliz::ConeProperty::EmbeddingDim:
+        return NmzIntToGAP(C->getEmbeddingDim());
+    
+    case libnormaliz::ConeProperty::Rank:
+        return NmzIntToGAP(C->getRank());
+    
     case libnormaliz::ConeProperty::Sublattice:
-        C->compute(p);
-        return C->isComputed(p) ? True : False;
+        return _NmzBasisChangeIntern(C);
+    
+    case libnormaliz::ConeProperty::HilbertQuasiPolynomial:
+        return NmzHilbertQuasiPolynomialToGAP(C->getHilbertSeries());
+    
+    case libnormaliz::ConeProperty::WeightedEhrhartQuasiPolynomial:
+        return NmzWeightedEhrhartQuasiPolynomialToPyList(C->getIntData());
+    
+    case libnormaliz::ConeProperty::IsTriangulationNested:
+        return C->isTriangulationNested() ? True : False;
+        
+    case libnormaliz::ConeProperty::IsTriangulationPartial:
+        return C->isTriangulationPartial() ? True : False;
+    
+    case libnormaliz::ConeProperty::ConeDecomposition:
+        return NmzBoolMatrixToGAP(C->getOpenFacets());
+    
+    case libnormaliz::ConeProperty::ExternalIndex:
+        return NmzIntToGAP(C->getSublattice().getExternalIndex());
+    
+    case libnormaliz::ConeProperty::InternalIndex:
+        return NmzIntToGAP(C->getIndex());
+    
+    case libnormaliz::ConeProperty::WitnessNotIntegrallyClosed:
+        return NmzVectorToGAP(C->getWitnessNotIntegrallyClosed());
 
 //  the following properties are compute options and do not return anything
-    case libnormaliz::ConeProperty::DualMode:
     case libnormaliz::ConeProperty::DefaultMode:
     case libnormaliz::ConeProperty::Approximate:
     case libnormaliz::ConeProperty::BottomDecomposition:
     case libnormaliz::ConeProperty::KeepOrder:
-        return True;    // FIXME: appropriate value?
+    case libnormaliz::ConeProperty::NoBottomDec:
+    case libnormaliz::ConeProperty::PrimalMode:
+    case libnormaliz::ConeProperty::Symmetrize:
+    case libnormaliz::ConeProperty::NoSymmetrization:
+    case libnormaliz::ConeProperty::BigInt:
+    case libnormaliz::ConeProperty::NoNestedTri:
+    case libnormaliz::ConeProperty::HSOP:
+        ErrorQuit("Cone property is input only", 0, 0);
 
     default:
-        // Case not handled. Should signal an error
-        break;
+        ErrorQuit("Unknown cone property", 0, 0);
     }
 
     return Fail;
@@ -720,9 +817,8 @@ Obj NmzEmbeddingDimension(Obj self, Obj cone)
 }
 
 template<typename Integer>
-static Obj _NmzBasisChangeIntern(Obj cone)
+static Obj _NmzBasisChangeIntern(Cone<Integer>* C)
 {
-    Cone<Integer>* C = GET_CONE<Integer>(cone);
     Sublattice_Representation<Integer> bc = C->getSublattice();
 
     Obj res = NEW_PLIST(T_PLIST, 3);
@@ -733,15 +829,6 @@ static Obj _NmzBasisChangeIntern(Obj cone)
     // Dim, Rank, Equations and Congruences are already covered by special functions
     // The index is not always computed and not so relevant
     return res;
-}
-
-Obj _NmzBasisChange(Obj self, Obj cone)
-{
-    FUNC_BEGIN
-    if (!IS_CONE(cone))
-        ErrorQuit("<cone> must be a Normaliz cone", 0, 0);
-    return _NmzBasisChangeIntern<mpz_class>(cone);
-    FUNC_END
 }
 
 /*
@@ -846,7 +933,6 @@ static StructGVarFunc GVarFuncs[] = {
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzKnownConeProperties, 1, "cone"),
 
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzEmbeddingDimension, 1, "cone"),
-    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", _NmzBasisChange, 1, "cone"),
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzRank, 1, "cone"),
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzIsInhomogeneous, 1, "cone"),
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzEquations, 1, "cone"),
@@ -866,15 +952,8 @@ static Int InitKernel( StructInitInfo *module )
 
     InitCopyGVar( "TheTypeNormalizCone", &TheTypeNormalizCone );
 
-#if 1
-    // GAP >= 4.8:
     T_NORMALIZ = RegisterPackageTNUM("NormalizCone", NormalizTypeFunc);
-#else
-    // GAP < 4.8:
-    T_NORMALIZ = T_SPARE1;  // HACK
-    InfoBags[T_NORMALIZ].name = "NormalizCone";
-    TypeObjFuncs[T_NORMALIZ] = &NormalizTypeFunc;
-#endif
+
     InitMarkFuncBags(T_NORMALIZ, &MarkNoSubBags);
     InitFreeFuncBag(T_NORMALIZ, &NormalizFreeFunc);
 
