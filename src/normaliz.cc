@@ -75,10 +75,23 @@ Obj NewCone(Cone<mpz_class>* C)
     return o;
 }
 
+Obj NewProxyCone(Cone<mpz_class>* C, Obj parentCone)
+{
+    Obj o;
+    o = NewBag(T_NORMALIZ, 2 * sizeof(Obj) );
+    SET_CONE<mpz_class>(o, C);
+    ADDR_OBJ(o)[1] = parentCone;
+    return o;
+}
+
+#define IS_PROXY_CONE(o)  (SIZE_OBJ(o) == 2)
+
 /* Free function */
 void NormalizFreeFunc(Obj o)
 {
-    delete GET_CONE<mpz_class>(o);
+    if (!IS_PROXY_CONE(o)) {
+        delete GET_CONE<mpz_class>(o);
+    }
 }
 
 /* Type object function for the object */
@@ -708,8 +721,8 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
     
     case libnormaliz::ConeProperty::IntegerHull:
     {
-        Cone<Integer>* hull = new Cone<Integer>( C->getIntegerHullCone() );
-        return NewCone( hull );
+        Cone<Integer>* int_hull = &(C->getIntegerHullCone());
+        return NewProxyCone( int_hull, cone );
     }
     
     case libnormaliz::ConeProperty::HilbertQuasiPolynomial:
@@ -880,7 +893,7 @@ static Int InitKernel( StructInitInfo *module )
 
     T_NORMALIZ = RegisterPackageTNUM("NormalizCone", NormalizTypeFunc);
 
-    InitMarkFuncBags(T_NORMALIZ, &MarkNoSubBags);
+    InitMarkFuncBags(T_NORMALIZ, &MarkAllSubBags);
     InitFreeFuncBag(T_NORMALIZ, &NormalizFreeFunc);
 
     CopyObjFuncs[ T_NORMALIZ ] = &NormalizCopyFunc;
