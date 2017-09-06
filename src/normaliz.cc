@@ -55,6 +55,9 @@ extern UInt T_NORMALIZ;
     } catch (std::exception& e) { \
         ErrorQuit(e.what(),0,0); \
         return Fail; \
+    } catch (const char* a) { \
+        ErrorQuit(a,0,0); \
+        return Fail; \
     }
 
 #define SIGNAL_HANDLER_BEGIN \
