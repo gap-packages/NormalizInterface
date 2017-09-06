@@ -1,5 +1,10 @@
 This file describes changes in the NormalizInterface package.
 
+1.0.0 (2017-09-06)
+  - update to libnormaliz 3.4.0
+    * added cone properties
+    * added wrappers for new normaliz functionality
+
 0.9.8 (2016-05-07)
   - update to libnormaliz 3.1.1
 

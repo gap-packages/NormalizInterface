@@ -24,6 +24,8 @@ InstallGlobalFunction( NmzExtremeRays, cone -> NmzConeProperty(cone, "ExtremeRay
 
 InstallGlobalFunction( NmzGenerators, cone -> NmzConeProperty(cone, "Generators" ) );
 
+InstallGlobalFunction( NmzGeneratorOfInterior, cone -> NmzConeProperty(cone, "GeneratorOfInterior" ) );
+
 InstallGlobalFunction( NmzGrading, cone -> NmzConeProperty(cone, "Grading" ) );
 
 InstallGlobalFunction( NmzGradingDenom, cone -> NmzConeProperty(cone, "GradingDenom" ) );
@@ -43,6 +45,8 @@ InstallGlobalFunction( NmzInternalIndex, cone -> NmzConeProperty(cone, "Internal
 InstallGlobalFunction( NmzIsDeg1ExtremeRays, cone -> NmzConeProperty(cone, "IsDeg1ExtremeRays" ) );
 
 InstallGlobalFunction( NmzIsDeg1HilbertBasis, cone -> NmzConeProperty(cone, "IsDeg1HilbertBasis" ) );
+
+InstallGlobalFunction( NmzIsGorenstein, cone -> NmzConeProperty(cone, "IsGorenstein" ) );
 
 InstallGlobalFunction( NmzIsInhomogeneous, cone -> NmzConeProperty(cone, "IsInhomogeneous" ) );
 
@@ -85,6 +89,8 @@ InstallGlobalFunction( NmzTriangulationSize, cone -> NmzConeProperty(cone, "Tria
 InstallGlobalFunction( NmzUnitGroupIndex, cone -> NmzConeProperty(cone, "UnitGroupIndex" ) );
 
 InstallGlobalFunction( NmzVerticesOfPolyhedron, cone -> NmzConeProperty(cone, "VerticesOfPolyhedron" ) );
+
+InstallGlobalFunction( NmzVerticesFloat, cone -> NmzConeProperty(cone, "VerticesFloat" ) );
 
 InstallGlobalFunction( NmzWeightedEhrhartQuasiPolynomial, cone -> NmzConeProperty( cone, "WeightedEhrhartQuasiPolynomial" ) );
 
