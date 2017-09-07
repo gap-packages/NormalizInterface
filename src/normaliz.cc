@@ -45,8 +45,8 @@ typedef void (*sighandler_t)(int);
 extern UInt T_NORMALIZ;
 
 // old versions of libnormaliz (before 2.99.1) did not include such a define
-#if !defined(NMZ_RELEASE) || NMZ_RELEASE < 30300
-#error Your Normaliz version is to old! Update to 3.3.0 or newer.
+#if !defined(NMZ_RELEASE) || NMZ_RELEASE < 30400
+#error Your Normaliz version is to old! Update to 3.4.0 or newer.
 #endif
 
 #define FUNC_BEGIN try {
@@ -218,38 +218,43 @@ static Obj MpqClassToGAP(const mpq_class& x)
     return QUO(num, den);
 }
 
-template<typename Integer>
-Obj NmzIntToGAP(Integer x)
+template<typename Number>
+Obj NmzNumberToGAP(Number x)
 {
-    return Integer::unimplemented_function;
+    return Number::unimplemented_function;
 }
 
 template<>
-Obj NmzIntToGAP(libnormaliz::key_t x)   // key_t = unsigned int
+Obj NmzNumberToGAP(libnormaliz::key_t x)   // key_t = unsigned int
 {
     return ObjInt_UInt(x);
 }
 
 #ifdef SYS_IS_64_BIT
 template<>
-Obj NmzIntToGAP(size_t x)               // size_t = unsigned long
+Obj NmzNumberToGAP(size_t x)               // size_t = unsigned long
 {
     return ObjInt_UInt(x);
 }
 #endif
 
 template<>
-Obj NmzIntToGAP(long x)
+Obj NmzNumberToGAP(long x)
 {
     return ObjInt_Int(x);
 }
 
 template<>
-Obj NmzIntToGAP(mpz_class x)
+Obj NmzNumberToGAP(mpz_class x)
 {
     return MpzClassToGAP(x);
 }
 
+template<>
+Obj NmzNumberToGAP(double x)
+{
+    return NEW_MACFLOAT(x);
+}
 
 
 template<typename Integer>
@@ -337,22 +342,22 @@ static bool GAPIntMatrixToNmz(vector< vector<Integer> >& out, Obj M)
     return true;
 }
 
-template<typename Integer>
-static Obj NmzVectorToGAP(const vector<Integer>& in)
+template<typename Number>
+static Obj NmzVectorToGAP(const vector<Number>& in)
 {
     Obj M;
     const size_t n = in.size();
     M = NEW_PLIST((n > 0) ? T_PLIST_CYC : T_PLIST, n);
     SET_LEN_PLIST(M, n);
     for (size_t i = 0; i < n; ++i) {
-        SET_ELM_PLIST(M, i+1, NmzIntToGAP(in[i]));
+        SET_ELM_PLIST(M, i+1, NmzNumberToGAP(in[i]));
         CHANGED_BAG( M );
     }
     return M;
 }
 
-template<typename Integer>
-static Obj NmzMatrixToGAP(const vector< vector<Integer> >& in)
+template<typename Number>
+static Obj NmzMatrixToGAP(const vector< vector<Number> >& in)
 {
     Obj M;
     const size_t n = in.size();
@@ -400,7 +405,7 @@ static Obj NmzHilbertSeriesToGAP(const libnormaliz::HilbertSeries& HS)
     SET_LEN_PLIST(ret, 3);
     AssPlist(ret, 1, NmzVectorToGAP(HS.getNum()));
     AssPlist(ret, 2, NmzVectorToGAP(libnormaliz::to_vector(HS.getDenom())));
-    AssPlist(ret, 3, NmzIntToGAP(HS.getShift()));
+    AssPlist(ret, 3, NmzNumberToGAP(HS.getShift()));
     return ret;
 }
 
@@ -412,8 +417,8 @@ static Obj NmzWeightedEhrhartSeriesToGAP(const std::pair<libnormaliz::HilbertSer
     SET_LEN_PLIST(ret, 4);
     AssPlist(ret, 1, NmzVectorToGAP(HS.first.getNum()));
     AssPlist(ret, 2, NmzVectorToGAP(libnormaliz::to_vector(HS.first.getDenom())));
-    AssPlist(ret, 3, NmzIntToGAP(HS.first.getShift()));
-    AssPlist(ret, 4, NmzIntToGAP(HS.second));
+    AssPlist(ret, 3, NmzNumberToGAP(HS.first.getShift()));
+    AssPlist(ret, 4, NmzNumberToGAP(HS.second));
     return ret;
 }
 
@@ -429,7 +434,7 @@ static Obj NmzHilbertQuasiPolynomialToGAP(const libnormaliz::HilbertSeries& HS)
         SET_ELM_PLIST(ret, i+1, NmzVectorToGAP(HQ[i]));
         CHANGED_BAG( ret );
     }
-    AssPlist(ret, n+1, NmzIntToGAP(HS.getHilbertQuasiPolynomialDenom()));
+    AssPlist(ret, n+1, NmzNumberToGAP(HS.getHilbertQuasiPolynomialDenom()));
     return ret;
 }
 
@@ -443,7 +448,7 @@ static Obj NmzWeightedEhrhartQuasiPolynomialToGAP(const libnormaliz::Integration
         SET_ELM_PLIST(ret, i+1 , NmzVectorToGAP(ehrhart_qp[i]));
         CHANGED_BAG( ret );
     }
-    AssPlist(ret, n+1, NmzIntToGAP(int_data.getWeightedEhrhartQuasiPolynomialDenom()));
+    AssPlist(ret, n+1, NmzNumberToGAP(int_data.getWeightedEhrhartQuasiPolynomialDenom()));
     return ret;
 }
 
@@ -459,7 +464,7 @@ static Obj NmzTriangleListToGAP(const vector< pair<vector<libnormaliz::key_t>, I
         Obj pair = NEW_PLIST(T_PLIST, 2);
         SET_LEN_PLIST(pair, 2);
         SET_ELM_PLIST(pair, 1, NmzVectorToGAP<libnormaliz::key_t>(in[i].first));
-        SET_ELM_PLIST(pair, 2, NmzIntToGAP(in[i].second));
+        SET_ELM_PLIST(pair, 2, NmzNumberToGAP(in[i].second));
         CHANGED_BAG( pair );
 
         SET_ELM_PLIST(M, i+1, pair);
@@ -678,7 +683,7 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
         return ObjInt_UInt(C->getTriangulationSize());
 
     case libnormaliz::ConeProperty::TriangulationDetSum:
-        return NmzIntToGAP(C->getTriangulationDetSum());
+        return NmzNumberToGAP(C->getTriangulationDetSum());
 
     case libnormaliz::ConeProperty::Triangulation:
         return NmzTriangleListToGAP<Integer>(C->getTriangulation());
@@ -696,13 +701,13 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
         return MpqClassToGAP(C->getVirtualMultiplicity());
 
     case libnormaliz::ConeProperty::RecessionRank:
-        return NmzIntToGAP(C->getRecessionRank());
+        return NmzNumberToGAP(C->getRecessionRank());
 
     case libnormaliz::ConeProperty::AffineDim:
-        return NmzIntToGAP(C->getAffineDim());
+        return NmzNumberToGAP(C->getAffineDim());
 
     case libnormaliz::ConeProperty::ModuleRank:
-        return NmzIntToGAP(C->getModuleRank());
+        return NmzNumberToGAP(C->getModuleRank());
 
     case libnormaliz::ConeProperty::HilbertBasis:
         return NmzMatrixToGAP(C->getHilbertBasis());
@@ -728,7 +733,7 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
         }
 
     case libnormaliz::ConeProperty::GradingDenom:
-        return NmzIntToGAP( C->getGradingDenom() );
+        return NmzNumberToGAP( C->getGradingDenom() );
 
     case libnormaliz::ConeProperty::IsPointed:
         return C->isPointed() ? True : False;
@@ -749,7 +754,7 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
         return C->isReesPrimary() ? True : False;
 
     case libnormaliz::ConeProperty::ReesPrimaryMultiplicity:
-        return NmzIntToGAP(C->getReesPrimaryMultiplicity());
+        return NmzNumberToGAP(C->getReesPrimaryMultiplicity());
 
     // StanleyDec is special and we do not support the required conversion at
     // this time. If you really need this, contact the developers.
@@ -779,10 +784,10 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
         return NmzMatrixToGAP(C->getSublattice().getCongruences());
     
     case libnormaliz::ConeProperty::EmbeddingDim:
-        return NmzIntToGAP(C->getEmbeddingDim());
+        return NmzNumberToGAP(C->getEmbeddingDim());
     
     case libnormaliz::ConeProperty::Rank:
-        return NmzIntToGAP(C->getRank());
+        return NmzNumberToGAP(C->getRank());
     
     case libnormaliz::ConeProperty::Sublattice:
         return _NmzBasisChangeIntern(C);
@@ -809,19 +814,28 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
         return NmzBoolMatrixToGAP(C->getOpenFacets());
     
     case libnormaliz::ConeProperty::ExternalIndex:
-        return NmzIntToGAP(C->getSublattice().getExternalIndex());
+        return NmzNumberToGAP(C->getSublattice().getExternalIndex());
     
     case libnormaliz::ConeProperty::InternalIndex:
-        return NmzIntToGAP(C->getIndex());
+        return NmzNumberToGAP(C->getIndex());
     
     case libnormaliz::ConeProperty::WitnessNotIntegrallyClosed:
         return NmzVectorToGAP(C->getWitnessNotIntegrallyClosed());
     
     case libnormaliz::ConeProperty::UnitGroupIndex:
-        return NmzIntToGAP(C->getUnitGroupIndex());
+        return NmzNumberToGAP(C->getUnitGroupIndex());
     
     case libnormaliz::ConeProperty::WeightedEhrhartSeries:
         return NmzWeightedEhrhartSeriesToGAP(C->getWeightedEhrhartSeries());
+    
+    case libnormaliz::ConeProperty::IsGorenstein:
+        return C->isGorenstein() ? True : False;
+    
+    case libnormaliz::ConeProperty::GeneratorOfInterior:
+        return NmzVectorToGAP( C->getGeneratorOfInterior() );
+    
+    case libnormaliz::ConeProperty::VerticesFloat:
+        return NmzMatrixToGAP( C->getVerticesFloat() );
 
 //  the following properties are compute options and do not return anything
     case libnormaliz::ConeProperty::DefaultMode:
@@ -835,6 +849,11 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
     case libnormaliz::ConeProperty::BigInt:
     case libnormaliz::ConeProperty::NoNestedTri:
     case libnormaliz::ConeProperty::HSOP:
+    case libnormaliz::ConeProperty::Projection:
+    case libnormaliz::ConeProperty::NoProjection:
+    case libnormaliz::ConeProperty::ProjectionFloat:
+    case libnormaliz::ConeProperty::SCIP:
+    case libnormaliz::ConeProperty::NoPeriodBound:
         throw "cone property is input-only";
 
     default:
@@ -918,7 +937,7 @@ static Obj _NmzBasisChangeIntern(Cone<Integer>* C)
     SET_LEN_PLIST(res, 3);
     AssPlist(res, 1, NmzMatrixToGAP(bc.getEmbedding()));
     AssPlist(res, 2, NmzMatrixToGAP(bc.getProjection()));
-    AssPlist(res, 3, NmzIntToGAP(bc.getAnnihilator()));
+    AssPlist(res, 3, NmzNumberToGAP(bc.getAnnihilator()));
     // Dim, Rank, Equations and Congruences are already covered by special functions
     // The index is not always computed and not so relevant
     return res;

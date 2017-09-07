@@ -83,6 +83,13 @@ DeclareGlobalFunction( "NmzExtremeRays" );
 DeclareGlobalFunction( "NmzGenerators" );
 
 #! @Arguments cone
+#! @Returns a vector representing the generator of the interior of <A>cone</A>
+#! @Description
+#! If <A>cone</A> is Gorenstein, this function returns the generator of the interior of <A>cone</A>.
+#! If <A>cone</A> is not Gorenstein, an error is raised.
+DeclareGlobalFunction( "NmzGeneratorOfInterior" );
+
+#! @Arguments cone
 #! @Returns the grading vector
 #! @Description
 #! This is an alias for <C>NmzConeProperty( cone, "Grading" );</C> see <Ref Func="NmzConeProperty"/>.
@@ -138,6 +145,12 @@ DeclareGlobalFunction( "NmzIsDeg1ExtremeRays" );
 #! @Description
 #! This is an alias for <C>NmzConeProperty( cone, "IsDeg1HilbertBasis" );</C> see <Ref Func="NmzConeProperty"/>.
 DeclareGlobalFunction( "NmzIsDeg1HilbertBasis" );
+
+#! @Arguments cone
+#! @Returns whether the cone is Gorenstein
+#! @Description
+#! Returns true if <A>cone</A> is Gorenstein, false otherwise.
+DeclareGlobalFunction( "NmzIsGorenstein" );
 
 #! @Arguments cone
 #! @Returns whether the cone is inhomogeneous
@@ -265,6 +278,13 @@ DeclareGlobalFunction( "NmzTriangulationDetSum" );
 #! @Description
 #! This is an alias for <C>NmzConeProperty( cone, "TriangulationSize" );</C> see <Ref Func="NmzConeProperty"/>.
 DeclareGlobalFunction( "NmzTriangulationSize" );
+
+#! @Arguments cone
+#! @Returns a matrix whose rows are the vertices of the polyhedron <A>cone</A> with float coordinates
+#! @Description
+#! The rows of this matrix represent the vertices of <A>cone</A>, printed as floats for better readability.
+#! The result might be inexact, and should therefore not be used for computations.
+DeclareGlobalFunction( "NmzVerticesFloat" );
 
 #! @Arguments cone
 #! @Returns a matrix whose rows are the vertices of the polyhedron
