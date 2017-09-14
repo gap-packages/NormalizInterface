@@ -59,13 +59,14 @@
   [1X3.4 [33X[0;0YCombined input[133X[101X
   
   [33X[0;0YNormaliz  also  allows  the  combination  of  different kinds of input, e.g.
-  multiple  constraint  types, or additional data like a grading. Suppose that
-  you  have a 3 by 3 [21Xsquare[121X of nonnegative integers such that the 3 numbers in
-  all  rows,  all  columns,  and  both  diagonals  sum to the same constant [22XM[122X.
-  Sometimes  such  squares  are called magic and [22XM[122X is the magic constant. This
-  leads  to  a  linear  system  of  equations. The magic constant is a natural
-  choice for the grading. Additionally we force here the 4 corner to have even
-  value by adding congruences.[133X
+  multiple constraint types, or additional data like a grading.[133X
+  
+  [33X[0;0YSuppose  that you have a 3 by 3 [21Xsquare[121X of nonnegative integers such that the
+  3  numbers  in  all  rows,  all  columns, and both diagonals sum to the same
+  constant  [22XM[122X.  Sometimes  such  squares  are  called magic and [22XM[122X is the magic
+  constant.  This leads to a linear system of equations. The magic constant is
+  a natural choice for the grading. Additionally we force here the 4 corner to
+  have even value by adding congruences.[133X
   
   [4X[32X  Example  [32X[104X
     [4X[25Xgap>[125X [27XMagic3x3even := NmzCone(["equations",[127X[104X
@@ -101,10 +102,12 @@
   
   [33X[0;0YFor  solving systems of equations and inequalities it is often faster to use
   the  dual  Normaliz  algorithm.  We  demonstrate  how  to  use  it  with  an
-  inhomogeneous  system of equations and inequalities. The input consists of a
-  system  of  8  inhomogeneous equations in R^3. The first row of the matrix M
-  encodes  the inequality [22X8x + 8y + 8z + 7 ≥ 0[122X. Additionally we say that [22Xx, y,
-  z[122X should be non-negative by giving the sign vector and use the total degree.[133X
+  inhomogeneous system of equations and inequalities.[133X
+  
+  [33X[0;0YThe  input  consists  of  a  system of 8 inhomogeneous equations in R^3. The
+  first  row  of  the  matrix  M  encodes the inequality [22X8x + 8y + 8z + 7 ≥ 0[122X.
+  Additionally  we  say that [22Xx, y, z[122X should be non-negative by giving the sign
+  vector and use the total degree.[133X
   
   [4X[32X  Example  [32X[104X
     [4X[25Xgap>[125X [27XM := [[127X[104X

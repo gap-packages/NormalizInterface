@@ -18,8 +18,9 @@
   [33X[0;0YCreates  a  NmzCone.  The  [3Xlist[103X  argument  should  contain an even number of
   elements,  alternating between a string and a integer matrix. The string has
   to  correspond to a Normaliz input type string and the following matrix will
-  be  interpreted  as  input of that type. Currently the following strings are
-  recognized:[133X
+  be interpreted as input of that type.[133X
+  
+  [33X[0;0YCurrently the following strings are recognized:[133X
   
   [30X    [33X[0;6Y[10Xintegral_closure[110X,[133X
   
@@ -115,15 +116,18 @@
   [6XReturns:[106X  [33X[0;10Ythe previous verbosity[133X
   
   [33X[0;0YSet  the  global default verbosity state in libnormaliz. This will influence
-  all  NmzCone  created  afterwards,  but  not  any  existing  ones.  See also
-  [2XNmzSetVerbose[102X ([14X2.2-4[114X)[133X
+  all NmzCone created afterwards, but not any existing ones.[133X
+  
+  [33X[0;0YSee also [2XNmzSetVerbose[102X ([14X2.2-4[114X)[133X
   
   [1X2.2-4 NmzSetVerbose[101X
   
   [29X[2XNmzSetVerbose[102X( [3Xcone[103X, [3XverboseFlag[103X ) [32X function
   [6XReturns:[106X  [33X[0;10Ythe previous verbosity[133X
   
-  [33X[0;0YSet the verbosity state for a cone. See also [2XNmzSetVerboseDefault[102X ([14X2.2-3[114X)[133X
+  [33X[0;0YSet the verbosity state for a cone.[133X
+  
+  [33X[0;0YSee also [2XNmzSetVerboseDefault[102X ([14X2.2-3[114X)[133X
   
   [1X2.2-5 NmzCompute[101X
   
@@ -165,69 +169,69 @@
   If  the  property  was  already  known,  it is not recomputed. Currently the
   following strings are recognized as properties:[133X
   
-  [30X    [33X[0;6Y[10XGenerators[110X see [2XNmzGenerators[102X ([14X2.3-12[114X),[133X
+  [30X    [33X[0;6Y[10XGenerators[110X see [2XNmzGenerators[102X ([14X2.3-10[114X),[133X
   
-  [30X    [33X[0;6Y[10XExtremeRays[110X see [2XNmzExtremeRays[102X ([14X2.3-11[114X),[133X
+  [30X    [33X[0;6Y[10XExtremeRays[110X see [2XNmzExtremeRays[102X ([14X2.3-9[114X),[133X
   
-  [30X    [33X[0;6Y[10XVerticesOfPolyhedron[110X see [2XNmzVerticesOfPolyhedron[102X ([14X2.3-35[114X),[133X
+  [30X    [33X[0;6Y[10XVerticesOfPolyhedron[110X see [2XNmzVerticesOfPolyhedron[102X ([14X2.3-38[114X),[133X
   
-  [30X    [33X[0;6Y[10XSupportHyperplanes[110X see [2XNmzSupportHyperplanes[102X ([14X2.3-31[114X),[133X
+  [30X    [33X[0;6Y[10XSupportHyperplanes[110X see [2XNmzSupportHyperplanes[102X ([14X2.3-33[114X),[133X
   
-  [30X    [33X[0;6Y[10XTriangulationSize[110X see [2XNmzTriangulationSize[102X ([14X2.3-34[114X),[133X
+  [30X    [33X[0;6Y[10XTriangulationSize[110X see [2XNmzTriangulationSize[102X ([14X2.3-36[114X),[133X
   
-  [30X    [33X[0;6Y[10XTriangulationDetSum[110X see [2XNmzTriangulationDetSum[102X ([14X2.3-33[114X),[133X
+  [30X    [33X[0;6Y[10XTriangulationDetSum[110X see [2XNmzTriangulationDetSum[102X ([14X2.3-35[114X),[133X
   
-  [30X    [33X[0;6Y[10XTriangulation[110X see [2XNmzTriangulation[102X ([14X2.3-32[114X),[133X
+  [30X    [33X[0;6Y[10XTriangulation[110X see [2XNmzTriangulation[102X ([14X2.3-34[114X),[133X
   
-  [30X    [33X[0;6Y[10XMultiplicity[110X see [2XNmzMultiplicity[102X ([14X2.3-26[114X),[133X
+  [30X    [33X[0;6Y[10XMultiplicity[110X see [2XNmzMultiplicity[102X ([14X2.3-28[114X),[133X
   
-  [30X    [33X[0;6Y[10XRecessionRank[110X see [2XNmzRecessionRank[102X ([14X2.3-28[114X),[133X
+  [30X    [33X[0;6Y[10XRecessionRank[110X see [2XNmzRecessionRank[102X ([14X2.3-31[114X),[133X
   
-  [30X    [33X[0;6Y[10XAffineDim[110X see [2XNmzAffineDim[102X ([14X2.3-6[114X),[133X
+  [30X    [33X[0;6Y[10XAffineDim[110X see [2XNmzAffineDim[102X ([14X2.3-1[114X),[133X
   
-  [30X    [33X[0;6Y[10XModuleRank[110X see [2XNmzModuleRank[102X ([14X2.3-25[114X),[133X
+  [30X    [33X[0;6Y[10XModuleRank[110X see [2XNmzModuleRank[102X ([14X2.3-27[114X),[133X
   
-  [30X    [33X[0;6Y[10XHilbertBasis[110X see [2XNmzHilbertBasis[102X ([14X2.3-14[114X),[133X
+  [30X    [33X[0;6Y[10XHilbertBasis[110X see [2XNmzHilbertBasis[102X ([14X2.3-13[114X),[133X
   
-  [30X    [33X[0;6Y[10XModuleGenerators[110X see [2XNmzModuleGenerators[102X ([14X2.3-23[114X),[133X
+  [30X    [33X[0;6Y[10XModuleGenerators[110X see [2XNmzModuleGenerators[102X ([14X2.3-25[114X),[133X
   
-  [30X    [33X[0;6Y[10XDeg1Elements[110X see [2XNmzDeg1Elements[102X ([14X2.3-8[114X),[133X
+  [30X    [33X[0;6Y[10XDeg1Elements[110X see [2XNmzDeg1Elements[102X ([14X2.3-4[114X),[133X
   
-  [30X    [33X[0;6Y[10XHilbertSeries[110X see [2XNmzHilbertSeries[102X ([14X2.3-16[114X),[133X
+  [30X    [33X[0;6Y[10XHilbertSeries[110X see [2XNmzHilbertSeries[102X ([14X2.3-15[114X),[133X
   
-  [30X    [33X[0;6Y[10XHilbertQuasiPolynomial[110X see [2XNmzHilbertQuasiPolynomial[102X ([14X2.3-15[114X),[133X
+  [30X    [33X[0;6Y[10XHilbertQuasiPolynomial[110X see [2XNmzHilbertQuasiPolynomial[102X ([14X2.3-14[114X),[133X
   
-  [30X    [33X[0;6Y[10XGrading[110X see [2XNmzGrading[102X ([14X2.3-13[114X),[133X
+  [30X    [33X[0;6Y[10XGrading[110X see [2XNmzGrading[102X ([14X2.3-12[114X),[133X
   
-  [30X    [33X[0;6Y[10XIsPointed[110X see [2XNmzIsPointed[102X ([14X2.3-21[114X),[133X
+  [30X    [33X[0;6Y[10XIsPointed[110X see [2XNmzIsPointed[102X ([14X2.3-22[114X),[133X
   
-  [30X    [33X[0;6Y[10XIsDeg1ExtremeRays[110X see [2XNmzIsDeg1ExtremeRays[102X ([14X2.3-18[114X),[133X
+  [30X    [33X[0;6Y[10XIsDeg1ExtremeRays[110X see [2XNmzIsDeg1ExtremeRays[102X ([14X2.3-17[114X),[133X
   
-  [30X    [33X[0;6Y[10XIsDeg1HilbertBasis[110X see [2XNmzIsDeg1HilbertBasis[102X ([14X2.3-19[114X),[133X
+  [30X    [33X[0;6Y[10XIsDeg1HilbertBasis[110X see [2XNmzIsDeg1HilbertBasis[102X ([14X2.3-18[114X),[133X
   
-  [30X    [33X[0;6Y[10XIsIntegrallyClosed[110X see [2XNmzIsIntegrallyClosed[102X ([14X2.3-20[114X),[133X
+  [30X    [33X[0;6Y[10XIsIntegrallyClosed[110X see [2XNmzIsIntegrallyClosed[102X ([14X2.3-21[114X),[133X
   
-  [30X    [33X[0;6Y[10XOriginalMonoidGenerators[110X see [2XNmzOriginalMonoidGenerators[102X ([14X2.3-27[114X),[133X
+  [30X    [33X[0;6Y[10XOriginalMonoidGenerators[110X see [2XNmzOriginalMonoidGenerators[102X ([14X2.3-29[114X),[133X
   
-  [30X    [33X[0;6Y[10XIsReesPrimary[110X see [2XNmzIsReesPrimary[102X ([14X2.3-29[114X),[133X
+  [30X    [33X[0;6Y[10XIsReesPrimary[110X see [2XNmzIsReesPrimary[102X ([14X2.3-23[114X),[133X
   
-  [30X    [33X[0;6Y[10XReesPrimaryMultiplicity[110X see [2XNmzReesPrimaryMultiplicity[102X ([14X2.3-30[114X),[133X
+  [30X    [33X[0;6Y[10XReesPrimaryMultiplicity[110X see [2XNmzReesPrimaryMultiplicity[102X ([14X2.3-32[114X),[133X
   
-  [30X    [33X[0;6Y[10XExcludedFaces[110X see [2XNmzExcludedFaces[102X ([14X2.3-10[114X),[133X
+  [30X    [33X[0;6Y[10XExcludedFaces[110X see [2XNmzExcludedFaces[102X ([14X2.3-8[114X),[133X
   
-  [30X    [33X[0;6Y[10XDehomogenization[110X see [2XNmzDehomogenization[102X ([14X2.3-9[114X),[133X
+  [30X    [33X[0;6Y[10XDehomogenization[110X see [2XNmzDehomogenization[102X ([14X2.3-5[114X),[133X
   
-  [30X    [33X[0;6Y[10XInclusionExclusionData[110X see [2XNmzInclusionExclusionData[102X ([14X2.3-17[114X),[133X
+  [30X    [33X[0;6Y[10XInclusionExclusionData[110X see [2XNmzInclusionExclusionData[102X ([14X2.3-16[114X),[133X
   
-  [30X    [33X[0;6Y[10XClassGroup[110X see [2XNmzClassGroup[102X ([14X2.3-7[114X),[133X
+  [30X    [33X[0;6Y[10XClassGroup[110X see [2XNmzClassGroup[102X ([14X2.3-2[114X),[133X
   
   [30X    [33X[0;6Y[10XModuleGeneratorsOverOriginalMonoid[110X                                 see
-        [2XNmzModuleGeneratorsOverOriginalMonoid[102X ([14X2.3-24[114X),[133X
+        [2XNmzModuleGeneratorsOverOriginalMonoid[102X ([14X2.3-26[114X),[133X
   
   [30X    [33X[0;6Y[10XSublattice[110X  computes  the  efficient  sublattice  and  returns  a bool
         signaling   whether   the  computation  was  successful.  Actual  data
-        connected  to  it  can  be  accessed  by [2XNmzRank[102X ([14X2.3-2[114X), [2XNmzEquations[102X
-        ([14X2.3-4[114X), [2XNmzCongruences[102X ([14X2.3-5[114X), and [2XNmzBasisChange[102X ([14X2.3-36[114X).[133X
+        connected  to  it  can  be  accessed by [2XNmzRank[102X ([14X2.3-30[114X), [2XNmzEquations[102X
+        ([14X2.3-7[114X), [2XNmzCongruences[102X ([14X2.3-3[114X), and [2XNmzBasisChange[102X ([14X2.3-51[114X).[133X
   
   [33X[0;0YAdditionally  also  the  following compute options are accepted as property.
   They  modify  what  and  how  should  be  computed,  and return True after a
@@ -266,54 +270,7 @@
   
   [1X2.3 [33X[0;0YCone properties[133X[101X
   
-  [1X2.3-1 NmzEmbeddingDimension[101X
-  
-  [29X[2XNmzEmbeddingDimension[102X( [3Xcone[103X ) [32X function
-  [6XReturns:[106X  [33X[0;10Ythe embedding dimension of the cone[133X
-  
-  [33X[0;0YThe  embedding  dimension  is  the  dimension  of  the  space  in  which the
-  computation  is  done. It is the number of components of the output vectors.
-  This value is always known directly after the creation of the cone.[133X
-  
-  [1X2.3-2 NmzRank[101X
-  
-  [29X[2XNmzRank[102X( [3Xcone[103X ) [32X function
-  [6XReturns:[106X  [33X[0;10Ythe rank of the cone[133X
-  
-  [33X[0;0YThe  rank  is the rank of the lattice generated by the lattice points of the
-  cone.[133X
-  
-  [33X[0;0YThis is part of the cone property [21XSublattice[121X.[133X
-  
-  [1X2.3-3 NmzIsInhomogeneous[101X
-  
-  [29X[2XNmzIsInhomogeneous[102X( [3Xcone[103X ) [32X function
-  [6XReturns:[106X  [33X[0;10Ywhether the cone is inhomogeneous[133X
-  
-  [33X[0;0YThis value is always known directly after the creation of the cone.[133X
-  
-  [1X2.3-4 NmzEquations[101X
-  
-  [29X[2XNmzEquations[102X( [3Xcone[103X ) [32X function
-  [6XReturns:[106X  [33X[0;10Ya matrix whose rows represent the equations[133X
-  
-  [33X[0;0YThe  equations cut out the linear space generated by the cone. Together with
-  the  support hyperplanes and the congruences it describes the lattice points
-  of the cone.[133X
-  
-  [33X[0;0YThis is part of the cone property [21XSublattice[121X.[133X
-  
-  [1X2.3-5 NmzCongruences[101X
-  
-  [29X[2XNmzCongruences[102X( [3Xcone[103X ) [32X function
-  [6XReturns:[106X  [33X[0;10Ya matrix whose rows represent the congruences[133X
-  
-  [33X[0;0YTogether  with  the  support  hyperplanes and the equations it describes the
-  lattice points of the cone.[133X
-  
-  [33X[0;0YThis is part of the cone property [21XSublattice[121X.[133X
-  
-  [1X2.3-6 NmzAffineDim[101X
+  [1X2.3-1 NmzAffineDim[101X
   
   [29X[2XNmzAffineDim[102X( [3Xcone[103X ) [32X function
   [6XReturns:[106X  [33X[0;10Ythe affine dimension[133X
@@ -324,7 +281,7 @@
   [33X[0;0YThis   is   an   alias   for   [10XNmzConeProperty(  cone,  "AffineDim"  );[110X  see
   [2XNmzConeProperty[102X ([14X2.2-6[114X).[133X
   
-  [1X2.3-7 NmzClassGroup[101X
+  [1X2.3-2 NmzClassGroup[101X
   
   [29X[2XNmzClassGroup[102X( [3Xcone[103X ) [32X function
   [6XReturns:[106X  [33X[0;10Ythe class group in a special format[133X
@@ -339,7 +296,17 @@
   [33X[0;0YThis   is   an   alias   for  [10XNmzConeProperty(  cone,  "ClassGroup"  );[110X  see
   [2XNmzConeProperty[102X ([14X2.2-6[114X).[133X
   
-  [1X2.3-8 NmzDeg1Elements[101X
+  [1X2.3-3 NmzCongruences[101X
+  
+  [29X[2XNmzCongruences[102X( [3Xcone[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya matrix whose rows represent the congruences[133X
+  
+  [33X[0;0YThe  equations,  congruences  and  support hyperplanes together describe the
+  lattice points of the cone.[133X
+  
+  [33X[0;0YThis is part of the cone property [21XSublattice[121X.[133X
+  
+  [1X2.3-4 NmzDeg1Elements[101X
   
   [29X[2XNmzDeg1Elements[102X( [3Xcone[103X ) [32X function
   [6XReturns:[106X  [33X[0;10Ya matrix whose rows are the degree 1 elements[133X
@@ -350,7 +317,7 @@
   [33X[0;0YThis   is   an  alias  for  [10XNmzConeProperty(  cone,  "Deg1Elements"  );[110X  see
   [2XNmzConeProperty[102X ([14X2.2-6[114X).[133X
   
-  [1X2.3-9 NmzDehomogenization[101X
+  [1X2.3-5 NmzDehomogenization[101X
   
   [29X[2XNmzDehomogenization[102X( [3Xcone[103X ) [32X function
   [6XReturns:[106X  [33X[0;10Ythe dehomgenization vector[133X
@@ -360,7 +327,25 @@
   [33X[0;0YThis  is  an  alias  for  [10XNmzConeProperty(  cone,  "Dehomogenization" );[110X see
   [2XNmzConeProperty[102X ([14X2.2-6[114X).[133X
   
-  [1X2.3-10 NmzExcludedFaces[101X
+  [1X2.3-6 NmzEmbeddingDimension[101X
+  
+  [29X[2XNmzEmbeddingDimension[102X( [3Xcone[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10Ythe embedding dimension of the cone[133X
+  
+  [33X[0;0YThe  embedding  dimension  is  the  dimension  of  the  space  in  which the
+  computation  is  done. It is the number of components of the output vectors.
+  This value is always known directly after the creation of the cone.[133X
+  
+  [1X2.3-7 NmzEquations[101X
+  
+  [29X[2XNmzEquations[102X( [3Xcone[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya matrix whose rows represent the equations[133X
+  
+  [33X[0;0YThe equations cut out the linear space generated by the cone. The equations,
+  congruences  and support hyperplanes together describe the lattice points of
+  the cone.[133X
+  
+  [1X2.3-8 NmzExcludedFaces[101X
   
   [29X[2XNmzExcludedFaces[102X( [3Xcone[103X ) [32X function
   [6XReturns:[106X  [33X[0;10Ya matrix whose rows represent the excluded faces[133X
@@ -368,7 +353,7 @@
   [33X[0;0YThis   is  an  alias  for  [10XNmzConeProperty(  cone,  "ExcludedFaces"  );[110X  see
   [2XNmzConeProperty[102X ([14X2.2-6[114X).[133X
   
-  [1X2.3-11 NmzExtremeRays[101X
+  [1X2.3-9 NmzExtremeRays[101X
   
   [29X[2XNmzExtremeRays[102X( [3Xcone[103X ) [32X function
   [6XReturns:[106X  [33X[0;10Ya matrix whose rows are the extreme rays[133X
@@ -376,15 +361,23 @@
   [33X[0;0YThis   is   an   alias  for  [10XNmzConeProperty(  cone,  "ExtremeRays"  );[110X  see
   [2XNmzConeProperty[102X ([14X2.2-6[114X).[133X
   
-  [1X2.3-12 NmzGenerators[101X
+  [1X2.3-10 NmzGenerators[101X
   
   [29X[2XNmzGenerators[102X( [3Xcone[103X ) [32X function
-  [6XReturns:[106X  [33X[0;10Ya matrix whose rows are the generators[133X
+  [6XReturns:[106X  [33X[0;10Ya matrix whose rows are the generators of [3Xcone[103X[133X
   
   [33X[0;0YThis   is   an   alias   for  [10XNmzConeProperty(  cone,  "Generators"  );[110X  see
   [2XNmzConeProperty[102X ([14X2.2-6[114X).[133X
   
-  [1X2.3-13 NmzGrading[101X
+  [1X2.3-11 NmzGeneratorOfInterior[101X
+  
+  [29X[2XNmzGeneratorOfInterior[102X( [3Xcone[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya vector representing the generator of the interior of [3Xcone[103X[133X
+  
+  [33X[0;0YIf  [3Xcone[103X  is Gorenstein, this function returns the generator of the interior
+  of [3Xcone[103X. If [3Xcone[103X is not Gorenstein, an error is raised.[133X
+  
+  [1X2.3-12 NmzGrading[101X
   
   [29X[2XNmzGrading[102X( [3Xcone[103X ) [32X function
   [6XReturns:[106X  [33X[0;10Ythe grading vector[133X
@@ -392,7 +385,7 @@
   [33X[0;0YThis is an alias for [10XNmzConeProperty( cone, "Grading" );[110X see [2XNmzConeProperty[102X
   ([14X2.2-6[114X).[133X
   
-  [1X2.3-14 NmzHilbertBasis[101X
+  [1X2.3-13 NmzHilbertBasis[101X
   
   [29X[2XNmzHilbertBasis[102X( [3Xcone[103X ) [32X function
   [6XReturns:[106X  [33X[0;10Ya matrix whose rows are the Hilbert basis elements[133X
@@ -400,7 +393,7 @@
   [33X[0;0YThis   is   an  alias  for  [10XNmzConeProperty(  cone,  "HilbertBasis"  );[110X  see
   [2XNmzConeProperty[102X ([14X2.2-6[114X).[133X
   
-  [1X2.3-15 NmzHilbertQuasiPolynomial[101X
+  [1X2.3-14 NmzHilbertQuasiPolynomial[101X
   
   [29X[2XNmzHilbertQuasiPolynomial[102X( [3Xcone[103X ) [32X function
   [6XReturns:[106X  [33X[0;10Ythe Hilbert function as a quasipolynomial[133X
@@ -413,7 +406,7 @@
   [33X[0;0YThis  is an alias for [10XNmzConeProperty( cone, "HilbertQuasiPolynomial" );[110X see
   [2XNmzConeProperty[102X ([14X2.2-6[114X).[133X
   
-  [1X2.3-16 NmzHilbertSeries[101X
+  [1X2.3-15 NmzHilbertSeries[101X
   
   [29X[2XNmzHilbertSeries[102X( [3Xcone[103X ) [32X function
   [6XReturns:[106X  [33X[0;10Ythe Hilbert series as rational function[133X
@@ -426,21 +419,21 @@
   [33X[0;0YThis   is  an  alias  for  [10XNmzConeProperty(  cone,  "HilbertSeries"  );[110X  see
   [2XNmzConeProperty[102X ([14X2.2-6[114X).[133X
   
-  [1X2.3-17 NmzInclusionExclusionData[101X
+  [1X2.3-16 NmzInclusionExclusionData[101X
   
   [29X[2XNmzInclusionExclusionData[102X( [3Xcone[103X ) [32X function
   [6XReturns:[106X  [33X[0;10Yinclusion-exclusion data[133X
   
   [33X[0;0YList of faces which are internally have been used in the inclusion-exclusion
   scheme.  Given  as a list pairs. The first pair entry is a key of generators
-  contained  in  the  face  (compare  also  [2XNmzTriangulation[102X ([14X2.3-32[114X)) and the
+  contained  in  the  face  (compare  also  [2XNmzTriangulation[102X ([14X2.3-34[114X)) and the
   multiplicity  with  which  it  was  considered. Only available with excluded
   faces or strict constraints as input.[133X
   
   [33X[0;0YThis  is an alias for [10XNmzConeProperty( cone, "InclusionExclusionData" );[110X see
   [2XNmzConeProperty[102X ([14X2.2-6[114X).[133X
   
-  [1X2.3-18 NmzIsDeg1ExtremeRays[101X
+  [1X2.3-17 NmzIsDeg1ExtremeRays[101X
   
   [29X[2XNmzIsDeg1ExtremeRays[102X( [3Xcone[103X ) [32X function
   [6XReturns:[106X  [33X[0;10Y[9Xtrue[109X if all extreme rays have degree 1; [9Xfalse[109X otherwise[133X
@@ -448,7 +441,7 @@
   [33X[0;0YThis  is  an  alias  for  [10XNmzConeProperty(  cone, "IsDeg1ExtremeRays" );[110X see
   [2XNmzConeProperty[102X ([14X2.2-6[114X).[133X
   
-  [1X2.3-19 NmzIsDeg1HilbertBasis[101X
+  [1X2.3-18 NmzIsDeg1HilbertBasis[101X
   
   [29X[2XNmzIsDeg1HilbertBasis[102X( [3Xcone[103X ) [32X function
   [6XReturns:[106X  [33X[0;10Y[9Xtrue[109X if all Hilbert basis elements have degree 1; [9Xfalse[109X otherwise[133X
@@ -456,7 +449,21 @@
   [33X[0;0YThis  is  an  alias  for  [10XNmzConeProperty( cone, "IsDeg1HilbertBasis" );[110X see
   [2XNmzConeProperty[102X ([14X2.2-6[114X).[133X
   
-  [1X2.3-20 NmzIsIntegrallyClosed[101X
+  [1X2.3-19 NmzIsGorenstein[101X
+  
+  [29X[2XNmzIsGorenstein[102X( [3Xcone[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10Ywhether the cone is Gorenstein[133X
+  
+  [33X[0;0YReturns true if [3Xcone[103X is Gorenstein, false otherwise.[133X
+  
+  [1X2.3-20 NmzIsInhomogeneous[101X
+  
+  [29X[2XNmzIsInhomogeneous[102X( [3Xcone[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10Ywhether the cone is inhomogeneous[133X
+  
+  [33X[0;0YThis value is always known directly after the creation of the cone.[133X
+  
+  [1X2.3-21 NmzIsIntegrallyClosed[101X
   
   [29X[2XNmzIsIntegrallyClosed[102X( [3Xcone[103X ) [32X function
   [6XReturns:[106X  [33X[0;10Y[9Xtrue[109X if the cone is integrally closed; [9Xfalse[109X otherwise[133X
@@ -468,7 +475,7 @@
   [33X[0;0YThis  is  an  alias  for  [10XNmzConeProperty( cone, "IsIntegrallyClosed" );[110X see
   [2XNmzConeProperty[102X ([14X2.2-6[114X).[133X
   
-  [1X2.3-21 NmzIsPointed[101X
+  [1X2.3-22 NmzIsPointed[101X
   
   [29X[2XNmzIsPointed[102X( [3Xcone[103X ) [32X function
   [6XReturns:[106X  [33X[0;10Y[9Xtrue[109X if the cone is pointed; [9Xfalse[109X otherwise[133X
@@ -476,7 +483,18 @@
   [33X[0;0YThis   is   an   alias   for   [10XNmzConeProperty(  cone,  "IsPointed"  );[110X  see
   [2XNmzConeProperty[102X ([14X2.2-6[114X).[133X
   
-  [1X2.3-22 NmzMaximalSubspace[101X
+  [1X2.3-23 NmzIsReesPrimary[101X
+  
+  [29X[2XNmzIsReesPrimary[102X( [3Xcone[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10Y[9Xtrue[109X if is the monomial ideal is primary to the irrelevant maximal
+            ideal, [9Xfalse[109X otherwise[133X
+  
+  [33X[0;0YOnly used with the input type [10Xrees_algebra[110X.[133X
+  
+  [33X[0;0YThis   is  an  alias  for  [10XNmzConeProperty(  cone,  "IsReesPrimary"  );[110X  see
+  [2XNmzConeProperty[102X ([14X2.2-6[114X).[133X
+  
+  [1X2.3-24 NmzMaximalSubspace[101X
   
   [29X[2XNmzMaximalSubspace[102X( [3Xcone[103X ) [32X function
   [6XReturns:[106X  [33X[0;10Ya matrix whose rows generate the maximale linear subspace[133X
@@ -484,7 +502,7 @@
   [33X[0;0YThis  is  an  alias  for  [10XNmzConeProperty(  cone,  "MaximalSubspace"  );[110X see
   [2XNmzConeProperty[102X ([14X2.2-6[114X).[133X
   
-  [1X2.3-23 NmzModuleGenerators[101X
+  [1X2.3-25 NmzModuleGenerators[101X
   
   [29X[2XNmzModuleGenerators[102X( [3Xcone[103X ) [32X function
   [6XReturns:[106X  [33X[0;10Ya matrix whose rows are the module generators[133X
@@ -492,7 +510,7 @@
   [33X[0;0YThis  is  an  alias  for  [10XNmzConeProperty(  cone,  "ModuleGenerators" );[110X see
   [2XNmzConeProperty[102X ([14X2.2-6[114X).[133X
   
-  [1X2.3-24 NmzModuleGeneratorsOverOriginalMonoid[101X
+  [1X2.3-26 NmzModuleGeneratorsOverOriginalMonoid[101X
   
   [29X[2XNmzModuleGeneratorsOverOriginalMonoid[102X( [3Xcone[103X ) [32X function
   [6XReturns:[106X  [33X[0;10Ya  matrix  whose  rows are the module generators over the original
@@ -505,7 +523,7 @@
   [33X[0;0YThis       is       an       alias      for      [10XNmzConeProperty(      cone,
   "ModuleGeneratorsOverOriginalMonoid" );[110X see [2XNmzConeProperty[102X ([14X2.2-6[114X).[133X
   
-  [1X2.3-25 NmzModuleRank[101X
+  [1X2.3-27 NmzModuleRank[101X
   
   [29X[2XNmzModuleRank[102X( [3Xcone[103X ) [32X function
   [6XReturns:[106X  [33X[0;10Ythe  rank  of  the module of lattice points in the polyhedron as a
@@ -516,14 +534,14 @@
   [33X[0;0YThis   is   an   alias   for  [10XNmzConeProperty(  cone,  "ModuleRank"  );[110X  see
   [2XNmzConeProperty[102X ([14X2.2-6[114X).[133X
   
-  [1X2.3-26 NmzMultiplicity[101X
+  [1X2.3-28 NmzMultiplicity[101X
   
   [29X[2XNmzMultiplicity[102X( [3Xcone[103X ) [32X function
   
   [33X[0;0YThis   is   an  alias  for  [10XNmzConeProperty(  cone,  "Multiplicity"  );[110X  see
   [2XNmzConeProperty[102X ([14X2.2-6[114X).[133X
   
-  [1X2.3-27 NmzOriginalMonoidGenerators[101X
+  [1X2.3-29 NmzOriginalMonoidGenerators[101X
   
   [29X[2XNmzOriginalMonoidGenerators[102X( [3Xcone[103X ) [32X function
   [6XReturns:[106X  [33X[0;10Ya matrix whose rows are the original monoid generators[133X
@@ -531,7 +549,17 @@
   [33X[0;0YThis  is  an  alias for [10XNmzConeProperty( cone, "OriginalMonoidGenerators" );[110X
   see [2XNmzConeProperty[102X ([14X2.2-6[114X).[133X
   
-  [1X2.3-28 NmzRecessionRank[101X
+  [1X2.3-30 NmzRank[101X
+  
+  [29X[2XNmzRank[102X( [3Xcone[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10Ythe rank of the cone[133X
+  
+  [33X[0;0YThis value is the rank of the lattice generated by the lattice points of the
+  cone.[133X
+  
+  [33X[0;0YThis is part of the cone property [21XSublattice[121X.[133X
+  
+  [1X2.3-31 NmzRecessionRank[101X
   
   [29X[2XNmzRecessionRank[102X( [3Xcone[103X ) [32X function
   [6XReturns:[106X  [33X[0;10Ythe rank of the recession cone[133X
@@ -541,18 +569,7 @@
   [33X[0;0YThis   is  an  alias  for  [10XNmzConeProperty(  cone,  "RecessionRank"  );[110X  see
   [2XNmzConeProperty[102X ([14X2.2-6[114X).[133X
   
-  [1X2.3-29 NmzIsReesPrimary[101X
-  
-  [29X[2XNmzIsReesPrimary[102X( [3Xcone[103X ) [32X function
-  [6XReturns:[106X  [33X[0;10Y[9Xtrue[109X if is the monomial ideal is primary to the irrelevant maximal
-            ideal, [9Xfalse[109X otherwise[133X
-  
-  [33X[0;0YOnly used with the input type [10Xrees_algebra[110X.[133X
-  
-  [33X[0;0YThis   is  an  alias  for  [10XNmzConeProperty(  cone,  "IsReesPrimary"  );[110X  see
-  [2XNmzConeProperty[102X ([14X2.2-6[114X).[133X
-  
-  [1X2.3-30 NmzReesPrimaryMultiplicity[101X
+  [1X2.3-32 NmzReesPrimaryMultiplicity[101X
   
   [29X[2XNmzReesPrimaryMultiplicity[102X( [3Xcone[103X ) [32X function
   
@@ -563,33 +580,35 @@
   [33X[0;0YThis is an alias for [10XNmzConeProperty( cone, "ReesPrimaryMultiplicity" );[110X see
   [2XNmzConeProperty[102X ([14X2.2-6[114X).[133X
   
-  [1X2.3-31 NmzSupportHyperplanes[101X
+  [1X2.3-33 NmzSupportHyperplanes[101X
   
   [29X[2XNmzSupportHyperplanes[102X( [3Xcone[103X ) [32X function
   [6XReturns:[106X  [33X[0;10Ya matrix whose rows represent the support hyperplanes[133X
   
-  [33X[0;0YThe  equations cut out the linear space generated by the cone. Together with
-  the  support hyperplanes and the congruences it describes the lattice points
-  of the cone.[133X
+  [33X[0;0YThe equations cut out the linear space generated by the cone. The equations,
+  congruences  and support hyperplanes together describe the lattice points of
+  the cone.[133X
   
   [33X[0;0YThis  is  an  alias  for  [10XNmzConeProperty( cone, "SupportHyperplanes" );[110X see
   [2XNmzConeProperty[102X ([14X2.2-6[114X).[133X
   
-  [1X2.3-32 NmzTriangulation[101X
+  [1X2.3-34 NmzTriangulation[101X
   
   [29X[2XNmzTriangulation[102X( [3Xcone[103X ) [32X function
   [6XReturns:[106X  [33X[0;10Ythe triangulation[133X
   
-  [33X[0;0YIt  is given as a list of pairs representing the maximal simplicial cones in
-  the  triangulation. The first pair entry is the key of the simplex, i.e. the
-  indices  of  the  generators  with  respect  th  the  generators obtained by
-  [2XNmzGenerators[102X  ([14X2.3-12[114X)  (counting  from  0).  The  second pair entry is the
-  absolute value of the determinant of the generator matrix.[133X
+  [33X[0;0YThis  returns  a  list  of  the maximal simplicial cones in a triangulation,
+  i.e.,  a list of cones dividing the cone into simplicial cones. Each cone in
+  the list is represented by a pair. The first entry of such a pair is the key
+  of  the  simplex,  i.e.,  a  list of integers [23Xa_1,\dots,a_n[123X referring to the
+  [2XNmzGenerators[102X  ([14X2.3-10[114X)  (counting from 0) which are used in this simplicial
+  cone. The second entry of each pair in the list is the absolute value of the
+  determinant of the generator matrix of the simplicial cone.[133X
   
   [33X[0;0YThis   is  an  alias  for  [10XNmzConeProperty(  cone,  "Triangulation"  );[110X  see
   [2XNmzConeProperty[102X ([14X2.2-6[114X).[133X
   
-  [1X2.3-33 NmzTriangulationDetSum[101X
+  [1X2.3-35 NmzTriangulationDetSum[101X
   
   [29X[2XNmzTriangulationDetSum[102X( [3Xcone[103X ) [32X function
   [6XReturns:[106X  [33X[0;10Ysum  of  the absolute values of the determinants of the simplicial
@@ -598,7 +617,7 @@
   [33X[0;0YThis  is  an  alias  for [10XNmzConeProperty( cone, "TriangulationDetSum" );[110X see
   [2XNmzConeProperty[102X ([14X2.2-6[114X).[133X
   
-  [1X2.3-34 NmzTriangulationSize[101X
+  [1X2.3-36 NmzTriangulationSize[101X
   
   [29X[2XNmzTriangulationSize[102X( [3Xcone[103X ) [32X function
   [6XReturns:[106X  [33X[0;10Ythe number of simplicial cones in the used triangulation[133X
@@ -606,7 +625,17 @@
   [33X[0;0YThis  is  an  alias  for  [10XNmzConeProperty(  cone, "TriangulationSize" );[110X see
   [2XNmzConeProperty[102X ([14X2.2-6[114X).[133X
   
-  [1X2.3-35 NmzVerticesOfPolyhedron[101X
+  [1X2.3-37 NmzVerticesFloat[101X
+  
+  [29X[2XNmzVerticesFloat[102X( [3Xcone[103X ) [32X function
+  [6XReturns:[106X  [33X[0;10Ya  matrix  whose rows are the vertices of the polyhedron [3Xcone[103X with
+            float coordinates[133X
+  
+  [33X[0;0YThe  rows  of  this matrix represent the vertices of [3Xcone[103X, printed as floats
+  for  better  readability.  The result might be inexact, and should therefore
+  not be used for computations.[133X
+  
+  [1X2.3-38 NmzVerticesOfPolyhedron[101X
   
   [29X[2XNmzVerticesOfPolyhedron[102X( [3Xcone[103X ) [32X function
   [6XReturns:[106X  [33X[0;10Ya matrix whose rows are the vertices of the polyhedron[133X
@@ -614,7 +643,80 @@
   [33X[0;0YThis  is  an  alias for [10XNmzConeProperty( cone, "VerticesOfPolyhedron" );[110X see
   [2XNmzConeProperty[102X ([14X2.2-6[114X).[133X
   
-  [1X2.3-36 NmzBasisChange[101X
+  [1X2.3-39 NmzConeDecomposition[101X
+  
+  [29X[2XNmzConeDecomposition[102X( [3Xcone[103X ) [32X function
+  
+  [33X[0;0YThis is an alias for NmzConeProperty( cone, "ConeDecomposition" );[133X
+  
+  [1X2.3-40 NmzEmbeddingDim[101X
+  
+  [29X[2XNmzEmbeddingDim[102X( [3Xcone[103X ) [32X function
+  
+  [33X[0;0YThis is an alias for NmzConeProperty( cone, "EmbeddingDim" );[133X
+  
+  [1X2.3-41 NmzExternalIndex[101X
+  
+  [29X[2XNmzExternalIndex[102X( [3Xcone[103X ) [32X function
+  
+  [33X[0;0YThis is an alias for NmzConeProperty( cone, "ExternalIndex" );[133X
+  
+  [1X2.3-42 NmzGradingDenom[101X
+  
+  [29X[2XNmzGradingDenom[102X( [3Xcone[103X ) [32X function
+  
+  [33X[0;0YThis is an alias for NmzConeProperty( cone, "GradingDenom" );[133X
+  
+  [1X2.3-43 NmzIntegerHull[101X
+  
+  [29X[2XNmzIntegerHull[102X( [3Xcone[103X ) [32X function
+  
+  [33X[0;0YThis is an alias for NmzConeProperty( cone, "IntegerHull" );[133X
+  
+  [1X2.3-44 NmzInternalIndex[101X
+  
+  [29X[2XNmzInternalIndex[102X( [3Xcone[103X ) [32X function
+  
+  [33X[0;0YThis is an alias for NmzConeProperty( cone, "InternalIndex" );[133X
+  
+  [1X2.3-45 NmzStanleyDec[101X
+  
+  [29X[2XNmzStanleyDec[102X( [3Xcone[103X ) [32X function
+  
+  [33X[0;0YThis is an alias for NmzConeProperty( cone, "StanleyDec" );[133X
+  
+  [1X2.3-46 NmzSublattice[101X
+  
+  [29X[2XNmzSublattice[102X( [3Xcone[103X ) [32X function
+  
+  [33X[0;0YThis is an alias for NmzConeProperty( cone, "Sublattice" );[133X
+  
+  [1X2.3-47 NmzUnitGroupIndex[101X
+  
+  [29X[2XNmzUnitGroupIndex[102X( [3Xcone[103X ) [32X function
+  
+  [33X[0;0YThis is an alias for NmzConeProperty( cone, "UnitGroupIndex" );[133X
+  
+  [1X2.3-48 NmzWeightedEhrhartQuasiPolynomial[101X
+  
+  [29X[2XNmzWeightedEhrhartQuasiPolynomial[102X( [3Xcone[103X ) [32X function
+  
+  [33X[0;0YThis       is       an       alias      for      NmzConeProperty(      cone,
+  "NmzWeightedEhrhartQuasiPolynomial" );[133X
+  
+  [1X2.3-49 NmzWeightedEhrhartSeries[101X
+  
+  [29X[2XNmzWeightedEhrhartSeries[102X( [3Xcone[103X ) [32X function
+  
+  [33X[0;0YThis is an alias for NmzConeProperty( cone, "NmzWeightedEhrhartSeries" );[133X
+  
+  [1X2.3-50 NmzWitnessNotIntegrallyClosed[101X
+  
+  [29X[2XNmzWitnessNotIntegrallyClosed[102X( [3Xcone[103X ) [32X function
+  
+  [33X[0;0YThis is an alias for NmzConeProperty( cone, "WitnessNotIntegrallyClosed" );[133X
+  
+  [1X2.3-51 NmzBasisChange[101X
   
   [29X[2XNmzBasisChange[102X( [3Xcone[103X ) [32X function
   [6XReturns:[106X  [33X[0;10Ya record describing the basis change[133X

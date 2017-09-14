@@ -6,10 +6,10 @@
                            [1X [5XGAP[105X wrapper for Normaliz [101X
   
   
-                                     0.9.8
+                                     1.0.0
   
   
-                                   07/05/2016
+                                6 September 2017
   
   
                                Sebastian Gutsche
@@ -69,42 +69,57 @@
       2.2-6 NmzConeProperty
       2.2-7 NmzPrintConeProperties
     2.3 [33X[0;0YCone properties[133X
-      2.3-1 NmzEmbeddingDimension
-      2.3-2 NmzRank
-      2.3-3 NmzIsInhomogeneous
-      2.3-4 NmzEquations
-      2.3-5 NmzCongruences
-      2.3-6 NmzAffineDim
-      2.3-7 NmzClassGroup
-      2.3-8 NmzDeg1Elements
-      2.3-9 NmzDehomogenization
-      2.3-10 NmzExcludedFaces
-      2.3-11 NmzExtremeRays
-      2.3-12 NmzGenerators
-      2.3-13 NmzGrading
-      2.3-14 NmzHilbertBasis
-      2.3-15 NmzHilbertQuasiPolynomial
-      2.3-16 NmzHilbertSeries
-      2.3-17 NmzInclusionExclusionData
-      2.3-18 NmzIsDeg1ExtremeRays
-      2.3-19 NmzIsDeg1HilbertBasis
-      2.3-20 NmzIsIntegrallyClosed
-      2.3-21 NmzIsPointed
-      2.3-22 NmzMaximalSubspace
-      2.3-23 NmzModuleGenerators
-      2.3-24 NmzModuleGeneratorsOverOriginalMonoid
-      2.3-25 NmzModuleRank
-      2.3-26 NmzMultiplicity
-      2.3-27 NmzOriginalMonoidGenerators
-      2.3-28 NmzRecessionRank
-      2.3-29 NmzIsReesPrimary
-      2.3-30 NmzReesPrimaryMultiplicity
-      2.3-31 NmzSupportHyperplanes
-      2.3-32 NmzTriangulation
-      2.3-33 NmzTriangulationDetSum
-      2.3-34 NmzTriangulationSize
-      2.3-35 NmzVerticesOfPolyhedron
-      2.3-36 NmzBasisChange
+      2.3-1 NmzAffineDim
+      2.3-2 NmzClassGroup
+      2.3-3 NmzCongruences
+      2.3-4 NmzDeg1Elements
+      2.3-5 NmzDehomogenization
+      2.3-6 NmzEmbeddingDimension
+      2.3-7 NmzEquations
+      2.3-8 NmzExcludedFaces
+      2.3-9 NmzExtremeRays
+      2.3-10 NmzGenerators
+      2.3-11 NmzGeneratorOfInterior
+      2.3-12 NmzGrading
+      2.3-13 NmzHilbertBasis
+      2.3-14 NmzHilbertQuasiPolynomial
+      2.3-15 NmzHilbertSeries
+      2.3-16 NmzInclusionExclusionData
+      2.3-17 NmzIsDeg1ExtremeRays
+      2.3-18 NmzIsDeg1HilbertBasis
+      2.3-19 NmzIsGorenstein
+      2.3-20 NmzIsInhomogeneous
+      2.3-21 NmzIsIntegrallyClosed
+      2.3-22 NmzIsPointed
+      2.3-23 NmzIsReesPrimary
+      2.3-24 NmzMaximalSubspace
+      2.3-25 NmzModuleGenerators
+      2.3-26 NmzModuleGeneratorsOverOriginalMonoid
+      2.3-27 NmzModuleRank
+      2.3-28 NmzMultiplicity
+      2.3-29 NmzOriginalMonoidGenerators
+      2.3-30 NmzRank
+      2.3-31 NmzRecessionRank
+      2.3-32 NmzReesPrimaryMultiplicity
+      2.3-33 NmzSupportHyperplanes
+      2.3-34 NmzTriangulation
+      2.3-35 NmzTriangulationDetSum
+      2.3-36 NmzTriangulationSize
+      2.3-37 NmzVerticesFloat
+      2.3-38 NmzVerticesOfPolyhedron
+      2.3-39 NmzConeDecomposition
+      2.3-40 NmzEmbeddingDim
+      2.3-41 NmzExternalIndex
+      2.3-42 NmzGradingDenom
+      2.3-43 NmzIntegerHull
+      2.3-44 NmzInternalIndex
+      2.3-45 NmzStanleyDec
+      2.3-46 NmzSublattice
+      2.3-47 NmzUnitGroupIndex
+      2.3-48 NmzWeightedEhrhartQuasiPolynomial
+      2.3-49 NmzWeightedEhrhartSeries
+      2.3-50 NmzWitnessNotIntegrallyClosed
+      2.3-51 NmzBasisChange
   3 [33X[0;0YExamples[133X
     3.1 [33X[0;0YGenerators[133X
     3.2 [33X[0;0YSystem of equations[133X
