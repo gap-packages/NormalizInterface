@@ -37,13 +37,22 @@ your system's package manager. At least the following are required:
  * cmake
  * boost
 
-Once you have installed these, you can build Normaliz by using
-the `build-normaliz.sh` script provided by us. It takes a single,
-optional, parameter: the location of the GAP root directory.
+Once you have installed these, you can build Normaliz by using the
+`build-normaliz.sh` script provided by us. If NormalizInterface is
+installed inside the `pkg` directory of your GAP installation, you
+can simply invoke it from inside the NormalizInterface directory as
+follows:
+
+    ./build-normaliz.sh
+
+Otherwise, you have to tell the script where your GAP directory is,
+by passing it as an argumnt:
 
     ./build-normaliz.sh GAPDIR
 
-If you omit `GAPDIR`, by default we look in `../..`.
+Not specifying GAPDIR is equivalent to passing `../..` as GAPDIR. If
+more than one argument is specified, then any arguments beyond the
+first are passed on to the Normaliz `configure` script.
 
 Once the script completed successfully, you can build NormalizInterface
 like this:

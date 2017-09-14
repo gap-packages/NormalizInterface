@@ -1,7 +1,8 @@
 name: NormalizInterface
-version: 0.9.8
-date: 07/05/2016
-description: GAP wrapper for Normaliz
+version: 1.0.0
+date: 06/09/2017
+description: |
+    GAP wrapper for Normaliz
 
 authors:
     - name: Sebastian Gutsche
@@ -22,16 +23,17 @@ maintainers:
 GAP: ">= 4.8.1"
 
 www: https://gap-packages.github.io/NormalizInterface
-readme: https://gap-packages.github.io/NormalizInterface/README
+readme: README.md
 packageinfo: https://gap-packages.github.io/NormalizInterface/PackageInfo.g
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/gap-packages/NormalizInterface/releases/download/v0.9.8/NormalizInterface-0.9.8.tar.gz
+      url: https://github.com/gap-packages/NormalizInterface/releases/download/v1.0.0/NormalizInterface-1.0.0.tar.gz
     - name: .tar.bz2
-      url: https://github.com/gap-packages/NormalizInterface/releases/download/v0.9.8/NormalizInterface-0.9.8.tar.bz2
+      url: https://github.com/gap-packages/NormalizInterface/releases/download/v1.0.0/NormalizInterface-1.0.0.tar.bz2
 
-abstract: The <span class='pkgname'>NormalizInterface</span> package provides  a GAP interface to <a href='http://www.home.uni-osnabrueck.de/wbruns/normaliz/'>Normaliz</a>,  enabling direct access to the complete functionality of Normaliz, such as  computations in affine monoids, vector configurations, lattice polytopes, and rational cones.  
+abstract: |
+    The <span class='pkgname'>NormalizInterface</span> package provides  a GAP interface to <a href='http://www.home.uni-osnabrueck.de/wbruns/normaliz/'>Normaliz</a>,  enabling direct access to the complete functionality of Normaliz, such as  computations in affine monoids, vector configurations, lattice polytopes, and rational cones.  
 
 status: dev
 doc-html: doc/chap0_mj.html
