@@ -104,6 +104,11 @@ fi
 CPPFLAGS="$old_CPPFLAGS"
 LDFLAGS="$old_LDFLAGS"
 
+dnl ##
+dnl ## Check for C++11 support
+dnl ##
+AX_CXX_COMPILE_STDCXX(11,noext,mandatory)
+
 
 dnl ##
 dnl ## Detect pointer size to distinguish 32 and 64 bit builds
