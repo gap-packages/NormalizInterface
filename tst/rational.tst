@@ -66,6 +66,5 @@ HilbertQuasiPolynomial = [ 5/16*t^2+7/12*t+1, 5/16*t^2+11/24*t+11/48,
 IsTriangulationNested = false
 IsTriangulationPartial = false
 
-
 #
 gap> STOP_TEST("rational.tst", 0);

@@ -153,6 +153,5 @@ HilbertQuasiPolynomial =
 IsTriangulationNested = false
 IsTriangulationPartial = false
 
-
 #
 gap> STOP_TEST("dual.tst", 0);

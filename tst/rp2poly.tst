@@ -122,6 +122,5 @@ HilbertQuasiPolynomial = [ 7/40*t^5+7/8*t^4+53/24*t^3+25/8*t^2+157/60*t+1 ]
 IsTriangulationNested = false
 IsTriangulationPartial = false
 
-
 #
 gap> STOP_TEST("rp2poly.tst", 0);

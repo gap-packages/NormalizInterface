@@ -164,6 +164,5 @@ HilbertQuasiPolynomial =
 IsTriangulationNested = false
 IsTriangulationPartial = false
 
-
 #
 gap> STOP_TEST("rproj2.tst", 0);
