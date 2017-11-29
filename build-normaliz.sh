@@ -88,7 +88,7 @@ mkdir -p DST
 #  GMP_DIR=/some/path BOOST_ROOT=/another/path ./build-normaliz.sh $GAPROOT
 
 # If GAP was build for 32 bit, also do it for normaliz
-if [ $GAParch_abi = "32-bit" ]; then
+if [ x$GAParch_abi = x"32-bit" ] || [ x$GAP_ABI = x32 ]; then
     echo "GAP was build for 32 bit"
     export CXXFLAGS="-m32"
 fi
