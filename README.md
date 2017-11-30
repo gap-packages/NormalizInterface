@@ -76,7 +76,7 @@ Generate the documentation:
 
 run automatic tests:
 
-    make check
+    gap tst/testall.g
     gap maketest.g
 
 
