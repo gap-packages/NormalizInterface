@@ -1,5 +1,9 @@
 This file describes changes in the NormalizInterface package.
 
+1.0.1 (2017-11-30)
+  - Use TestDirectory, adapt to upcoming GAP build system changes
+  - Detect C++11 capabilities of compiler, add c++11 flag if necessary
+
 1.0.0 (2017-09-06)
   - update to libnormaliz 3.4.0
     * added cone properties
