@@ -79,6 +79,5 @@ HilbertQuasiPolynomial = [ 5*t^2+3*t+1 ]
 IsTriangulationNested = false
 IsTriangulationPartial = false
 
-
 #
 gap> STOP_TEST("lattice_ideal.tst", 0);

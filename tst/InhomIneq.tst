@@ -3,7 +3,6 @@ gap> START_TEST("NormalizInterface: InhomIneq.tst");
 #
 # Test a Hilbert series with negative shift
 #
-
 gap> M := [
 > [0,  2,  1],
 > [0, -2,  3],

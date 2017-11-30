@@ -1,4 +1,0 @@
-#!/bin/sh
-# This file is used by "make check"
-
-AUTOMAKE_TESTS=yes $GAP_EXECUTABLE -A -q -b "$srcdir/tst/testall.g"
