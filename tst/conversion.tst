@@ -39,46 +39,46 @@ gap> C := NmzCone("cone", M);
 <a Normaliz cone>
 gap> NmzMultiplicity(C);
 1
-gap> Rays := NmzExtremeRays(C);;
+gap> rays := NmzExtremeRays(C);;
 
 #
 gap> i := 1;;
-gap> Print(i+start," ", M[i] = Rays[i], "\n"); i := i + 1;;
+gap> Print(i+start," ", M[i] = rays[i], "\n"); i := i + 1;;
 26 true
-gap> Print(i+start," ", M[i] = Rays[i], "\n"); i := i + 1;;
+gap> Print(i+start," ", M[i] = rays[i], "\n"); i := i + 1;;
 27 true
-gap> Print(i+start," ", M[i] = Rays[i], "\n"); i := i + 1;;
+gap> Print(i+start," ", M[i] = rays[i], "\n"); i := i + 1;;
 28 true
-gap> Print(i+start," ", M[i] = Rays[i], "\n"); i := i + 1;;
+gap> Print(i+start," ", M[i] = rays[i], "\n"); i := i + 1;;
 29 true
-gap> Print(i+start," ", M[i] = Rays[i], "\n"); i := i + 1;;
+gap> Print(i+start," ", M[i] = rays[i], "\n"); i := i + 1;;
 30 true
-gap> Print(i+start," ", M[i] = Rays[i], "\n"); i := i + 1;;
+gap> Print(i+start," ", M[i] = rays[i], "\n"); i := i + 1;;
 31 true
-gap> Print(i+start," ", M[i] = Rays[i], "\n"); i := i + 1;;
+gap> Print(i+start," ", M[i] = rays[i], "\n"); i := i + 1;;
 32 true
-gap> Print(i+start," ", M[i] = Rays[i], "\n"); i := i + 1;;
+gap> Print(i+start," ", M[i] = rays[i], "\n"); i := i + 1;;
 33 true
-gap> Print(i+start," ", M[i] = Rays[i], "\n"); i := i + 1;;
+gap> Print(i+start," ", M[i] = rays[i], "\n"); i := i + 1;;
 34 true
 
 #
 gap> i := 58 - start;;
-gap> Print(i+start," ", M[i] = Rays[i], "\n"); i := i + 1;;
+gap> Print(i+start," ", M[i] = rays[i], "\n"); i := i + 1;;
 58 true
-gap> Print(i+start," ", M[i] = Rays[i], "\n"); i := i + 1;;
+gap> Print(i+start," ", M[i] = rays[i], "\n"); i := i + 1;;
 59 true
-gap> Print(i+start," ", M[i] = Rays[i], "\n"); i := i + 1;;
+gap> Print(i+start," ", M[i] = rays[i], "\n"); i := i + 1;;
 60 true
-gap> Print(i+start," ", M[i] = Rays[i], "\n"); i := i + 1;;
+gap> Print(i+start," ", M[i] = rays[i], "\n"); i := i + 1;;
 61 true
-gap> Print(i+start," ", M[i] = Rays[i], "\n"); i := i + 1;;
+gap> Print(i+start," ", M[i] = rays[i], "\n"); i := i + 1;;
 62 true
-gap> Print(i+start," ", M[i] = Rays[i], "\n"); i := i + 1;;
+gap> Print(i+start," ", M[i] = rays[i], "\n"); i := i + 1;;
 63 true
-gap> Print(i+start," ", M[i] = Rays[i], "\n"); i := i + 1;;
+gap> Print(i+start," ", M[i] = rays[i], "\n"); i := i + 1;;
 64 true
-gap> Print(i+start," ", M[i] = Rays[i], "\n"); i := i + 1;;
+gap> Print(i+start," ", M[i] = rays[i], "\n"); i := i + 1;;
 65 true
 
 #
