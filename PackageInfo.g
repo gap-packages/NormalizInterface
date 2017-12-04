@@ -2,8 +2,8 @@ SetPackageInfo( rec(
 
 PackageName := "NormalizInterface",
 Subtitle := "GAP wrapper for Normaliz",
-Version := "1.0.1",
-Date    := "30/11/2017", # dd/mm/yyyy format
+Version := "1.0.2",
+Date    := "03/12/2017", # dd/mm/yyyy format
 
 Persons := [
   rec(
@@ -11,15 +11,15 @@ Persons := [
     FirstNames    := "Sebastian",
     IsAuthor      := true,
     IsMaintainer  := true,
-    Email         := "gutsche@mathematik.uni-kl.de",
+    Email         := "gutsche@mathematik.uni-siegen.de",
     WWWHome       := "http://wwwb.math.rwth-aachen.de/~gutsche/",
     PostalAddress := Concatenation(
                        "Department of Mathematics\n",
-                       "University of Kaiserslautern\n",
-                       "67653 Kaiserslautern\n",
+                       "University of Siegen\n",
+                       "57072 Kaiserslautern\n",
                        "Germany" ),
-    Place         := "Kaiserslautern",
-    Institution   := "University of Kaiserslautern"
+    Place         := "Siegen",
+    Institution   := "University of Siegen"
   ),
 
   rec(

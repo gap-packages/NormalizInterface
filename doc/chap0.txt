@@ -6,10 +6,10 @@
                            [1X [5XGAP[105X wrapper for Normaliz [101X
   
   
-                                     1.0.1
+                                     1.0.2
   
   
-                                30 November 2017
+                                3 December 2017
   
   
                                Sebastian Gutsche
@@ -21,11 +21,11 @@
   
   
   Sebastian Gutsche
-      Email:    [7Xmailto:gutsche@mathematik.uni-kl.de[107X
+      Email:    [7Xmailto:gutsche@mathematik.uni-siegen.de[107X
       Homepage: [7Xhttp://wwwb.math.rwth-aachen.de/~gutsche/[107X
       Address:  [33X[0;14YDepartment of Mathematics[133X
-                [33X[0;14YUniversity of Kaiserslautern[133X
-                [33X[0;14Y67653 Kaiserslautern[133X
+                [33X[0;14YUniversity of Siegen[133X
+                [33X[0;14Y57072 Kaiserslautern[133X
                 [33X[0;14YGermany[133X
   
   
