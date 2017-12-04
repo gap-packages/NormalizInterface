@@ -1,5 +1,8 @@
 This file describes changes in the NormalizInterface package.
 
+1.0.2 (2017-12-04)
+  - Use variable rays instead of Rays in test file
+
 1.0.1 (2017-11-30)
   - Use TestDirectory, adapt to upcoming GAP build system changes
   - Detect C++11 capabilities of compiler, add c++11 flag if necessary
