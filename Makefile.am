@@ -13,8 +13,9 @@ lib_LTLIBRARIES = NormalizInterface.la
 
 NormalizInterface_la_SOURCES = src/normaliz.cc
 NormalizInterface_la_CXXFLAGS = -Wall
-NormalizInterface_la_CPPFLAGS = $(GAP_CPPFLAGS) -DCONFIG_H $(NORMALIZ_CPPFLAGS)
-NormalizInterface_la_LDFLAGS = -R$(NORMALIZ_LDPATH)
+NormalizInterface_la_CPPFLAGS = $(GAP_CPPFLAGS) $(NORMALIZ_CPPFLAGS)
+NormalizInterface_la_CFLAGS = $(GAP_CFLAGS)
+NormalizInterface_la_LDFLAGS = $(GAP_LDFLAGS) -R$(NORMALIZ_LDPATH)
 NormalizInterface_la_LDFLAGS += -module -avoid-version
 if SYS_IS_CYGWIN
 NormalizInterface_la_LDFLAGS += -no-undefined -version-info 0:0:0 -Wl,$(GAPROOT)/bin/$(GAPARCH)/gap.dll
