@@ -622,8 +622,7 @@ Obj NmzKnownConeProperties(Obj self, Obj cone)
         if (isComputed) {
             string prop_name(libnormaliz::toString(p));
 
-            Obj prop_name_gap;
-            C_NEW_STRING(prop_name_gap, prop_name.size(), prop_name.c_str());
+            Obj prop_name_gap = MakeImmString(prop_name.c_str());
 
             n++;    // Increment counter
             SET_ELM_PLIST(M, n, prop_name_gap);
@@ -634,10 +633,7 @@ Obj NmzKnownConeProperties(Obj self, Obj cone)
                 isComputed = C->getHilbertSeries().isHilbertQuasiPolynomialComputed();
 
                 if (isComputed) {
-                    string prop_name("HilbertQuasiPolynomial");
-
-                    Obj prop_name_gap;
-                    C_NEW_STRING(prop_name_gap, prop_name.size(), prop_name.c_str());
+                    Obj prop_name_gap = MakeImmString("HilbertQuasiPolynomial");
 
                     n++;    // Increment counter
                     SET_ELM_PLIST(M, n, prop_name_gap);
