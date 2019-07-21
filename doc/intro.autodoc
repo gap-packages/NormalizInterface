@@ -75,7 +75,7 @@ solutions to the inhomogeneous system.
 
 @Section Compiling
 
-NormalizInterface supports GAP 4.8.0 or later, and Normaliz 3.0.0 or later.
+NormalizInterface supports GAP 4.9 or later, and Normaliz 3.0.0 or later.
 <P/>
 
 For technical reasons, installing and using NormalizInterface requires
