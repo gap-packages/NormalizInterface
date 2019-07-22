@@ -13,14 +13,15 @@ Persons := [
     IsAuthor      := true,
     IsMaintainer  := true,
     Email         := "gutsche@mathematik.uni-siegen.de",
-    WWWHome       := "http://wwwb.math.rwth-aachen.de/~gutsche/",
+    WWWHome       := "https://algebra.mathematik.uni-siegen.de/gutsche/",
     PostalAddress := Concatenation(
-                       "Department of Mathematics\n",
-                       "University of Siegen\n",
-                       "57072 Kaiserslautern\n",
+                       "Department Mathematik\n",
+                       "Universität Siegen\n",
+                       "Walter-Flex-Straße 3\n",
+                       "57072 Siegen\n",
                        "Germany" ),
     Place         := "Siegen",
-    Institution   := "University of Siegen"
+    Institution   := "Universität Siegen"
   ),
 
   rec(
