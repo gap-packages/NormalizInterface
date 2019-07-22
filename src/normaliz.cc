@@ -58,6 +58,12 @@ extern UInt T_NORMALIZ;
     } catch (const char* a) { \
         ErrorQuit(a,0,0); \
         return Fail; \
+    } catch (const std::string &a) { \
+        ErrorQuit(a.c_str(),0,0); \
+        return Fail; \
+    } catch (...) { \
+        ErrorQuit("PANIC: caught general exception", 0, 0); \
+        return Fail; \
     }
 
 #define SIGNAL_HANDLER_BEGIN \
@@ -853,7 +859,7 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
         throw "cone property is input-only";
 
     default:
-        throw "unknown cone property";
+        throw "unsupported cone property " + libnormaliz::toString(p);
     }
 
     return Fail;
