@@ -12,7 +12,7 @@ function( cone, prop )
     local result, t, shift, poly, tmp, denom;
     result := _NmzConeProperty(cone, prop);
     if prop = "Grading" then
-        denom := Remove(result);
+        denom := NmzConeProperty(cone, "GradingDenom");;
         return result / denom;
     fi;
     if prop = "HilbertSeries" then

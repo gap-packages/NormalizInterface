@@ -678,6 +678,7 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
     case libnormaliz::ConeProperty::ExtremeRays: return NmzMatrixToGAP(C->getExtremeRays());
     case libnormaliz::ConeProperty::GeneratorOfInterior: return NmzVectorToGAP(C->getGeneratorOfInterior());
     case libnormaliz::ConeProperty::Generators: return NmzMatrixToGAP(C->getGenerators());
+    case libnormaliz::ConeProperty::Grading: return NmzVectorToGAP(C->getGrading());
     case libnormaliz::ConeProperty::GradingDenom: return NmzNumberToGAP(C->getGradingDenom());
     case libnormaliz::ConeProperty::HilbertBasis: return NmzMatrixToGAP(C->getHilbertBasis());
     case libnormaliz::ConeProperty::HilbertQuasiPolynomial: return NmzHilbertQuasiPolynomialToGAP(C->getHilbertSeries());
@@ -715,13 +716,6 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
     case libnormaliz::ConeProperty::WeightedEhrhartQuasiPolynomial: return NmzWeightedEhrhartQuasiPolynomialToGAP(C->getIntData());
     case libnormaliz::ConeProperty::WeightedEhrhartSeries: return NmzWeightedEhrhartSeriesToGAP(C->getWeightedEhrhartSeries());
     case libnormaliz::ConeProperty::WitnessNotIntegrallyClosed: return NmzVectorToGAP(C->getWitnessNotIntegrallyClosed());
-
-    case libnormaliz::ConeProperty::Grading:
-        {
-        vector<Integer> grad = C->getGrading();
-        grad.push_back(C->getGradingDenom());
-        return NmzVectorToGAP(grad);
-        }
 
     // StanleyDec is special and we do not support the required conversion at
     // this time. If you really need this, contact the developers.
