@@ -36,18 +36,26 @@ echo "Found GAP in directory $GAPDIR"
 echo "GAParch = $GAParch"
 
 # check if GAP was built with its own GMP (this is kind of a hack...)
-GAP_GMP="$GAPDIR/bin/$GAParch/extern/gmp"
-if [ -f "$GAP_GMP/MAKE_CHECK_PASSED" -a  -f "$GAP_GMP/include/gmp.h" ]; then
-    echo "GAP was built with its own GMP"
-    if [ -f "$GAP_GMP/include/gmpxx.h" ]; then
+GAP48_GMP="$GAPDIR/bin/$GAParch/extern/gmp"
+GAP49_GMP="$GAPDIR/extern/install/gmp"
+if [ -n "$GMP_FLAG" ]; then
+    echo "Using supplied GMP_FLAG = $GMP_FLAG"
+elif [ -f "$GAP48_GMP/MAKE_CHECK_PASSED" -a  -f "$GAP48_GMP/include/gmp.h" ]; then
+    # GAP <= 4.8
+    echo "ERROR: your GAP is too old, need GAP 4.9 or later"
+    exit 1
+elif [ -f "$GAP49_GMP/include/gmp.h" ]; then
+    # GAP >= 4.9
+    echo "GAP >= 4.9 was built with its own GMP"
+    if [ -f "$GAP49_GMP/include/gmpxx.h" ]; then
         echo "GAP's GMP includes C++ support"
-        GMP_FLAG="$GAP_GMP"
+        GMP_FLAG="$GAP49_GMP"
     else
         echo "ERROR: GAP's GMP was built without C++ support"
         exit 1
     fi
 else
-    echo "GAP was built with external GMP"
+    echo "GAP was apparently built with external GMP"
     # TODO: actually, now we should figure out somehow which
     # external GMP library was used to build GAP. But that's not really
     # possible: While we could e.g. scan the "internal" sysinfo.gap
@@ -62,23 +70,25 @@ else
     # the GMP_DIR variable manually.
 fi
 
-NORMALIZ_VERSION=v3.4.0
+NORMALIZ_VERSION=3.7.2
+NORMALIZ_SHA256=436a870a1ab9a5e0c2330f5900d904dc460938c17428db1c729318dbd9bf27aa
+NORMALIZ_BASE=normaliz-${NORMALIZ_VERSION}
+NORMALIZ_TAR=${NORMALIZ_BASE}.tar.gz
+NORMALIZ_URL=https://github.com/Normaliz/Normaliz/releases/download/v${NORMALIZ_VERSION}/${NORMALIZ_TAR}
 
-# needs git 1.8 or newer
-if [ ! -d Normaliz.git ]; then
-    echo "Fetching Normaliz source code"
-    git clone --depth 1 --branch $NORMALIZ_VERSION -- https://github.com/Normaliz/Normaliz Normaliz.git
-fi
-cd Normaliz.git
-# get a new version
-if [ `git describe --tags` != $NORMALIZ_VERSION ]; then
-    git fetch origin $NORMALIZ_VERSION
-    git fetch origin
-    git checkout $NORMALIZ_VERSION
-fi
+echo
+echo "##"
+echo "## downloading ${NORMALIZ_TAR}"
+echo "##"
+etc/download.sh ${NORMALIZ_URL} ${NORMALIZ_SHA256}
 
-rm -rf DST
-mkdir -p DST
+# extract it
+echo
+echo "##"
+echo "## extracting ${NORMALIZ_TAR}"
+echo "##"
+rm -rf ${NORMALIZ_BASE}
+tar xvf ${NORMALIZ_TAR}
 
 # The cmake build process honors environment variables like
 # GMP_DIR and BOOST_ROOT. So if you need to tell the build
@@ -87,20 +97,25 @@ mkdir -p DST
 #
 #  GMP_DIR=/some/path BOOST_ROOT=/another/path ./build-normaliz.sh $GAPROOT
 
+echo "##"
+echo "## compiling Normaliz ${NORMALIZ_VERSION}"
+echo "##"
+
 # If GAP was build for 32 bit, also do it for normaliz
 if [ x$GAParch_abi = x"32-bit" ] || [ x$GAP_ABI = x32 ]; then
-    echo "GAP was build for 32 bit"
+    echo "GAP was built for 32 bit"
     export CXXFLAGS="-m32"
 fi
 
-## use the libtool build system
+NormalizInstallDir=$PWD/NormalizInstallDir
+rm -rf ${NormalizInstallDir}
+mkdir -p ${NormalizInstallDir}
 
-PREFIX="$PWD/DST"
-./bootstrap.sh
+cd ${NORMALIZ_BASE}
 if [ "x$GMP_FLAG" != "x" ]; then
-  ./configure --prefix=$PREFIX --with-gmp=$GMP_FLAG $@
+  ./configure --prefix="${NormalizInstallDir}" --with-gmp=$GMP_FLAG $@
 else
-  ./configure --prefix=$PREFIX $@
+  ./configure --prefix="${NormalizInstallDir}" $@
 fi
-make
+make -j4
 make install

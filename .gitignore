@@ -47,11 +47,10 @@ src/*.lo
 
 
 /doc/*.xml
+/gh-pages/
 
-/Normaliz2.*
-/Normaliz.git
-/Normaliz
-gh-pages/
+/normaliz-*/
+/normaliz-*.tar.gz
 
 /maketest.g
 /test-suite.log
