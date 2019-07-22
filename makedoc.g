@@ -10,6 +10,3 @@ AutoDoc(rec(
     scaffold := rec( bib := "NormalizInterface-bib.xml" ),
     autodoc := rec( files := [ "doc/intro.autodoc", "src/normaliz.cc" ] ),
 ));
-PrintTo("VERSION", GAPInfo.PackageInfoCurrent.Version);
-
-QUIT;
