@@ -6,7 +6,7 @@ dnl ##
 dnl ## Setup autoconf
 dnl ##
 AC_PREREQ([2.68])
-AC_INIT([NormalizInterface], [package], [https://github.com/gap-packages/NormalizInterface/issues], [NormalizInterface], [http://gap-packages.github.io/NormalizInterface/])
+AC_INIT([NormalizInterface], [package], [https://github.com/gap-packages/NormalizInterface/issues], [NormalizInterface], [https://gap-packages.github.io/NormalizInterface/])
 AC_CONFIG_SRCDIR([src/normaliz.cc])
 AC_CONFIG_HEADER([src/pkgconfig.h:cnf/pkgconfig.h.in])
 AC_CONFIG_MACRO_DIR([m4])

@@ -4,10 +4,10 @@
 
 <entry id="GAP4"><manual>
   <title><C>GAP</C> -- <C>G</C>roups, <C>A</C>lgorithms, and
-                  <C>P</C>rogramming, Version 4.7.5</title>
+                  <C>P</C>rogramming, Version 4.10.2</title>
   <organization>The GAP Group</organization>
-  <year>2014</year>
-  <note><URL>http://www.gap-system.org</URL></note>
+  <year>2019</year>
+  <note><URL>https://www.gap-system.org</URL></note>
   <key>GAP</key>
   <keywords>groups; *; gap; manual</keywords>
 </manual></entry>
