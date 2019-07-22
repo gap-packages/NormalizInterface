@@ -212,18 +212,6 @@ static Obj MpzToGAP(const mpz_t x)
     return res;
 }
 
-static inline Obj MpzClassToGAP(const mpz_class& x)
-{
-    return MpzToGAP(x.get_mpz_t());
-}
-
-static Obj MpqClassToGAP(const mpq_class& x)
-{
-    Obj num = MpzClassToGAP(x.get_num());
-    Obj den = MpzClassToGAP(x.get_den());
-    return QUO(num, den);
-}
-
 template<typename Number>
 Obj NmzNumberToGAP(Number x)
 {
@@ -253,7 +241,15 @@ Obj NmzNumberToGAP(long x)
 template<>
 Obj NmzNumberToGAP(mpz_class x)
 {
-    return MpzClassToGAP(x);
+    return MpzToGAP(x.get_mpz_t());
+}
+
+template<>
+Obj NmzNumberToGAP(mpq_class x)
+{
+    Obj num = NmzNumberToGAP(x.get_num());
+    Obj den = NmzNumberToGAP(x.get_den());
+    return QUO(num, den);
 }
 
 template<>
@@ -688,7 +684,7 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
     case libnormaliz::ConeProperty::HilbertSeries: return NmzHilbertSeriesToGAP(C->getHilbertSeries());
     case libnormaliz::ConeProperty::InclusionExclusionData: return NmzTriangleListToGAP<long>(C->getInclusionExclusionData());
     case libnormaliz::ConeProperty::IntegerHull: return NewProxyCone(&(C->getIntegerHullCone()), cone);
-    case libnormaliz::ConeProperty::Integral: return MpqClassToGAP(C->getIntegral());
+    case libnormaliz::ConeProperty::Integral: return NmzNumberToGAP(C->getIntegral());
     case libnormaliz::ConeProperty::InternalIndex: return NmzNumberToGAP(C->getIndex());
     case libnormaliz::ConeProperty::IsDeg1ExtremeRays: return C->isDeg1ExtremeRays() ? True : False;
     case libnormaliz::ConeProperty::IsDeg1HilbertBasis: return C->isDeg1HilbertBasis() ? True : False;
@@ -702,7 +698,7 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
     case libnormaliz::ConeProperty::MaximalSubspace: return NmzMatrixToGAP(C->getMaximalSubspace());
     case libnormaliz::ConeProperty::ModuleGenerators: return NmzMatrixToGAP(C->getModuleGenerators());
     case libnormaliz::ConeProperty::ModuleRank: return NmzNumberToGAP(C->getModuleRank());
-    case libnormaliz::ConeProperty::Multiplicity: return MpqClassToGAP(C->getMultiplicity());
+    case libnormaliz::ConeProperty::Multiplicity: return NmzNumberToGAP(C->getMultiplicity());
     case libnormaliz::ConeProperty::OriginalMonoidGenerators: return NmzMatrixToGAP(C->getOriginalMonoidGenerators());
     case libnormaliz::ConeProperty::Rank: return NmzNumberToGAP(C->getRank());
     case libnormaliz::ConeProperty::RecessionRank: return NmzNumberToGAP(C->getRecessionRank());
@@ -711,11 +707,11 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
     case libnormaliz::ConeProperty::SupportHyperplanes: return NmzMatrixToGAP(C->getSupportHyperplanes());
     case libnormaliz::ConeProperty::Triangulation: return NmzTriangleListToGAP<Integer>(C->getTriangulation());
     case libnormaliz::ConeProperty::TriangulationDetSum: return NmzNumberToGAP(C->getTriangulationDetSum());
-    case libnormaliz::ConeProperty::TriangulationSize: return ObjInt_UInt(C->getTriangulationSize());
+    case libnormaliz::ConeProperty::TriangulationSize: return NmzNumberToGAP(C->getTriangulationSize());
     case libnormaliz::ConeProperty::UnitGroupIndex: return NmzNumberToGAP(C->getUnitGroupIndex());
     case libnormaliz::ConeProperty::VerticesFloat: return NmzMatrixToGAP(C->getVerticesFloat());
     case libnormaliz::ConeProperty::VerticesOfPolyhedron: return NmzMatrixToGAP(C->getVerticesOfPolyhedron());
-    case libnormaliz::ConeProperty::VirtualMultiplicity: return MpqClassToGAP(C->getVirtualMultiplicity());
+    case libnormaliz::ConeProperty::VirtualMultiplicity: return NmzNumberToGAP(C->getVirtualMultiplicity());
     case libnormaliz::ConeProperty::WeightedEhrhartQuasiPolynomial: return NmzWeightedEhrhartQuasiPolynomialToGAP(C->getIntData());
     case libnormaliz::ConeProperty::WeightedEhrhartSeries: return NmzWeightedEhrhartSeriesToGAP(C->getWeightedEhrhartSeries());
     case libnormaliz::ConeProperty::WitnessNotIntegrallyClosed: return NmzVectorToGAP(C->getWitnessNotIntegrallyClosed());
