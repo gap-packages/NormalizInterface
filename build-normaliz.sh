@@ -70,8 +70,12 @@ else
     # the GMP_DIR variable manually.
 fi
 
-NORMALIZ_VERSION=3.7.2
-NORMALIZ_SHA256=436a870a1ab9a5e0c2330f5900d904dc460938c17428db1c729318dbd9bf27aa
+# allow overriding the normaliz version via env var or argument, so that
+# we can test with many different ones
+if [ -z $NORMALIZ_VERSION ]; then
+    NORMALIZ_VERSION=3.7.2
+    NORMALIZ_SHA256=436a870a1ab9a5e0c2330f5900d904dc460938c17428db1c729318dbd9bf27aa
+fi
 NORMALIZ_BASE=normaliz-${NORMALIZ_VERSION}
 NORMALIZ_TAR=${NORMALIZ_BASE}.tar.gz
 NORMALIZ_URL=https://github.com/Normaliz/Normaliz/releases/download/v${NORMALIZ_VERSION}/${NORMALIZ_TAR}
