@@ -1,4 +1,4 @@
-#! @BeginChunk Demo example
+#! @BeginChunk Demo_example
 #! @BeginExample
 C := NmzCone(["integral_closure",[[2,1],[1,3]]]);
 #! <a Normaliz cone>
@@ -16,7 +16,7 @@ NmzConeProperty(C,"SupportHyperplanes");
 #! @EndChunk
 
 
-#! @BeginChunk Demo example equation
+#! @BeginChunk Demo_example_equation
 #! @BeginExample
 D := NmzCone(["equations",[[1,2,-3]], "grading",[[0,-1,3]]]);
 #! <a Normaliz cone>
@@ -36,7 +36,7 @@ NmzEquations(D);
 #! @EndChunk
 
 
-#! @BeginChunk Demo example inhom equation
+#! @BeginChunk Demo_example_inhom_equation
 #! @BeginExample
 P := NmzCone(["inhom_equations",[[1,2,-3,1]], "grading", [[1,1,1]]]);
 #! <a Normaliz cone>

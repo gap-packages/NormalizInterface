@@ -35,13 +35,13 @@ To create a cone object use <A>NmzCone</A>.
 
 @Section Generators
 
-@InsertChunk Demo example
+@InsertChunk Demo_example
 
 @Section System of equations
-@InsertChunk Demo example equation
+@InsertChunk Demo_example_equation
 
 @Section System of inhomogeneous equations
-@InsertChunk Demo example inhom equation
+@InsertChunk Demo_example_inhom_equation
 
 @Section Combined input
 Normaliz also allows the combination of different kinds of input, e.g.
@@ -54,7 +54,7 @@ magic constant. This leads to a linear system of equations. The magic constant
 is a natural choice for the grading. Additionally we force here the 4 corner
 to have even value by adding congruences.
 
-@InsertChunk Demo example 3x3magiceven
+@InsertChunk Demo_example_3x3magiceven
 
 @Section Using the dual mode
 For solving systems of equations and inequalities it is often faster to use
@@ -65,7 +65,7 @@ The input consists of a system of 8 inhomogeneous equations in R^3. The first
 row of the matrix M encodes the inequality <M>8x + 8y + 8z + 7 \geq 0</M>.
 Additionally we say that <M>x, y, z</M> should be non-negative by giving the
 sign vector and use the total degree.
-@InsertChunk example dual
+@InsertChunk example_dual
 
 As result we get the Hilbert basis of the cone of the solutions to the
 homogeneous system and the module generators which are the base

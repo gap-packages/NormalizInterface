@@ -1,25 +1,25 @@
-#! @BeginChunk NmzCone example
+#! @BeginChunk NmzCone_example
 #! @BeginExample
 cone := NmzCone(["integral_closure",[[2,1],[1,3]]]);
 #! <a Normaliz cone>
 #! @EndExample
 #! @EndChunk
 
-#! @BeginChunk NmzHasConeProperty example
+#! @BeginChunk NmzHasConeProperty_example
 #! @BeginExample
 NmzHasConeProperty(cone, "ExtremeRays");
 #! false
 #! @EndExample
 #! @EndChunk
 
-#! @BeginChunk NmzKnownConeProperties example
+#! @BeginChunk NmzKnownConeProperties_example
 #! @BeginExample
 NmzKnownConeProperties(cone);
 #! [ "Generators", "OriginalMonoidGenerators", "Sublattice" ]
 #! @EndExample
 #! @EndChunk
 
-#! @BeginChunk NmzCompute example
+#! @BeginChunk NmzCompute_example
 #! @BeginExample
 NmzKnownConeProperties(cone);
 #! [ "Generators", "OriginalMonoidGenerators", "Sublattice" ]

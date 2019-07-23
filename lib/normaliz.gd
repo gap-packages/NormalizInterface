@@ -25,7 +25,7 @@ BindGlobal("TheTypeNormalizCone", NewType( NormalizObjectFamily, IsNormalizCone 
 #! The single parameter version is equivalent to
 #! <C>NmzCone(cone, ["DefaultMode"])</C>.
 #! See <Ref Func="NmzConeProperty"/> for a list of recognized properties.
-#! @InsertChunk NmzCompute example
+#! @InsertChunk NmzCompute_example
 DeclareGlobalFunction( "NmzCompute" );
 
 #! @Arguments cone, property
@@ -154,5 +154,5 @@ DeclareGlobalFunction( "NmzBasisChange" );
 #!
 #! See the Normaliz manual for a detailed description.
 #!
-#! @InsertChunk NmzCone example
+#! @InsertChunk NmzCone_example
 DeclareGlobalFunction( "NmzCone" );

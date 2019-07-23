@@ -1,4 +1,4 @@
-#! @BeginChunk Demo example 3x3magiceven
+#! @BeginChunk Demo_example_3x3magiceven
 #! @BeginExample
 Magic3x3even := NmzCone(["equations",
 [ [1, 1, 1,  -1, -1, -1,   0,  0,  0],

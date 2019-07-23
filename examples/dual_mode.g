@@ -1,4 +1,4 @@
-#! @BeginChunk example dual
+#! @BeginChunk example_dual
 #! @BeginExample
 M := [
  [ 8,  8,  8,  7 ],
