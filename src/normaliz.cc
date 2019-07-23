@@ -147,7 +147,7 @@ static Obj NewProxyCone(Cone<mpz_class>* C, Obj parentCone)
 /* Free function */
 static void NormalizFreeFunc(Obj o)
 {
-    if (SIZE_OBJ(o) != 2) {
+    if (SIZE_OBJ(o) != 2 * sizeof(Obj)) {
         delete GET_CONE<mpz_class>(o);
     }
 }
