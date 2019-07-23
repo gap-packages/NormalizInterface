@@ -73,8 +73,10 @@ fi
 # allow overriding the normaliz version via env var or argument, so that
 # we can test with many different ones
 if [ -z $NORMALIZ_VERSION ]; then
-    NORMALIZ_VERSION=3.7.2
-    NORMALIZ_SHA256=436a870a1ab9a5e0c2330f5900d904dc460938c17428db1c729318dbd9bf27aa
+    NORMALIZ_VERSION=3.4.0
+    NORMALIZ_SHA256=01eae802621beb3bdbde57bae32a1251d40ecc4a01660a50540c1e1f5eeb9c24
+#     NORMALIZ_VERSION=3.7.2
+#     NORMALIZ_SHA256=436a870a1ab9a5e0c2330f5900d904dc460938c17428db1c729318dbd9bf27aa
 fi
 NORMALIZ_BASE=normaliz-${NORMALIZ_VERSION}
 NORMALIZ_TAR=${NORMALIZ_BASE}.tar.gz
