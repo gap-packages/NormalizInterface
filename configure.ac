@@ -31,6 +31,11 @@ AC_PROG_CXX
 AC_LANG([C++])
 
 dnl ##
+dnl ## Check for C++11 support
+dnl ##
+AX_CXX_COMPILE_STDCXX(11, ,mandatory)
+
+dnl ##
 dnl ## Setup libtool (for building the GAP kernel extension)
 dnl ##
 LT_PREREQ([2.4.2])
@@ -103,11 +108,6 @@ if test "x$ac_normaliz" != "xyes"; then
 fi
 CPPFLAGS="$old_CPPFLAGS"
 LDFLAGS="$old_LDFLAGS"
-
-dnl ##
-dnl ## Check for C++11 support
-dnl ##
-AX_CXX_COMPILE_STDCXX(11,noext,mandatory)
 
 dnl ##
 dnl ## Detect Windows resp. Cygwin
