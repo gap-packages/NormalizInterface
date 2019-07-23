@@ -22,27 +22,19 @@
 #! @Section YOU FORGOT TO SET A SECTION
 */
 
-#include <gmp.h>
-
-extern "C" {
 #include "src/compiled.h"          /* GAP headers                */
-}
+
 #include "libnormaliz/cone.h"
-#include <assert.h>
-
-
 #include "libnormaliz/map_operations.h"
 
 #include <vector>
 #include <iostream>
 
+#include <cassert>
 #include <csignal>
 using std::signal;
 
 typedef void (*sighandler_t)(int);
-
-// the TNUM used for NormalizInterface objects,
-extern UInt T_NORMALIZ;
 
 // old versions of libnormaliz (before 2.99.1) did not include such a define
 #if !defined(NMZ_RELEASE) || NMZ_RELEASE < 30400
@@ -82,10 +74,6 @@ extern UInt T_NORMALIZ;
     } \
     signal(SIGINT,current_interpreter_sigint_handler);
 
-extern Obj TheTypeNormalizCone;
-
-#define IS_CONE(o) (TNUM_OBJ(o) == T_NORMALIZ)
-
 
 // Paranoia check
 #ifdef SYS_IS_64_BIT
@@ -113,27 +101,33 @@ using std::pair;
 using std::cerr;
 using std::endl;
 
-void signal_handler(int signal)
+static void signal_handler(int signal)
 {
     libnormaliz::nmz_interrupted = true;
 }
 
+static Obj TheTypeNormalizCone;
 
-Obj TheTypeNormalizCone;
+static UInt T_NORMALIZ = 0;
 
-UInt T_NORMALIZ = 0;
+static inline bool IS_CONE(Obj o)
+{
+    return TNUM_OBJ(o) == T_NORMALIZ;
+}
 
 template<typename Integer>
-inline void SET_CONE(Obj o, libnormaliz::Cone<Integer>* p) {
+static inline void SET_CONE(Obj o, libnormaliz::Cone<Integer>* p)
+{
     ADDR_OBJ(o)[0] = reinterpret_cast<Obj>(p);
 }
 
 template<typename Integer>
-inline libnormaliz::Cone<Integer>* GET_CONE(Obj o) {
+static inline libnormaliz::Cone<Integer>* GET_CONE(Obj o)
+{
     return reinterpret_cast<libnormaliz::Cone<Integer>*>(ADDR_OBJ(o)[0]);
 }
 
-Obj NewCone(Cone<mpz_class>* C)
+static Obj NewCone(Cone<mpz_class>* C)
 {
     Obj o;
     o = NewBag(T_NORMALIZ, 1 * sizeof(Obj));
@@ -141,43 +135,41 @@ Obj NewCone(Cone<mpz_class>* C)
     return o;
 }
 
-Obj NewProxyCone(Cone<mpz_class>* C, Obj parentCone)
+static Obj NewProxyCone(Cone<mpz_class>* C, Obj parentCone)
 {
     Obj o;
-    o = NewBag(T_NORMALIZ, 2 * sizeof(Obj) );
+    o = NewBag(T_NORMALIZ, 2 * sizeof(Obj));
     SET_CONE<mpz_class>(o, C);
     ADDR_OBJ(o)[1] = parentCone;
     return o;
 }
 
-#define IS_PROXY_CONE(o)  (SIZE_OBJ(o) == 2)
-
 /* Free function */
-void NormalizFreeFunc(Obj o)
+static void NormalizFreeFunc(Obj o)
 {
-    if (!IS_PROXY_CONE(o)) {
+    if (SIZE_OBJ(o) != 2) {
         delete GET_CONE<mpz_class>(o);
     }
 }
 
 /* Type object function for the object */
-Obj NormalizTypeFunc(Obj o)
+static Obj NormalizTypeFunc(Obj o)
 {
     return TheTypeNormalizCone;
 }
 
-Obj NormalizCopyFunc(Obj o, Int mut)
+static Obj NormalizCopyFunc(Obj o, Int mut)
 {
     // Cone objects are mathematically immutable, so
     // we don't need to do anything,
     return o;
 }
 
-void NormalizCleanFunc(Obj o)
+static void NormalizCleanFunc(Obj o)
 {
 }
 
-Int NormalizIsMutableObjFuncs(Obj o)
+static Int NormalizIsMutableObjFuncs(Obj o)
 {
     // Cone objects are mathematically immutable.
     return 0L;
@@ -213,7 +205,7 @@ static Obj MpzToGAP(const mpz_t x)
 }
 
 template<typename Number>
-Obj NmzNumberToGAP(Number x)
+static Obj NmzNumberToGAP(Number x)
 {
     return Number::unimplemented_function;
 }
@@ -260,7 +252,7 @@ Obj NmzNumberToGAP(double x)
 
 
 template<typename Number>
-bool GAPNumberToNmz(Obj x, Number &out)
+static bool GAPNumberToNmz(Obj x, Number &out)
 {
     return Number::unimplemented_function;
 }
@@ -520,7 +512,7 @@ static Obj _NmzConeIntern(Obj input_list)
 
 }
 
-Obj _NmzCone(Obj self, Obj input_list)
+static Obj _NmzCone(Obj self, Obj input_list)
 {
     if (!IS_PLIST(input_list) || !IS_DENSE_LIST(input_list))
         ErrorQuit("Input argument must be a list", 0, 0);
@@ -530,7 +522,7 @@ Obj _NmzCone(Obj self, Obj input_list)
     FUNC_END
 }
 
-Obj _NmzCompute(Obj self, Obj cone, Obj to_compute)
+static Obj _NmzCompute(Obj self, Obj cone, Obj to_compute)
 {
     if (!IS_CONE(cone))
         ErrorQuit("<cone> must be a Normaliz cone", 0, 0);
@@ -575,7 +567,7 @@ Obj _NmzCompute(Obj self, Obj cone, Obj to_compute)
 #! @InsertChunk NmzHasConeProperty example
 DeclareGlobalFunction("NmzHasConeProperty");
 */
-Obj NmzHasConeProperty(Obj self, Obj cone, Obj prop)
+static Obj NmzHasConeProperty(Obj self, Obj cone, Obj prop)
 {
     if (!IS_CONE(cone))
         ErrorQuit("<cone> must be a Normaliz cone", 0, 0);
@@ -603,7 +595,7 @@ Obj NmzHasConeProperty(Obj self, Obj cone, Obj prop)
 #! @InsertChunk NmzKnownConeProperties example
 DeclareGlobalFunction("NmzKnownConeProperties");
 */
-Obj NmzKnownConeProperties(Obj self, Obj cone)
+static Obj NmzKnownConeProperties(Obj self, Obj cone)
 {
     if (!IS_CONE(cone))
         ErrorQuit("<cone> must be a Normaliz cone", 0, 0);
@@ -750,7 +742,7 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
     return Fail;
 }
 
-Obj _NmzConeProperty(Obj self, Obj cone, Obj prop)
+static Obj _NmzConeProperty(Obj self, Obj cone, Obj prop)
 {
     if (!IS_CONE(cone))
         ErrorQuit("<cone> must be a Normaliz cone", 0, 0);
@@ -761,7 +753,6 @@ Obj _NmzConeProperty(Obj self, Obj cone, Obj prop)
     return _NmzConePropertyImpl<mpz_class>(cone, prop);
     FUNC_END
 }
-
 
 
 /*
@@ -775,7 +766,7 @@ Obj _NmzConeProperty(Obj self, Obj cone, Obj prop)
 #! See also <Ref Func="NmzSetVerbose"/>
 DeclareGlobalFunction("NmzSetVerboseDefault");
 */
-Obj NmzSetVerboseDefault(Obj self, Obj value)
+static Obj NmzSetVerboseDefault(Obj self, Obj value)
 {
     if (value != True && value != False)
         ErrorQuit("<value> must be a boolean value", 0, 0);
@@ -783,6 +774,8 @@ Obj NmzSetVerboseDefault(Obj self, Obj value)
     return libnormaliz::setVerboseDefault(value == True) ? True : False;
     FUNC_END
 }
+
+
 /*
 #! @Arguments cone verboseFlag
 #! @Returns the previous verbosity
@@ -792,7 +785,7 @@ Obj NmzSetVerboseDefault(Obj self, Obj value)
 #! See also <Ref Func="NmzSetVerboseDefault"/>
 DeclareGlobalFunction("NmzSetVerbose");
 */
-Obj NmzSetVerbose(Obj self, Obj cone, Obj value)
+static Obj NmzSetVerbose(Obj self, Obj cone, Obj value)
 {
     if (!IS_CONE(cone))
         ErrorQuit("<cone> must be a Normaliz cone", 0, 0);
