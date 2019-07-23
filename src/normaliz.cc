@@ -831,6 +831,16 @@ static Obj _NmzBasisChangeIntern(Cone<Integer>* C)
 }
 
 
+static Obj _NmzVersion(Obj self)
+{
+    Obj res = NEW_PLIST(T_PLIST, 3);
+    SET_LEN_PLIST(res, 3);
+    AssPlist(res, 1, INTOBJ_INT(NMZ_VERSION_MAJOR));
+    AssPlist(res, 2, INTOBJ_INT(NMZ_VERSION_MINOR));
+    AssPlist(res, 3, INTOBJ_INT(NMZ_VERSION_PATCH));
+    return res;
+}
+
 typedef Obj (* GVarFuncType)(/*arguments*/);
 
 #define GVAR_FUNC_TABLE_ENTRY(srcfile, name, nparam, params) \
@@ -850,6 +860,8 @@ static StructGVarFunc GVarFuncs[] = {
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzHasConeProperty, 2, "cone, prop"),
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", _NmzConeProperty, 2, "cone, prop"),
     GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzKnownConeProperties, 1, "cone"),
+
+    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", _NmzVersion, 0, ""),
 
     { 0 } /* Finish with an empty entry */
 

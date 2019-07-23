@@ -113,7 +113,23 @@ AvailabilityTest := function()
     return true;
   end,
 
-Autoload := false,
+
+# Show the Normaliz version number in the banner string.
+# (We assume that this function gets called *after* the package has been
+# loaded, in particular after libnormaliz has been loaded.)
+BannerFunction := function( info )
+  local str, version;
+
+  str := DefaultPackageBannerString( info );
+  if not IsBoundGlobal( "_NmzVersion" ) then
+    return str;
+  fi;
+  version := ValueGlobal( "_NmzVersion" )();
+  version := JoinStringsWithSeparator(version, ".");
+
+  return ReplacedString( str, "by Sebastian",
+             Concatenation( "(Normaliz version is ", version, ")\n", "by Sebastian" ) );
+end,
 
 Keywords := [
   "normaliz",
