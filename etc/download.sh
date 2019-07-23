@@ -7,13 +7,13 @@ set -e
 
 usage() {
     cat <<EOF
-Usage: $0 URL SHA256 [FILENAME]
+Usage: $0 URL [SHA256 [FILENAME]]
 EOF
 
     exit $1
 }
 
-if [ $# -lt 2 ]; then
+if [ $# -lt 1 ]; then
     usage 1
 fi
 if [ $# -gt 3 ]; then
@@ -22,10 +22,10 @@ fi
 
 FileURL="$1"
 ExpectedChecksum="$2"
-if [ $# = 2 ]; then
-    Filename=$(basename ${FileURL})
-else
+if [ $# = 3 ]; then
     Filename="$3"
+else
+    Filename=$(basename ${FileURL})
 fi
 
 while : ; do
