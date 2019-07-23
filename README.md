@@ -34,10 +34,10 @@ must be compiled against the exact same version of the GMP library
 as GAP. The easiest way to do that is to run the script we provide
 to you for just that.  This requires the presence of several further
 system software packages, which you could for example install via
-your system's package manager. At least the following are required:
+your system's package manager. At least the following are required,
+in addition to a C++11 compiler:
 
- * git
- * cmake
+ * curl OR wget for downloading the source code
  * boost
 
 Once you have installed these, you can build Normaliz by using the
@@ -66,16 +66,12 @@ like this:
 The ` --with-gaproot=GAPDIR` parameter is actually optional, and if omitted,
 the package will search for GAP in `../..`.
 
-If you need to customize the Normaliz compilation, please have a look at
-`Normaliz.git/source/INSTALL`. Remember to use the same compiler and GMP
-version as for GAP.
-
 
 ## Documentation and tests
 
 Generate the documentation:
 
-    make doc
+    gap makedoc.g
 
 run automatic tests:
 
