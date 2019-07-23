@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/gap-packages/NormalizInterface.svg?branch=master)](https://travis-ci.org/gap-packages/NormalizInterface)
+[![Code Coverage](https://codecov.io/github/gap-packages/NormalizInterface/coverage.svg?branch=master&token=)](https://codecov.io/gh/gap-packages/NormalizInterface)
+
 # The GAP 4 package 'NormalizInterface'
 
 ## Package description
