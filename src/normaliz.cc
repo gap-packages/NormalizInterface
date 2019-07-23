@@ -259,14 +259,14 @@ Obj NmzNumberToGAP(double x)
 }
 
 
-template<typename Integer>
-bool GAPIntToNmz(Obj x, Integer &out)
+template<typename Number>
+bool GAPNumberToNmz(Obj x, Number &out)
 {
-    return Integer::unimplemented_function;
+    return Number::unimplemented_function;
 }
 
 template<>
-bool GAPIntToNmz(Obj x, long &out)
+bool GAPNumberToNmz(Obj x, long &out)
 {
     if (IS_INTOBJ(x)) {
         out = INT_INTOBJ(x);
@@ -286,7 +286,7 @@ bool GAPIntToNmz(Obj x, long &out)
 }
 
 template<>
-bool GAPIntToNmz(Obj x, mpz_class &out)
+bool GAPNumberToNmz(Obj x, mpz_class &out)
 {
     mpz_ptr m = out.get_mpz_t();
 
@@ -314,8 +314,8 @@ bool GAPIntToNmz(Obj x, mpz_class &out)
     return false;
 }
 
-template<typename Integer>
-static bool GAPIntVectorToNmz(vector<Integer>& out, Obj V)
+template<typename Number>
+static bool GAPVectorToNmz(vector<Number>& out, Obj V)
 {
     if (!IS_PLIST(V) || !IS_DENSE_LIST(V))
         return false;
@@ -323,21 +323,21 @@ static bool GAPIntVectorToNmz(vector<Integer>& out, Obj V)
     out.resize(n);
     for (int i = 0; i < n; ++i) {
         Obj tmp = ELM_PLIST(V, i+1);
-        if (!GAPIntToNmz(tmp, out[i]))
+        if (!GAPNumberToNmz(tmp, out[i]))
             return false;
     }
     return true;
 }
 
-template<typename Integer>
-static bool GAPIntMatrixToNmz(vector< vector<Integer> >& out, Obj M)
+template<typename Number>
+static bool GAPMatrixToNmz(vector< vector<Number> >& out, Obj M)
 {
     if (!IS_PLIST(M) || !IS_DENSE_LIST(M))
         return false;
     const int nr = LEN_PLIST(M);
     out.resize(nr);
     for (int i = 0; i < nr; ++i) {
-        bool okay = GAPIntVectorToNmz(out[i], ELM_PLIST(M, i+1));
+        bool okay = GAPVectorToNmz(out[i], ELM_PLIST(M, i+1));
         if (!okay)
             return false;
     }
@@ -503,7 +503,7 @@ static Obj _NmzConeIntern(Obj input_list)
             continue;
         }
         vector<vector<Integer> > Mat;
-        bool okay = GAPIntMatrixToNmz(Mat, M);
+        bool okay = GAPMatrixToNmz(Mat, M);
         if (!okay) {
             throw std::runtime_error("Element " + std::to_string(i+2) + " of the input list must integer matrix");
         }
