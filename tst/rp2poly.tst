@@ -16,8 +16,35 @@ gap> M := [
 gap> cone := NmzCone(["normalization", M]);;
 gap> NmzCompute(cone);
 true
-gap> NmzPrintConeProperties(cone);
-Generators = 
+gap> Perform(Set(NmzKnownConeProperties(cone)),Display);
+ClassGroup
+Deg1Elements
+EmbeddingDim
+ExtremeRays
+Generators
+Grading
+GradingDenom
+HilbertBasis
+HilbertQuasiPolynomial
+HilbertSeries
+InternalIndex
+IsDeg1ExtremeRays
+IsDeg1HilbertBasis
+IsInhomogeneous
+IsIntegrallyClosed
+IsPointed
+IsTriangulationNested
+IsTriangulationPartial
+MaximalSubspace
+Multiplicity
+OriginalMonoidGenerators
+Rank
+Sublattice
+SupportHyperplanes
+TriangulationDetSum
+TriangulationSize
+UnitGroupIndex
+gap> Display(NmzGenerators(cone));
 [ [  0,  0,  1,  1,  0,  1 ],
   [  0,  0,  1,  1,  1,  0 ],
   [  0,  1,  0,  0,  1,  1 ],
@@ -28,7 +55,7 @@ Generators =
   [  1,  0,  1,  0,  1,  0 ],
   [  1,  1,  0,  1,  0,  0 ],
   [  1,  1,  1,  0,  0,  0 ] ]
-ExtremeRays = 
+gap> Display(NmzExtremeRays(cone));
 [ [  0,  0,  1,  1,  0,  1 ],
   [  0,  0,  1,  1,  1,  0 ],
   [  0,  1,  0,  0,  1,  1 ],
@@ -39,7 +66,7 @@ ExtremeRays =
   [  1,  0,  1,  0,  1,  0 ],
   [  1,  1,  0,  1,  0,  0 ],
   [  1,  1,  1,  0,  0,  0 ] ]
-SupportHyperplanes = 
+gap> Display(NmzSupportHyperplanes(cone));
 [ [  -2,   1,   1,   1,   1,   1 ],
   [  -1,  -1,   2,   2,  -1,   2 ],
   [  -1,  -1,   2,   2,   2,  -1 ],
@@ -62,7 +89,7 @@ SupportHyperplanes =
   [   2,  -1,   2,  -1,   2,  -1 ],
   [   2,   2,  -1,   2,  -1,  -1 ],
   [   2,   2,   2,  -1,  -1,  -1 ] ]
-HilbertBasis = 
+gap> Display(NmzHilbertBasis(cone));
 [ [  0,  0,  1,  1,  0,  1 ],
   [  0,  0,  1,  1,  1,  0 ],
   [  0,  1,  0,  0,  1,  1 ],
@@ -74,7 +101,7 @@ HilbertBasis =
   [  1,  1,  0,  1,  0,  0 ],
   [  1,  1,  1,  0,  0,  0 ],
   [  1,  1,  1,  1,  1,  1 ] ]
-Deg1Elements = 
+gap> Display(NmzDeg1Elements(cone));
 [ [  0,  0,  1,  1,  0,  1 ],
   [  0,  0,  1,  1,  1,  0 ],
   [  0,  1,  0,  0,  1,  1 ],
@@ -85,12 +112,12 @@ Deg1Elements =
   [  1,  0,  1,  0,  1,  0 ],
   [  1,  1,  0,  1,  0,  0 ],
   [  1,  1,  1,  0,  0,  0 ] ]
-Sublattice = 
+gap> Display(NmzSublattice(cone));
 [ [ [ 1, 0, 0, 0, 0, -1 ], [ 0, 1, 0, 0, 0, -1 ], [ 0, 0, 1, 0, 0, -1 ], 
       [ 0, 0, 0, 1, 0, -1 ], [ 0, 0, 0, 0, 1, -1 ], [ 0, 0, 0, 0, 0, 3 ] ], 
   [ [ 3, 0, 0, 0, 0, 1 ], [ 0, 3, 0, 0, 0, 1 ], [ 0, 0, 3, 0, 0, 1 ], 
       [ 0, 0, 0, 3, 0, 1 ], [ 0, 0, 0, 0, 3, 1 ], [ 0, 0, 0, 0, 0, 1 ] ], 3 ]
-OriginalMonoidGenerators = 
+gap> Display(NmzOriginalMonoidGenerators(cone));
 [ [  1,  1,  1,  0,  0,  0 ],
   [  1,  1,  0,  1,  0,  0 ],
   [  1,  0,  1,  0,  1,  0 ],
@@ -101,26 +128,54 @@ OriginalMonoidGenerators =
   [  0,  1,  0,  0,  1,  1 ],
   [  0,  0,  1,  1,  1,  0 ],
   [  0,  0,  1,  1,  0,  1 ] ]
-MaximalSubspace = [  ]
-Grading = [ 1/3, 1/3, 1/3, 1/3, 1/3, 1/3 ]
-TriangulationSize = 18
-TriangulationDetSum = 21
-GradingDenom = 3
-UnitGroupIndex = 1
-InternalIndex = 1
-Multiplicity = 21
-Rank = 6
+gap> _NmzPrintSomeConeProperties(cone, [
+> "Generators",
+> "ExtremeRays",
+> "SupportHyperplanes",
+> "HilbertBasis",
+> "Deg1Elements",
+> "Sublattice",
+> "OriginalMonoidGenerators",
+> ]);
+ClassGroup = [ 16 ]
 EmbeddingDim = 6
-IsPointed = true
+Grading = [ 1/3, 1/3, 1/3, 1/3, 1/3, 1/3 ]
+GradingDenom = 3
+HilbertQuasiPolynomial = [ 7/40*t^5+7/8*t^4+53/24*t^3+25/8*t^2+157/60*t+1 ]
+HilbertSeries = [ t^4+4*t^3+11*t^2+4*t+1, [ [ 1, 6 ] ] ]
+InternalIndex = 1
 IsDeg1ExtremeRays = true
 IsDeg1HilbertBasis = false
-IsIntegrallyClosed = false
 IsInhomogeneous = false
-ClassGroup = [ 16 ]
-HilbertSeries = [ t^4+4*t^3+11*t^2+4*t+1, [ [ 1, 6 ] ] ]
-HilbertQuasiPolynomial = [ 7/40*t^5+7/8*t^4+53/24*t^3+25/8*t^2+157/60*t+1 ]
+IsIntegrallyClosed = false
+IsPointed = true
 IsTriangulationNested = false
 IsTriangulationPartial = false
+MaximalSubspace = [  ]
+Multiplicity = 21
+Rank = 6
+TriangulationDetSum = 21
+TriangulationSize = 18
+UnitGroupIndex = 1
+gap> Display(NmzConeDecomposition(cone));
+[ [ false, false, false, false, false, false ], 
+  [ false, true, false, false, false, true ], 
+  [ true, false, false, false, false, true ], 
+  [ true, false, false, false, false, true ], 
+  [ true, false, false, false, true, true ], 
+  [ true, false, false, false, false, true ], 
+  [ false, false, false, false, false, true ], 
+  [ true, false, true, false, false, true ], 
+  [ false, false, false, false, false, true ], 
+  [ false, false, false, false, true, true ], 
+  [ true, false, false, false, false, true ], 
+  [ true, false, false, false, false, true ], 
+  [ true, false, false, false, false, true ], 
+  [ true, false, false, false, true, true ], 
+  [ false, false, false, false, false, true ], 
+  [ false, false, true, false, false, true ], 
+  [ false, false, false, false, false, true ], 
+  [ false, false, true, false, false, true ] ]
 
 #
 gap> STOP_TEST("rp2poly.tst", 0);

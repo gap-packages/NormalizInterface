@@ -9,27 +9,26 @@ gap> M := [
 gap> cone := NmzCone(["lattice_ideal", M]);;
 gap> NmzCompute(cone);
 true
-gap> NmzPrintConeProperties(cone);
-Generators = 
+gap> Display(NmzGenerators(cone));
 [ [  0,  0,  1 ],
   [  0,  1,  0 ],
   [  1,  0,  3 ],
   [  1,  2,  1 ],
   [  1,  3,  0 ],
   [  3,  5,  2 ] ]
-ExtremeRays = 
+gap> Display(NmzExtremeRays(cone));
 [ [  0,  0,  1 ],
   [  0,  1,  0 ],
   [  1,  0,  3 ],
   [  1,  3,  0 ],
   [  3,  5,  2 ] ]
-SupportHyperplanes = 
+gap> Display(NmzSupportHyperplanes(cone));
 [ [  -15,    7,    5 ],
   [   -3,    1,    2 ],
   [    0,    0,    1 ],
   [    0,    1,    0 ],
   [    1,    0,    0 ] ]
-HilbertBasis = 
+gap> Display(NmzHilbertBasis(cone));
 [ [  0,  0,  1 ],
   [  0,  1,  0 ],
   [  1,  0,  3 ],
@@ -39,7 +38,7 @@ HilbertBasis =
   [  2,  3,  2 ],
   [  2,  4,  1 ],
   [  3,  5,  2 ] ]
-Deg1Elements = 
+gap> Display(NmzDeg1Elements(cone));
 [ [  0,  0,  1 ],
   [  0,  1,  0 ],
   [  1,  0,  3 ],
@@ -49,35 +48,48 @@ Deg1Elements =
   [  2,  3,  2 ],
   [  2,  4,  1 ],
   [  3,  5,  2 ] ]
-Sublattice = [ [ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ], 
+gap> Display(NmzSublattice(cone));
+[ [ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ], 
   [ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ], 1 ]
-OriginalMonoidGenerators = 
+gap> Display(NmzOriginalMonoidGenerators(cone));
 [ [  0,  0,  1 ],
   [  3,  5,  2 ],
   [  0,  1,  0 ],
   [  1,  2,  1 ],
   [  1,  3,  0 ],
   [  1,  0,  3 ] ]
-MaximalSubspace = [  ]
-Grading = [ -2, 1, 1 ]
-TriangulationSize = 5
-TriangulationDetSum = 10
-GradingDenom = 1
-UnitGroupIndex = 1
-InternalIndex = 1
-Multiplicity = 10
-Rank = 3
+gap> _NmzPrintSomeConeProperties(cone, [
+> "Generators",
+> "ExtremeRays",
+> "SupportHyperplanes",
+> "HilbertBasis",
+> "Deg1Elements",
+> "Sublattice",
+> "OriginalMonoidGenerators",
+> ]);
+ClassGroup = [ 2 ]
 EmbeddingDim = 3
-IsPointed = true
+Grading = [ -2, 1, 1 ]
+GradingDenom = 1
+HilbertQuasiPolynomial = [ 5*t^2+3*t+1 ]
+HilbertSeries = [ 3*t^2+6*t+1, [ [ 1, 3 ] ] ]
+InternalIndex = 1
 IsDeg1ExtremeRays = true
 IsDeg1HilbertBasis = true
-IsIntegrallyClosed = false
 IsInhomogeneous = false
-ClassGroup = [ 2 ]
-HilbertSeries = [ 3*t^2+6*t+1, [ [ 1, 3 ] ] ]
-HilbertQuasiPolynomial = [ 5*t^2+3*t+1 ]
+IsIntegrallyClosed = false
+IsPointed = true
 IsTriangulationNested = false
 IsTriangulationPartial = false
+MaximalSubspace = [  ]
+Multiplicity = 10
+Rank = 3
+TriangulationDetSum = 10
+TriangulationSize = 5
+UnitGroupIndex = 1
+gap> Display(NmzConeDecomposition(cone));
+[ [ false, false, false ], [ false, false, true ], [ false, false, true ], 
+  [ false, false, true ], [ false, true, true ] ]
 
 #
 gap> STOP_TEST("lattice_ideal.tst", 0);
