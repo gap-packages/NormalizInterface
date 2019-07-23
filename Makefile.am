@@ -57,6 +57,6 @@ DOC_FILES = \
 	makedoc.g
 
 doc/manual.six: $(DOC_FILES)
-	($(GAPROOT)/bin/gap.sh -A makedoc.g)
+	($(GAPROOT)/bin/gap.sh -A --quitonbreak < makedoc.g)
 
 .PHONY: doc
