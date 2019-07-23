@@ -252,13 +252,13 @@ Obj NmzNumberToGAP(double x)
 
 
 template<typename Number>
-static bool GAPNumberToNmz(Obj x, Number &out)
+static bool GAPNumberToNmz(Number &out, Obj x)
 {
     return Number::unimplemented_function;
 }
 
 template<>
-bool GAPNumberToNmz(Obj x, long &out)
+bool GAPNumberToNmz(long &out, Obj x)
 {
     if (IS_INTOBJ(x)) {
         out = INT_INTOBJ(x);
@@ -278,7 +278,7 @@ bool GAPNumberToNmz(Obj x, long &out)
 }
 
 template<>
-bool GAPNumberToNmz(Obj x, mpz_class &out)
+bool GAPNumberToNmz(mpz_class &out, Obj x)
 {
     mpz_ptr m = out.get_mpz_t();
 
@@ -315,7 +315,7 @@ static bool GAPVectorToNmz(vector<Number>& out, Obj V)
     out.resize(n);
     for (int i = 0; i < n; ++i) {
         Obj tmp = ELM_PLIST(V, i+1);
-        if (!GAPNumberToNmz(tmp, out[i]))
+        if (!GAPNumberToNmz(out[i], tmp))
             return false;
     }
     return true;
