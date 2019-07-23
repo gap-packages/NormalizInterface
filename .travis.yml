@@ -2,26 +2,33 @@ dist: xenial
 language: c
 
 addons:
-  apt_packages:
-    - libgmp-dev
-    - libreadline-dev
-    - zlib1g-dev
-    - libboost-dev
-    - libgmp-dev:i386
-    - libreadline-dev:i386
-    - zlib1g-dev:i386
-    - libboost-dev:i386
-    - gcc-multilib
-    - g++-multilib
+  apt:
+    packages:
+      - libgmp-dev
+      - libreadline-dev
+      - zlib1g-dev
+      - libboost-dev
+  homebrew:
+    packages:
+      - gmp
+      - boost
 
 matrix:
   include:
     - env: GAPBRANCH=master
     - env: GAPBRANCH=stable-4.10
     - env: GAPBRANCH=stable-4.9
+    - env: GAPBRANCH=master
+      os: osx
     - env: GAPBRANCH=master ABI=32
-    - env: GAPBRANCH=stable-4.10 ABI=32
-    - env: GAPBRANCH=stable-4.9 ABI=32
+      addons:
+        apt_packages:
+          - libgmp-dev:i386
+          - libreadline-dev:i386
+          - zlib1g-dev:i386
+          - libboost-dev:i386
+          - gcc-multilib
+          - g++-multilib
 
 branches:
   only:
