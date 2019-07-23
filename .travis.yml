@@ -7,12 +7,21 @@ addons:
     - libreadline-dev
     - zlib1g-dev
     - libboost-dev
+    - libgmp-dev:i386
+    - libreadline-dev:i386
+    - zlib1g-dev:i386
+    - libboost-dev:i386
+    - gcc-multilib
+    - g++-multilib
 
 matrix:
   include:
     - env: GAPBRANCH=master
     - env: GAPBRANCH=stable-4.10
     - env: GAPBRANCH=stable-4.9
+    - env: GAPBRANCH=master ABI=32
+    - env: GAPBRANCH=stable-4.10 ABI=32
+    - env: GAPBRANCH=stable-4.9 ABI=32
 
 branches:
   only:
