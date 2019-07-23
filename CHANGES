@@ -1,5 +1,11 @@
 This file describes changes in the NormalizInterface package.
 
+1.x.x (2019-07-DD)
+  - Update build system for improve compatibility with GAP >= 4.9
+  - Completely rewrote build-normaliz.sh (now downloads a tarball using
+    curl or wget, instead of cloning a git repository)
+  - Various janitorial changes
+
 1.0.2 (2017-12-04)
   - Use variable rays instead of Rays in test file
 
