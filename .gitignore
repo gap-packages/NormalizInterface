@@ -51,6 +51,7 @@ src/*.lo
 
 /normaliz-*/
 /normaliz-*.tar.gz
+/NormalizInstallDir/
 
 /maketest.g
 /test-suite.log
