@@ -1,6 +1,7 @@
 This file describes changes in the NormalizInterface package.
 
 1.x.x (2019-07-DD)
+  - Add support for rational inputs, e.g. polytopes with rational coordinates
   - Update build system for improve compatibility with GAP >= 4.9
   - Completely rewrote build-normaliz.sh (now downloads a tarball using
     curl or wget, instead of cloning a git repository)

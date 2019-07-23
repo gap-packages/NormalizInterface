@@ -280,28 +280,32 @@ bool GAPNumberToNmz(long &out, Obj x)
 template<>
 bool GAPNumberToNmz(mpz_class &out, Obj x)
 {
-    mpz_ptr m = out.get_mpz_t();
-
     if (IS_INTOBJ(x)) {
-        mpz_realloc2(m, 1 * GMP_NUMB_BITS);
-
-        if (INT_INTOBJ(x) == 0) {
-            mpz_set_ui(m, 0);
-        } else if (INT_INTOBJ(x) >= 0) {
-            m->_mp_d[0] = INT_INTOBJ(x);
-            m->_mp_size = 1;
-        } else {
-            m->_mp_d[0] = -INT_INTOBJ(x);
-            m->_mp_size = -1;
-        }
-
+        out = INT_INTOBJ(x);
         return true;
     } else if (TNUM_OBJ(x) == T_INTPOS || TNUM_OBJ(x) == T_INTNEG) {
         UInt size = SIZE_INT(x);
+        mpz_ptr m = out.get_mpz_t();
         mpz_realloc2(m, size * GMP_NUMB_BITS);
         memcpy(m->_mp_d, ADDR_INT(x), sizeof(mp_limb_t) * size);
         m->_mp_size = (TNUM_OBJ(x) == T_INTPOS) ? (Int)size : - (Int)size;
         return true;
+    }
+    return false;
+}
+
+template<>
+bool GAPNumberToNmz(mpq_class &out, Obj x)
+{
+    if (IS_INTOBJ(x)) {
+        out = INT_INTOBJ(x);
+        return true;
+    } else if (TNUM_OBJ(x) == T_INTPOS || TNUM_OBJ(x) == T_INTNEG) {
+        out.get_den() = 1;
+        return GAPNumberToNmz(out.get_num(), x);
+    } else if (TNUM_OBJ(x) == T_RAT) {
+        return GAPNumberToNmz(out.get_num(), NUM_RAT(x)) &&
+               GAPNumberToNmz(out.get_den(), DEN_RAT(x));
     }
     return false;
 }
@@ -447,7 +451,7 @@ static Obj _NmzConeIntern(Obj input_list)
 {
     bool has_polynomial_input = false;
     string polynomial;
-    map <InputType, vector< vector<Integer> > > input;
+    map <InputType, vector< vector<mpq_class> > > input;
     const int n = LEN_PLIST(input_list);
     if (n&1) {
         throw std::runtime_error("Input list must have even number of elements");
@@ -467,10 +471,10 @@ static Obj _NmzConeIntern(Obj input_list)
             has_polynomial_input = true;
             continue;
         }
-        vector<vector<Integer> > Mat;
+        vector<vector<mpq_class> > Mat;
         bool okay = GAPMatrixToNmz(Mat, M);
         if (!okay) {
-            throw std::runtime_error("Element " + std::to_string(i+2) + " of the input list must integer matrix");
+            throw std::runtime_error("Element " + std::to_string(i+2) + " of the input list must be an integer matrix");
         }
 
         input[libnormaliz::to_type(type_str)] = Mat;
