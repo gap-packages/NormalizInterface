@@ -581,25 +581,28 @@ static Obj FuncNmzKnownConeProperties(Obj self, Obj cone)
 
     size_t n = 0;
     Obj M = NEW_PLIST(T_PLIST, libnormaliz::ConeProperty::EnumSize);
+    Cone<mpz_class> * C = GET_CONE<mpz_class>(cone);
 
     // FIXME: This code could be a lot simpler if there was
     // a Cone method for reading the value of is_Computed.
     for (int i = 0; i < libnormaliz::ConeProperty::EnumSize; ++i) {
         libnormaliz::ConeProperty::Enum p = (libnormaliz::ConeProperty::Enum)i;
 
-        Cone<mpz_class>* C = GET_CONE<mpz_class>(cone);
-        bool isComputed = C->isComputed(p);
+#if NMZ_RELEASE >= 30500
+        // skip internal control properties
+        if (p == libnormaliz::ConeProperty::ExplicitHilbertSeries ||
+            p == libnormaliz::ConeProperty::NakedDual)
+            continue;
+#endif
 
-        if (isComputed) {
+        if (C->isComputed(p)) {
             string prop_name(libnormaliz::toString(p));
 
             ASS_LIST(M, ++n, MakeImmString(prop_name.c_str()));
             if (p == libnormaliz::ConeProperty::HilbertSeries) {
-                Cone<mpz_class>* C = GET_CONE<mpz_class>(cone);
-                C->getHilbertSeries().computeHilbertQuasiPolynomial();
-                isComputed = C->getHilbertSeries().isHilbertQuasiPolynomialComputed();
-
-                if (isComputed) {
+                const libnormaliz::HilbertSeries & HS = C->getHilbertSeries();
+                HS.computeHilbertQuasiPolynomial();
+                if (HS.isHilbertQuasiPolynomialComputed()) {
                     ASS_LIST(M, ++n, MakeImmString("HilbertQuasiPolynomial"));
                 }
             }

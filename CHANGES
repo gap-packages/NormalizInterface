@@ -6,6 +6,8 @@ This file describes changes in the NormalizInterface package.
   - Completely rewrote build-normaliz.sh (now downloads a tarball using
     curl or wget, instead of cloning a git repository)
   - Fix a potential crash when freeing proxy cone objects
+  - Fix 'unknown cone property' that could occur when using newer versions of
+    Normaliz, e.g. version 3.5.4
   - Display the Normaliz version as part of banner string
   - Loads of internal and janitorial changes
 
