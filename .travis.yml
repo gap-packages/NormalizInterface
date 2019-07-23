@@ -44,6 +44,7 @@ before_script:
   - ./build-normaliz.sh $HOME/gap
 script:
   - scripts/build_pkg.sh && scripts/run_tests.sh
+  - make doc
 after_script:
   - scripts/gather-coverage.sh
   - bash <(curl -s https://codecov.io/bash)
