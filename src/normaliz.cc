@@ -340,11 +340,9 @@ template<typename Number>
 static Obj NmzVectorToGAP(const vector<Number>& in)
 {
     const size_t n = in.size();
-    Obj list = NEW_PLIST((n > 0) ? T_PLIST_CYC : T_PLIST, n);
-    SET_LEN_PLIST(list, n);
+    Obj list = NEW_PLIST(T_PLIST, n);
     for (size_t i = 0; i < n; ++i) {
-        SET_ELM_PLIST(list, i + 1, NmzNumberToGAP(in[i]));
-        CHANGED_BAG(list);
+        ASS_LIST(list, i + 1, NmzNumberToGAP(in[i]));
     }
     return list;
 }
@@ -368,12 +366,9 @@ static Obj NmzMatrixToGAP(const vector< vector<Number> >& in)
     Obj M;
     const size_t n = in.size();
     M = NEW_PLIST(T_PLIST, n);
-    SET_LEN_PLIST(M, n);
     for (size_t i = 0; i < n; ++i) {
-        SET_ELM_PLIST(M, i+1, NmzVectorToGAP(in[i]));
-        CHANGED_BAG( M );
+        ASS_LIST(M, i+1, NmzVectorToGAP(in[i]));
     }
-    CHANGED_BAG( M );
     return M;
 }
 
@@ -385,10 +380,9 @@ static Obj NmzHilbertSeriesToGAP(const libnormaliz::HilbertSeries& HS)
 {
     Obj ret;
     ret = NEW_PLIST(T_PLIST, 3);
-    SET_LEN_PLIST(ret, 3);
-    AssPlist(ret, 1, NmzVectorToGAP(HS.getNum()));
-    AssPlist(ret, 2, NmzVectorToGAP(libnormaliz::to_vector(HS.getDenom())));
-    AssPlist(ret, 3, NmzNumberToGAP(HS.getShift()));
+    ASS_LIST(ret, 1, NmzVectorToGAP(HS.getNum()));
+    ASS_LIST(ret, 2, NmzVectorToGAP(libnormaliz::to_vector(HS.getDenom())));
+    ASS_LIST(ret, 3, NmzNumberToGAP(HS.getShift()));
     return ret;
 }
 
@@ -397,11 +391,10 @@ static Obj NmzWeightedEhrhartSeriesToGAP(const std::pair<libnormaliz::HilbertSer
 {   
     Obj ret;
     ret = NEW_PLIST(T_PLIST, 4);
-    SET_LEN_PLIST(ret, 4);
-    AssPlist(ret, 1, NmzVectorToGAP(HS.first.getNum()));
-    AssPlist(ret, 2, NmzVectorToGAP(libnormaliz::to_vector(HS.first.getDenom())));
-    AssPlist(ret, 3, NmzNumberToGAP(HS.first.getShift()));
-    AssPlist(ret, 4, NmzNumberToGAP(HS.second));
+    ASS_LIST(ret, 1, NmzVectorToGAP(HS.first.getNum()));
+    ASS_LIST(ret, 2, NmzVectorToGAP(libnormaliz::to_vector(HS.first.getDenom())));
+    ASS_LIST(ret, 3, NmzNumberToGAP(HS.first.getShift()));
+    ASS_LIST(ret, 4, NmzNumberToGAP(HS.second));
     return ret;
 }
 
@@ -411,13 +404,10 @@ static Obj NmzHilbertQuasiPolynomialToGAP(const libnormaliz::HilbertSeries& HS)
     vector< vector<mpz_class> > HQ = HS.getHilbertQuasiPolynomial();
     const size_t n = HS.getPeriod();
     ret = NEW_PLIST(T_PLIST, n+1);
-    SET_LEN_PLIST(ret, n+1);
-
     for (size_t i = 0; i < n; ++i) {
-        SET_ELM_PLIST(ret, i+1, NmzVectorToGAP(HQ[i]));
-        CHANGED_BAG( ret );
+        ASS_LIST(ret, i+1, NmzVectorToGAP(HQ[i]));
     }
-    AssPlist(ret, n+1, NmzNumberToGAP(HS.getHilbertQuasiPolynomialDenom()));
+    ASS_LIST(ret, n+1, NmzNumberToGAP(HS.getHilbertQuasiPolynomialDenom()));
     return ret;
 }
 
@@ -428,10 +418,9 @@ static Obj NmzWeightedEhrhartQuasiPolynomialToGAP(const libnormaliz::Integration
     const size_t n = ehrhart_qp.size();
     ret = NEW_PLIST(T_PLIST, n+1);
     for (size_t i = 0; i < n; ++i) {
-        SET_ELM_PLIST(ret, i+1 , NmzVectorToGAP(ehrhart_qp[i]));
-        CHANGED_BAG( ret );
+        ASS_LIST(ret, i+1 , NmzVectorToGAP(ehrhart_qp[i]));
     }
-    AssPlist(ret, n+1, NmzNumberToGAP(int_data.getWeightedEhrhartQuasiPolynomialDenom()));
+    ASS_LIST(ret, n+1, NmzNumberToGAP(int_data.getWeightedEhrhartQuasiPolynomialDenom()));
     return ret;
 }
 
@@ -441,19 +430,14 @@ static Obj NmzTriangleListToGAP(const vector< pair<vector<libnormaliz::key_t>, I
     Obj M;
     const size_t n = in.size();
     M = NEW_PLIST(T_PLIST, n);
-    SET_LEN_PLIST(M, n);
     for (size_t i = 0; i < n; ++i) {
         // convert the pair
         Obj pair = NEW_PLIST(T_PLIST, 2);
-        SET_LEN_PLIST(pair, 2);
-        SET_ELM_PLIST(pair, 1, NmzVectorToGAP<libnormaliz::key_t>(in[i].first));
-        SET_ELM_PLIST(pair, 2, NmzNumberToGAP(in[i].second));
-        CHANGED_BAG( pair );
+        ASS_LIST(pair, 1, NmzVectorToGAP<libnormaliz::key_t>(in[i].first));
+        ASS_LIST(pair, 2, NmzNumberToGAP(in[i].second));
 
-        SET_ELM_PLIST(M, i+1, pair);
-        CHANGED_BAG( M );
+        ASS_LIST(M, i+1, pair);
     }
-    CHANGED_BAG( M );
     return M;
 }
 
@@ -605,27 +589,18 @@ static Obj FuncNmzKnownConeProperties(Obj self, Obj cone)
         if (isComputed) {
             string prop_name(libnormaliz::toString(p));
 
-            Obj prop_name_gap = MakeImmString(prop_name.c_str());
-
-            n++;    // Increment counter
-            SET_ELM_PLIST(M, n, prop_name_gap);
-            CHANGED_BAG(M);
+            ASS_LIST(M, ++n, MakeImmString(prop_name.c_str()));
             if (p == libnormaliz::ConeProperty::HilbertSeries) {
                 Cone<mpz_class>* C = GET_CONE<mpz_class>(cone);
                 C->getHilbertSeries().computeHilbertQuasiPolynomial();
                 isComputed = C->getHilbertSeries().isHilbertQuasiPolynomialComputed();
 
                 if (isComputed) {
-                    Obj prop_name_gap = MakeImmString("HilbertQuasiPolynomial");
-
-                    n++;    // Increment counter
-                    SET_ELM_PLIST(M, n, prop_name_gap);
-                    CHANGED_BAG(M);
+                    ASS_LIST(M, ++n, MakeImmString("HilbertQuasiPolynomial"));
                 }
             }
         }
     }
-    SET_LEN_PLIST(M, n);
     return M;
 
     FUNC_END
@@ -803,10 +778,9 @@ static Obj _NmzBasisChangeIntern(Cone<Integer>* C)
     SIGNAL_HANDLER_END
 
     Obj res = NEW_PLIST(T_PLIST, 3);
-    SET_LEN_PLIST(res, 3);
-    AssPlist(res, 1, NmzMatrixToGAP(bc.getEmbedding()));
-    AssPlist(res, 2, NmzMatrixToGAP(bc.getProjection()));
-    AssPlist(res, 3, NmzNumberToGAP(bc.getAnnihilator()));
+    ASS_LIST(res, 1, NmzMatrixToGAP(bc.getEmbedding()));
+    ASS_LIST(res, 2, NmzMatrixToGAP(bc.getProjection()));
+    ASS_LIST(res, 3, NmzNumberToGAP(bc.getAnnihilator()));
     // Dim, Rank, Equations and Congruences are already covered by special functions
     // The index is not always computed and not so relevant
     return res;
@@ -816,10 +790,9 @@ static Obj _NmzBasisChangeIntern(Cone<Integer>* C)
 static Obj Func_NmzVersion(Obj self)
 {
     Obj res = NEW_PLIST(T_PLIST, 3);
-    SET_LEN_PLIST(res, 3);
-    AssPlist(res, 1, INTOBJ_INT(NMZ_VERSION_MAJOR));
-    AssPlist(res, 2, INTOBJ_INT(NMZ_VERSION_MINOR));
-    AssPlist(res, 3, INTOBJ_INT(NMZ_VERSION_PATCH));
+    ASS_LIST(res, 1, INTOBJ_INT(NMZ_VERSION_MAJOR));
+    ASS_LIST(res, 2, INTOBJ_INT(NMZ_VERSION_MINOR));
+    ASS_LIST(res, 3, INTOBJ_INT(NMZ_VERSION_PATCH));
     return res;
 }
 
