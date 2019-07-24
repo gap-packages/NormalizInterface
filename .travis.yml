@@ -1,5 +1,6 @@
 dist: xenial
 language: c
+cache: ccache
 
 addons:
   apt:
@@ -8,17 +9,19 @@ addons:
       - libreadline-dev
       - zlib1g-dev
       - libboost-dev
+      - ccache
   homebrew:
     packages:
       - gmp
       - boost
+      - ccache
 
 matrix:
   include:
     - env: GAPBRANCH=master
     - env: GAPBRANCH=stable-4.10
     - env: GAPBRANCH=stable-4.9
-    - env: GAPBRANCH=master
+    - env: GAPBRANCH=master PATH="/usr/local/opt/ccache/libexec:$PATH"
       os: osx
     - env: GAPBRANCH=master ABI=32
       addons:
@@ -27,6 +30,7 @@ matrix:
           - libreadline-dev:i386
           - zlib1g-dev:i386
           - libboost-dev:i386
+          - ccache
           - gcc-multilib
           - g++-multilib
 
