@@ -564,7 +564,7 @@ static Obj _NmzCompute(Obj self, Obj cone, Obj to_compute)
 #! @Description
 #! See <Ref Func="NmzConeProperty"/> for a list of recognized properties.
 #!
-#! @InsertChunk NmzHasConeProperty example
+#! @InsertChunk NmzHasConeProperty_example
 DeclareGlobalFunction("NmzHasConeProperty");
 */
 static Obj NmzHasConeProperty(Obj self, Obj cone, Obj prop)
@@ -592,7 +592,7 @@ static Obj NmzHasConeProperty(Obj self, Obj cone, Obj prop)
 #! Given a Normaliz cone object, return a list of all properties already
 #! computed for the cone.
 #!
-#! @InsertChunk NmzKnownConeProperties example
+#! @InsertChunk NmzKnownConeProperties_example
 DeclareGlobalFunction("NmzKnownConeProperties");
 */
 static Obj NmzKnownConeProperties(Obj self, Obj cone)
