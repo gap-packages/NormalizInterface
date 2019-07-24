@@ -4,7 +4,9 @@ This file describes changes in the NormalizInterface package.
   - Update build system for improve compatibility with GAP >= 4.9
   - Completely rewrote build-normaliz.sh (now downloads a tarball using
     curl or wget, instead of cloning a git repository)
-  - Various janitorial changes
+  - Fix a potential crash when freeing proxy cone objects
+  - Display the Normaliz version as part of banner string
+  - Loads of internal and janitorial changes
 
 1.0.2 (2017-12-04)
   - Use variable rays instead of Rays in test file
