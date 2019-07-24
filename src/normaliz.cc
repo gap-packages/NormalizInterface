@@ -339,15 +339,27 @@ static bool GAPMatrixToNmz(vector< vector<Number> >& out, Obj M)
 template<typename Number>
 static Obj NmzVectorToGAP(const vector<Number>& in)
 {
-    Obj M;
     const size_t n = in.size();
-    M = NEW_PLIST((n > 0) ? T_PLIST_CYC : T_PLIST, n);
-    SET_LEN_PLIST(M, n);
+    Obj list = NEW_PLIST((n > 0) ? T_PLIST_CYC : T_PLIST, n);
+    SET_LEN_PLIST(list, n);
     for (size_t i = 0; i < n; ++i) {
-        SET_ELM_PLIST(M, i+1, NmzNumberToGAP(in[i]));
-        CHANGED_BAG( M );
+        SET_ELM_PLIST(list, i + 1, NmzNumberToGAP(in[i]));
+        CHANGED_BAG(list);
     }
-    return M;
+    return list;
+}
+
+template<>
+Obj NmzVectorToGAP(const vector<bool>& in)
+{
+    const size_t n = in.size();
+    Obj list = NewBag( T_BLIST, SIZE_PLEN_BLIST( n ) );
+    SET_LEN_BLIST(list, n);
+    for (size_t i = 0; i < n; ++i) {
+        if (in[i])
+            SET_BIT_BLIST(list, i + 1);
+    }
+    return list;
 }
 
 template<typename Number>
@@ -359,29 +371,6 @@ static Obj NmzMatrixToGAP(const vector< vector<Number> >& in)
     SET_LEN_PLIST(M, n);
     for (size_t i = 0; i < n; ++i) {
         SET_ELM_PLIST(M, i+1, NmzVectorToGAP(in[i]));
-        CHANGED_BAG( M );
-    }
-    CHANGED_BAG( M );
-    return M;
-}
-
-static Obj NmzBoolMatrixToGAP(const vector< vector<bool> >& in)
-{
-    Obj M;
-    Obj N;
-    const size_t m = in.size();
-    size_t n;
-    // TODO: Use BLIST instead
-    M = NEW_PLIST(T_PLIST, m);
-    SET_LEN_PLIST(M, m);
-    for (size_t i = 0; i < m; ++i) {
-        n = in[i].size();
-        N = NEW_PLIST( T_PLIST, n );
-        SET_LEN_PLIST( N, n );
-        for( size_t j = 0; j < n; ++j ){
-            SET_ELM_PLIST(N, j+1, in[i][j] ? True : False );
-        }
-        SET_ELM_PLIST( M, i+1, N );
         CHANGED_BAG( M );
     }
     CHANGED_BAG( M );
@@ -659,7 +648,7 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
     switch (p) {
     case libnormaliz::ConeProperty::AffineDim: return NmzNumberToGAP(C->getAffineDim());
     case libnormaliz::ConeProperty::ClassGroup: return NmzVectorToGAP(C->getClassGroup());
-    case libnormaliz::ConeProperty::ConeDecomposition: return NmzBoolMatrixToGAP(C->getOpenFacets());
+    case libnormaliz::ConeProperty::ConeDecomposition: return NmzMatrixToGAP(C->getOpenFacets());
     case libnormaliz::ConeProperty::Congruences: return NmzMatrixToGAP(C->getSublattice().getCongruences());
     case libnormaliz::ConeProperty::Deg1Elements: return NmzMatrixToGAP(C->getDeg1Elements());
     case libnormaliz::ConeProperty::Dehomogenization: return NmzVectorToGAP(C->getDehomogenization());
