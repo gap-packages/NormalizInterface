@@ -104,6 +104,8 @@ TriangulationSize = 1
 UnitGroupIndex = 1
 gap> Display(NmzConeDecomposition(cone));
 [ [ false, false, false ] ]
+gap> ForAll(NmzConeDecomposition(cone), IsBlistRep);
+true
 
 #
 gap> STOP_TEST("rational.tst", 0);

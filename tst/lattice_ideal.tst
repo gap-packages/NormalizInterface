@@ -90,6 +90,8 @@ UnitGroupIndex = 1
 gap> Display(NmzConeDecomposition(cone));
 [ [ false, false, false ], [ false, false, true ], [ false, false, true ], 
   [ false, false, true ], [ false, true, true ] ]
+gap> ForAll(NmzConeDecomposition(cone), IsBlistRep);
+true
 
 #
 gap> STOP_TEST("lattice_ideal.tst", 0);

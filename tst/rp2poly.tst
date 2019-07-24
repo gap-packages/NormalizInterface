@@ -176,6 +176,8 @@ gap> Display(NmzConeDecomposition(cone));
   [ false, false, true, false, false, true ], 
   [ false, false, false, false, false, true ], 
   [ false, false, true, false, false, true ] ]
+gap> ForAll(NmzConeDecomposition(cone), IsBlistRep);
+true
 
 #
 gap> STOP_TEST("rp2poly.tst", 0);
