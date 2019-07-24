@@ -512,7 +512,7 @@ static Obj _NmzConeIntern(Obj input_list)
 
 }
 
-static Obj _NmzCone(Obj self, Obj input_list)
+static Obj Func_NmzCone(Obj self, Obj input_list)
 {
     if (!IS_PLIST(input_list) || !IS_DENSE_LIST(input_list))
         ErrorQuit("Input argument must be a list", 0, 0);
@@ -522,7 +522,7 @@ static Obj _NmzCone(Obj self, Obj input_list)
     FUNC_END
 }
 
-static Obj _NmzCompute(Obj self, Obj cone, Obj to_compute)
+static Obj Func_NmzCompute(Obj self, Obj cone, Obj to_compute)
 {
     if (!IS_CONE(cone))
         ErrorQuit("<cone> must be a Normaliz cone", 0, 0);
@@ -567,7 +567,7 @@ static Obj _NmzCompute(Obj self, Obj cone, Obj to_compute)
 #! @InsertChunk NmzHasConeProperty_example
 DeclareGlobalFunction("NmzHasConeProperty");
 */
-static Obj NmzHasConeProperty(Obj self, Obj cone, Obj prop)
+static Obj FuncNmzHasConeProperty(Obj self, Obj cone, Obj prop)
 {
     if (!IS_CONE(cone))
         ErrorQuit("<cone> must be a Normaliz cone", 0, 0);
@@ -595,7 +595,7 @@ static Obj NmzHasConeProperty(Obj self, Obj cone, Obj prop)
 #! @InsertChunk NmzKnownConeProperties_example
 DeclareGlobalFunction("NmzKnownConeProperties");
 */
-static Obj NmzKnownConeProperties(Obj self, Obj cone)
+static Obj FuncNmzKnownConeProperties(Obj self, Obj cone)
 {
     if (!IS_CONE(cone))
         ErrorQuit("<cone> must be a Normaliz cone", 0, 0);
@@ -742,7 +742,7 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
     return Fail;
 }
 
-static Obj _NmzConeProperty(Obj self, Obj cone, Obj prop)
+static Obj Func_NmzConeProperty(Obj self, Obj cone, Obj prop)
 {
     if (!IS_CONE(cone))
         ErrorQuit("<cone> must be a Normaliz cone", 0, 0);
@@ -766,7 +766,7 @@ static Obj _NmzConeProperty(Obj self, Obj cone, Obj prop)
 #! See also <Ref Func="NmzSetVerbose"/>
 DeclareGlobalFunction("NmzSetVerboseDefault");
 */
-static Obj NmzSetVerboseDefault(Obj self, Obj value)
+static Obj FuncNmzSetVerboseDefault(Obj self, Obj value)
 {
     if (value != True && value != False)
         ErrorQuit("<value> must be a boolean value", 0, 0);
@@ -785,7 +785,7 @@ static Obj NmzSetVerboseDefault(Obj self, Obj value)
 #! See also <Ref Func="NmzSetVerboseDefault"/>
 DeclareGlobalFunction("NmzSetVerbose");
 */
-static Obj NmzSetVerbose(Obj self, Obj cone, Obj value)
+static Obj FuncNmzSetVerbose(Obj self, Obj cone, Obj value)
 {
     if (!IS_CONE(cone))
         ErrorQuit("<cone> must be a Normaliz cone", 0, 0);
@@ -824,7 +824,7 @@ static Obj _NmzBasisChangeIntern(Cone<Integer>* C)
 }
 
 
-static Obj _NmzVersion(Obj self)
+static Obj Func_NmzVersion(Obj self)
 {
     Obj res = NEW_PLIST(T_PLIST, 3);
     SET_LEN_PLIST(res, 3);
@@ -834,27 +834,19 @@ static Obj _NmzVersion(Obj self)
     return res;
 }
 
-typedef Obj (* GVarFuncType)(/*arguments*/);
-
-#define GVAR_FUNC_TABLE_ENTRY(srcfile, name, nparam, params) \
-  {#name, nparam, \
-   params, \
-   (GVarFuncType)name, \
-   srcfile ":Func" #name }
-
 // Table of functions to export
 static StructGVarFunc GVarFuncs[] = {
-    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", _NmzCone, 1, "list"),
+    GVAR_FUNC(_NmzCone, 1, "list"),
 
-    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", _NmzCompute, 2, "cone, props"),
-    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzSetVerboseDefault, 1, "value"),
-    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzSetVerbose, 2, "cone, value"),
+    GVAR_FUNC(_NmzCompute, 2, "cone, props"),
+    GVAR_FUNC(NmzSetVerboseDefault, 1, "value"),
+    GVAR_FUNC(NmzSetVerbose, 2, "cone, value"),
 
-    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzHasConeProperty, 2, "cone, prop"),
-    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", _NmzConeProperty, 2, "cone, prop"),
-    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", NmzKnownConeProperties, 1, "cone"),
+    GVAR_FUNC(NmzHasConeProperty, 2, "cone, prop"),
+    GVAR_FUNC(_NmzConeProperty, 2, "cone, prop"),
+    GVAR_FUNC(NmzKnownConeProperties, 1, "cone"),
 
-    GVAR_FUNC_TABLE_ENTRY("normaliz.cc", _NmzVersion, 0, ""),
+    GVAR_FUNC(_NmzVersion, 0, ""),
 
     { 0 } /* Finish with an empty entry */
 
