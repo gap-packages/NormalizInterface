@@ -834,6 +834,14 @@ static Obj Func_NmzVersion(Obj self)
     return res;
 }
 
+// GVAR_FUNC in GAP 4.9 and 4.10 triggers warnings when used in C++ code; so
+// we force it to the definition from GAP 4.11
+#undef GVAR_FUNC
+#define GVAR_FUNC(name, nargs, args)                                         \
+    {                                                                        \
+        #name, nargs, args, (ObjFunc)Func##name, __FILE__ ":" #name          \
+    }
+
 // Table of functions to export
 static StructGVarFunc GVarFuncs[] = {
     GVAR_FUNC(_NmzCone, 1, "list"),
