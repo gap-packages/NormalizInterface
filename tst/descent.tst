@@ -33,17 +33,7 @@ gap> NmzCompute(cone, ["Descent"]);
 true
 gap> Perform(Set(NmzKnownConeProperties(cone)),Display);
 EmbeddingDim
-ExtremeRays
-Generators
-Grading
-GradingDenom
-IsDeg1ExtremeRays
 IsInhomogeneous
-IsPointed
-MaximalSubspace
-Rank
-Sublattice
-SupportHyperplanes
 gap> Display(NmzGenerators(cone));
 [ [  0,  0,  0,  0,  0,  1,  0 ],
   [  0,  0,  0,  0,  1,  0,  0 ],

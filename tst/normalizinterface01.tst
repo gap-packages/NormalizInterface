@@ -37,11 +37,11 @@ gap> NmzKnownConeProperties(cone);
 gap> NmzCompute(cone);;
 gap> NmzKnownConeProperties(cone);
 [ "Generators", "ExtremeRays", "SupportHyperplanes", "HilbertBasis", 
-  "OriginalMonoidGenerators", "MaximalSubspace", "ClassGroup", 
-  "TriangulationDetSum", "UnitGroupIndex", "InternalIndex", 
-  "TriangulationSize", "Rank", "EmbeddingDim", "IsPointed", 
-  "IsDeg1ExtremeRays", "IsIntegrallyClosed", "IsInhomogeneous", "Sublattice", 
-  "IsTriangulationNested", "IsTriangulationPartial" ]
+  "OriginalMonoidGenerators", "MaximalSubspace", "TriangulationDetSum", 
+  "UnitGroupIndex", "InternalIndex", "TriangulationSize", "Rank", 
+  "EmbeddingDim", "IsPointed", "IsDeg1ExtremeRays", "IsIntegrallyClosed", 
+  "IsInhomogeneous", "Sublattice", "ClassGroup", "IsTriangulationNested", 
+  "IsTriangulationPartial" ]
 
 #
 gap> STOP_TEST("normalizinterface01.tst", 1 );
