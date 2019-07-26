@@ -20,6 +20,7 @@ IsInhomogeneous
 IsPointed
 MaximalSubspace
 ProjectCone
+Rank
 Sublattice
 SupportHyperplanes
 gap> Display(NmzGenerators(cone));
