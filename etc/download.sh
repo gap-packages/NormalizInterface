@@ -41,7 +41,7 @@ while : ; do
         wget ${FileURL}
     elif command -v curl >/dev/null 2>&1 ; then
         echo "Checking for ${Filename}... downloading with curl"
-        curl -O ${FileURL}
+        curl -L -O ${FileURL}
     else
         echo "Checking for ${Filename}... not found and unable to download"
         echo
