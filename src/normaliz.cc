@@ -186,6 +186,9 @@ Obj NmzToGAP(const vector<T>& in);
 
 static Obj NmzToGAP(const mpz_t x)
 {
+#if GAP_KERNEL_MAJOR_VERSION >= 7
+    return MakeObjInt((const UInt *)x->_mp_d, x->_mp_size);   // added in GAP 4.11
+#else
     Obj res;
     Int size = x->_mp_size;
     int sign;
@@ -210,6 +213,7 @@ static Obj NmzToGAP(const mpz_t x)
         memcpy(ADDR_INT(res), x->_mp_d, size);
     }
     return res;
+#endif
 }
 
 static Obj NmzToGAP(libnormaliz::key_t x)   // key_t = unsigned int
