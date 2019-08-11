@@ -204,52 +204,63 @@ static Obj MpzToGAP(const mpz_t x)
     return res;
 }
 
-template<typename Number>
-static Obj NmzNumberToGAP(Number x)
-{
-    return Number::unimplemented_function;
-}
-
-template<>
-Obj NmzNumberToGAP(libnormaliz::key_t x)   // key_t = unsigned int
+static Obj NmzToGAP(libnormaliz::key_t x)   // key_t = unsigned int
 {
     return ObjInt_UInt(x);
 }
 
 #ifdef SYS_IS_64_BIT
-template<>
-Obj NmzNumberToGAP(size_t x)               // size_t = unsigned long
+static Obj NmzToGAP(size_t x)               // size_t = unsigned long
 {
     return ObjInt_UInt(x);
 }
 #endif
 
-template<>
-Obj NmzNumberToGAP(long x)
+static Obj NmzToGAP(long x)
 {
     return ObjInt_Int(x);
 }
 
-template<>
-Obj NmzNumberToGAP(mpz_class x)
+static Obj NmzToGAP(mpz_class x)
 {
     return MpzToGAP(x.get_mpz_t());
 }
 
-template<>
-Obj NmzNumberToGAP(mpq_class x)
+static Obj NmzToGAP(mpq_class x)
 {
-    Obj num = NmzNumberToGAP(x.get_num());
-    Obj den = NmzNumberToGAP(x.get_den());
+    Obj num = NmzToGAP(x.get_num());
+    Obj den = NmzToGAP(x.get_den());
     return QUO(num, den);
 }
 
-template<>
-Obj NmzNumberToGAP(double x)
+static Obj NmzToGAP(double x)
 {
     return NEW_MACFLOAT(x);
 }
 
+template<typename T>
+static Obj NmzToGAP(const vector<T>& in)
+{
+    const size_t n = in.size();
+    Obj list = NEW_PLIST(T_PLIST, n);
+    for (size_t i = 0; i < n; ++i) {
+        ASS_LIST(list, i + 1, NmzToGAP(in[i]));
+    }
+    return list;
+}
+
+template<>
+Obj NmzToGAP(const vector<bool>& in)
+{
+    const size_t n = in.size();
+    Obj list = NewBag( T_BLIST, SIZE_PLEN_BLIST( n ) );
+    SET_LEN_BLIST(list, n);
+    for (size_t i = 0; i < n; ++i) {
+        if (in[i])
+            SET_BIT_BLIST(list, i + 1);
+    }
+    return list;
+}
 
 template<typename Number>
 static bool GAPNumberToNmz(Number &out, Obj x)
@@ -340,42 +351,6 @@ static bool GAPMatrixToNmz(vector< vector<Number> >& out, Obj M)
     return true;
 }
 
-template<typename Number>
-static Obj NmzVectorToGAP(const vector<Number>& in)
-{
-    const size_t n = in.size();
-    Obj list = NEW_PLIST(T_PLIST, n);
-    for (size_t i = 0; i < n; ++i) {
-        ASS_LIST(list, i + 1, NmzNumberToGAP(in[i]));
-    }
-    return list;
-}
-
-template<>
-Obj NmzVectorToGAP(const vector<bool>& in)
-{
-    const size_t n = in.size();
-    Obj list = NewBag( T_BLIST, SIZE_PLEN_BLIST( n ) );
-    SET_LEN_BLIST(list, n);
-    for (size_t i = 0; i < n; ++i) {
-        if (in[i])
-            SET_BIT_BLIST(list, i + 1);
-    }
-    return list;
-}
-
-template<typename Number>
-static Obj NmzMatrixToGAP(const vector< vector<Number> >& in)
-{
-    Obj M;
-    const size_t n = in.size();
-    M = NEW_PLIST(T_PLIST, n);
-    for (size_t i = 0; i < n; ++i) {
-        ASS_LIST(M, i+1, NmzVectorToGAP(in[i]));
-    }
-    return M;
-}
-
 /* TODO: HSOP
  *       There are two representations for Hilbert series in Normaliz, standard and HSOP. 
  *       Currently, only the standard representation is returned.
@@ -384,9 +359,9 @@ static Obj NmzHilbertSeriesToGAP(const libnormaliz::HilbertSeries& HS)
 {
     Obj ret;
     ret = NEW_PLIST(T_PLIST, 3);
-    ASS_LIST(ret, 1, NmzVectorToGAP(HS.getNum()));
-    ASS_LIST(ret, 2, NmzVectorToGAP(libnormaliz::to_vector(HS.getDenom())));
-    ASS_LIST(ret, 3, NmzNumberToGAP(HS.getShift()));
+    ASS_LIST(ret, 1, NmzToGAP(HS.getNum()));
+    ASS_LIST(ret, 2, NmzToGAP(libnormaliz::to_vector(HS.getDenom())));
+    ASS_LIST(ret, 3, NmzToGAP(HS.getShift()));
     return ret;
 }
 
@@ -395,10 +370,10 @@ static Obj NmzWeightedEhrhartSeriesToGAP(const std::pair<libnormaliz::HilbertSer
 {   
     Obj ret;
     ret = NEW_PLIST(T_PLIST, 4);
-    ASS_LIST(ret, 1, NmzVectorToGAP(HS.first.getNum()));
-    ASS_LIST(ret, 2, NmzVectorToGAP(libnormaliz::to_vector(HS.first.getDenom())));
-    ASS_LIST(ret, 3, NmzNumberToGAP(HS.first.getShift()));
-    ASS_LIST(ret, 4, NmzNumberToGAP(HS.second));
+    ASS_LIST(ret, 1, NmzToGAP(HS.first.getNum()));
+    ASS_LIST(ret, 2, NmzToGAP(libnormaliz::to_vector(HS.first.getDenom())));
+    ASS_LIST(ret, 3, NmzToGAP(HS.first.getShift()));
+    ASS_LIST(ret, 4, NmzToGAP(HS.second));
     return ret;
 }
 
@@ -409,9 +384,9 @@ static Obj NmzHilbertQuasiPolynomialToGAP(const libnormaliz::HilbertSeries& HS)
     const size_t n = HS.getPeriod();
     ret = NEW_PLIST(T_PLIST, n+1);
     for (size_t i = 0; i < n; ++i) {
-        ASS_LIST(ret, i+1, NmzVectorToGAP(HQ[i]));
+        ASS_LIST(ret, i+1, NmzToGAP(HQ[i]));
     }
-    ASS_LIST(ret, n+1, NmzNumberToGAP(HS.getHilbertQuasiPolynomialDenom()));
+    ASS_LIST(ret, n+1, NmzToGAP(HS.getHilbertQuasiPolynomialDenom()));
     return ret;
 }
 
@@ -422,9 +397,9 @@ static Obj NmzWeightedEhrhartQuasiPolynomialToGAP(const libnormaliz::Integration
     const size_t n = ehrhart_qp.size();
     ret = NEW_PLIST(T_PLIST, n+1);
     for (size_t i = 0; i < n; ++i) {
-        ASS_LIST(ret, i+1 , NmzVectorToGAP(ehrhart_qp[i]));
+        ASS_LIST(ret, i+1 , NmzToGAP(ehrhart_qp[i]));
     }
-    ASS_LIST(ret, n+1, NmzNumberToGAP(int_data.getWeightedEhrhartQuasiPolynomialDenom()));
+    ASS_LIST(ret, n+1, NmzToGAP(int_data.getWeightedEhrhartQuasiPolynomialDenom()));
     return ret;
 }
 
@@ -437,8 +412,8 @@ static Obj NmzTriangleListToGAP(const vector< pair<vector<libnormaliz::key_t>, I
     for (size_t i = 0; i < n; ++i) {
         // convert the pair
         Obj pair = NEW_PLIST(T_PLIST, 2);
-        ASS_LIST(pair, 1, NmzVectorToGAP<libnormaliz::key_t>(in[i].first));
-        ASS_LIST(pair, 2, NmzNumberToGAP(in[i].second));
+        ASS_LIST(pair, 1, NmzToGAP<libnormaliz::key_t>(in[i].first));
+        ASS_LIST(pair, 2, NmzToGAP(in[i].second));
 
         ASS_LIST(M, i+1, pair);
     }
@@ -642,13 +617,13 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
     // ClassGroups is reported as libnormaliz::OutputType::Vector, but calling
     // getVectorConeProperty on it produces an error
     if (p == libnormaliz::ConeProperty::ClassGroup)
-        return NmzVectorToGAP(C->getClassGroup());
+        return NmzToGAP(C->getClassGroup());
 
 #if NMZ_RELEASE >= 30700 && NMZ_RELEASE < 30703
     // workaround bug where getMachineIntegerConeProperty does not support
     // NumberLatticePoints
     if (p == libnormaliz::ConeProperty::NumberLatticePoints)
-        return NmzNumberToGAP(C->getNumberLatticePoints());
+        return NmzToGAP(C->getNumberLatticePoints());
 #endif
 
     // workaround: these two properties are marked as having output type "void"
@@ -660,22 +635,22 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
     switch (libnormaliz::output_type(p)) {
     case libnormaliz::OutputType::Matrix:
         // TODO: switch to getMatrixConePropertyMatrix ?
-        return NmzMatrixToGAP(C->getMatrixConeProperty(p));
+        return NmzToGAP(C->getMatrixConeProperty(p));
 
     case libnormaliz::OutputType::MatrixFloat:
-        return NmzMatrixToGAP(C->getFloatMatrixConeProperty(p));
+        return NmzToGAP(C->getFloatMatrixConeProperty(p));
 
     case libnormaliz::OutputType::Vector:
-        return NmzVectorToGAP(C->getVectorConeProperty(p));
+        return NmzToGAP(C->getVectorConeProperty(p));
 
     case libnormaliz::OutputType::Integer:
-        return NmzNumberToGAP(C->getIntegerConeProperty(p));
+        return NmzToGAP(C->getIntegerConeProperty(p));
 
     case libnormaliz::OutputType::GMPInteger:
-        return NmzNumberToGAP(C->getGMPIntegerConeProperty(p));
+        return NmzToGAP(C->getGMPIntegerConeProperty(p));
 
     case libnormaliz::OutputType::Rational:
-        return NmzNumberToGAP(C->getRationalConeProperty(p));
+        return NmzToGAP(C->getRationalConeProperty(p));
 
 #if NMZ_RELEASE >= 30700
     case libnormaliz::OutputType::FieldElem:
@@ -683,10 +658,10 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
 #endif
 
     case libnormaliz::OutputType::Float:
-        return NmzNumberToGAP(C->getFloatConeProperty(p));
+        return NmzToGAP(C->getFloatConeProperty(p));
 
     case libnormaliz::OutputType::MachineInteger:
-        return NmzNumberToGAP(C->getMachineIntegerConeProperty(p));
+        return NmzToGAP(C->getMachineIntegerConeProperty(p));
 
     case libnormaliz::OutputType::Bool:
         return C->getBooleanConeProperty(p) ? True : False;
@@ -706,23 +681,23 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
 #else
 
     switch (p) {
-    case libnormaliz::ConeProperty::AffineDim: return NmzNumberToGAP(C->getAffineDim());
-    case libnormaliz::ConeProperty::ClassGroup: return NmzVectorToGAP(C->getClassGroup());
-    case libnormaliz::ConeProperty::Congruences: return NmzMatrixToGAP(C->getSublattice().getCongruences());
-    case libnormaliz::ConeProperty::Deg1Elements: return NmzMatrixToGAP(C->getDeg1Elements());
-    case libnormaliz::ConeProperty::Dehomogenization: return NmzVectorToGAP(C->getDehomogenization());
-    case libnormaliz::ConeProperty::EmbeddingDim: return NmzNumberToGAP(C->getEmbeddingDim());
-    case libnormaliz::ConeProperty::Equations: return NmzMatrixToGAP(C->getSublattice().getEquations());
-    case libnormaliz::ConeProperty::ExcludedFaces: return NmzMatrixToGAP(C->getExcludedFaces());
-    case libnormaliz::ConeProperty::ExternalIndex: return NmzNumberToGAP(C->getSublattice().getExternalIndex());
-    case libnormaliz::ConeProperty::ExtremeRays: return NmzMatrixToGAP(C->getExtremeRays());
-    case libnormaliz::ConeProperty::GeneratorOfInterior: return NmzVectorToGAP(C->getGeneratorOfInterior());
-    case libnormaliz::ConeProperty::Generators: return NmzMatrixToGAP(C->getGenerators());
-    case libnormaliz::ConeProperty::Grading: return NmzVectorToGAP(C->getGrading());
-    case libnormaliz::ConeProperty::GradingDenom: return NmzNumberToGAP(C->getGradingDenom());
-    case libnormaliz::ConeProperty::HilbertBasis: return NmzMatrixToGAP(C->getHilbertBasis());
-    case libnormaliz::ConeProperty::Integral: return NmzNumberToGAP(C->getIntegral());
-    case libnormaliz::ConeProperty::InternalIndex: return NmzNumberToGAP(C->getIndex());
+    case libnormaliz::ConeProperty::AffineDim: return NmzToGAP(C->getAffineDim());
+    case libnormaliz::ConeProperty::ClassGroup: return NmzToGAP(C->getClassGroup());
+    case libnormaliz::ConeProperty::Congruences: return NmzToGAP(C->getSublattice().getCongruences());
+    case libnormaliz::ConeProperty::Deg1Elements: return NmzToGAP(C->getDeg1Elements());
+    case libnormaliz::ConeProperty::Dehomogenization: return NmzToGAP(C->getDehomogenization());
+    case libnormaliz::ConeProperty::EmbeddingDim: return NmzToGAP(C->getEmbeddingDim());
+    case libnormaliz::ConeProperty::Equations: return NmzToGAP(C->getSublattice().getEquations());
+    case libnormaliz::ConeProperty::ExcludedFaces: return NmzToGAP(C->getExcludedFaces());
+    case libnormaliz::ConeProperty::ExternalIndex: return NmzToGAP(C->getSublattice().getExternalIndex());
+    case libnormaliz::ConeProperty::ExtremeRays: return NmzToGAP(C->getExtremeRays());
+    case libnormaliz::ConeProperty::GeneratorOfInterior: return NmzToGAP(C->getGeneratorOfInterior());
+    case libnormaliz::ConeProperty::Generators: return NmzToGAP(C->getGenerators());
+    case libnormaliz::ConeProperty::Grading: return NmzToGAP(C->getGrading());
+    case libnormaliz::ConeProperty::GradingDenom: return NmzToGAP(C->getGradingDenom());
+    case libnormaliz::ConeProperty::HilbertBasis: return NmzToGAP(C->getHilbertBasis());
+    case libnormaliz::ConeProperty::Integral: return NmzToGAP(C->getIntegral());
+    case libnormaliz::ConeProperty::InternalIndex: return NmzToGAP(C->getIndex());
     case libnormaliz::ConeProperty::IsDeg1ExtremeRays: return C->isDeg1ExtremeRays() ? True : False;
     case libnormaliz::ConeProperty::IsDeg1HilbertBasis: return C->isDeg1HilbertBasis() ? True : False;
     case libnormaliz::ConeProperty::IsGorenstein: return C->isGorenstein() ? True : False;
@@ -732,22 +707,22 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
     case libnormaliz::ConeProperty::IsReesPrimary: return C->isReesPrimary() ? True : False;
     case libnormaliz::ConeProperty::IsTriangulationNested: return C->isTriangulationNested() ? True : False;
     case libnormaliz::ConeProperty::IsTriangulationPartial: return C->isTriangulationPartial() ? True : False;
-    case libnormaliz::ConeProperty::MaximalSubspace: return NmzMatrixToGAP(C->getMaximalSubspace());
-    case libnormaliz::ConeProperty::ModuleGenerators: return NmzMatrixToGAP(C->getModuleGenerators());
-    case libnormaliz::ConeProperty::ModuleRank: return NmzNumberToGAP(C->getModuleRank());
-    case libnormaliz::ConeProperty::Multiplicity: return NmzNumberToGAP(C->getMultiplicity());
-    case libnormaliz::ConeProperty::OriginalMonoidGenerators: return NmzMatrixToGAP(C->getOriginalMonoidGenerators());
-    case libnormaliz::ConeProperty::Rank: return NmzNumberToGAP(C->getRank());
-    case libnormaliz::ConeProperty::RecessionRank: return NmzNumberToGAP(C->getRecessionRank());
-    case libnormaliz::ConeProperty::ReesPrimaryMultiplicity: return NmzNumberToGAP(C->getReesPrimaryMultiplicity());
-    case libnormaliz::ConeProperty::SupportHyperplanes: return NmzMatrixToGAP(C->getSupportHyperplanes());
-    case libnormaliz::ConeProperty::TriangulationDetSum: return NmzNumberToGAP(C->getTriangulationDetSum());
-    case libnormaliz::ConeProperty::TriangulationSize: return NmzNumberToGAP(C->getTriangulationSize());
-    case libnormaliz::ConeProperty::UnitGroupIndex: return NmzNumberToGAP(C->getUnitGroupIndex());
-    case libnormaliz::ConeProperty::VerticesFloat: return NmzMatrixToGAP(C->getVerticesFloat());
-    case libnormaliz::ConeProperty::VerticesOfPolyhedron: return NmzMatrixToGAP(C->getVerticesOfPolyhedron());
-    case libnormaliz::ConeProperty::VirtualMultiplicity: return NmzNumberToGAP(C->getVirtualMultiplicity());
-    case libnormaliz::ConeProperty::WitnessNotIntegrallyClosed: return NmzVectorToGAP(C->getWitnessNotIntegrallyClosed());
+    case libnormaliz::ConeProperty::MaximalSubspace: return NmzToGAP(C->getMaximalSubspace());
+    case libnormaliz::ConeProperty::ModuleGenerators: return NmzToGAP(C->getModuleGenerators());
+    case libnormaliz::ConeProperty::ModuleRank: return NmzToGAP(C->getModuleRank());
+    case libnormaliz::ConeProperty::Multiplicity: return NmzToGAP(C->getMultiplicity());
+    case libnormaliz::ConeProperty::OriginalMonoidGenerators: return NmzToGAP(C->getOriginalMonoidGenerators());
+    case libnormaliz::ConeProperty::Rank: return NmzToGAP(C->getRank());
+    case libnormaliz::ConeProperty::RecessionRank: return NmzToGAP(C->getRecessionRank());
+    case libnormaliz::ConeProperty::ReesPrimaryMultiplicity: return NmzToGAP(C->getReesPrimaryMultiplicity());
+    case libnormaliz::ConeProperty::SupportHyperplanes: return NmzToGAP(C->getSupportHyperplanes());
+    case libnormaliz::ConeProperty::TriangulationDetSum: return NmzToGAP(C->getTriangulationDetSum());
+    case libnormaliz::ConeProperty::TriangulationSize: return NmzToGAP(C->getTriangulationSize());
+    case libnormaliz::ConeProperty::UnitGroupIndex: return NmzToGAP(C->getUnitGroupIndex());
+    case libnormaliz::ConeProperty::VerticesFloat: return NmzToGAP(C->getVerticesFloat());
+    case libnormaliz::ConeProperty::VerticesOfPolyhedron: return NmzToGAP(C->getVerticesOfPolyhedron());
+    case libnormaliz::ConeProperty::VirtualMultiplicity: return NmzToGAP(C->getVirtualMultiplicity());
+    case libnormaliz::ConeProperty::WitnessNotIntegrallyClosed: return NmzToGAP(C->getWitnessNotIntegrallyClosed());
     default:
         break; // go on
     }
@@ -762,7 +737,7 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
 //     case libnormaliz::ConeProperty::CombinatorialAutomorphisms: TODO;
 
     case libnormaliz::ConeProperty::ConeDecomposition:
-        return NmzMatrixToGAP(C->getOpenFacets());
+        return NmzToGAP(C->getOpenFacets());
 
 #if NMZ_RELEASE >= 30600
     case libnormaliz::ConeProperty::EhrhartQuasiPolynomial:
@@ -789,7 +764,7 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
 //         return TODO(C->getFaceLattice(p));
 
     case libnormaliz::ConeProperty::FVector:
-        return NmzVectorToGAP(C->getFVector());
+        return NmzToGAP(C->getFVector());
 #endif
 
     case libnormaliz::ConeProperty::HilbertQuasiPolynomial:
@@ -904,9 +879,9 @@ static Obj _NmzBasisChangeIntern(Cone<Integer>* C)
     SIGNAL_HANDLER_END
 
     Obj res = NEW_PLIST(T_PLIST, 3);
-    ASS_LIST(res, 1, NmzMatrixToGAP(bc.getEmbedding()));
-    ASS_LIST(res, 2, NmzMatrixToGAP(bc.getProjection()));
-    ASS_LIST(res, 3, NmzNumberToGAP(bc.getAnnihilator()));
+    ASS_LIST(res, 1, NmzToGAP(bc.getEmbedding()));
+    ASS_LIST(res, 2, NmzToGAP(bc.getProjection()));
+    ASS_LIST(res, 3, NmzToGAP(bc.getAnnihilator()));
     // Dim, Rank, Equations and Congruences are already covered by special functions
     // The index is not always computed and not so relevant
     return res;
