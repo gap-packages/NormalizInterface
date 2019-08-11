@@ -623,7 +623,15 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
     SIGNAL_HANDLER_BEGIN
     notComputed = C->compute(ConeProperties(p));
     SIGNAL_HANDLER_END
+#if NMZ_RELEASE >= 30700
+    // workaround a bug where computing HilbertQuasiPolynomial after
+    // HilbertSeries was already computed returned notComputed equal to
+    // NoGradingDenom, even though of course the quasi polynomial was
+    // available.
+    notComputed.reset(libnormaliz::ConeProperty::NoGradingDenom);
+#endif
     if (notComputed.any()) {
+        ErrorQuit("Failed to compute %s, missing properties: %s", (Int)(libnormaliz::toString(p).c_str()), (Int)(libnormaliz::toString(notComputed).c_str()));
         return Fail;
     }
 
