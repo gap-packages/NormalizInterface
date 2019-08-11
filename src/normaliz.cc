@@ -96,7 +96,6 @@ using libnormaliz::Type::InputType;
 using std::map;
 using std::vector;
 using std::string;
-using std::pair;
 
 using std::cerr;
 using std::endl;
@@ -175,8 +174,17 @@ static Int NormalizIsMutableObjFuncs(Obj o)
     return 0L;
 }
 
+//
+// conversion of various C++ types to GAP objects
+//
 
-static Obj MpzToGAP(const mpz_t x)
+template<typename T, typename U>
+Obj NmzToGAP(const std::pair<T,U>& in);
+
+template<typename T>
+Obj NmzToGAP(const vector<T>& in);
+
+static Obj NmzToGAP(const mpz_t x)
 {
     Obj res;
     Int size = x->_mp_size;
@@ -223,7 +231,7 @@ static Obj NmzToGAP(long x)
 
 static Obj NmzToGAP(mpz_class x)
 {
-    return MpzToGAP(x.get_mpz_t());
+    return NmzToGAP(x.get_mpz_t());
 }
 
 static Obj NmzToGAP(mpq_class x)
@@ -238,8 +246,12 @@ static Obj NmzToGAP(double x)
     return NEW_MACFLOAT(x);
 }
 
+//
+// generic recursive conversion of C++ containers to GAP objects
+//
+
 template<typename T>
-static Obj NmzToGAP(const vector<T>& in)
+Obj NmzToGAP(const vector<T>& in)
 {
     const size_t n = in.size();
     Obj list = NEW_PLIST(T_PLIST, n);
@@ -260,6 +272,15 @@ Obj NmzToGAP(const vector<bool>& in)
             SET_BIT_BLIST(list, i + 1);
     }
     return list;
+}
+
+template<typename T, typename U>
+Obj NmzToGAP(const std::pair<T,U>& in)
+{
+    Obj pair = NEW_PLIST(T_PLIST, 2);
+    ASS_LIST(pair, 1, NmzToGAP(in.first));
+    ASS_LIST(pair, 2, NmzToGAP(in.second));
+    return pair;
 }
 
 template<typename Number>
@@ -402,24 +423,6 @@ static Obj NmzWeightedEhrhartQuasiPolynomialToGAP(const libnormaliz::Integration
     ASS_LIST(ret, n+1, NmzToGAP(int_data.getWeightedEhrhartQuasiPolynomialDenom()));
     return ret;
 }
-
-template<typename Integer>
-static Obj NmzTriangleListToGAP(const vector< pair<vector<libnormaliz::key_t>, Integer> >& in)
-{
-    Obj M;
-    const size_t n = in.size();
-    M = NEW_PLIST(T_PLIST, n);
-    for (size_t i = 0; i < n; ++i) {
-        // convert the pair
-        Obj pair = NEW_PLIST(T_PLIST, 2);
-        ASS_LIST(pair, 1, NmzToGAP<libnormaliz::key_t>(in[i].first));
-        ASS_LIST(pair, 2, NmzToGAP(in[i].second));
-
-        ASS_LIST(M, i+1, pair);
-    }
-    return M;
-}
-
 
 template<typename Integer>
 static Obj _NmzConeIntern(Obj input_list)
@@ -774,7 +777,7 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
         return NmzHilbertSeriesToGAP(C->getHilbertSeries());
 
     case libnormaliz::ConeProperty::InclusionExclusionData:
-        return NmzTriangleListToGAP<long>(C->getInclusionExclusionData());
+        return NmzToGAP(C->getInclusionExclusionData());
 
     case libnormaliz::ConeProperty::IntegerHull:
         return NewProxyCone(&(C->getIntegerHullCone()), cone);
@@ -792,7 +795,7 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
         break;
 
     case libnormaliz::ConeProperty::Triangulation:
-        return NmzTriangleListToGAP<Integer>(C->getTriangulation());
+        return NmzToGAP(C->getTriangulation());
 
     case libnormaliz::ConeProperty::WeightedEhrhartQuasiPolynomial:
         return NmzWeightedEhrhartQuasiPolynomialToGAP(C->getIntData());
