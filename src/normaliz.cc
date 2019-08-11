@@ -635,10 +635,79 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
         return Fail;
     }
 
+
+#if NMZ_RELEASE >= 30504
+
+    // workaround bug in certain Normaliz versions, where the output type for
+    // ClassGroups is reported as libnormaliz::OutputType::Vector, but calling
+    // getVectorConeProperty on it produces an error
+    if (p == libnormaliz::ConeProperty::ClassGroup)
+        return NmzVectorToGAP(C->getClassGroup());
+
+#if NMZ_RELEASE >= 30700 && NMZ_RELEASE < 30703
+    // workaround bug where getMachineIntegerConeProperty does not support
+    // NumberLatticePoints
+    if (p == libnormaliz::ConeProperty::NumberLatticePoints)
+        return NmzNumberToGAP(C->getNumberLatticePoints());
+#endif
+
+    // workaround: these two properties are marked as having output type "void"
+    if (p == libnormaliz::ConeProperty::IsTriangulationNested)
+        return C->isTriangulationNested() ? True : False;
+    if (p == libnormaliz::ConeProperty::IsTriangulationPartial)
+        return C->isTriangulationPartial() ? True : False;
+
+    switch (libnormaliz::output_type(p)) {
+    case libnormaliz::OutputType::Matrix:
+        // TODO: switch to getMatrixConePropertyMatrix ?
+        return NmzMatrixToGAP(C->getMatrixConeProperty(p));
+
+    case libnormaliz::OutputType::MatrixFloat:
+        return NmzMatrixToGAP(C->getFloatMatrixConeProperty(p));
+
+    case libnormaliz::OutputType::Vector:
+        return NmzVectorToGAP(C->getVectorConeProperty(p));
+
+    case libnormaliz::OutputType::Integer:
+        return NmzNumberToGAP(C->getIntegerConeProperty(p));
+
+    case libnormaliz::OutputType::GMPInteger:
+        return NmzNumberToGAP(C->getGMPIntegerConeProperty(p));
+
+    case libnormaliz::OutputType::Rational:
+        return NmzNumberToGAP(C->getRationalConeProperty(p));
+
+#if NMZ_RELEASE >= 30700
+    case libnormaliz::OutputType::FieldElem:
+        throw "OutputType::FieldElem not yet supported";
+#endif
+
+    case libnormaliz::OutputType::Float:
+        return NmzNumberToGAP(C->getFloatConeProperty(p));
+
+    case libnormaliz::OutputType::MachineInteger:
+        return NmzNumberToGAP(C->getMachineIntegerConeProperty(p));
+
+    case libnormaliz::OutputType::Bool:
+        return C->getBooleanConeProperty(p) ? True : False;
+
+    case libnormaliz::OutputType::Complex:
+        // more complex data structures are handled below
+        break;
+
+    case libnormaliz::OutputType::Void:
+        //throw "cone property is input-only";
+        return Fail;
+
+    default:
+        throw "unsupported output_type";
+    }
+
+#else
+
     switch (p) {
     case libnormaliz::ConeProperty::AffineDim: return NmzNumberToGAP(C->getAffineDim());
     case libnormaliz::ConeProperty::ClassGroup: return NmzVectorToGAP(C->getClassGroup());
-    case libnormaliz::ConeProperty::ConeDecomposition: return NmzMatrixToGAP(C->getOpenFacets());
     case libnormaliz::ConeProperty::Congruences: return NmzMatrixToGAP(C->getSublattice().getCongruences());
     case libnormaliz::ConeProperty::Deg1Elements: return NmzMatrixToGAP(C->getDeg1Elements());
     case libnormaliz::ConeProperty::Dehomogenization: return NmzVectorToGAP(C->getDehomogenization());
@@ -652,10 +721,6 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
     case libnormaliz::ConeProperty::Grading: return NmzVectorToGAP(C->getGrading());
     case libnormaliz::ConeProperty::GradingDenom: return NmzNumberToGAP(C->getGradingDenom());
     case libnormaliz::ConeProperty::HilbertBasis: return NmzMatrixToGAP(C->getHilbertBasis());
-    case libnormaliz::ConeProperty::HilbertQuasiPolynomial: return NmzHilbertQuasiPolynomialToGAP(C->getHilbertSeries());
-    case libnormaliz::ConeProperty::HilbertSeries: return NmzHilbertSeriesToGAP(C->getHilbertSeries());
-    case libnormaliz::ConeProperty::InclusionExclusionData: return NmzTriangleListToGAP<long>(C->getInclusionExclusionData());
-    case libnormaliz::ConeProperty::IntegerHull: return NewProxyCone(&(C->getIntegerHullCone()), cone);
     case libnormaliz::ConeProperty::Integral: return NmzNumberToGAP(C->getIntegral());
     case libnormaliz::ConeProperty::InternalIndex: return NmzNumberToGAP(C->getIndex());
     case libnormaliz::ConeProperty::IsDeg1ExtremeRays: return C->isDeg1ExtremeRays() ? True : False;
@@ -675,18 +740,75 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
     case libnormaliz::ConeProperty::Rank: return NmzNumberToGAP(C->getRank());
     case libnormaliz::ConeProperty::RecessionRank: return NmzNumberToGAP(C->getRecessionRank());
     case libnormaliz::ConeProperty::ReesPrimaryMultiplicity: return NmzNumberToGAP(C->getReesPrimaryMultiplicity());
-    case libnormaliz::ConeProperty::Sublattice: return _NmzBasisChangeIntern(C);
     case libnormaliz::ConeProperty::SupportHyperplanes: return NmzMatrixToGAP(C->getSupportHyperplanes());
-    case libnormaliz::ConeProperty::Triangulation: return NmzTriangleListToGAP<Integer>(C->getTriangulation());
     case libnormaliz::ConeProperty::TriangulationDetSum: return NmzNumberToGAP(C->getTriangulationDetSum());
     case libnormaliz::ConeProperty::TriangulationSize: return NmzNumberToGAP(C->getTriangulationSize());
     case libnormaliz::ConeProperty::UnitGroupIndex: return NmzNumberToGAP(C->getUnitGroupIndex());
     case libnormaliz::ConeProperty::VerticesFloat: return NmzMatrixToGAP(C->getVerticesFloat());
     case libnormaliz::ConeProperty::VerticesOfPolyhedron: return NmzMatrixToGAP(C->getVerticesOfPolyhedron());
     case libnormaliz::ConeProperty::VirtualMultiplicity: return NmzNumberToGAP(C->getVirtualMultiplicity());
-    case libnormaliz::ConeProperty::WeightedEhrhartQuasiPolynomial: return NmzWeightedEhrhartQuasiPolynomialToGAP(C->getIntData());
-    case libnormaliz::ConeProperty::WeightedEhrhartSeries: return NmzWeightedEhrhartSeriesToGAP(C->getWeightedEhrhartSeries());
     case libnormaliz::ConeProperty::WitnessNotIntegrallyClosed: return NmzVectorToGAP(C->getWitnessNotIntegrallyClosed());
+    default:
+        break; // go on
+    }
+
+#endif
+
+    switch (p) {
+//     case libnormaliz::ConeProperty::AmbientAutomorphisms:  TODO;
+
+//     case libnormaliz::ConeProperty::Automorphisms: TODO;
+
+//     case libnormaliz::ConeProperty::CombinatorialAutomorphisms: TODO;
+
+    case libnormaliz::ConeProperty::ConeDecomposition:
+        return NmzMatrixToGAP(C->getOpenFacets());
+
+#if NMZ_RELEASE >= 30600
+    case libnormaliz::ConeProperty::EhrhartQuasiPolynomial:
+    #if NMZ_RELEASE >= 30700
+        return NmzHilbertQuasiPolynomialToGAP(C->getEhrhartSeries());
+    #else
+        throw "Extracting EhrhartQuasiPolynomial requires Normaliz >= 3.7.0";
+    #endif
+#endif
+
+#if NMZ_RELEASE >= 30504
+    case libnormaliz::ConeProperty::EhrhartSeries:
+    #if NMZ_RELEASE >= 30700
+        return NmzHilbertSeriesToGAP(C->getEhrhartSeries());
+    #else
+        throw "Extracting EhrhartSeries requires Normaliz >= 3.7.0";
+    #endif
+#endif
+
+//     case libnormaliz::ConeProperty::EuclideanAutomorphisms: TODO;
+
+#if NMZ_RELEASE >= 30700
+//     case libnormaliz::ConeProperty::FaceLattice:
+//         return TODO(C->getFaceLattice(p));
+
+    case libnormaliz::ConeProperty::FVector:
+        return NmzVectorToGAP(C->getFVector());
+#endif
+
+    case libnormaliz::ConeProperty::HilbertQuasiPolynomial:
+        return NmzHilbertQuasiPolynomialToGAP(C->getHilbertSeries());
+
+    case libnormaliz::ConeProperty::HilbertSeries:
+        return NmzHilbertSeriesToGAP(C->getHilbertSeries());
+
+    case libnormaliz::ConeProperty::InclusionExclusionData:
+        return NmzTriangleListToGAP<long>(C->getInclusionExclusionData());
+
+    case libnormaliz::ConeProperty::IntegerHull:
+        return NewProxyCone(&(C->getIntegerHullCone()), cone);
+
+//     case libnormaliz::ConeProperty::ProjectCone: TODO;
+//     case libnormaliz::ConeProperty::RationalAutomorphisms: TODO;
+
+    case libnormaliz::ConeProperty::Sublattice:
+        return _NmzBasisChangeIntern(C);
 
     // StanleyDec is special and we do not support the required conversion at
     // this time. If you really need this, contact the developers.
@@ -694,25 +816,14 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
         //C->getStanleyDec();
         break;
 
+    case libnormaliz::ConeProperty::Triangulation:
+        return NmzTriangleListToGAP<Integer>(C->getTriangulation());
 
-//  the following properties are compute options and do not return anything
-    case libnormaliz::ConeProperty::DefaultMode:
-    case libnormaliz::ConeProperty::Approximate:
-    case libnormaliz::ConeProperty::BottomDecomposition:
-    case libnormaliz::ConeProperty::KeepOrder:
-    case libnormaliz::ConeProperty::NoBottomDec:
-    case libnormaliz::ConeProperty::PrimalMode:
-    case libnormaliz::ConeProperty::Symmetrize:
-    case libnormaliz::ConeProperty::NoSymmetrization:
-    case libnormaliz::ConeProperty::BigInt:
-    case libnormaliz::ConeProperty::NoNestedTri:
-    case libnormaliz::ConeProperty::HSOP:
-    case libnormaliz::ConeProperty::Projection:
-    case libnormaliz::ConeProperty::NoProjection:
-    case libnormaliz::ConeProperty::ProjectionFloat:
-    case libnormaliz::ConeProperty::SCIP:
-    case libnormaliz::ConeProperty::NoPeriodBound:
-        throw "cone property is input-only";
+    case libnormaliz::ConeProperty::WeightedEhrhartQuasiPolynomial:
+        return NmzWeightedEhrhartQuasiPolynomialToGAP(C->getIntData());
+
+    case libnormaliz::ConeProperty::WeightedEhrhartSeries:
+        return NmzWeightedEhrhartSeriesToGAP(C->getWeightedEhrhartSeries());
 
     default:
         throw "unsupported cone property " + libnormaliz::toString(p);
