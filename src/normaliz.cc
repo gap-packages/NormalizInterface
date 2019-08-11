@@ -246,6 +246,58 @@ static Obj NmzToGAP(double x)
     return NEW_MACFLOAT(x);
 }
 
+/* TODO: HSOP
+ *       There are two representations for Hilbert series in Normaliz, standard and HSOP.
+ *       Currently, only the standard representation is returned.
+ */
+static Obj NmzHilbertSeriesToGAP(const libnormaliz::HilbertSeries& HS)
+{
+    Obj ret;
+    ret = NEW_PLIST(T_PLIST, 3);
+    ASS_LIST(ret, 1, NmzToGAP(HS.getNum()));
+    ASS_LIST(ret, 2, NmzToGAP(libnormaliz::to_vector(HS.getDenom())));
+    ASS_LIST(ret, 3, NmzToGAP(HS.getShift()));
+    return ret;
+}
+
+template<typename Integer>
+static Obj NmzWeightedEhrhartSeriesToGAP(const std::pair<libnormaliz::HilbertSeries,Integer>& HS)
+{
+    Obj ret;
+    ret = NEW_PLIST(T_PLIST, 4);
+    ASS_LIST(ret, 1, NmzToGAP(HS.first.getNum()));
+    ASS_LIST(ret, 2, NmzToGAP(libnormaliz::to_vector(HS.first.getDenom())));
+    ASS_LIST(ret, 3, NmzToGAP(HS.first.getShift()));
+    ASS_LIST(ret, 4, NmzToGAP(HS.second));
+    return ret;
+}
+
+static Obj NmzHilbertQuasiPolynomialToGAP(const libnormaliz::HilbertSeries& HS)
+{
+    Obj ret;
+    vector< vector<mpz_class> > HQ = HS.getHilbertQuasiPolynomial();
+    const size_t n = HS.getPeriod();
+    ret = NEW_PLIST(T_PLIST, n+1);
+    for (size_t i = 0; i < n; ++i) {
+        ASS_LIST(ret, i+1, NmzToGAP(HQ[i]));
+    }
+    ASS_LIST(ret, n+1, NmzToGAP(HS.getHilbertQuasiPolynomialDenom()));
+    return ret;
+}
+
+static Obj NmzWeightedEhrhartQuasiPolynomialToGAP(const libnormaliz::IntegrationData& int_data)
+{
+    Obj ret;
+    vector< vector<mpz_class> > ehrhart_qp = int_data.getWeightedEhrhartQuasiPolynomial();
+    const size_t n = ehrhart_qp.size();
+    ret = NEW_PLIST(T_PLIST, n+1);
+    for (size_t i = 0; i < n; ++i) {
+        ASS_LIST(ret, i+1 , NmzToGAP(ehrhart_qp[i]));
+    }
+    ASS_LIST(ret, n+1, NmzToGAP(int_data.getWeightedEhrhartQuasiPolynomialDenom()));
+    return ret;
+}
+
 //
 // generic recursive conversion of C++ containers to GAP objects
 //
@@ -370,58 +422,6 @@ static bool GAPMatrixToNmz(vector< vector<Number> >& out, Obj M)
             return false;
     }
     return true;
-}
-
-/* TODO: HSOP
- *       There are two representations for Hilbert series in Normaliz, standard and HSOP. 
- *       Currently, only the standard representation is returned.
- */
-static Obj NmzHilbertSeriesToGAP(const libnormaliz::HilbertSeries& HS)
-{
-    Obj ret;
-    ret = NEW_PLIST(T_PLIST, 3);
-    ASS_LIST(ret, 1, NmzToGAP(HS.getNum()));
-    ASS_LIST(ret, 2, NmzToGAP(libnormaliz::to_vector(HS.getDenom())));
-    ASS_LIST(ret, 3, NmzToGAP(HS.getShift()));
-    return ret;
-}
-
-template<typename Integer>
-static Obj NmzWeightedEhrhartSeriesToGAP(const std::pair<libnormaliz::HilbertSeries,Integer>& HS)
-{   
-    Obj ret;
-    ret = NEW_PLIST(T_PLIST, 4);
-    ASS_LIST(ret, 1, NmzToGAP(HS.first.getNum()));
-    ASS_LIST(ret, 2, NmzToGAP(libnormaliz::to_vector(HS.first.getDenom())));
-    ASS_LIST(ret, 3, NmzToGAP(HS.first.getShift()));
-    ASS_LIST(ret, 4, NmzToGAP(HS.second));
-    return ret;
-}
-
-static Obj NmzHilbertQuasiPolynomialToGAP(const libnormaliz::HilbertSeries& HS)
-{
-    Obj ret;
-    vector< vector<mpz_class> > HQ = HS.getHilbertQuasiPolynomial();
-    const size_t n = HS.getPeriod();
-    ret = NEW_PLIST(T_PLIST, n+1);
-    for (size_t i = 0; i < n; ++i) {
-        ASS_LIST(ret, i+1, NmzToGAP(HQ[i]));
-    }
-    ASS_LIST(ret, n+1, NmzToGAP(HS.getHilbertQuasiPolynomialDenom()));
-    return ret;
-}
-
-static Obj NmzWeightedEhrhartQuasiPolynomialToGAP(const libnormaliz::IntegrationData& int_data)
-{
-    Obj ret;
-    vector< vector<mpz_class> > ehrhart_qp = int_data.getWeightedEhrhartQuasiPolynomial();
-    const size_t n = ehrhart_qp.size();
-    ret = NEW_PLIST(T_PLIST, n+1);
-    for (size_t i = 0; i < n; ++i) {
-        ASS_LIST(ret, i+1 , NmzToGAP(ehrhart_qp[i]));
-    }
-    ASS_LIST(ret, n+1, NmzToGAP(int_data.getWeightedEhrhartQuasiPolynomialDenom()));
-    return ret;
 }
 
 template<typename Integer>
