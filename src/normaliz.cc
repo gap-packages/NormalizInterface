@@ -266,27 +266,15 @@ static Obj NmzToGAP(const libnormaliz::HilbertSeries& HS)
 
 static Obj NmzHilbertQuasiPolynomialToGAP(const libnormaliz::HilbertSeries& HS)
 {
-    Obj ret;
-    vector< vector<mpz_class> > HQ = HS.getHilbertQuasiPolynomial();
-    const size_t n = HS.getPeriod();
-    ret = NEW_PLIST(T_PLIST, n+1);
-    for (size_t i = 0; i < n; ++i) {
-        ASS_LIST(ret, i+1, NmzToGAP(HQ[i]));
-    }
-    ASS_LIST(ret, n+1, NmzToGAP(HS.getHilbertQuasiPolynomialDenom()));
+    Obj ret = NmzToGAP(HS.getHilbertQuasiPolynomial());
+    AddList(ret, NmzToGAP(HS.getHilbertQuasiPolynomialDenom()));
     return ret;
 }
 
 static Obj NmzWeightedEhrhartQuasiPolynomialToGAP(const libnormaliz::IntegrationData& int_data)
 {
-    Obj ret;
-    vector< vector<mpz_class> > ehrhart_qp = int_data.getWeightedEhrhartQuasiPolynomial();
-    const size_t n = ehrhart_qp.size();
-    ret = NEW_PLIST(T_PLIST, n+1);
-    for (size_t i = 0; i < n; ++i) {
-        ASS_LIST(ret, i+1 , NmzToGAP(ehrhart_qp[i]));
-    }
-    ASS_LIST(ret, n+1, NmzToGAP(int_data.getWeightedEhrhartQuasiPolynomialDenom()));
+    Obj ret = NmzToGAP(int_data.getWeightedEhrhartQuasiPolynomial());
+    AddList(ret, NmzToGAP(int_data.getWeightedEhrhartQuasiPolynomialDenom()));
     return ret;
 }
 
