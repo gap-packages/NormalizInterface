@@ -3,18 +3,19 @@
  * Copyright (C) 2014  Sebastian Gutsche, Max Horn, Christof Söger
  *
  * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version 2
- * of the License, or (at your option) any later version.
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ * You should have received a copy of the GNU General Public
+ * License along with this program; if not, write to the Free
+ * Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+ * Boston, MA 02110-1301, USA.
  */
 
 /*
@@ -22,13 +23,13 @@
 #! @Section YOU FORGOT TO SET A SECTION
 */
 
-#include "src/compiled.h"          /* GAP headers                */
+#include "src/compiled.h" /* GAP headers                */
 
 #include "libnormaliz/cone.h"
 #include "libnormaliz/map_operations.h"
 
-#include <vector>
 #include <iostream>
+#include <vector>
 
 #include <cassert>
 #include <csignal>
@@ -43,59 +44,72 @@ typedef void (*sighandler_t)(int);
 
 #define FUNC_BEGIN try {
 
-#define FUNC_END \
-    } catch (std::exception& e) { \
-        ErrorQuit(e.what(),0,0); \
-        return Fail; \
-    } catch (const char* a) { \
-        ErrorQuit(a,0,0); \
-        return Fail; \
-    } catch (const std::string &a) { \
-        ErrorQuit(a.c_str(),0,0); \
-        return Fail; \
-    } catch (...) { \
-        ErrorQuit("PANIC: caught general exception", 0, 0); \
-        return Fail; \
+#define FUNC_END                                                             \
+    }                                                                        \
+    catch (std::exception & e)                                               \
+    {                                                                        \
+        ErrorQuit(e.what(), 0, 0);                                           \
+        return Fail;                                                         \
+    }                                                                        \
+    catch (const char * a)                                                   \
+    {                                                                        \
+        ErrorQuit(a, 0, 0);                                                  \
+        return Fail;                                                         \
+    }                                                                        \
+    catch (const std::string & a)                                            \
+    {                                                                        \
+        ErrorQuit(a.c_str(), 0, 0);                                          \
+        return Fail;                                                         \
+    }                                                                        \
+    catch (...)                                                              \
+    {                                                                        \
+        ErrorQuit("PANIC: caught general exception", 0, 0);                  \
+        return Fail;                                                         \
     }
 
-#define SIGNAL_HANDLER_BEGIN \
-    sighandler_t current_interpreter_sigint_handler = signal( SIGINT, signal_handler ); \
-    try{
+#define SIGNAL_HANDLER_BEGIN                                                 \
+    sighandler_t current_interpreter_sigint_handler =                        \
+        signal(SIGINT, signal_handler);                                      \
+    try {
 
-#define SIGNAL_HANDLER_END \
-    } catch (libnormaliz::InterruptException& e ) {\
-        signal(SIGINT,current_interpreter_sigint_handler);\
-        libnormaliz::nmz_interrupted = false; \
-        ErrorQuit( "computation interrupted", 0, 0 ); \
-        return 0; \
-    } catch (...) { \
-        signal(SIGINT,current_interpreter_sigint_handler);\
-        throw;\
-    } \
-    signal(SIGINT,current_interpreter_sigint_handler);
+#define SIGNAL_HANDLER_END                                                   \
+    }                                                                        \
+    catch (libnormaliz::InterruptException & e)                              \
+    {                                                                        \
+        signal(SIGINT, current_interpreter_sigint_handler);                  \
+        libnormaliz::nmz_interrupted = false;                                \
+        ErrorQuit("computation interrupted", 0, 0);                          \
+        return 0;                                                            \
+    }                                                                        \
+    catch (...)                                                              \
+    {                                                                        \
+        signal(SIGINT, current_interpreter_sigint_handler);                  \
+        throw;                                                               \
+    }                                                                        \
+    signal(SIGINT, current_interpreter_sigint_handler);
 
 
 // Paranoia check
 #ifdef SYS_IS_64_BIT
-  #if GMP_LIMB_BITS != 64
-    #error GAP compiled in 64 bit mode, but GMP limbs are not 64 bit
-  #endif
+#if GMP_LIMB_BITS != 64
+#error GAP compiled in 64 bit mode, but GMP limbs are not 64 bit
+#endif
 #else
-  #if GMP_LIMB_BITS != 32
-    #error GAP compiled in 32 bit mode, but GMP limbs are not 32 bit
-  #endif
+#if GMP_LIMB_BITS != 32
+#error GAP compiled in 32 bit mode, but GMP limbs are not 32 bit
+#endif
 #endif
 
 
 using libnormaliz::Cone;
-//using libnormaliz::ConeProperty;
+// using libnormaliz::ConeProperty;
 using libnormaliz::ConeProperties;
 using libnormaliz::Sublattice_Representation;
 using libnormaliz::Type::InputType;
 
 using std::map;
-using std::vector;
 using std::string;
+using std::vector;
 
 using std::cerr;
 using std::endl;
@@ -114,19 +128,19 @@ static inline bool IS_CONE(Obj o)
     return TNUM_OBJ(o) == T_NORMALIZ;
 }
 
-template<typename Integer>
-static inline void SET_CONE(Obj o, libnormaliz::Cone<Integer>* p)
+template <typename Integer>
+static inline void SET_CONE(Obj o, libnormaliz::Cone<Integer> * p)
 {
     ADDR_OBJ(o)[0] = reinterpret_cast<Obj>(p);
 }
 
-template<typename Integer>
-static inline libnormaliz::Cone<Integer>* GET_CONE(Obj o)
+template <typename Integer>
+static inline libnormaliz::Cone<Integer> * GET_CONE(Obj o)
 {
-    return reinterpret_cast<libnormaliz::Cone<Integer>*>(ADDR_OBJ(o)[0]);
+    return reinterpret_cast<libnormaliz::Cone<Integer> *>(ADDR_OBJ(o)[0]);
 }
 
-static Obj NewCone(Cone<mpz_class>* C)
+static Obj NewCone(Cone<mpz_class> * C)
 {
     Obj o;
     o = NewBag(T_NORMALIZ, 1 * sizeof(Obj));
@@ -134,7 +148,7 @@ static Obj NewCone(Cone<mpz_class>* C)
     return o;
 }
 
-static Obj NewProxyCone(Cone<mpz_class>* C, Obj parentCone)
+static Obj NewProxyCone(Cone<mpz_class> * C, Obj parentCone)
 {
     Obj o;
     o = NewBag(T_NORMALIZ, 2 * sizeof(Obj));
@@ -178,33 +192,37 @@ static Int NormalizIsMutableObjFuncs(Obj o)
 // conversion of various C++ types to GAP objects
 //
 
-template<typename T, typename U>
-Obj NmzToGAP(const std::pair<T,U>& in);
+template <typename T, typename U>
+Obj NmzToGAP(const std::pair<T, U> & in);
 
-template<typename T>
-Obj NmzToGAP(const vector<T>& in);
+template <typename T>
+Obj NmzToGAP(const vector<T> & in);
 
 static Obj NmzToGAP(const mpz_t x)
 {
 #if GAP_KERNEL_MAJOR_VERSION >= 7
-    return MakeObjInt((const UInt *)x->_mp_d, x->_mp_size);   // added in GAP 4.11
+    return MakeObjInt((const UInt *)x->_mp_d,
+                      x->_mp_size);    // added in GAP 4.11
 #else
     Obj res;
     Int size = x->_mp_size;
     int sign;
     if (size == 0) {
         return INTOBJ_INT(0);
-    } else if (size < 0) {
+    }
+    else if (size < 0) {
         size = -size;
         sign = -1;
-    } else {
+    }
+    else {
         sign = +1;
     }
     if (size == 1) {
         res = ObjInt_UInt(x->_mp_d[0]);
         if (sign < 0)
             res = AInvInt(res);
-    } else {
+    }
+    else {
         size = sizeof(mp_limb_t) * size;
         if (sign > 0)
             res = NewBag(T_INTPOS, size);
@@ -216,13 +234,13 @@ static Obj NmzToGAP(const mpz_t x)
 #endif
 }
 
-static Obj NmzToGAP(libnormaliz::key_t x)   // key_t = unsigned int
+static Obj NmzToGAP(libnormaliz::key_t x)    // key_t = unsigned int
 {
     return ObjInt_UInt(x);
 }
 
 #ifdef SYS_IS_64_BIT
-static Obj NmzToGAP(size_t x)               // size_t = unsigned long
+static Obj NmzToGAP(size_t x)    // size_t = unsigned long
 {
     return ObjInt_UInt(x);
 }
@@ -251,10 +269,10 @@ static Obj NmzToGAP(double x)
 }
 
 /* TODO: HSOP
- *       There are two representations for Hilbert series in Normaliz, standard and HSOP.
- *       Currently, only the standard representation is returned.
+ *       There are two representations for Hilbert series in Normaliz,
+ * standard and HSOP. Currently, only the standard representation is returned.
  */
-static Obj NmzToGAP(const libnormaliz::HilbertSeries& HS)
+static Obj NmzToGAP(const libnormaliz::HilbertSeries & HS)
 {
     Obj ret;
     ret = NEW_PLIST(T_PLIST, 3);
@@ -264,7 +282,8 @@ static Obj NmzToGAP(const libnormaliz::HilbertSeries& HS)
     return ret;
 }
 
-static Obj NmzHilbertQuasiPolynomialToGAP(const libnormaliz::HilbertSeries& HS)
+static Obj
+NmzHilbertQuasiPolynomialToGAP(const libnormaliz::HilbertSeries & HS)
 {
     Obj ret = NmzToGAP(HS.getHilbertQuasiPolynomial());
     AddList(ret, NmzToGAP(HS.getHilbertQuasiPolynomialDenom()));
@@ -275,22 +294,22 @@ static Obj NmzHilbertQuasiPolynomialToGAP(const libnormaliz::HilbertSeries& HS)
 // generic recursive conversion of C++ containers to GAP objects
 //
 
-template<typename T>
-Obj NmzToGAP(const vector<T>& in)
+template <typename T>
+Obj NmzToGAP(const vector<T> & in)
 {
     const size_t n = in.size();
-    Obj list = NEW_PLIST(T_PLIST, n);
+    Obj          list = NEW_PLIST(T_PLIST, n);
     for (size_t i = 0; i < n; ++i) {
         ASS_LIST(list, i + 1, NmzToGAP(in[i]));
     }
     return list;
 }
 
-template<>
-Obj NmzToGAP(const vector<bool>& in)
+template <>
+Obj NmzToGAP(const vector<bool> & in)
 {
     const size_t n = in.size();
-    Obj list = NewBag( T_BLIST, SIZE_PLEN_BLIST( n ) );
+    Obj          list = NewBag(T_BLIST, SIZE_PLEN_BLIST(n));
     SET_LEN_BLIST(list, n);
     for (size_t i = 0; i < n; ++i) {
         if (in[i])
@@ -299,8 +318,8 @@ Obj NmzToGAP(const vector<bool>& in)
     return list;
 }
 
-template<typename T, typename U>
-Obj NmzToGAP(const std::pair<T,U>& in)
+template <typename T, typename U>
+Obj NmzToGAP(const std::pair<T, U> & in)
 {
     Obj pair = NEW_PLIST(T_PLIST, 2);
     ASS_LIST(pair, 1, NmzToGAP(in.first));
@@ -308,17 +327,18 @@ Obj NmzToGAP(const std::pair<T,U>& in)
     return pair;
 }
 
-bool GAPNumberToNmz(long &out, Obj x)
+bool GAPNumberToNmz(long & out, Obj x)
 {
     if (IS_INTOBJ(x)) {
         out = INT_INTOBJ(x);
         return true;
-    } else if (TNUM_OBJ(x) == T_INTPOS || TNUM_OBJ(x) == T_INTNEG) {
+    }
+    else if (TNUM_OBJ(x) == T_INTPOS || TNUM_OBJ(x) == T_INTNEG) {
         UInt size = SIZE_INT(x);
         if (size == 1) {
             out = *ADDR_INT(x);
             if (out < 0)
-                return false;   // overflow
+                return false;    // overflow
             if (TNUM_OBJ(x) == T_INTNEG)
                 out = -out;
             return true;
@@ -327,108 +347,117 @@ bool GAPNumberToNmz(long &out, Obj x)
     return false;
 }
 
-bool GAPNumberToNmz(mpz_class &out, Obj x)
+bool GAPNumberToNmz(mpz_class & out, Obj x)
 {
     if (IS_INTOBJ(x)) {
         out = INT_INTOBJ(x);
         return true;
-    } else if (TNUM_OBJ(x) == T_INTPOS || TNUM_OBJ(x) == T_INTNEG) {
-        UInt size = SIZE_INT(x);
+    }
+    else if (TNUM_OBJ(x) == T_INTPOS || TNUM_OBJ(x) == T_INTNEG) {
+        UInt    size = SIZE_INT(x);
         mpz_ptr m = out.get_mpz_t();
         mpz_realloc2(m, size * GMP_NUMB_BITS);
         memcpy(m->_mp_d, ADDR_INT(x), sizeof(mp_limb_t) * size);
-        m->_mp_size = (TNUM_OBJ(x) == T_INTPOS) ? (Int)size : - (Int)size;
+        m->_mp_size = (TNUM_OBJ(x) == T_INTPOS) ? (Int)size : -(Int)size;
         return true;
     }
     return false;
 }
 
-bool GAPNumberToNmz(mpq_class &out, Obj x)
+bool GAPNumberToNmz(mpq_class & out, Obj x)
 {
     if (IS_INTOBJ(x)) {
         out = INT_INTOBJ(x);
         return true;
-    } else if (TNUM_OBJ(x) == T_INTPOS || TNUM_OBJ(x) == T_INTNEG) {
+    }
+    else if (TNUM_OBJ(x) == T_INTPOS || TNUM_OBJ(x) == T_INTNEG) {
         out.get_den() = 1;
         return GAPNumberToNmz(out.get_num(), x);
-    } else if (TNUM_OBJ(x) == T_RAT) {
+    }
+    else if (TNUM_OBJ(x) == T_RAT) {
         return GAPNumberToNmz(out.get_num(), NUM_RAT(x)) &&
                GAPNumberToNmz(out.get_den(), DEN_RAT(x));
     }
     return false;
 }
 
-template<typename Number>
-static bool GAPVectorToNmz(vector<Number>& out, Obj V)
+template <typename Number>
+static bool GAPVectorToNmz(vector<Number> & out, Obj V)
 {
     if (!IS_PLIST(V) || !IS_DENSE_LIST(V))
         return false;
     const int n = LEN_PLIST(V);
     out.resize(n);
     for (int i = 0; i < n; ++i) {
-        Obj tmp = ELM_PLIST(V, i+1);
+        Obj tmp = ELM_PLIST(V, i + 1);
         if (!GAPNumberToNmz(out[i], tmp))
             return false;
     }
     return true;
 }
 
-template<typename Number>
-static bool GAPMatrixToNmz(vector< vector<Number> >& out, Obj M)
+template <typename Number>
+static bool GAPMatrixToNmz(vector<vector<Number>> & out, Obj M)
 {
     if (!IS_PLIST(M) || !IS_DENSE_LIST(M))
         return false;
     const int nr = LEN_PLIST(M);
     out.resize(nr);
     for (int i = 0; i < nr; ++i) {
-        bool okay = GAPVectorToNmz(out[i], ELM_PLIST(M, i+1));
+        bool okay = GAPVectorToNmz(out[i], ELM_PLIST(M, i + 1));
         if (!okay)
             return false;
     }
     return true;
 }
 
-template<typename Integer>
+template <typename Integer>
 static Obj _NmzConeIntern(Obj input_list)
 {
-    bool has_polynomial_input = false;
-    string polynomial;
-    map <InputType, vector< vector<mpq_class> > > input;
-    const int n = LEN_PLIST(input_list);
-    if (n&1) {
-        throw std::runtime_error("Input list must have even number of elements");
+    bool                                      has_polynomial_input = false;
+    string                                    polynomial;
+    map<InputType, vector<vector<mpq_class>>> input;
+    const int                                 n = LEN_PLIST(input_list);
+    if (n & 1) {
+        throw std::runtime_error(
+            "Input list must have even number of elements");
     }
     for (int i = 0; i < n; i += 2) {
-        Obj type = ELM_PLIST(input_list, i+1);
+        Obj type = ELM_PLIST(input_list, i + 1);
         if (!IS_STRING_REP(type)) {
-            throw std::runtime_error("Element " + std::to_string(i+1) + " of the input list must be a type string");
+            throw std::runtime_error(
+                "Element " + std::to_string(i + 1) +
+                " of the input list must be a type string");
         }
         string type_str(CSTR_STRING(type));
-        Obj M = ELM_PLIST(input_list, i+2);
+        Obj    M = ELM_PLIST(input_list, i + 2);
         if (type_str.compare("polynomial") == 0) {
             if (!IS_STRING_REP(M)) {
-                throw std::runtime_error("Element " + std::to_string(i+2) + " of the input list must be a string");
+                throw std::runtime_error(
+                    "Element " + std::to_string(i + 2) +
+                    " of the input list must be a string");
             }
             polynomial = string(CSTR_STRING(M));
             has_polynomial_input = true;
             continue;
         }
-        vector<vector<mpq_class> > Mat;
-        bool okay = GAPMatrixToNmz(Mat, M);
+        vector<vector<mpq_class>> Mat;
+        bool                      okay = GAPMatrixToNmz(Mat, M);
         if (!okay) {
-            throw std::runtime_error("Element " + std::to_string(i+2) + " of the input list must be an integer matrix");
+            throw std::runtime_error(
+                "Element " + std::to_string(i + 2) +
+                " of the input list must be an integer matrix");
         }
 
         input[libnormaliz::to_type(type_str)] = Mat;
     }
 
-    Cone<Integer>* C = new Cone<Integer>(input);
+    Cone<Integer> * C = new Cone<Integer>(input);
     if (has_polynomial_input) {
         C->setPolynomial(polynomial);
     }
     Obj Cone = NewCone(C);
     return Cone;
-
 }
 
 static Obj Func_NmzCone(Obj self, Obj input_list)
@@ -454,16 +483,18 @@ static Obj Func_NmzCompute(Obj self, Obj cone, Obj to_compute)
     const int n = LEN_PLIST(to_compute);
 
     for (int i = 0; i < n; ++i) {
-        Obj prop = ELM_PLIST(to_compute, i+1);
+        Obj prop = ELM_PLIST(to_compute, i + 1);
         if (!IS_STRING_REP(prop)) {
-            throw std::runtime_error("Element " + std::to_string(i+1) + " of the input list must be a type string");
+            throw std::runtime_error(
+                "Element " + std::to_string(i + 1) +
+                " of the input list must be a type string");
         }
         string prop_str(CSTR_STRING(prop));
-        propsToCompute.set( libnormaliz::toConeProperty(prop_str) );
+        propsToCompute.set(libnormaliz::toConeProperty(prop_str));
     }
 
-    Cone<mpz_class>* C = GET_CONE<mpz_class>(cone);
-    
+    Cone<mpz_class> * C = GET_CONE<mpz_class>(cone);
+
     ConeProperties notComputed;
     SIGNAL_HANDLER_BEGIN
     notComputed = C->compute(propsToCompute);
@@ -495,9 +526,10 @@ static Obj FuncNmzHasConeProperty(Obj self, Obj cone, Obj prop)
 
     FUNC_BEGIN
 
-    libnormaliz::ConeProperty::Enum p = libnormaliz::toConeProperty(CSTR_STRING(prop));
+    libnormaliz::ConeProperty::Enum p =
+        libnormaliz::toConeProperty(CSTR_STRING(prop));
 
-    Cone<mpz_class>* C = GET_CONE<mpz_class>(cone);
+    Cone<mpz_class> * C = GET_CONE<mpz_class>(cone);
     return C->isComputed(p) ? True : False;
 
     FUNC_END
@@ -506,7 +538,8 @@ static Obj FuncNmzHasConeProperty(Obj self, Obj cone, Obj prop)
 /*
 #! @Section Use a NmzCone
 #! @Arguments cone
-#! @Returns a list of strings representing the known (computed) cone properties
+#! @Returns a list of strings representing the known (computed) cone
+#!   properties
 #! @Description
 #! Given a Normaliz cone object, return a list of all properties already
 #! computed for the cone.
@@ -522,13 +555,14 @@ static Obj FuncNmzKnownConeProperties(Obj self, Obj cone)
     FUNC_BEGIN
 
     size_t n = 0;
-    Obj M = NEW_PLIST(T_PLIST, libnormaliz::ConeProperty::EnumSize);
+    Obj    M = NEW_PLIST(T_PLIST, libnormaliz::ConeProperty::EnumSize);
     Cone<mpz_class> * C = GET_CONE<mpz_class>(cone);
 
     // FIXME: This code could be a lot simpler if there was
     // a Cone method for reading the value of is_Computed.
     for (int i = 0; i < libnormaliz::ConeProperty::EnumSize; ++i) {
-        libnormaliz::ConeProperty::Enum p = (libnormaliz::ConeProperty::Enum)i;
+        libnormaliz::ConeProperty::Enum p =
+            (libnormaliz::ConeProperty::Enum)i;
 
 #if NMZ_RELEASE >= 30500
         // skip internal control properties
@@ -555,12 +589,13 @@ static Obj FuncNmzKnownConeProperties(Obj self, Obj cone)
     FUNC_END
 }
 
-template<typename Integer>
+template <typename Integer>
 static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
 {
-    Cone<Integer>* C = GET_CONE<Integer>(cone);
+    Cone<Integer> * C = GET_CONE<Integer>(cone);
 
-    libnormaliz::ConeProperty::Enum p = libnormaliz::toConeProperty(CSTR_STRING(prop));
+    libnormaliz::ConeProperty::Enum p =
+        libnormaliz::toConeProperty(CSTR_STRING(prop));
     ConeProperties notComputed;
     SIGNAL_HANDLER_BEGIN
     notComputed = C->compute(ConeProperties(p));
@@ -573,7 +608,9 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
     notComputed.reset(libnormaliz::ConeProperty::NoGradingDenom);
 #endif
     if (notComputed.any()) {
-        ErrorQuit("Failed to compute %s, missing properties: %s", (Int)(libnormaliz::toString(p).c_str()), (Int)(libnormaliz::toString(notComputed).c_str()));
+        ErrorQuit("Failed to compute %s, missing properties: %s",
+                  (Int)(libnormaliz::toString(p).c_str()),
+                  (Int)(libnormaliz::toString(notComputed).c_str()));
         return Fail;
     }
 
@@ -593,7 +630,8 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
         return NmzToGAP(C->getNumberLatticePoints());
 #endif
 
-    // workaround: these two properties are marked as having output type "void"
+    // workaround: these two properties are marked as having output type
+    // "void"
     if (p == libnormaliz::ConeProperty::IsTriangulationNested)
         return C->isTriangulationNested() ? True : False;
     if (p == libnormaliz::ConeProperty::IsTriangulationPartial)
@@ -638,7 +676,7 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
         break;
 
     case libnormaliz::OutputType::Void:
-        //throw "cone property is input-only";
+        // throw "cone property is input-only";
         return Fail;
 
     default:
@@ -648,87 +686,129 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
 #else
 
     switch (p) {
-    case libnormaliz::ConeProperty::AffineDim: return NmzToGAP(C->getAffineDim());
-    case libnormaliz::ConeProperty::ClassGroup: return NmzToGAP(C->getClassGroup());
-    case libnormaliz::ConeProperty::Congruences: return NmzToGAP(C->getSublattice().getCongruences());
-    case libnormaliz::ConeProperty::Deg1Elements: return NmzToGAP(C->getDeg1Elements());
-    case libnormaliz::ConeProperty::Dehomogenization: return NmzToGAP(C->getDehomogenization());
-    case libnormaliz::ConeProperty::EmbeddingDim: return NmzToGAP(C->getEmbeddingDim());
-    case libnormaliz::ConeProperty::Equations: return NmzToGAP(C->getSublattice().getEquations());
-    case libnormaliz::ConeProperty::ExcludedFaces: return NmzToGAP(C->getExcludedFaces());
-    case libnormaliz::ConeProperty::ExternalIndex: return NmzToGAP(C->getSublattice().getExternalIndex());
-    case libnormaliz::ConeProperty::ExtremeRays: return NmzToGAP(C->getExtremeRays());
-    case libnormaliz::ConeProperty::GeneratorOfInterior: return NmzToGAP(C->getGeneratorOfInterior());
-    case libnormaliz::ConeProperty::Generators: return NmzToGAP(C->getGenerators());
-    case libnormaliz::ConeProperty::Grading: return NmzToGAP(C->getGrading());
-    case libnormaliz::ConeProperty::GradingDenom: return NmzToGAP(C->getGradingDenom());
-    case libnormaliz::ConeProperty::HilbertBasis: return NmzToGAP(C->getHilbertBasis());
-    case libnormaliz::ConeProperty::Integral: return NmzToGAP(C->getIntegral());
-    case libnormaliz::ConeProperty::InternalIndex: return NmzToGAP(C->getIndex());
-    case libnormaliz::ConeProperty::IsDeg1ExtremeRays: return C->isDeg1ExtremeRays() ? True : False;
-    case libnormaliz::ConeProperty::IsDeg1HilbertBasis: return C->isDeg1HilbertBasis() ? True : False;
-    case libnormaliz::ConeProperty::IsGorenstein: return C->isGorenstein() ? True : False;
-    case libnormaliz::ConeProperty::IsInhomogeneous: return C->isInhomogeneous() ? True : False;
-    case libnormaliz::ConeProperty::IsIntegrallyClosed: return C->isIntegrallyClosed() ? True : False;
-    case libnormaliz::ConeProperty::IsPointed: return C->isPointed() ? True : False;
-    case libnormaliz::ConeProperty::IsReesPrimary: return C->isReesPrimary() ? True : False;
-    case libnormaliz::ConeProperty::IsTriangulationNested: return C->isTriangulationNested() ? True : False;
-    case libnormaliz::ConeProperty::IsTriangulationPartial: return C->isTriangulationPartial() ? True : False;
-    case libnormaliz::ConeProperty::MaximalSubspace: return NmzToGAP(C->getMaximalSubspace());
-    case libnormaliz::ConeProperty::ModuleGenerators: return NmzToGAP(C->getModuleGenerators());
-    case libnormaliz::ConeProperty::ModuleRank: return NmzToGAP(C->getModuleRank());
-    case libnormaliz::ConeProperty::Multiplicity: return NmzToGAP(C->getMultiplicity());
-    case libnormaliz::ConeProperty::OriginalMonoidGenerators: return NmzToGAP(C->getOriginalMonoidGenerators());
-    case libnormaliz::ConeProperty::Rank: return NmzToGAP(C->getRank());
-    case libnormaliz::ConeProperty::RecessionRank: return NmzToGAP(C->getRecessionRank());
-    case libnormaliz::ConeProperty::ReesPrimaryMultiplicity: return NmzToGAP(C->getReesPrimaryMultiplicity());
-    case libnormaliz::ConeProperty::SupportHyperplanes: return NmzToGAP(C->getSupportHyperplanes());
-    case libnormaliz::ConeProperty::TriangulationDetSum: return NmzToGAP(C->getTriangulationDetSum());
-    case libnormaliz::ConeProperty::TriangulationSize: return NmzToGAP(C->getTriangulationSize());
-    case libnormaliz::ConeProperty::UnitGroupIndex: return NmzToGAP(C->getUnitGroupIndex());
-    case libnormaliz::ConeProperty::VerticesFloat: return NmzToGAP(C->getVerticesFloat());
-    case libnormaliz::ConeProperty::VerticesOfPolyhedron: return NmzToGAP(C->getVerticesOfPolyhedron());
-    case libnormaliz::ConeProperty::VirtualMultiplicity: return NmzToGAP(C->getVirtualMultiplicity());
-    case libnormaliz::ConeProperty::WitnessNotIntegrallyClosed: return NmzToGAP(C->getWitnessNotIntegrallyClosed());
+    case libnormaliz::ConeProperty::AffineDim:
+        return NmzToGAP(C->getAffineDim());
+    case libnormaliz::ConeProperty::ClassGroup:
+        return NmzToGAP(C->getClassGroup());
+    case libnormaliz::ConeProperty::Congruences:
+        return NmzToGAP(C->getSublattice().getCongruences());
+    case libnormaliz::ConeProperty::Deg1Elements:
+        return NmzToGAP(C->getDeg1Elements());
+    case libnormaliz::ConeProperty::Dehomogenization:
+        return NmzToGAP(C->getDehomogenization());
+    case libnormaliz::ConeProperty::EmbeddingDim:
+        return NmzToGAP(C->getEmbeddingDim());
+    case libnormaliz::ConeProperty::Equations:
+        return NmzToGAP(C->getSublattice().getEquations());
+    case libnormaliz::ConeProperty::ExcludedFaces:
+        return NmzToGAP(C->getExcludedFaces());
+    case libnormaliz::ConeProperty::ExternalIndex:
+        return NmzToGAP(C->getSublattice().getExternalIndex());
+    case libnormaliz::ConeProperty::ExtremeRays:
+        return NmzToGAP(C->getExtremeRays());
+    case libnormaliz::ConeProperty::GeneratorOfInterior:
+        return NmzToGAP(C->getGeneratorOfInterior());
+    case libnormaliz::ConeProperty::Generators:
+        return NmzToGAP(C->getGenerators());
+    case libnormaliz::ConeProperty::Grading:
+        return NmzToGAP(C->getGrading());
+    case libnormaliz::ConeProperty::GradingDenom:
+        return NmzToGAP(C->getGradingDenom());
+    case libnormaliz::ConeProperty::HilbertBasis:
+        return NmzToGAP(C->getHilbertBasis());
+    case libnormaliz::ConeProperty::Integral:
+        return NmzToGAP(C->getIntegral());
+    case libnormaliz::ConeProperty::InternalIndex:
+        return NmzToGAP(C->getIndex());
+    case libnormaliz::ConeProperty::IsDeg1ExtremeRays:
+        return C->isDeg1ExtremeRays() ? True : False;
+    case libnormaliz::ConeProperty::IsDeg1HilbertBasis:
+        return C->isDeg1HilbertBasis() ? True : False;
+    case libnormaliz::ConeProperty::IsGorenstein:
+        return C->isGorenstein() ? True : False;
+    case libnormaliz::ConeProperty::IsInhomogeneous:
+        return C->isInhomogeneous() ? True : False;
+    case libnormaliz::ConeProperty::IsIntegrallyClosed:
+        return C->isIntegrallyClosed() ? True : False;
+    case libnormaliz::ConeProperty::IsPointed:
+        return C->isPointed() ? True : False;
+    case libnormaliz::ConeProperty::IsReesPrimary:
+        return C->isReesPrimary() ? True : False;
+    case libnormaliz::ConeProperty::IsTriangulationNested:
+        return C->isTriangulationNested() ? True : False;
+    case libnormaliz::ConeProperty::IsTriangulationPartial:
+        return C->isTriangulationPartial() ? True : False;
+    case libnormaliz::ConeProperty::MaximalSubspace:
+        return NmzToGAP(C->getMaximalSubspace());
+    case libnormaliz::ConeProperty::ModuleGenerators:
+        return NmzToGAP(C->getModuleGenerators());
+    case libnormaliz::ConeProperty::ModuleRank:
+        return NmzToGAP(C->getModuleRank());
+    case libnormaliz::ConeProperty::Multiplicity:
+        return NmzToGAP(C->getMultiplicity());
+    case libnormaliz::ConeProperty::OriginalMonoidGenerators:
+        return NmzToGAP(C->getOriginalMonoidGenerators());
+    case libnormaliz::ConeProperty::Rank:
+        return NmzToGAP(C->getRank());
+    case libnormaliz::ConeProperty::RecessionRank:
+        return NmzToGAP(C->getRecessionRank());
+    case libnormaliz::ConeProperty::ReesPrimaryMultiplicity:
+        return NmzToGAP(C->getReesPrimaryMultiplicity());
+    case libnormaliz::ConeProperty::SupportHyperplanes:
+        return NmzToGAP(C->getSupportHyperplanes());
+    case libnormaliz::ConeProperty::TriangulationDetSum:
+        return NmzToGAP(C->getTriangulationDetSum());
+    case libnormaliz::ConeProperty::TriangulationSize:
+        return NmzToGAP(C->getTriangulationSize());
+    case libnormaliz::ConeProperty::UnitGroupIndex:
+        return NmzToGAP(C->getUnitGroupIndex());
+    case libnormaliz::ConeProperty::VerticesFloat:
+        return NmzToGAP(C->getVerticesFloat());
+    case libnormaliz::ConeProperty::VerticesOfPolyhedron:
+        return NmzToGAP(C->getVerticesOfPolyhedron());
+    case libnormaliz::ConeProperty::VirtualMultiplicity:
+        return NmzToGAP(C->getVirtualMultiplicity());
+    case libnormaliz::ConeProperty::WitnessNotIntegrallyClosed:
+        return NmzToGAP(C->getWitnessNotIntegrallyClosed());
     default:
-        break; // go on
+        break;    // go on
     }
 
 #endif
 
     switch (p) {
-//     case libnormaliz::ConeProperty::AmbientAutomorphisms:  TODO;
+        // case libnormaliz::ConeProperty::AmbientAutomorphisms:  TODO;
 
-//     case libnormaliz::ConeProperty::Automorphisms: TODO;
+        // case libnormaliz::ConeProperty::Automorphisms: TODO;
 
-//     case libnormaliz::ConeProperty::CombinatorialAutomorphisms: TODO;
+        // case libnormaliz::ConeProperty::CombinatorialAutomorphisms: TODO;
 
     case libnormaliz::ConeProperty::ConeDecomposition:
         return NmzToGAP(C->getOpenFacets());
 
 #if NMZ_RELEASE >= 30600
     case libnormaliz::ConeProperty::EhrhartQuasiPolynomial:
-    #if NMZ_RELEASE >= 30700
+#if NMZ_RELEASE >= 30700
         return NmzHilbertQuasiPolynomialToGAP(C->getEhrhartSeries());
-    #else
+#else
         throw "Extracting EhrhartQuasiPolynomial requires Normaliz >= 3.7.0";
-    #endif
+#endif
 #endif
 
 #if NMZ_RELEASE >= 30504
     case libnormaliz::ConeProperty::EhrhartSeries:
-    #if NMZ_RELEASE >= 30700
+#if NMZ_RELEASE >= 30700
         return NmzToGAP(C->getEhrhartSeries());
-    #else
+#else
         throw "Extracting EhrhartSeries requires Normaliz >= 3.7.0";
-    #endif
+#endif
 #endif
 
-//     case libnormaliz::ConeProperty::EuclideanAutomorphisms: TODO;
+        // case libnormaliz::ConeProperty::EuclideanAutomorphisms: TODO;
 
 #if NMZ_RELEASE >= 30700
-//     case libnormaliz::ConeProperty::FaceLattice:
-//         return TODO(C->getFaceLattice(p));
+        // case libnormaliz::ConeProperty::FaceLattice:
+        //  return TODO(C->getFaceLattice(p));
 
     case libnormaliz::ConeProperty::FVector:
         return NmzToGAP(C->getFVector());
@@ -746,8 +826,8 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
     case libnormaliz::ConeProperty::IntegerHull:
         return NewProxyCone(&(C->getIntegerHullCone()), cone);
 
-//     case libnormaliz::ConeProperty::ProjectCone: TODO;
-//     case libnormaliz::ConeProperty::RationalAutomorphisms: TODO;
+        // case libnormaliz::ConeProperty::ProjectCone: TODO;
+        // case libnormaliz::ConeProperty::RationalAutomorphisms: TODO;
 
     case libnormaliz::ConeProperty::Sublattice:
         return _NmzBasisChangeIntern(C);
@@ -755,14 +835,15 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
     // StanleyDec is special and we do not support the required conversion at
     // this time. If you really need this, contact the developers.
     case libnormaliz::ConeProperty::StanleyDec:
-        //C->getStanleyDec();
+        // C->getStanleyDec();
         break;
 
     case libnormaliz::ConeProperty::Triangulation:
         return NmzToGAP(C->getTriangulation());
 
     case libnormaliz::ConeProperty::WeightedEhrhartQuasiPolynomial:
-        return NmzHilbertQuasiPolynomialToGAP(C->getWeightedEhrhartSeries().first);
+        return NmzHilbertQuasiPolynomialToGAP(
+            C->getWeightedEhrhartSeries().first);
 
     case libnormaliz::ConeProperty::WeightedEhrhartSeries:
         return NmzToGAP(C->getWeightedEhrhartSeries());
@@ -793,7 +874,8 @@ static Obj Func_NmzConeProperty(Obj self, Obj cone, Obj prop)
 #! @Returns the previous verbosity
 #! @Description
 #! Set the global default verbosity state in libnormaliz.
-#! This will influence all NmzCone created afterwards, but not any existing ones.
+#! This will influence all NmzCone created afterwards, but not any existing
+#! ones.
 #!
 #! See also <Ref Func="NmzSetVerbose"/>
 DeclareGlobalFunction("NmzSetVerboseDefault");
@@ -826,7 +908,7 @@ static Obj FuncNmzSetVerbose(Obj self, Obj cone, Obj value)
     bool old_value;
 
     FUNC_BEGIN
-    Cone<mpz_class>* C = GET_CONE<mpz_class>(cone);
+    Cone<mpz_class> * C = GET_CONE<mpz_class>(cone);
     old_value = C->setVerbose(value == True);
     return old_value ? True : False;
     FUNC_END
@@ -837,8 +919,8 @@ static Obj FuncNmzSetVerbose(Obj self, Obj cone, Obj value)
 */
 
 
-template<typename Integer>
-static Obj _NmzBasisChangeIntern(Cone<Integer>* C)
+template <typename Integer>
+static Obj _NmzBasisChangeIntern(Cone<Integer> * C)
 {
     Sublattice_Representation<Integer> bc;
     SIGNAL_HANDLER_BEGIN
@@ -849,8 +931,8 @@ static Obj _NmzBasisChangeIntern(Cone<Integer>* C)
     ASS_LIST(res, 1, NmzToGAP(bc.getEmbedding()));
     ASS_LIST(res, 2, NmzToGAP(bc.getProjection()));
     ASS_LIST(res, 3, NmzToGAP(bc.getAnnihilator()));
-    // Dim, Rank, Equations and Congruences are already covered by special functions
-    // The index is not always computed and not so relevant
+    // Dim, Rank, Equations and Congruences are already covered by special
+    // functions The index is not always computed and not so relevant
     return res;
 }
 
@@ -869,7 +951,7 @@ static Obj Func_NmzVersion(Obj self)
 #undef GVAR_FUNC
 #define GVAR_FUNC(name, nargs, args)                                         \
     {                                                                        \
-        #name, nargs, args, (ObjFunc)Func##name, __FILE__ ":" #name          \
+#name, nargs, args, (ObjFunc)Func##name, __FILE__ ":" #name          \
     }
 
 // Table of functions to export
@@ -890,73 +972,65 @@ static StructGVarFunc GVarFuncs[] = {
 
 };
 
-/******************************************************************************
-*F  InitKernel( <module> )  . . . . . . . . initialise kernel data structures
-*/
-static Int InitKernel( StructInitInfo *module )
+// initialise kernel data structures
+static Int InitKernel(StructInitInfo * module)
 {
     /* init filters and functions                                          */
-    InitHdlrFuncsFromTable( GVarFuncs );
+    InitHdlrFuncsFromTable(GVarFuncs);
 
-    InitCopyGVar( "TheTypeNormalizCone", &TheTypeNormalizCone );
+    InitCopyGVar("TheTypeNormalizCone", &TheTypeNormalizCone);
 
     T_NORMALIZ = RegisterPackageTNUM("NormalizCone", NormalizTypeFunc);
 
     InitMarkFuncBags(T_NORMALIZ, &MarkAllSubBags);
     InitFreeFuncBag(T_NORMALIZ, &NormalizFreeFunc);
 
-    CopyObjFuncs[ T_NORMALIZ ] = &NormalizCopyFunc;
-    CleanObjFuncs[ T_NORMALIZ ] = &NormalizCleanFunc;
-    IsMutableObjFuncs[ T_NORMALIZ ] = &NormalizIsMutableObjFuncs;
-    
+    CopyObjFuncs[T_NORMALIZ] = &NormalizCopyFunc;
+    CleanObjFuncs[T_NORMALIZ] = &NormalizCleanFunc;
+    IsMutableObjFuncs[T_NORMALIZ] = &NormalizIsMutableObjFuncs;
+
     /* return success                                                      */
     return 0;
 }
 
-/******************************************************************************
-*F  InitLibrary( <module> ) . . . . . . .  initialise library data structures
-*/
-static Int InitLibrary( StructInitInfo *module )
+// initialise library data structures
+static Int InitLibrary(StructInitInfo * module)
 {
     /* init filters and functions */
-    InitGVarFuncsFromTable( GVarFuncs );
+    InitGVarFuncsFromTable(GVarFuncs);
 
     /* return success                                                      */
     return 0;
 }
 
-/******************************************************************************
-*F  InitInfopl()  . . . . . . . . . . . . . . . . . table of init functions
-*/
+// table of init functions
 static StructInitInfo module = {
 #ifdef NORMALIZSTATIC
- /* type        = */ MODULE_STATIC,
+    /* type        = */ MODULE_STATIC,
 #else
- /* type        = */ MODULE_DYNAMIC,
+    /* type        = */ MODULE_DYNAMIC,
 #endif
- /* name        = */ "Normaliz",
- /* revision_c  = */ 0,
- /* revision_h  = */ 0,
- /* version     = */ 0,
- /* crc         = */ 0,
- /* initKernel  = */ InitKernel,
- /* initLibrary = */ InitLibrary,
- /* checkInit   = */ 0,
- /* preSave     = */ 0,
- /* postSave    = */ 0,
- /* postRestore = */ 0
+    /* name        = */ "Normaliz",
+    /* revision_c  = */ 0,
+    /* revision_h  = */ 0,
+    /* version     = */ 0,
+    /* crc         = */ 0,
+    /* initKernel  = */ InitKernel,
+    /* initLibrary = */ InitLibrary,
+    /* checkInit   = */ 0,
+    /* preSave     = */ 0,
+    /* postSave    = */ 0,
+    /* postRestore = */ 0
 };
 
 #ifndef NORMALIZSTATIC
-extern "C"
-StructInitInfo * Init__Dynamic ( void )
+extern "C" StructInitInfo * Init__Dynamic(void)
 {
-  return &module;
+    return &module;
 }
 #endif
 
-extern "C"
-StructInitInfo * Init__normaliz ( void )
+extern "C" StructInitInfo * Init__normaliz(void)
 {
     return &module;
 }
