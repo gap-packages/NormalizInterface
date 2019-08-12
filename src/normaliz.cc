@@ -254,25 +254,13 @@ static Obj NmzToGAP(double x)
  *       There are two representations for Hilbert series in Normaliz, standard and HSOP.
  *       Currently, only the standard representation is returned.
  */
-static Obj NmzHilbertSeriesToGAP(const libnormaliz::HilbertSeries& HS)
+static Obj NmzToGAP(const libnormaliz::HilbertSeries& HS)
 {
     Obj ret;
     ret = NEW_PLIST(T_PLIST, 3);
     ASS_LIST(ret, 1, NmzToGAP(HS.getNum()));
     ASS_LIST(ret, 2, NmzToGAP(libnormaliz::to_vector(HS.getDenom())));
     ASS_LIST(ret, 3, NmzToGAP(HS.getShift()));
-    return ret;
-}
-
-template<typename Integer>
-static Obj NmzWeightedEhrhartSeriesToGAP(const std::pair<libnormaliz::HilbertSeries,Integer>& HS)
-{
-    Obj ret;
-    ret = NEW_PLIST(T_PLIST, 4);
-    ASS_LIST(ret, 1, NmzToGAP(HS.first.getNum()));
-    ASS_LIST(ret, 2, NmzToGAP(libnormaliz::to_vector(HS.first.getDenom())));
-    ASS_LIST(ret, 3, NmzToGAP(HS.first.getShift()));
-    ASS_LIST(ret, 4, NmzToGAP(HS.second));
     return ret;
 }
 
@@ -758,7 +746,7 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
 #if NMZ_RELEASE >= 30504
     case libnormaliz::ConeProperty::EhrhartSeries:
     #if NMZ_RELEASE >= 30700
-        return NmzHilbertSeriesToGAP(C->getEhrhartSeries());
+        return NmzToGAP(C->getEhrhartSeries());
     #else
         throw "Extracting EhrhartSeries requires Normaliz >= 3.7.0";
     #endif
@@ -778,7 +766,7 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
         return NmzHilbertQuasiPolynomialToGAP(C->getHilbertSeries());
 
     case libnormaliz::ConeProperty::HilbertSeries:
-        return NmzHilbertSeriesToGAP(C->getHilbertSeries());
+        return NmzToGAP(C->getHilbertSeries());
 
     case libnormaliz::ConeProperty::InclusionExclusionData:
         return NmzToGAP(C->getInclusionExclusionData());
@@ -805,7 +793,7 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
         return NmzWeightedEhrhartQuasiPolynomialToGAP(C->getIntData());
 
     case libnormaliz::ConeProperty::WeightedEhrhartSeries:
-        return NmzWeightedEhrhartSeriesToGAP(C->getWeightedEhrhartSeries());
+        return NmzToGAP(C->getWeightedEhrhartSeries());
 
     default:
         throw "unsupported cone property " + libnormaliz::toString(p);
