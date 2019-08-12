@@ -327,13 +327,6 @@ Obj NmzToGAP(const std::pair<T,U>& in)
     return pair;
 }
 
-template<typename Number>
-static bool GAPNumberToNmz(Number &out, Obj x)
-{
-    return Number::unimplemented_function;
-}
-
-template<>
 bool GAPNumberToNmz(long &out, Obj x)
 {
     if (IS_INTOBJ(x)) {
@@ -353,7 +346,6 @@ bool GAPNumberToNmz(long &out, Obj x)
     return false;
 }
 
-template<>
 bool GAPNumberToNmz(mpz_class &out, Obj x)
 {
     if (IS_INTOBJ(x)) {
@@ -370,7 +362,6 @@ bool GAPNumberToNmz(mpz_class &out, Obj x)
     return false;
 }
 
-template<>
 bool GAPNumberToNmz(mpq_class &out, Obj x)
 {
     if (IS_INTOBJ(x)) {
