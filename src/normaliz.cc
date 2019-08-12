@@ -271,13 +271,6 @@ static Obj NmzHilbertQuasiPolynomialToGAP(const libnormaliz::HilbertSeries& HS)
     return ret;
 }
 
-static Obj NmzWeightedEhrhartQuasiPolynomialToGAP(const libnormaliz::IntegrationData& int_data)
-{
-    Obj ret = NmzToGAP(int_data.getWeightedEhrhartQuasiPolynomial());
-    AddList(ret, NmzToGAP(int_data.getWeightedEhrhartQuasiPolynomialDenom()));
-    return ret;
-}
-
 //
 // generic recursive conversion of C++ containers to GAP objects
 //
@@ -769,7 +762,7 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
         return NmzToGAP(C->getTriangulation());
 
     case libnormaliz::ConeProperty::WeightedEhrhartQuasiPolynomial:
-        return NmzWeightedEhrhartQuasiPolynomialToGAP(C->getIntData());
+        return NmzHilbertQuasiPolynomialToGAP(C->getWeightedEhrhartSeries().first);
 
     case libnormaliz::ConeProperty::WeightedEhrhartSeries:
         return NmzToGAP(C->getWeightedEhrhartSeries());
