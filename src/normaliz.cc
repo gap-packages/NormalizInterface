@@ -574,16 +574,44 @@ static Obj FuncNmzHasConeProperty(Obj self, Obj cone, Obj prop)
 {
     if (!IS_CONE(cone))
         ErrorQuit("<cone> must be a Normaliz cone", 0, 0);
-    if (!IS_STRING_REP(prop))
-        ErrorQuit("<prop> must be a string", 0, 0);
+    if (!IS_STRING_REP(prop) && !IS_NONNEG_INTOBJ(prop))
+        ErrorQuit("<prop> must be a string or a non-negative small integer",
+                  0, 0);
 
     FUNC_BEGIN
 
-    libnormaliz::ConeProperty::Enum p =
-        libnormaliz::toConeProperty(CSTR_STRING(prop));
+    libnormaliz::ConeProperty::Enum p;
+    if (IS_STRING_REP(prop))
+        p = libnormaliz::toConeProperty(CSTR_STRING(prop));
+    else
+        p = (libnormaliz::ConeProperty::Enum)UInt8_ObjInt(prop);
 
     Cone<mpz_class> * C = GET_CONE<mpz_class>(cone);
     return C->isComputed(p) ? True : False;
+
+    FUNC_END
+}
+
+static Obj Func_NmzConePropertiesNamesRecord(Obj self)
+{
+    FUNC_BEGIN
+
+    Obj M = NEW_PREC(libnormaliz::ConeProperty::EnumSize);
+
+    for (int i = 0; i < libnormaliz::ConeProperty::EnumSize; ++i) {
+        libnormaliz::ConeProperty::Enum p =
+            (libnormaliz::ConeProperty::Enum)i;
+
+#if NMZ_RELEASE >= 30500
+        // skip internal control properties
+        if (p == libnormaliz::ConeProperty::ExplicitHilbertSeries ||
+            p == libnormaliz::ConeProperty::NakedDual)
+            continue;
+#endif
+        AssPRec(M, RNamName(libnormaliz::toString(p).c_str()),
+                ObjInt_UInt8(p));
+    }
+    return M;
 
     FUNC_END
 }
@@ -645,8 +673,14 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
 {
     Cone<Integer> * C = GET_CONE<Integer>(cone);
 
-    libnormaliz::ConeProperty::Enum p =
-        libnormaliz::toConeProperty(CSTR_STRING(prop));
+    libnormaliz::ConeProperty::Enum p;
+    if (IS_STRING_REP(prop))
+        p = libnormaliz::toConeProperty(CSTR_STRING(prop));
+    else if (IS_INT(prop))
+        p = (libnormaliz::ConeProperty::Enum)UInt8_ObjInt(prop);
+    else
+        return Fail;
+
     ConeProperties notComputed;
     SIGNAL_HANDLER_BEGIN
     notComputed = C->compute(ConeProperties(p));
@@ -810,8 +844,9 @@ static Obj Func_NmzConeProperty(Obj self, Obj cone, Obj prop)
 {
     if (!IS_CONE(cone))
         ErrorQuit("<cone> must be a Normaliz cone", 0, 0);
-    if (!IS_STRING_REP(prop))
-        ErrorQuit("<prop> must be a string", 0, 0);
+    if (!IS_STRING_REP(prop) && !IS_NONNEG_INTOBJ(prop))
+        ErrorQuit("<prop> must be a string or a non-negative small integer",
+                  0, 0);
 
     FUNC_BEGIN
     return _NmzConePropertyImpl<mpz_class>(cone, prop);
@@ -916,6 +951,7 @@ static StructGVarFunc GVarFuncs[] = {
     GVAR_FUNC(NmzHasConeProperty, 2, "cone, prop"),
     GVAR_FUNC(_NmzConeProperty, 2, "cone, prop"),
     GVAR_FUNC(NmzKnownConeProperties, 1, "cone"),
+    GVAR_FUNC(_NmzConePropertiesNamesRecord, 0, ""),
 
     GVAR_FUNC(_NmzVersion, 0, ""),
 

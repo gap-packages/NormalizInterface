@@ -7,22 +7,24 @@ function( r )
     return "<a Normaliz cone>";
 end );
 
+BindGlobal("_NmzRecordOfConeProperties", _NmzConePropertiesNamesRecord());
+
 InstallGlobalFunction("NmzConeProperty",
 function(cone, prop)
     local result, t, poly, tmp, denom;
     result := _NmzConeProperty(cone, prop);
-    if prop = "Grading" then
-        denom := NmzConeProperty(cone, "GradingDenom");;
+    if prop = _NmzRecordOfConeProperties.Grading or prop = "Grading" then
+        denom := NmzConeProperty(cone, _NmzRecordOfConeProperties.GradingDenom);;
         return result / denom;
     fi;
-    if prop = "HilbertSeries" then
+    if prop = _NmzRecordOfConeProperties.HilbertSeries or prop = "HilbertSeries" then
         t := Indeterminate(Integers, "t");
         poly := UnivariatePolynomial(Integers, result[1], t);
         poly := poly * t^result[3];
         tmp := Collected(result[2]);
         return [poly, tmp];
     fi;
-    if prop = "HilbertQuasiPolynomial" then
+    if prop = _NmzRecordOfConeProperties.HilbertQuasiPolynomial or prop = "HilbertQuasiPolynomial" then
         t := Indeterminate(Rationals, "t");
         denom := Remove(result);
         poly := List(result, coeffs -> UnivariatePolynomial(Rationals, coeffs, t));
@@ -92,8 +94,12 @@ function(arg)
     if Length(arg) = 1 then
         if IsList(arg[1]) then
             opts_list := arg[1];
-        #elif IsRecord(arg[1]) then
-        #   TODO
+        elif IsRecord(arg[1]) then
+            opts_list := [];
+            for opts_rec in RecNames(arg[1]) do
+              Add(opts_list, opts_rec);
+              Add(opts_list, arg[1].(opts_rec));
+            od;
         else
             # TODO: better error message
             Error("Unsupported input");
