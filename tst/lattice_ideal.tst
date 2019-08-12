@@ -11,53 +11,53 @@ gap> NmzCompute(cone);
 true
 gap> Display(NmzGenerators(cone));
 [ [  0,  0,  1 ],
-  [  0,  1,  0 ],
-  [  1,  0,  3 ],
-  [  1,  2,  1 ],
-  [  1,  3,  0 ],
-  [  3,  5,  2 ] ]
+  [  0,  1,  3 ],
+  [  1,  0,  0 ],
+  [  1,  1,  2 ],
+  [  2,  3,  5 ],
+  [  3,  1,  0 ] ]
 gap> Display(NmzExtremeRays(cone));
 [ [  0,  0,  1 ],
-  [  0,  1,  0 ],
-  [  1,  0,  3 ],
-  [  1,  3,  0 ],
-  [  3,  5,  2 ] ]
+  [  0,  1,  3 ],
+  [  1,  0,  0 ],
+  [  2,  3,  5 ],
+  [  3,  1,  0 ] ]
 gap> Display(NmzSupportHyperplanes(cone));
-[ [  -15,    7,    5 ],
-  [   -3,    1,    2 ],
-  [    0,    0,    1 ],
+[ [    0,    0,    1 ],
   [    0,    1,    0 ],
-  [    1,    0,    0 ] ]
+  [    1,    0,    0 ],
+  [    2,   -3,    1 ],
+  [    5,  -15,    7 ] ]
 gap> Display(NmzHilbertBasis(cone));
 [ [  0,  0,  1 ],
-  [  0,  1,  0 ],
-  [  1,  0,  3 ],
+  [  0,  1,  3 ],
+  [  1,  0,  0 ],
   [  1,  1,  2 ],
-  [  1,  2,  1 ],
-  [  1,  3,  0 ],
-  [  2,  3,  2 ],
-  [  2,  4,  1 ],
-  [  3,  5,  2 ] ]
+  [  1,  2,  4 ],
+  [  2,  1,  1 ],
+  [  2,  2,  3 ],
+  [  2,  3,  5 ],
+  [  3,  1,  0 ] ]
 gap> Display(NmzDeg1Elements(cone));
 [ [  0,  0,  1 ],
-  [  0,  1,  0 ],
-  [  1,  0,  3 ],
+  [  0,  1,  3 ],
+  [  1,  0,  0 ],
   [  1,  1,  2 ],
-  [  1,  2,  1 ],
-  [  1,  3,  0 ],
-  [  2,  3,  2 ],
-  [  2,  4,  1 ],
-  [  3,  5,  2 ] ]
+  [  1,  2,  4 ],
+  [  2,  1,  1 ],
+  [  2,  2,  3 ],
+  [  2,  3,  5 ],
+  [  3,  1,  0 ] ]
 gap> Display(NmzSublattice(cone));
 [ [ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ], 
   [ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ], 1 ]
 gap> Display(NmzOriginalMonoidGenerators(cone));
-[ [  0,  0,  1 ],
-  [  3,  5,  2 ],
-  [  0,  1,  0 ],
-  [  1,  2,  1 ],
-  [  1,  3,  0 ],
-  [  1,  0,  3 ] ]
+[ [  1,  0,  0 ],
+  [  2,  3,  5 ],
+  [  0,  0,  1 ],
+  [  1,  1,  2 ],
+  [  0,  1,  3 ],
+  [  3,  1,  0 ] ]
 gap> _NmzPrintSomeConeProperties(cone, [
 > "Generators",
 > "ExtremeRays",
@@ -69,7 +69,7 @@ gap> _NmzPrintSomeConeProperties(cone, [
 > ]);
 ClassGroup = [ 2 ]
 EmbeddingDim = 3
-Grading = [ -2, 1, 1 ]
+Grading = [ 1, -2, 1 ]
 GradingDenom = 1
 HilbertQuasiPolynomial = [ 5*t^2+3*t+1 ]
 HilbertSeries = [ 3*t^2+6*t+1, [ [ 1, 3 ] ] ]
@@ -89,7 +89,7 @@ TriangulationSize = 5
 UnitGroupIndex = 1
 gap> Display(NmzConeDecomposition(cone));
 [ [ false, false, false ], [ false, false, true ], [ false, false, true ], 
-  [ false, false, true ], [ false, true, true ] ]
+  [ true, false, true ], [ false, false, true ] ]
 gap> ForAll(NmzConeDecomposition(cone), IsBlistRep);
 true
 

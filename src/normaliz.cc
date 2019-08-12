@@ -38,8 +38,8 @@ using std::signal;
 typedef void (*sighandler_t)(int);
 
 // old versions of libnormaliz (before 2.99.1) did not include such a define
-#if !defined(NMZ_RELEASE) || NMZ_RELEASE < 30400
-#error Your Normaliz version is to old! Update to 3.4.0 or newer.
+#if !defined(NMZ_RELEASE) || NMZ_RELEASE < 30504
+#error Your Normaliz version is to old! Update to 3.5.4 or newer.
 #endif
 
 #define FUNC_BEGIN try {

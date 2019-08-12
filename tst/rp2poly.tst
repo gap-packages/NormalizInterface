@@ -113,10 +113,10 @@ gap> Display(NmzDeg1Elements(cone));
   [  1,  1,  0,  1,  0,  0 ],
   [  1,  1,  1,  0,  0,  0 ] ]
 gap> Display(NmzSublattice(cone));
-[ [ [ 1, 0, 0, 0, 0, -1 ], [ 0, 1, 0, 0, 0, -1 ], [ 0, 0, 1, 0, 0, -1 ], 
-      [ 0, 0, 0, 1, 0, -1 ], [ 0, 0, 0, 0, 1, -1 ], [ 0, 0, 0, 0, 0, 3 ] ], 
-  [ [ 3, 0, 0, 0, 0, 1 ], [ 0, 3, 0, 0, 0, 1 ], [ 0, 0, 3, 0, 0, 1 ], 
-      [ 0, 0, 0, 3, 0, 1 ], [ 0, 0, 0, 0, 3, 1 ], [ 0, 0, 0, 0, 0, 1 ] ], 3 ]
+[ [ [ 0, 0, 0, 0, 0, 3 ], [ 1, 0, 0, 0, 0, -1 ], [ 0, 1, 0, 0, 0, -1 ], 
+      [ 0, 0, 1, 0, 0, -1 ], [ 0, 0, 0, 1, 0, -1 ], [ 0, 0, 0, 0, 1, -1 ] ], 
+  [ [ 1, 3, 0, 0, 0, 0 ], [ 1, 0, 3, 0, 0, 0 ], [ 1, 0, 0, 3, 0, 0 ], 
+      [ 1, 0, 0, 0, 3, 0 ], [ 1, 0, 0, 0, 0, 3 ], [ 1, 0, 0, 0, 0, 0 ] ], 3 ]
 gap> Display(NmzOriginalMonoidGenerators(cone));
 [ [  1,  1,  1,  0,  0,  0 ],
   [  1,  1,  0,  1,  0,  0 ],
@@ -163,17 +163,17 @@ gap> Display(NmzConeDecomposition(cone));
   [ true, false, false, false, false, true ], 
   [ true, false, false, false, false, true ], 
   [ true, false, false, false, true, true ], 
-  [ true, false, false, false, false, true ], 
+  [ true, true, false, false, false, true ], 
   [ false, false, false, false, false, true ], 
-  [ true, false, true, false, false, true ], 
+  [ true, false, false, false, false, true ], 
   [ false, false, false, false, false, true ], 
   [ false, false, false, false, true, true ], 
   [ true, false, false, false, false, true ], 
   [ true, false, false, false, false, true ], 
   [ true, false, false, false, false, true ], 
   [ true, false, false, false, true, true ], 
+  [ false, true, false, false, false, true ], 
   [ false, false, false, false, false, true ], 
-  [ false, false, true, false, false, true ], 
   [ false, false, false, false, false, true ], 
   [ false, false, true, false, false, true ] ]
 gap> ForAll(NmzConeDecomposition(cone), IsBlistRep);
