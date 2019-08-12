@@ -1,4 +1,4 @@
-gap> START_TEST("NormalizInterface: lattice_ideal.tst");
+gap> START_TEST("lattice_ideal.tst");
 
 #
 gap> M := [

@@ -1,4 +1,4 @@
-gap> START_TEST("NormalizInterface: conversion.tst");
+gap> START_TEST("conversion.tst");
 
 ## Check the multiplicity for some powers of 2:
 gap> for n in [28,31,32,33,60,63,64,65] do

@@ -1,4 +1,4 @@
-gap> START_TEST("NormalizInterface: rational.tst");
+gap> START_TEST("rational.tst");
 
 #
 gap> M := [

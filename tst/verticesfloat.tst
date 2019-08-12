@@ -1,4 +1,4 @@
-gap> START_TEST("NormalizInterface: verticesfloat.tst");
+gap> START_TEST("verticesfloat.tst");
 gap> M := [
 > [  1,  1,  2 ],
 > [ -1, -1,  3 ],

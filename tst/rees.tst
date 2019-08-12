@@ -1,4 +1,4 @@
-gap> START_TEST("NormalizInterface: rees.tst");
+gap> START_TEST("rees.tst");
 
 #
 gap> M := [

@@ -1,4 +1,4 @@
-gap> START_TEST("NormalizInterface: gorenstein.tst");
+gap> START_TEST("gorenstein.tst");
 gap> 5x5eq := [
 > [1, 1, 1, 1, 1, -1, -1, -1, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 > [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, -1, -1, -1, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],

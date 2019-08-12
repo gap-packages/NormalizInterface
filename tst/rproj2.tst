@@ -1,4 +1,4 @@
-gap> START_TEST("NormalizInterface: rproj2.tst");
+gap> START_TEST("rproj2.tst");
 
 #
 gap> M := [

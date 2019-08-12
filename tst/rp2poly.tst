@@ -1,4 +1,4 @@
-gap> START_TEST("NormalizInterface: rp2poly.tst");
+gap> START_TEST("rp2poly.tst");
 
 #
 gap> M := [

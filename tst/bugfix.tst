@@ -1,4 +1,4 @@
-gap> START_TEST("NormalizInterface: bugfix.tst");
+gap> START_TEST("bugfix.tst");
 
 #
 # We used to incorrectly convert integer value "0" (zero) from type mpz_t

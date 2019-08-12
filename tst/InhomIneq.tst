@@ -1,4 +1,4 @@
-gap> START_TEST("NormalizInterface: InhomIneq.tst");
+gap> START_TEST("InhomIneq.tst");
 
 #
 # Test a Hilbert series with negative shift

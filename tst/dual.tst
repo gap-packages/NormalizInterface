@@ -1,4 +1,4 @@
-gap> START_TEST("NormalizInterface: dual.tst");
+gap> START_TEST("dual.tst");
 
 #
 gap> # Based on dual.in
