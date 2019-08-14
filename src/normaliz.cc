@@ -263,6 +263,15 @@ static Obj NmzToGAP(double x)
     return NEW_MACFLOAT(x);
 }
 
+template <typename T>
+static Obj NmzToGAP(const libnormaliz::STANLEYDATA<T> & sd)
+{
+    Obj ret = NEW_PLIST(T_PLIST, 2);
+    ASS_LIST(ret, 1, NmzToGAP(sd.key));
+    ASS_LIST(ret, 2, NmzToGAP(sd.offsets));
+    return ret;
+}
+
 /* TODO: HSOP
  *       There are two representations for Hilbert series in Normaliz,
  * standard and HSOP. Currently, only the standard representation is returned.
@@ -288,6 +297,17 @@ NmzHilbertQuasiPolynomialToGAP(const libnormaliz::HilbertSeries & HS)
 //
 // generic recursive conversion of C++ containers to GAP objects
 //
+
+template <typename T>
+static Obj NmzToGAP(const std::list<T> & in)
+{
+    const size_t n = in.size();
+    Obj          list = NEW_PLIST(T_PLIST, n);
+    for (const auto & it : in) {
+        AddList(list, NmzToGAP(it));
+    }
+    return list;
+}
 
 template <typename T>
 static Obj NmzToGAP(const vector<T> & in)
@@ -320,6 +340,13 @@ static Obj NmzToGAP(const std::pair<T, U> & in)
     ASS_LIST(pair, 1, NmzToGAP(in.first));
     ASS_LIST(pair, 2, NmzToGAP(in.second));
     return pair;
+}
+
+// TODO: generate a "proper" MatrixObj, once available
+template <typename T>
+static Obj NmzToGAP(const libnormaliz::Matrix<T> & in)
+{
+    return NmzToGAP(in.get_elements());
 }
 
 bool GAPNumberToNmz(long & out, Obj x)
@@ -703,7 +730,7 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
 
 #if NMZ_RELEASE >= 30700
         // case libnormaliz::ConeProperty::FaceLattice:
-        //  return TODO(C->getFaceLattice(p));
+        //  return NmzToGAP(C->getFaceLattice(p));
 
     case libnormaliz::ConeProperty::FVector:
         return NmzToGAP(C->getFVector());
@@ -727,11 +754,8 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
     case libnormaliz::ConeProperty::Sublattice:
         return _NmzBasisChangeIntern(C);
 
-    // StanleyDec is special and we do not support the required conversion at
-    // this time. If you really need this, contact the developers.
     case libnormaliz::ConeProperty::StanleyDec:
-        // C->getStanleyDec();
-        break;
+        return NmzToGAP(C->getStanleyDec());
 
     case libnormaliz::ConeProperty::Triangulation:
         return NmzToGAP(C->getTriangulation());
