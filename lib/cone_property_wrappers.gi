@@ -107,3 +107,7 @@ InstallGlobalFunction( NmzProjectCone, cone -> NmzConeProperty(cone, "ProjectCon
 InstallGlobalFunction( NmzSuppHypsFloat, cone -> NmzConeProperty(cone, "SuppHypsFloat" ) );
 
 InstallGlobalFunction( NmzVolume, cone -> NmzConeProperty(cone, "Volume" ) );
+
+InstallGlobalFunction( NmzFVector, cone -> NmzConeProperty(cone, "FVector" ) );
+
+InstallGlobalFunction( NmzFaceLattice, cone -> NmzConeProperty(cone, "FaceLattice" ) );

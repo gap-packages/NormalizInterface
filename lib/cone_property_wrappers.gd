@@ -387,3 +387,17 @@ DeclareGlobalFunction( "NmzSuppHypsFloat" );
 #!  Supported in Normaliz >= 3.5.0.
 #! @Arguments cone
 DeclareGlobalFunction( "NmzVolume" );
+
+#! @Description
+#!  This is an alias for <C>NmzConeProperty( cone, "FVector" );</C> see <Ref Func="NmzConeProperty"/>.
+#!
+#!  Supported in Normaliz >= 3.7.0.
+#! @Arguments cone
+DeclareGlobalFunction( "NmzFVector" );
+
+#! @Description
+#!  This is an alias for <C>NmzConeProperty( cone, "FaceLattice" );</C> see <Ref Func="NmzConeProperty"/>.
+#!
+#!  Supported in Normaliz >= 3.7.0.
+#! @Arguments cone
+DeclareGlobalFunction( "NmzFaceLattice" );
