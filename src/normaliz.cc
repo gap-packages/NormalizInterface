@@ -773,7 +773,9 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
     case libnormaliz::ConeProperty::IntegerHull:
         return NewProxyCone(&(C->getIntegerHullCone()), cone);
 
-        // case libnormaliz::ConeProperty::ProjectCone: TODO;
+    case libnormaliz::ConeProperty::ProjectCone:
+        return NewProxyCone(&(C->getProjectCone()), cone);
+
         // case libnormaliz::ConeProperty::RationalAutomorphisms: TODO;
 
     case libnormaliz::ConeProperty::Sublattice:
