@@ -726,11 +726,14 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
     }
 
     switch (p) {
-        // case libnormaliz::ConeProperty::AmbientAutomorphisms:  TODO;
-
-        // case libnormaliz::ConeProperty::Automorphisms: TODO;
-
-        // case libnormaliz::ConeProperty::CombinatorialAutomorphisms: TODO;
+#if NMZ_RELEASE >= 30703
+    case libnormaliz::ConeProperty::AmbientAutomorphisms:
+    case libnormaliz::ConeProperty::Automorphisms:
+    case libnormaliz::ConeProperty::CombinatorialAutomorphisms:
+    case libnormaliz::ConeProperty::EuclideanAutomorphisms:
+    case libnormaliz::ConeProperty::RationalAutomorphisms:
+        throw "querying automorphisms not yet supported";
+#endif
 
     case libnormaliz::ConeProperty::ConeDecomposition:
         return NmzToGAP(C->getOpenFacets());
@@ -750,8 +753,6 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
 #else
         throw "Extracting EhrhartSeries requires Normaliz >= 3.7.0";
 #endif
-
-        // case libnormaliz::ConeProperty::EuclideanAutomorphisms: TODO;
 
 #if NMZ_RELEASE >= 30700
     case libnormaliz::ConeProperty::FaceLattice:
@@ -775,8 +776,6 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
 
     case libnormaliz::ConeProperty::ProjectCone:
         return NewProxyCone(&(C->getProjectCone()), cone);
-
-        // case libnormaliz::ConeProperty::RationalAutomorphisms: TODO;
 
     case libnormaliz::ConeProperty::Sublattice:
         return _NmzBasisChangeIntern(C);
