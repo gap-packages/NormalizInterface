@@ -193,10 +193,10 @@ static Int NormalizIsMutableObjFuncs(Obj o)
 //
 
 template <typename T, typename U>
-Obj NmzToGAP(const std::pair<T, U> & in);
+static Obj NmzToGAP(const std::pair<T, U> & in);
 
 template <typename T>
-Obj NmzToGAP(const vector<T> & in);
+static Obj NmzToGAP(const vector<T> & in);
 
 static Obj NmzToGAP(const mpz_t x)
 {
@@ -295,7 +295,7 @@ NmzHilbertQuasiPolynomialToGAP(const libnormaliz::HilbertSeries & HS)
 //
 
 template <typename T>
-Obj NmzToGAP(const vector<T> & in)
+static Obj NmzToGAP(const vector<T> & in)
 {
     const size_t n = in.size();
     Obj          list = NEW_PLIST(T_PLIST, n);
@@ -319,7 +319,7 @@ Obj NmzToGAP(const vector<bool> & in)
 }
 
 template <typename T, typename U>
-Obj NmzToGAP(const std::pair<T, U> & in)
+static Obj NmzToGAP(const std::pair<T, U> & in)
 {
     Obj pair = NEW_PLIST(T_PLIST, 2);
     ASS_LIST(pair, 1, NmzToGAP(in.first));
