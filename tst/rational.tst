@@ -106,12 +106,24 @@ gap> Display(NmzConeDecomposition(cone));
 [ [ false, false, false ] ]
 gap> ForAll(NmzConeDecomposition(cone), IsBlistRep);
 true
+
+#
 gap> NmzStanleyDec(cone);
 [ [ [ 0, 1, 2 ], 
       [ [ 0, 0, 0 ], [ 3, 3, 0 ], [ 6, 6, 0 ], [ 9, 9, 0 ], [ 12, 12, 0 ], 
           [ 7, 2, 10 ], [ 10, 5, 10 ], [ 13, 8, 10 ], [ 1, 11, 10 ], 
           [ 4, 14, 10 ], [ 14, 4, 5 ], [ 2, 7, 5 ], [ 5, 10, 5 ], 
           [ 8, 13, 5 ], [ 11, 1, 5 ] ] ] ]
+
+#
+gap> (_NmzVersion() < [3, 7, 0]) or (NmzFVector(cone) = [ 1, 3, 3, 1 ]);
+true
+gap> (_NmzVersion() < [3, 7, 0]) or (NmzFaceLattice(cone) =
+> [ [ [ false, false, false ], 0 ], [ [ true, false, false ], 1 ], 
+>   [ [ false, true, false ], 1 ], [ [ true, true, false ], 2 ], 
+>   [ [ false, false, true ], 1 ], [ [ true, false, true ], 2 ], 
+>   [ [ false, true, true ], 2 ], [ [ true, true, true ], 3 ] ]);
+true
 
 #
 gap> STOP_TEST("rational.tst", 0);

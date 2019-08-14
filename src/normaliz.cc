@@ -229,17 +229,20 @@ static Obj NmzToGAP(const mpz_t x)
 #endif
 }
 
-static Obj NmzToGAP(libnormaliz::key_t x)    // key_t = unsigned int
+static Obj NmzToGAP(unsigned int x)    // key_t = unsigned int
 {
     return ObjInt_UInt(x);
 }
 
-#ifdef SYS_IS_64_BIT
-static Obj NmzToGAP(size_t x)    // size_t = unsigned long
+static Obj NmzToGAP(unsigned long x)    // size_t = unsigned long
 {
     return ObjInt_UInt(x);
 }
-#endif
+
+static Obj NmzToGAP(int x)
+{
+    return ObjInt_Int(x);
+}
 
 static Obj NmzToGAP(long x)
 {
@@ -298,11 +301,21 @@ NmzHilbertQuasiPolynomialToGAP(const libnormaliz::HilbertSeries & HS)
 // generic recursive conversion of C++ containers to GAP objects
 //
 
+// convert maps to list of [key,value] pairs
+template <typename K, typename V>
+static Obj NmzToGAP(const map<K, V> & in)
+{
+    Obj list = NEW_PLIST(T_PLIST, in.size());
+    for (const auto & it : in) {
+        AddList(list, NmzToGAP(it));
+    }
+    return list;
+}
+
 template <typename T>
 static Obj NmzToGAP(const std::list<T> & in)
 {
-    const size_t n = in.size();
-    Obj          list = NEW_PLIST(T_PLIST, n);
+    Obj list = NEW_PLIST(T_PLIST, in.size());
     for (const auto & it : in) {
         AddList(list, NmzToGAP(it));
     }
@@ -328,6 +341,18 @@ Obj NmzToGAP(const vector<bool> & in)
     SET_LEN_BLIST(list, n);
     for (size_t i = 0; i < n; ++i) {
         if (in[i])
+            SET_BIT_BLIST(list, i + 1);
+    }
+    return list;
+}
+
+static Obj NmzToGAP(const boost::dynamic_bitset<> & in)
+{
+    const size_t n = in.size();
+    Obj          list = NewBag(T_BLIST, SIZE_PLEN_BLIST(n));
+    SET_LEN_BLIST(list, n);
+    for (size_t i = 0; i < n; ++i) {
+        if (in.test(i))
             SET_BIT_BLIST(list, i + 1);
     }
     return list;
@@ -729,8 +754,8 @@ static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
         // case libnormaliz::ConeProperty::EuclideanAutomorphisms: TODO;
 
 #if NMZ_RELEASE >= 30700
-        // case libnormaliz::ConeProperty::FaceLattice:
-        //  return NmzToGAP(C->getFaceLattice(p));
+    case libnormaliz::ConeProperty::FaceLattice:
+        return NmzToGAP(C->getFaceLattice());
 
     case libnormaliz::ConeProperty::FVector:
         return NmzToGAP(C->getFVector());
