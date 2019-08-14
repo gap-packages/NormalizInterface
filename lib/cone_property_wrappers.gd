@@ -294,61 +294,61 @@ DeclareGlobalFunction( "NmzVerticesOfPolyhedron" );
 
 
 #! @Description
-#!  This is an alias for NmzConeProperty( cone, "ConeDecomposition" );
+#!  This is an alias for <C>NmzConeProperty( cone, "ConeDecomposition" );</C> see <Ref Func="NmzConeProperty"/>.
 #! @Arguments cone
 DeclareGlobalFunction( "NmzConeDecomposition" );
 
 #! @Description
-#!  This is an alias for NmzConeProperty( cone, "EmbeddingDim" );
+#!  This is an alias for <C>NmzConeProperty( cone, "EmbeddingDim" );</C> see <Ref Func="NmzConeProperty"/>.
 #! @Arguments cone
 DeclareGlobalFunction( "NmzEmbeddingDim" );
 
 #! @Description
-#!  This is an alias for NmzConeProperty( cone, "ExternalIndex" );
+#!  This is an alias for <C>NmzConeProperty( cone, "ExternalIndex" );</C> see <Ref Func="NmzConeProperty"/>.
 #! @Arguments cone
 DeclareGlobalFunction( "NmzExternalIndex" );
 
 #! @Description
-#!  This is an alias for NmzConeProperty( cone, "GradingDenom" );
+#!  This is an alias for <C>NmzConeProperty( cone, "GradingDenom" );</C> see <Ref Func="NmzConeProperty"/>.
 #! @Arguments cone
 DeclareGlobalFunction( "NmzGradingDenom" );
 
 #! @Description
-#!  This is an alias for NmzConeProperty( cone, "IntegerHull" );
+#!  This is an alias for <C>NmzConeProperty( cone, "IntegerHull" );</C> see <Ref Func="NmzConeProperty"/>.
 #! @Arguments cone
 DeclareGlobalFunction( "NmzIntegerHull" );
 
 #! @Description
-#!  This is an alias for NmzConeProperty( cone, "InternalIndex" );
+#!  This is an alias for <C>NmzConeProperty( cone, "InternalIndex" );</C> see <Ref Func="NmzConeProperty"/>.
 #! @Arguments cone
 DeclareGlobalFunction( "NmzInternalIndex" );
 
 #! @Description
-#!  This is an alias for NmzConeProperty( cone, "StanleyDec" );
+#!  This is an alias for <C>NmzConeProperty( cone, "StanleyDec" );</C> see <Ref Func="NmzConeProperty"/>.
 #! @Arguments cone
 DeclareGlobalFunction( "NmzStanleyDec" );
 
 #! @Description
-#!  This is an alias for NmzConeProperty( cone, "Sublattice" );
+#!  This is an alias for <C>NmzConeProperty( cone, "Sublattice" );</C> see <Ref Func="NmzConeProperty"/>.
 #! @Arguments cone
 DeclareGlobalFunction( "NmzSublattice" );
 
 #! @Description
-#!  This is an alias for NmzConeProperty( cone, "UnitGroupIndex" );
+#!  This is an alias for <C>NmzConeProperty( cone, "UnitGroupIndex" );</C> see <Ref Func="NmzConeProperty"/>.
 #! @Arguments cone
 DeclareGlobalFunction( "NmzUnitGroupIndex" );
 
 #! @Description
-#!  This is an alias for NmzConeProperty( cone, "NmzWeightedEhrhartQuasiPolynomial" );
+#!  This is an alias for <C>NmzConeProperty( cone, "NmzWeightedEhrhartQuasiPolynomial" );</C> see <Ref Func="NmzConeProperty"/>.
 #! @Arguments cone
 DeclareGlobalFunction( "NmzWeightedEhrhartQuasiPolynomial" );
 
 #! @Description
-#!  This is an alias for NmzConeProperty( cone, "NmzWeightedEhrhartSeries" );
+#!  This is an alias for <C>NmzConeProperty( cone, "NmzWeightedEhrhartSeries" );</C> see <Ref Func="NmzConeProperty"/>.
 #! @Arguments cone
 DeclareGlobalFunction( "NmzWeightedEhrhartSeries" );
 
 #! @Description
-#!  This is an alias for NmzConeProperty( cone, "WitnessNotIntegrallyClosed" );
+#!  This is an alias for <C>NmzConeProperty( cone, "WitnessNotIntegrallyClosed" );</C> see <Ref Func="NmzConeProperty"/>.
 #! @Arguments cone
 DeclareGlobalFunction( "NmzWitnessNotIntegrallyClosed" );
