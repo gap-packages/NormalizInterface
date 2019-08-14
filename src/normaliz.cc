@@ -28,10 +28,8 @@
 #include "libnormaliz/cone.h"
 #include "libnormaliz/map_operations.h"
 
-#include <iostream>
 #include <vector>
 
-#include <cassert>
 #include <csignal>
 using std::signal;
 
@@ -110,9 +108,6 @@ using libnormaliz::Type::InputType;
 using std::map;
 using std::string;
 using std::vector;
-
-using std::cerr;
-using std::endl;
 
 static void signal_handler(int signal)
 {
