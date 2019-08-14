@@ -97,3 +97,13 @@ InstallGlobalFunction( NmzWeightedEhrhartQuasiPolynomial, cone -> NmzConePropert
 InstallGlobalFunction( NmzWeightedEhrhartSeries, cone -> NmzConeProperty( cone, "WeightedEhrhartSeries" ) );
 
 InstallGlobalFunction( NmzWitnessNotIntegrallyClosed, cone -> NmzConeProperty(cone, "WitnessNotIntegrallyClosed" ) );
+
+InstallGlobalFunction( NmzEhrhartSeries, cone -> NmzConeProperty(cone, "EhrhartSeries" ) );
+
+InstallGlobalFunction( NmzEuclideanVolume, cone -> NmzConeProperty(cone, "EuclideanVolume" ) );
+
+InstallGlobalFunction( NmzProjectCone, cone -> NmzConeProperty(cone, "ProjectCone" ) );
+
+InstallGlobalFunction( NmzSuppHypsFloat, cone -> NmzConeProperty(cone, "SuppHypsFloat" ) );
+
+InstallGlobalFunction( NmzVolume, cone -> NmzConeProperty(cone, "Volume" ) );

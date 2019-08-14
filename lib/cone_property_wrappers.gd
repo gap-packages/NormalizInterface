@@ -352,3 +352,38 @@ DeclareGlobalFunction( "NmzWeightedEhrhartSeries" );
 #!  This is an alias for <C>NmzConeProperty( cone, "WitnessNotIntegrallyClosed" );</C> see <Ref Func="NmzConeProperty"/>.
 #! @Arguments cone
 DeclareGlobalFunction( "NmzWitnessNotIntegrallyClosed" );
+
+#! @Description
+#!  This is an alias for <C>NmzConeProperty( cone, "EhrhartSeries" );</C> see <Ref Func="NmzConeProperty"/>.
+#!
+#!  Supported in Normaliz >= 3.5.0.
+#! @Arguments cone
+DeclareGlobalFunction( "NmzEhrhartSeries" );
+
+#! @Description
+#!  This is an alias for <C>NmzConeProperty( cone, "EuclideanVolume" );</C> see <Ref Func="NmzConeProperty"/>.
+#!
+#!  Supported in Normaliz >= 3.5.0.
+#! @Arguments cone
+DeclareGlobalFunction( "NmzEuclideanVolume" );
+
+#! @Description
+#!  This is an alias for <C>NmzConeProperty( cone, "ProjectCone" );</C> see <Ref Func="NmzConeProperty"/>.
+#!
+#!  Supported in Normaliz >= 3.5.0.
+#! @Arguments cone
+DeclareGlobalFunction( "NmzProjectCone" );
+
+#! @Description
+#!  This is an alias for <C>NmzConeProperty( cone, "SuppHypsFloat" );</C> see <Ref Func="NmzConeProperty"/>.
+#!
+#!  Supported in Normaliz >= 3.5.2.
+#! @Arguments cone
+DeclareGlobalFunction( "NmzSuppHypsFloat" );
+
+#! @Description
+#!  This is an alias for <C>NmzConeProperty( cone, "Volume" );</C> see <Ref Func="NmzConeProperty"/>.
+#!
+#!  Supported in Normaliz >= 3.5.0.
+#! @Arguments cone
+DeclareGlobalFunction( "NmzVolume" );
