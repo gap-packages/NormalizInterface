@@ -16,7 +16,9 @@ gap> M := [
 gap> cone := NmzCone(["rees_algebra", M]);;
 gap> NmzCompute(cone);
 true
-gap> Perform(Set(NmzKnownConeProperties(cone)),Display);
+gap> tmp := Set(NmzKnownConeProperties(cone));;
+gap> RemoveSet(tmp, "NumberLatticePoints");
+gap> Perform(tmp, Display);
 ClassGroup
 Deg1Elements
 EmbeddingDim
@@ -170,6 +172,7 @@ gap> _NmzPrintSomeConeProperties(cone, [
 > "HilbertBasis",
 > "Deg1Elements",
 > "Sublattice",
+> "NumberLatticePoints",
 > "OriginalMonoidGenerators",
 > ]);
 ClassGroup = [ 17 ]

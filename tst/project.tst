@@ -10,7 +10,9 @@ gap> proj:=NmzProjectCone(cone);
 <a Normaliz cone>
 
 # check what was computed for the input cone
-gap> Perform(Set(NmzKnownConeProperties(cone)),Display);
+gap> tmp := Set(NmzKnownConeProperties(cone));;
+gap> RemoveSet(tmp, "NumberLatticePoints");
+gap> Perform(tmp, Display);
 EmbeddingDim
 ExtremeRays
 Generators
@@ -18,7 +20,6 @@ IsInhomogeneous
 IsPointed
 MaximalSubspace
 ProjectCone
-Rank
 Sublattice
 SupportHyperplanes
 gap> Display(NmzGenerators(cone));
@@ -41,6 +42,7 @@ gap> _NmzPrintSomeConeProperties(cone, [
 > "HilbertBasis",
 > "Deg1Elements",
 > "Sublattice",
+> "NumberLatticePoints",
 > "OriginalMonoidGenerators",
 > ]);
 EmbeddingDim = 4
@@ -54,7 +56,6 @@ IsTriangulationNested = false
 IsTriangulationPartial = true
 MaximalSubspace = 
 [ [  1,  0,  0,  0 ] ]
-NumberLatticePoints = 1
 ProjectCone = <object>
 Rank = 2
 TriangulationDetSum = 0
@@ -95,6 +96,7 @@ gap> _NmzPrintSomeConeProperties(proj, [
 > "HilbertBasis",
 > "Deg1Elements",
 > "Sublattice",
+> "NumberLatticePoints",
 > "OriginalMonoidGenerators",
 > ]);
 EmbeddingDim = 3
@@ -110,7 +112,6 @@ IsTriangulationNested = false
 IsTriangulationPartial = true
 MaximalSubspace = 
 [ [  1,  0,  0 ] ]
-NumberLatticePoints = 1
 Rank = 2
 TriangulationDetSum = 0
 TriangulationSize = 0
