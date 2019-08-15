@@ -65,6 +65,7 @@ gap> _NmzPrintSomeConeProperties(cone, [
 > "HilbertBasis",
 > "Deg1Elements",
 > "Sublattice",
+> "NumberLatticePoints",
 > "OriginalMonoidGenerators",
 > ]);
 ClassGroup = [ 2 ]
