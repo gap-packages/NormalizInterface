@@ -33,7 +33,7 @@
 
 <h4>4.1 <span class="Heading">Compiling</span></h4>
 
-<p>NormalizInterface supports GAP 4.8.0 or later, and Normaliz 3.0.0 or later.</p>
+<p>NormalizInterface supports GAP 4.9 or later, and Normaliz 3.5.4 or later.</p>
 
 <p>For technical reasons, installing and using NormalizInterface requires that your version of GAP is compiled in a special way. Specifically, GAP must be compiled against the exact same version of the GMP library as Normaliz. By default, GAP compiles its own version of GMP; however, we cannot use that, as it lacks C++ support, which is required by Normaliz.</p>
 
@@ -44,7 +44,7 @@
 
 <div class="example"><pre>
 make clean
-./configure --with-gmp=system
+./configure --with-gmp=PATH/TO/YOUR/GMP
 make
 </pre></div>
 
@@ -52,10 +52,7 @@ make
 
 
 <ul>
-<li><p>git</p>
-
-</li>
-<li><p>cmake</p>
+<li><p>curl OR wget for downloading the source code</p>
 
 </li>
 <li><p>boost</p>
@@ -76,8 +73,6 @@ make
 ./configure --with-gaproot=GAPDIR
 make
 </pre></div>
-
-<p>If you need to customize the normaliz compilation, please have a look at Normaliz.git/source/INSTALL. Remember to use the same compiler and GMP version as for GAP.</p>
 
 
 <div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap3.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chapBib.html">[Next Chapter]</a>&nbsp;  </div>

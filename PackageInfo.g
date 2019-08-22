@@ -2,24 +2,26 @@ SetPackageInfo( rec(
 
 PackageName := "NormalizInterface",
 Subtitle := "GAP wrapper for Normaliz",
-Version := "1.0.2",
-Date    := "03/12/2017", # dd/mm/yyyy format
+Version := "1.1.0",
+Date    := "23/08/2019", # dd/mm/yyyy format
+License := "GPL-2.0-or-later",
 
 Persons := [
   rec(
     LastName      := "Gutsche",
     FirstNames    := "Sebastian",
     IsAuthor      := true,
-    IsMaintainer  := true,
+    IsMaintainer  := false,
     Email         := "gutsche@mathematik.uni-siegen.de",
-    WWWHome       := "http://wwwb.math.rwth-aachen.de/~gutsche/",
+    WWWHome       := "https://algebra.mathematik.uni-siegen.de/gutsche/",
     PostalAddress := Concatenation(
-                       "Department of Mathematics\n",
-                       "University of Siegen\n",
-                       "57072 Kaiserslautern\n",
+                       "Department Mathematik\n",
+                       "Universität Siegen\n",
+                       "Walter-Flex-Straße 3\n",
+                       "57072 Siegen\n",
                        "Germany" ),
     Place         := "Siegen",
-    Institution   := "University of Siegen"
+    Institution   := "Universität Siegen"
   ),
 
   rec(
@@ -27,24 +29,23 @@ Persons := [
     FirstNames    := "Max",
     IsAuthor      := true,
     IsMaintainer  := true,
-    Email         := "max.horn@math.uni-giessen.de",
-    WWWHome       := "http://www.quendi.de/math",
+    Email         := "max.horn@uni-siegen.de",
+    WWWHome       := "https://www.quendi.de/math",
     PostalAddress := Concatenation(
-                       "AG Algebra\n",
-                       "Mathematisches Institut\n",
-                       "Justus-Liebig-Universität Gießen\n",
-                       "Arndtstraße 2\n",
-                       "35392 Gießen\n",
+                       "Department Mathematik\n",
+                       "Universität Siegen\n",
+                       "Walter-Flex-Straße 3\n",
+                       "57072 Siegen\n",
                        "Germany" ),
-    Place         := "Gießen",
-    Institution   := "Justus-Liebig-Universität Gießen"
+    Place         := "Siegen",
+    Institution   := "Universität Siegen"
   ),
 
   rec(
     LastName      := "Söger",
     FirstNames    := "Christof",
     IsAuthor      := true,
-    IsMaintainer  := true,
+    IsMaintainer  := false,
     Email         := "csoeger@uos.de",
     WWWHome       := "https://www.normaliz.uni-osnabrueck.de",
     PostalAddress := Concatenation(
@@ -76,7 +77,7 @@ ArchiveFormats  := ".tar.gz .tar.bz2",
 
 AbstractHTML :=
   "The <span class='pkgname'>NormalizInterface</span> package provides\
-  a GAP interface to <a href='http://www.home.uni-osnabrueck.de/wbruns/normaliz/'>Normaliz</a>,\
+  a GAP interface to <a href='https://www.normaliz.uni-osnabrueck.de'>Normaliz</a>,\
   enabling direct access to the complete functionality of Normaliz, such as\
   computations in affine monoids, vector configurations, lattice polytopes, and rational cones.\
   ",
@@ -93,7 +94,7 @@ PackageDoc := rec(
 ),
 
 Dependencies := rec(
-  GAP                    := ">= 4.8.1",
+  GAP                    := ">= 4.9",
   NeededOtherPackages    := [ ],
   SuggestedOtherPackages := [ ],
   ExternalConditions     := [ ]
@@ -112,7 +113,23 @@ AvailabilityTest := function()
     return true;
   end,
 
-Autoload := false,
+
+# Show the Normaliz version number in the banner string.
+# (We assume that this function gets called *after* the package has been
+# loaded, in particular after libnormaliz has been loaded.)
+BannerFunction := function( info )
+  local str, version;
+
+  str := DefaultPackageBannerString( info );
+  if not IsBoundGlobal( "_NmzVersion" ) then
+    return str;
+  fi;
+  version := ValueGlobal( "_NmzVersion" )();
+  version := JoinStringsWithSeparator(version, ".");
+
+  return ReplacedString( str, "by Sebastian",
+             Concatenation( "(Normaliz version is ", version, ")\n", "by Sebastian" ) );
+end,
 
 Keywords := [
   "normaliz",

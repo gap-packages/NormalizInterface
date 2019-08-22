@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/gap-packages/NormalizInterface.svg?branch=master)](https://travis-ci.org/gap-packages/NormalizInterface)
+[![Code Coverage](https://codecov.io/github/gap-packages/NormalizInterface/coverage.svg?branch=master&token=)](https://codecov.io/gh/gap-packages/NormalizInterface)
+
 # The GAP 4 package 'NormalizInterface'
 
 ## Package description
@@ -23,7 +26,7 @@ and especially have a look at the manual.
 
 ## Installation
 
-NormalizInterface supports GAP 4.8.2 or later, and Normaliz 3.0.0 or later.
+NormalizInterface supports GAP 4.9 or later, and Normaliz 3.5.4 or later.
 
 Assuming you have a suitable version installed, you still need to
 compile Normaliz. There is a complicating factor, however: Normaliz
@@ -31,10 +34,10 @@ must be compiled against the exact same version of the GMP library
 as GAP. The easiest way to do that is to run the script we provide
 to you for just that.  This requires the presence of several further
 system software packages, which you could for example install via
-your system's package manager. At least the following are required:
+your system's package manager. At least the following are required,
+in addition to a C++11 compiler:
 
- * git
- * cmake
+ * curl OR wget for downloading the source code
  * boost
 
 Once you have installed these, you can build Normaliz by using the
@@ -63,16 +66,12 @@ like this:
 The ` --with-gaproot=GAPDIR` parameter is actually optional, and if omitted,
 the package will search for GAP in `../..`.
 
-If you need to customize the Normaliz compilation, please have a look at
-`Normaliz.git/source/INSTALL`. Remember to use the same compiler and GMP
-version as for GAP.
-
 
 ## Documentation and tests
 
 Generate the documentation:
 
-    make doc
+    gap makedoc.g
 
 run automatic tests:
 
