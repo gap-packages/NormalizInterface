@@ -11,6 +11,7 @@ This file describes changes in the NormalizInterface package.
   - Display the Normaliz version as part of banner string
   - Loads of internal and janitorial changes
   - Require Normaliz 3.5.4 or newer (and add support for its new features)
+  - Sebastian Gutsche is no longer package maintainer
 
 1.0.2 (2017-12-04)
   - Use variable rays instead of Rays in test file
