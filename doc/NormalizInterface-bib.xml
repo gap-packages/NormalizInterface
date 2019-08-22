@@ -20,9 +20,9 @@
     <name><first>Christof</first><last>Söger</last></name>
   </author>
   <title><C>Normaliz</C>, a tool for computations in affine monoids, vector configurations, lattice polytopes, and rational cones,
-         <C>V</C>ersion 3.1.0</title>
+         <C>V</C>ersion 3.5.4</title>
   <howpublished><URL>https://www.normaliz.uni-osnabrueck.de</URL></howpublished>
-  <year>2014</year>
+  <year>2018</year>
 </misc></entry>
 
 </file>
