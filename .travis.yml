@@ -2,6 +2,10 @@ dist: xenial
 language: c
 cache: ccache
 
+env:
+  global:
+    - GAP_PKGS_TO_CLONE="AutoDoc"
+
 addons:
   apt:
     packages:

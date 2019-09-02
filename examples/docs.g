@@ -15,26 +15,30 @@ NmzHasConeProperty(cone, "ExtremeRays");
 #! @BeginChunk NmzKnownConeProperties_example
 #! @BeginExample
 NmzKnownConeProperties(cone);
-#! [ "Generators", "OriginalMonoidGenerators", "Sublattice" ]
+#! [ "Generators", "OriginalMonoidGenerators", "InternalIndex", "EmbeddingDim", 
+#!   "IsInhomogeneous", "Sublattice" ]
 #! @EndExample
 #! @EndChunk
 
 #! @BeginChunk NmzCompute_example
 #! @BeginExample
 NmzKnownConeProperties(cone);
-#! [ "Generators", "OriginalMonoidGenerators", "Sublattice" ]
+#! [ "Generators", "OriginalMonoidGenerators", "InternalIndex", "EmbeddingDim", 
+#!   "IsInhomogeneous", "Sublattice" ]
 NmzCompute(cone, ["SupportHyperplanes", "IsPointed"]);
 #! true
 NmzKnownConeProperties(cone);
-#! [ "Generators", "ExtremeRays", "SupportHyperplanes", "IsPointed",
-#!   "IsDeg1ExtremeRays", "OriginalMonoidGenerators", "Sublattice",
-#!   "MaximalSubspace" ]
-NmzCompute(cone);
-#! true
+#! [ "Generators", "ExtremeRays", "SupportHyperplanes", 
+#!   "OriginalMonoidGenerators", "MaximalSubspace", "InternalIndex", "Rank", 
+#!   "EmbeddingDim", "IsPointed", "IsDeg1ExtremeRays", "IsInhomogeneous", 
+#!   "Sublattice" ]
+NmzCompute(cone);;
 NmzKnownConeProperties(cone);
-#! [ "Generators", "ExtremeRays", "SupportHyperplanes", "TriangulationSize",
-#!   "TriangulationDetSum", "HilbertBasis", "IsPointed", "IsDeg1ExtremeRays",
-#!   "IsIntegrallyClosed", "OriginalMonoidGenerators", "Sublattice",
-#!   "ClassGroup", "MaximalSubspace"]
+#! [ "Generators", "ExtremeRays", "SupportHyperplanes", "HilbertBasis", 
+#!   "OriginalMonoidGenerators", "MaximalSubspace", "ClassGroup", 
+#!   "TriangulationDetSum", "UnitGroupIndex", "InternalIndex", 
+#!   "TriangulationSize", "Rank", "EmbeddingDim", "IsPointed", 
+#!   "IsDeg1ExtremeRays", "IsIntegrallyClosed", "IsInhomogeneous", "Sublattice", 
+#!   "IsTriangulationNested", "IsTriangulationPartial" ]
 #! @EndExample
 #! @EndChunk

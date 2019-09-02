@@ -17,6 +17,7 @@
 /doc/*.six
 /doc/*.tex
 /doc/*.toc
+/doc/*.xml
 /doc/manual.pdf
 /doc/NormalizInterface-bib.xml.bib
 
@@ -45,18 +46,11 @@
 *.la
 src/*.lo
 
-
-/doc/*.xml
 /gh-pages/
 
 /normaliz-*/
 /normaliz-*.tar.gz
 /NormalizInstallDir/
-
-/maketest.g
-/test-suite.log
-/tst/run-tap.log
-/tst/run-tap.trs
 
 /tmp/
 /misc
