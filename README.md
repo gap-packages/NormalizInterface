@@ -76,7 +76,6 @@ Generate the documentation:
 run automatic tests:
 
     gap tst/testall.g
-    gap maketest.g
 
 
 ## Bug reports and feature requests
