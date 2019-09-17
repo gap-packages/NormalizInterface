@@ -9,7 +9,7 @@ end );
 
 InstallGlobalFunction("NmzConeProperty",
 function(cone, prop)
-    local result, t, shift, poly, tmp, denom;
+    local result, t, poly, tmp, denom;
     result := _NmzConeProperty(cone, prop);
     if prop = "Grading" then
         denom := NmzConeProperty(cone, "GradingDenom");;
@@ -18,13 +18,7 @@ function(cone, prop)
     if prop = "HilbertSeries" then
         t := Indeterminate(Integers, "t");
         poly := UnivariatePolynomial(Integers, result[1], t);
-        shift := result[3];
-        if shift > 0 then
-            poly := poly * t^shift;
-        fi;
-        if shift < 0 then
-            poly := poly / t^(-shift);
-        fi;
+        poly := poly * t^result[3];
         tmp := Collected(result[2]);
         return [poly, tmp];
     fi;
