@@ -7,8 +7,8 @@ function( r )
     return "<a Normaliz cone>";
 end );
 
-InstallGlobalFunction( NmzConeProperty,
-function( cone, prop )
+InstallGlobalFunction("NmzConeProperty",
+function(cone, prop)
     local result, t, shift, poly, tmp, denom;
     result := _NmzConeProperty(cone, prop);
     if prop = "Grading" then
@@ -35,9 +35,10 @@ function( cone, prop )
         return poly / denom;
     fi;
     return result;
-end );
+end);
 
-InstallGlobalFunction("NmzPrintConeProperties", function(cone)
+InstallGlobalFunction("NmzPrintConeProperties",
+function(cone)
     local prop, val;
     if not IsNormalizCone(cone) then
         Error("First argument must be a Normaliz cone object");
@@ -53,7 +54,8 @@ InstallGlobalFunction("NmzPrintConeProperties", function(cone)
     od;
 end);
 
-BindGlobal("_NmzPrintSomeConeProperties", function(cone, excluded)
+BindGlobal("_NmzPrintSomeConeProperties",
+function(cone, excluded)
     local prop, val;
     if not IsNormalizCone(cone) then
         Error("First argument must be a Normaliz cone object");
@@ -75,8 +77,8 @@ BindGlobal("_NmzPrintSomeConeProperties", function(cone, excluded)
     od;
 end);
 
-InstallGlobalFunction( NmzBasisChange,
-function( cone )
+InstallGlobalFunction("NmzBasisChange",
+function(cone)
     local result;
     result := NmzConeProperty( cone, "Sublattice" );
     return rec(
@@ -84,13 +86,14 @@ function( cone )
         Projection := result[2],
         Annihilator := result[3],
         );
-end );
+end);
 
 
 #
 #
 #
-InstallGlobalFunction("NmzCone", function(arg)
+InstallGlobalFunction("NmzCone",
+function(arg)
     local func, opts_rec, opts_list, cone;
     if Length(arg) = 1 then
         if IsList(arg[1]) then
@@ -117,7 +120,8 @@ end);
 #
 #
 #
-InstallGlobalFunction("NmzCompute", function(arg)
+InstallGlobalFunction("NmzCompute",
+function(arg)
     local cone, propsToCompute;
     if not Length(arg) in [1,2] then
         Error("Wrong number of arguments, expected 1 or 2");
