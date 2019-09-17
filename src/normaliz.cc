@@ -464,6 +464,19 @@ static bool GAPMatrixToNmz(vector<vector<Number>> & out, Obj M)
     return true;
 }
 
+// take either a GAP string, or a GAP small integer, and try to convert
+// it to a Normaliz ConeProperty enum value.
+static libnormaliz::ConeProperty::Enum GetConeProperty(Obj prop)
+{
+    if (IS_STRING_REP(prop))
+        return libnormaliz::toConeProperty(CSTR_STRING(prop));
+    if (IS_NONNEG_INTOBJ(prop))
+        return (libnormaliz::ConeProperty::Enum)UInt8_ObjInt(prop);
+
+    ErrorQuit("<prop> must be a string or a non-negative small integer", 0,
+              0);
+}
+
 template <typename Integer>
 static Obj _NmzConeIntern(Obj input_list)
 {
@@ -574,21 +587,12 @@ static Obj FuncNmzHasConeProperty(Obj self, Obj cone, Obj prop)
 {
     if (!IS_CONE(cone))
         ErrorQuit("<cone> must be a Normaliz cone", 0, 0);
-    if (!IS_STRING_REP(prop) && !IS_NONNEG_INTOBJ(prop))
-        ErrorQuit("<prop> must be a string or a non-negative small integer",
-                  0, 0);
+
+    libnormaliz::ConeProperty::Enum p = GetConeProperty(prop);
 
     FUNC_BEGIN
-
-    libnormaliz::ConeProperty::Enum p;
-    if (IS_STRING_REP(prop))
-        p = libnormaliz::toConeProperty(CSTR_STRING(prop));
-    else
-        p = (libnormaliz::ConeProperty::Enum)UInt8_ObjInt(prop);
-
     Cone<mpz_class> * C = GET_CONE<mpz_class>(cone);
     return C->isComputed(p) ? True : False;
-
     FUNC_END
 }
 
@@ -669,22 +673,15 @@ static Obj FuncNmzKnownConeProperties(Obj self, Obj cone)
 }
 
 template <typename Integer>
-static Obj _NmzConePropertyImpl(Obj cone, Obj prop)
+static Obj _NmzConePropertyImpl(Obj cone, libnormaliz::ConeProperty::Enum p)
 {
     Cone<Integer> * C = GET_CONE<Integer>(cone);
+    ConeProperties  notComputed;
 
-    libnormaliz::ConeProperty::Enum p;
-    if (IS_STRING_REP(prop))
-        p = libnormaliz::toConeProperty(CSTR_STRING(prop));
-    else if (IS_INT(prop))
-        p = (libnormaliz::ConeProperty::Enum)UInt8_ObjInt(prop);
-    else
-        return Fail;
-
-    ConeProperties notComputed;
     SIGNAL_HANDLER_BEGIN
     notComputed = C->compute(ConeProperties(p));
     SIGNAL_HANDLER_END
+
 #if NMZ_RELEASE >= 30700
     // workaround a bug where computing HilbertQuasiPolynomial after
     // HilbertSeries was already computed returned notComputed equal to
@@ -844,12 +841,11 @@ static Obj Func_NmzConeProperty(Obj self, Obj cone, Obj prop)
 {
     if (!IS_CONE(cone))
         ErrorQuit("<cone> must be a Normaliz cone", 0, 0);
-    if (!IS_STRING_REP(prop) && !IS_NONNEG_INTOBJ(prop))
-        ErrorQuit("<prop> must be a string or a non-negative small integer",
-                  0, 0);
+
+    libnormaliz::ConeProperty::Enum p = GetConeProperty(prop);
 
     FUNC_BEGIN
-    return _NmzConePropertyImpl<mpz_class>(cone, prop);
+    return _NmzConePropertyImpl<mpz_class>(cone, p);
     FUNC_END
 }
 
