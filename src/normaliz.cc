@@ -105,6 +105,12 @@ using libnormaliz::ConeProperties;
 using libnormaliz::Sublattice_Representation;
 using libnormaliz::Type::InputType;
 
+#ifdef LIBNORMALIZ_DYNAMIC_BITSET_H
+using libnormaliz::dynamic_bitset;
+#else
+typedef boost::dynamic_bitset<> dynamic_bitset;
+#endif
+
 using std::map;
 using std::string;
 using std::vector;
@@ -346,7 +352,7 @@ Obj NmzToGAP(const vector<bool> & in)
     return list;
 }
 
-static Obj NmzToGAP(const boost::dynamic_bitset<> & in)
+static Obj NmzToGAP(const dynamic_bitset & in)
 {
     const size_t n = in.size();
     Obj          list = NewBag(T_BLIST, SIZE_PLEN_BLIST(n));
