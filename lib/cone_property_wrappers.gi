@@ -111,3 +111,5 @@ InstallGlobalFunction( NmzVolume, cone -> NmzConeProperty(cone, "Volume" ) );
 InstallGlobalFunction( NmzFVector, cone -> NmzConeProperty(cone, "FVector" ) );
 
 InstallGlobalFunction( NmzFaceLattice, cone -> NmzConeProperty(cone, "FaceLattice" ) );
+
+InstallGlobalFunction( NmzIncidence, cone -> NmzConeProperty(cone, "Incidence" ) );

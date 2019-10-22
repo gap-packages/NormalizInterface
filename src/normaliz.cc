@@ -199,6 +199,9 @@ static Obj NmzToGAP(const std::pair<T, U> & in);
 template <typename T>
 static Obj NmzToGAP(const vector<T> & in);
 
+static Obj NmzToGAP(const dynamic_bitset & in);
+
+
 static Obj NmzToGAP(const mpz_t x)
 {
 #if GAP_KERNEL_MAJOR_VERSION >= 7
@@ -789,6 +792,9 @@ static Obj _NmzConePropertyImpl(Obj cone, libnormaliz::ConeProperty::Enum p)
     case libnormaliz::ConeProperty::FVector:
         return NmzToGAP(C->getFVector());
 #endif
+
+    case libnormaliz::ConeProperty::Incidence:
+        return NmzToGAP(C->getIncidence());
 
     case libnormaliz::ConeProperty::HilbertQuasiPolynomial:
         return NmzHilbertQuasiPolynomialToGAP(C->getHilbertSeries());

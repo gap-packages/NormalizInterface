@@ -401,3 +401,10 @@ DeclareGlobalFunction( "NmzFVector" );
 #!  Supported in Normaliz >= 3.7.0.
 #! @Arguments cone
 DeclareGlobalFunction( "NmzFaceLattice" );
+
+#! @Description
+#!  This is an alias for <C>NmzConeProperty( cone, "Incidence" );</C> see <Ref Func="NmzConeProperty"/>.
+#!
+#!  Supported in Normaliz >= 3.8.0.
+#! @Arguments cone
+DeclareGlobalFunction( "NmzIncidence" );
