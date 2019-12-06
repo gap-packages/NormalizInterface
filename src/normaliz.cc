@@ -593,7 +593,10 @@ static Obj Func_NmzConePropertiesNamesRecord(Obj self)
 
 #if NMZ_RELEASE >= 30500
         // skip internal control properties
-        if (p == libnormaliz::ConeProperty::ExplicitHilbertSeries ||
+        if (
+#if NMZ_RELEASE < 30800
+            p == libnormaliz::ConeProperty::ExplicitHilbertSeries ||
+#endif
             p == libnormaliz::ConeProperty::NakedDual)
             continue;
 #endif
@@ -635,7 +638,10 @@ static Obj FuncNmzKnownConeProperties(Obj self, Obj cone)
             (libnormaliz::ConeProperty::Enum)i;
 
         // skip internal control properties
-        if (p == libnormaliz::ConeProperty::ExplicitHilbertSeries ||
+        if (
+#if NMZ_RELEASE < 30800
+            p == libnormaliz::ConeProperty::ExplicitHilbertSeries ||
+#endif
             p == libnormaliz::ConeProperty::NakedDual)
             continue;
 
