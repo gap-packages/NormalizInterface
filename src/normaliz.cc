@@ -255,12 +255,12 @@ static Obj NmzToGAP(long x)
     return ObjInt_Int(x);
 }
 
-static Obj NmzToGAP(mpz_class x)
+static Obj NmzToGAP(const mpz_class x)
 {
     return NmzToGAP(x.get_mpz_t());
 }
 
-static Obj NmzToGAP(mpq_class x)
+static Obj NmzToGAP(const mpq_class x)
 {
     Obj num = NmzToGAP(x.get_num());
     Obj den = NmzToGAP(x.get_den());
