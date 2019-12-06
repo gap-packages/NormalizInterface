@@ -380,7 +380,7 @@ static Obj NmzToGAP(const libnormaliz::Matrix<T> & in)
     return NmzToGAP(in.get_elements());
 }
 
-bool GAPNumberToNmz(long & out, Obj x)
+bool GAPToNmz(long & out, Obj x)
 {
     if (IS_INTOBJ(x)) {
         out = INT_INTOBJ(x);
@@ -400,7 +400,7 @@ bool GAPNumberToNmz(long & out, Obj x)
     return false;
 }
 
-bool GAPNumberToNmz(mpz_class & out, Obj x)
+bool GAPToNmz(mpz_class & out, Obj x)
 {
     if (IS_INTOBJ(x)) {
         out = INT_INTOBJ(x);
@@ -417,7 +417,7 @@ bool GAPNumberToNmz(mpz_class & out, Obj x)
     return false;
 }
 
-bool GAPNumberToNmz(mpq_class & out, Obj x)
+bool GAPToNmz(mpq_class & out, Obj x)
 {
     if (IS_INTOBJ(x)) {
         out = INT_INTOBJ(x);
@@ -425,17 +425,17 @@ bool GAPNumberToNmz(mpq_class & out, Obj x)
     }
     else if (TNUM_OBJ(x) == T_INTPOS || TNUM_OBJ(x) == T_INTNEG) {
         out.get_den() = 1;
-        return GAPNumberToNmz(out.get_num(), x);
+        return GAPToNmz(out.get_num(), x);
     }
     else if (TNUM_OBJ(x) == T_RAT) {
-        return GAPNumberToNmz(out.get_num(), NUM_RAT(x)) &&
-               GAPNumberToNmz(out.get_den(), DEN_RAT(x));
+        return GAPToNmz(out.get_num(), NUM_RAT(x)) &&
+               GAPToNmz(out.get_den(), DEN_RAT(x));
     }
     return false;
 }
 
 template <typename Number>
-static bool GAPVectorToNmz(vector<Number> & out, Obj V)
+static bool GAPToNmz(vector<Number> & out, Obj V)
 {
     if (!IS_PLIST(V) || !IS_DENSE_LIST(V))
         return false;
@@ -443,22 +443,7 @@ static bool GAPVectorToNmz(vector<Number> & out, Obj V)
     out.resize(n);
     for (int i = 0; i < n; ++i) {
         Obj tmp = ELM_PLIST(V, i + 1);
-        if (!GAPNumberToNmz(out[i], tmp))
-            return false;
-    }
-    return true;
-}
-
-template <typename Number>
-static bool GAPMatrixToNmz(vector<vector<Number>> & out, Obj M)
-{
-    if (!IS_PLIST(M) || !IS_DENSE_LIST(M))
-        return false;
-    const int nr = LEN_PLIST(M);
-    out.resize(nr);
-    for (int i = 0; i < nr; ++i) {
-        bool okay = GAPVectorToNmz(out[i], ELM_PLIST(M, i + 1));
-        if (!okay)
+        if (!GAPToNmz(out[i], tmp))
             return false;
     }
     return true;
@@ -508,7 +493,7 @@ static Obj _NmzConeIntern(Obj input_list)
             continue;
         }
         vector<vector<mpq_class>> Mat;
-        bool                      okay = GAPMatrixToNmz(Mat, M);
+        bool                      okay = GAPToNmz(Mat, M);
         if (!okay) {
             throw std::runtime_error(
                 "Element " + std::to_string(i + 2) +
