@@ -94,13 +94,6 @@ echo "##"
 rm -rf ${NORMALIZ_BASE}
 tar xvf ${NORMALIZ_TAR}
 
-# The cmake build process honors environment variables like
-# GMP_DIR and BOOST_ROOT. So if you need to tell the build
-# process where to find GMP and Boost, you can invoke this
-# script like this:
-#
-#  GMP_DIR=/some/path BOOST_ROOT=/another/path ./build-normaliz.sh $GAPROOT
-
 echo "##"
 echo "## compiling Normaliz ${NORMALIZ_VERSION}"
 echo "##"
