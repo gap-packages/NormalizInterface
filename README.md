@@ -38,7 +38,6 @@ your system's package manager. At least the following are required,
 in addition to a C++11 compiler:
 
  * curl OR wget for downloading the source code
- * boost
 
 Once you have installed these, you can build Normaliz by using the
 `build-normaliz.sh` script provided by us. If NormalizInterface is

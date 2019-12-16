@@ -12,12 +12,10 @@ addons:
       - libgmp-dev
       - libreadline-dev
       - zlib1g-dev
-      - libboost-dev
       - ccache
   homebrew:
     packages:
       - gmp
-      - boost
       - ccache
 
 matrix:
@@ -34,7 +32,6 @@ matrix:
           - libgmp-dev:i386
           - libreadline-dev:i386
           - zlib1g-dev:i386
-          - libboost-dev:i386
           - ccache
           - gcc-multilib
           - g++-multilib
