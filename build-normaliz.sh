@@ -101,7 +101,7 @@ echo "##"
 # If GAP was build for 32 bit, also do it for normaliz
 if [ x$GAParch_abi = x"32-bit" ] || [ x$GAP_ABI = x32 ]; then
     echo "GAP was built for 32 bit"
-    export CXXFLAGS="-m32"
+    export CXXFLAGS="${CXXFLAGS} -m32"
 fi
 
 NormalizInstallDir=$PWD/NormalizInstallDir
