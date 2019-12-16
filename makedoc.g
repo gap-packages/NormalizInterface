@@ -10,3 +10,4 @@ AutoDoc(rec(
     scaffold := rec( bib := "NormalizInterface-bib.xml" ),
     autodoc := rec( files := [ "doc/intro.autodoc", "src/normaliz.cc" ] ),
 ));
+QUIT;
