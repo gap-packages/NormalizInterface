@@ -1,5 +1,10 @@
 This file describes changes in the NormalizInterface package.
 
+1.2.0 (2020-03-26)
+  - Update to Normaliz 3.8.4
+  - New build system
+  - Various janitorial changes
+
 1.1.0 (2019-08-23)
   - Add support for rational inputs, e.g. polytopes with rational coordinates
   - Update build system for improve compatibility with GAP >= 4.9
