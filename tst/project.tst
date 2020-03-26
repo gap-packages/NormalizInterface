@@ -10,7 +10,7 @@ gap> proj:=NmzProjectCone(cone);
 <a Normaliz cone>
 
 # check what was computed for the input cone
-gap> tmp := Set(NmzKnownConeProperties(cone));;
+gap> tmp := NmzKnownConeProperties(cone);;
 gap> RemoveSet(tmp, "NumberLatticePoints");
 gap> Perform(tmp, Display);
 EmbeddingDim
@@ -63,7 +63,7 @@ TriangulationDetSum = 0
 TriangulationSize = 0
 
 # check what was computed for the projected cone
-gap> Perform(Set(NmzKnownConeProperties(proj)),Display);
+gap> Perform(NmzKnownConeProperties(proj), Display);
 EmbeddingDim
 ExtremeRays
 Generators

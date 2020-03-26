@@ -661,6 +661,7 @@ static Obj FuncNmzKnownConeProperties(Obj self, Obj cone)
             }
         }
     }
+    SORT_LIST(M);
     return M;
 
     FUNC_END

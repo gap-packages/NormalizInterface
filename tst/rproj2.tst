@@ -22,7 +22,7 @@ gap> M := [
 gap> cone := NmzCone(["integral_closure", M]);;
 gap> NmzCompute(cone);
 true
-gap> tmp := Set(NmzKnownConeProperties(cone));;
+gap> tmp := NmzKnownConeProperties(cone);;
 gap> RemoveSet(tmp, "NumberLatticePoints");
 gap> Perform(tmp, Display);
 ClassGroup

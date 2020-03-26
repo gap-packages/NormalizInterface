@@ -10,7 +10,7 @@
 #
 gap> START_TEST( "normalizinterface01.tst");
 
-# doc/_Chunks.xml:164-167
+# doc/_Chunks.xml:163-166
 gap> cone := NmzCone(["integral_closure",[[2,1],[1,3]]]);
 <a Normaliz cone>
 
@@ -20,28 +20,27 @@ false
 
 # doc/_Chunks.xml:129-133
 gap> NmzKnownConeProperties(cone);
-[ "Generators", "OriginalMonoidGenerators", "InternalIndex", "EmbeddingDim", 
-  "IsInhomogeneous", "Sublattice" ]
+[ "EmbeddingDim", "Generators", "InternalIndex", "IsInhomogeneous", 
+  "OriginalMonoidGenerators", "Sublattice" ]
 
-# doc/_Chunks.xml:139-158
+# doc/_Chunks.xml:139-157
 gap> NmzKnownConeProperties(cone);
-[ "Generators", "OriginalMonoidGenerators", "InternalIndex", "EmbeddingDim", 
-  "IsInhomogeneous", "Sublattice" ]
+[ "EmbeddingDim", "Generators", "InternalIndex", "IsInhomogeneous", 
+  "OriginalMonoidGenerators", "Sublattice" ]
 gap> NmzCompute(cone, ["SupportHyperplanes", "IsPointed"]);
 true
 gap> NmzKnownConeProperties(cone);
-[ "Generators", "ExtremeRays", "SupportHyperplanes", 
-  "OriginalMonoidGenerators", "MaximalSubspace", "InternalIndex", "Rank", 
-  "EmbeddingDim", "IsPointed", "IsDeg1ExtremeRays", "IsInhomogeneous", 
-  "Sublattice" ]
+[ "EmbeddingDim", "ExtremeRays", "Generators", "InternalIndex", 
+  "IsDeg1ExtremeRays", "IsInhomogeneous", "IsPointed", "MaximalSubspace", 
+  "OriginalMonoidGenerators", "Rank", "Sublattice", "SupportHyperplanes" ]
 gap> NmzCompute(cone);;
 gap> NmzKnownConeProperties(cone);
-[ "Generators", "ExtremeRays", "SupportHyperplanes", "HilbertBasis", 
-  "OriginalMonoidGenerators", "MaximalSubspace", "TriangulationDetSum", 
-  "UnitGroupIndex", "InternalIndex", "TriangulationSize", "Rank", 
-  "EmbeddingDim", "IsPointed", "IsDeg1ExtremeRays", "IsIntegrallyClosed", 
-  "IsInhomogeneous", "Sublattice", "ClassGroup", "IsTriangulationNested", 
-  "IsTriangulationPartial" ]
+[ "ClassGroup", "EmbeddingDim", "ExtremeRays", "Generators", "HilbertBasis", 
+  "InternalIndex", "IsDeg1ExtremeRays", "IsInhomogeneous", 
+  "IsIntegrallyClosed", "IsPointed", "IsTriangulationNested", 
+  "IsTriangulationPartial", "MaximalSubspace", "OriginalMonoidGenerators", 
+  "Rank", "Sublattice", "SupportHyperplanes", "TriangulationDetSum", 
+  "TriangulationSize", "UnitGroupIndex" ]
 
 #
 gap> STOP_TEST("normalizinterface01.tst", 1 );

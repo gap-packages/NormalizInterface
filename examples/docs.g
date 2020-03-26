@@ -15,30 +15,29 @@ NmzHasConeProperty(cone, "ExtremeRays");
 #! @BeginChunk NmzKnownConeProperties_example
 #! @BeginExample
 NmzKnownConeProperties(cone);
-#! [ "Generators", "OriginalMonoidGenerators", "InternalIndex", "EmbeddingDim", 
-#!   "IsInhomogeneous", "Sublattice" ]
+#! [ "EmbeddingDim", "Generators", "InternalIndex", "IsInhomogeneous", 
+#!   "OriginalMonoidGenerators", "Sublattice" ]
 #! @EndExample
 #! @EndChunk
 
 #! @BeginChunk NmzCompute_example
 #! @BeginExample
 NmzKnownConeProperties(cone);
-#! [ "Generators", "OriginalMonoidGenerators", "InternalIndex", "EmbeddingDim", 
-#!   "IsInhomogeneous", "Sublattice" ]
+#! [ "EmbeddingDim", "Generators", "InternalIndex", "IsInhomogeneous", 
+#!   "OriginalMonoidGenerators", "Sublattice" ]
 NmzCompute(cone, ["SupportHyperplanes", "IsPointed"]);
 #! true
 NmzKnownConeProperties(cone);
-#! [ "Generators", "ExtremeRays", "SupportHyperplanes", 
-#!   "OriginalMonoidGenerators", "MaximalSubspace", "InternalIndex", "Rank", 
-#!   "EmbeddingDim", "IsPointed", "IsDeg1ExtremeRays", "IsInhomogeneous", 
-#!   "Sublattice" ]
+#! [ "EmbeddingDim", "ExtremeRays", "Generators", "InternalIndex", 
+#!   "IsDeg1ExtremeRays", "IsInhomogeneous", "IsPointed", "MaximalSubspace", 
+#!   "OriginalMonoidGenerators", "Rank", "Sublattice", "SupportHyperplanes" ]
 NmzCompute(cone);;
 NmzKnownConeProperties(cone);
-#! [ "Generators", "ExtremeRays", "SupportHyperplanes", "HilbertBasis", 
-#!   "OriginalMonoidGenerators", "MaximalSubspace", "ClassGroup", 
-#!   "TriangulationDetSum", "UnitGroupIndex", "InternalIndex", 
-#!   "TriangulationSize", "Rank", "EmbeddingDim", "IsPointed", 
-#!   "IsDeg1ExtremeRays", "IsIntegrallyClosed", "IsInhomogeneous", "Sublattice", 
-#!   "IsTriangulationNested", "IsTriangulationPartial" ]
+#! [ "ClassGroup", "EmbeddingDim", "ExtremeRays", "Generators", "HilbertBasis", 
+#!   "InternalIndex", "IsDeg1ExtremeRays", "IsInhomogeneous", 
+#!   "IsIntegrallyClosed", "IsPointed", "IsTriangulationNested", 
+#!   "IsTriangulationPartial", "MaximalSubspace", "OriginalMonoidGenerators", 
+#!   "Rank", "Sublattice", "SupportHyperplanes", "TriangulationDetSum", 
+#!   "TriangulationSize", "UnitGroupIndex" ]
 #! @EndExample
 #! @EndChunk

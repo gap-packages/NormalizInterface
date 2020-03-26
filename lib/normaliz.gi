@@ -60,7 +60,7 @@ function(cone, excluded)
     excluded := Union(excluded, [ "ExplicitHilbertSeries" ]);
     # iterate over properties in alphabetical order, to reduce
     # fluctuations between Normaliz versions
-    for prop in Set(NmzKnownConeProperties(cone)) do
+    for prop in NmzKnownConeProperties(cone) do
         if prop in excluded then
             continue;
         fi;

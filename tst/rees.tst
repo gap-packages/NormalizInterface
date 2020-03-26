@@ -16,7 +16,7 @@ gap> M := [
 gap> cone := NmzCone(["rees_algebra", M]);;
 gap> NmzCompute(cone);
 true
-gap> tmp := Set(NmzKnownConeProperties(cone));;
+gap> tmp := NmzKnownConeProperties(cone);;
 gap> RemoveSet(tmp, "NumberLatticePoints");
 gap> Perform(tmp, Display);
 ClassGroup

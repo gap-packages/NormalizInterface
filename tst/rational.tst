@@ -10,7 +10,7 @@ gap> gr := [ [ 0, 0, 1 ] ];;
 gap> cone := NmzCone(["integral_closure", M, "grading", gr]);;
 gap> NmzCompute(cone);
 true
-gap> tmp := Set(NmzKnownConeProperties(cone));;
+gap> tmp := NmzKnownConeProperties(cone);;
 gap> RemoveSet(tmp, "NumberLatticePoints");
 gap> Perform(tmp, Display);
 ClassGroup

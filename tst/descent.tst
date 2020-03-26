@@ -31,7 +31,7 @@ gap> M := [
 gap> cone := NmzCone(["inequalities", M]);;
 gap> NmzCompute(cone, ["Descent"]);
 true
-gap> Perform(Set(NmzKnownConeProperties(cone)),Display);
+gap> Perform(NmzKnownConeProperties(cone),Display);
 EmbeddingDim
 IsInhomogeneous
 gap> Display(NmzGenerators(cone));
