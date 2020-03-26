@@ -3,7 +3,7 @@
   [1XIndex[101X
   
   [2XNmzAffineDim[102X 2.3-1 
-  [2XNmzBasisChange[102X 2.3-58 
+  [2XNmzBasisChange[102X 2.3-59 
   [2XNmzClassGroup[102X 2.3-2 
   [2XNmzCompute[102X 2.2-5 
   [2XNmzCone[102X 2.1-1 
@@ -30,6 +30,7 @@
   [2XNmzHilbertBasis[102X 2.3-13 
   [2XNmzHilbertQuasiPolynomial[102X 2.3-14 
   [2XNmzHilbertSeries[102X 2.3-15 
+  [2XNmzIncidence[102X 2.3-58 
   [2XNmzInclusionExclusionData[102X 2.3-16 
   [2XNmzIntegerHull[102X 2.3-43 
   [2XNmzInternalIndex[102X 2.3-44 

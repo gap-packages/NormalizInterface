@@ -6,10 +6,10 @@
                            [1X [5XGAP[105X wrapper for Normaliz [101X
   
   
-                                     1.1.0
+                                     1.2.0
   
   
-                                 23 August 2019
+                                 26 March 2020
   
   
                                Sebastian Gutsche
@@ -126,7 +126,8 @@
       2.3-55 NmzVolume
       2.3-56 NmzFVector
       2.3-57 NmzFaceLattice
-      2.3-58 NmzBasisChange
+      2.3-58 NmzIncidence
+      2.3-59 NmzBasisChange
   3 [33X[0;0YExamples[133X
     3.1 [33X[0;0YGenerators[133X
     3.2 [33X[0;0YSystem of equations[133X

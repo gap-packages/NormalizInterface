@@ -38,7 +38,6 @@ your system's package manager. At least the following are required,
 in addition to a C++11 compiler:
 
  * curl OR wget for downloading the source code
- * boost
 
 Once you have installed these, you can build Normaliz by using the
 `build-normaliz.sh` script provided by us. If NormalizInterface is
@@ -76,7 +75,6 @@ Generate the documentation:
 run automatic tests:
 
     gap tst/testall.g
-    gap maketest.g
 
 
 ## Bug reports and feature requests
@@ -93,4 +91,4 @@ it under the terms of the GNU General Public License as published by
 the Free Software Foundation; either version 2 of the License, or
 (at your option) any later version.
 
-For details see the file COPYING.
+For details see the file LICENSE.

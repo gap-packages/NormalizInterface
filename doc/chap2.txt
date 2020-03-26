@@ -107,7 +107,8 @@
   
   [4X[32X  Example  [32X[104X
     [4X[25Xgap>[125X [27XNmzKnownConeProperties(cone);[127X[104X
-    [4X[28X[ "Generators", "OriginalMonoidGenerators", "Sublattice" ][128X[104X
+    [4X[28X[ "EmbeddingDim", "Generators", "InternalIndex", "IsInhomogeneous", [128X[104X
+    [4X[28X  "OriginalMonoidGenerators", "Sublattice" ][128X[104X
   [4X[32X[104X
   
   [1X2.2-3 NmzSetVerboseDefault[101X
@@ -144,20 +145,22 @@
   
   [4X[32X  Example  [32X[104X
     [4X[25Xgap>[125X [27XNmzKnownConeProperties(cone);[127X[104X
-    [4X[28X[ "Generators", "OriginalMonoidGenerators", "Sublattice" ][128X[104X
+    [4X[28X[ "EmbeddingDim", "Generators", "InternalIndex", "IsInhomogeneous", [128X[104X
+    [4X[28X  "OriginalMonoidGenerators", "Sublattice" ][128X[104X
     [4X[25Xgap>[125X [27XNmzCompute(cone, ["SupportHyperplanes", "IsPointed"]);[127X[104X
     [4X[28Xtrue[128X[104X
     [4X[25Xgap>[125X [27XNmzKnownConeProperties(cone);[127X[104X
-    [4X[28X[ "Generators", "ExtremeRays", "SupportHyperplanes", "IsPointed",[128X[104X
-    [4X[28X  "IsDeg1ExtremeRays", "OriginalMonoidGenerators", "Sublattice",[128X[104X
-    [4X[28X  "MaximalSubspace" ][128X[104X
-    [4X[25Xgap>[125X [27XNmzCompute(cone);[127X[104X
-    [4X[28Xtrue[128X[104X
+    [4X[28X[ "EmbeddingDim", "ExtremeRays", "Generators", "InternalIndex", [128X[104X
+    [4X[28X  "IsDeg1ExtremeRays", "IsInhomogeneous", "IsPointed", "MaximalSubspace", [128X[104X
+    [4X[28X  "OriginalMonoidGenerators", "Rank", "Sublattice", "SupportHyperplanes" ][128X[104X
+    [4X[25Xgap>[125X [27XNmzCompute(cone);;[127X[104X
     [4X[25Xgap>[125X [27XNmzKnownConeProperties(cone);[127X[104X
-    [4X[28X[ "Generators", "ExtremeRays", "SupportHyperplanes", "TriangulationSize",[128X[104X
-    [4X[28X  "TriangulationDetSum", "HilbertBasis", "IsPointed", "IsDeg1ExtremeRays",[128X[104X
-    [4X[28X  "IsIntegrallyClosed", "OriginalMonoidGenerators", "Sublattice",[128X[104X
-    [4X[28X  "ClassGroup", "MaximalSubspace"][128X[104X
+    [4X[28X[ "ClassGroup", "EmbeddingDim", "ExtremeRays", "Generators", "HilbertBasis", [128X[104X
+    [4X[28X  "InternalIndex", "IsDeg1ExtremeRays", "IsInhomogeneous", [128X[104X
+    [4X[28X  "IsIntegrallyClosed", "IsPointed", "IsTriangulationNested", [128X[104X
+    [4X[28X  "IsTriangulationPartial", "MaximalSubspace", "OriginalMonoidGenerators", [128X[104X
+    [4X[28X  "Rank", "Sublattice", "SupportHyperplanes", "TriangulationDetSum", [128X[104X
+    [4X[28X  "TriangulationSize", "UnitGroupIndex" ][128X[104X
   [4X[32X[104X
   
   [1X2.2-6 NmzConeProperty[101X
@@ -231,7 +234,7 @@
   [30X    [33X[0;6Y[10XSublattice[110X  computes  the  efficient  sublattice  and  returns  a bool
         signaling   whether   the  computation  was  successful.  Actual  data
         connected  to  it  can  be  accessed by [2XNmzRank[102X ([14X2.3-30[114X), [2XNmzEquations[102X
-        ([14X2.3-7[114X), [2XNmzCongruences[102X ([14X2.3-3[114X), and [2XNmzBasisChange[102X ([14X2.3-58[114X).[133X
+        ([14X2.3-7[114X), [2XNmzCongruences[102X ([14X2.3-3[114X), and [2XNmzBasisChange[102X ([14X2.3-59[114X).[133X
   
   [33X[0;0YAdditionally  also  the  following compute options are accepted as property.
   They  modify  what  and  how  should  be  computed,  and return True after a
@@ -790,7 +793,16 @@
   
   [33X[0;0YSupported in Normaliz >= 3.7.0.[133X
   
-  [1X2.3-58 NmzBasisChange[101X
+  [1X2.3-58 NmzIncidence[101X
+  
+  [33X[1;0Y[29X[2XNmzIncidence[102X( [3Xcone[103X ) [32X function[133X
+  
+  [33X[0;0YThis   is   an   alias   for   [10XNmzConeProperty(  cone,  "Incidence"  );[110X  see
+  [2XNmzConeProperty[102X ([14X2.2-6[114X).[133X
+  
+  [33X[0;0YSupported in Normaliz >= 3.8.0.[133X
+  
+  [1X2.3-59 NmzBasisChange[101X
   
   [33X[1;0Y[29X[2XNmzBasisChange[102X( [3Xcone[103X ) [32X function[133X
   [6XReturns:[106X  [33X[0;10Ya record describing the basis change[133X

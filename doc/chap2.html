@@ -98,7 +98,8 @@
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X8550FB5182075539">2.3-55 NmzVolume</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X8084862B7E5EB685">2.3-56 NmzFVector</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X87916CA882C9B4CC">2.3-57 NmzFaceLattice</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X84D0AADB7BAF0328">2.3-58 NmzBasisChange</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X81B24C9187682ACC">2.3-58 NmzIncidence</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X84D0AADB7BAF0328">2.3-59 NmzBasisChange</a></span>
 </div></div>
 </div>
 
@@ -243,7 +244,8 @@ false
 
 <div class="example"><pre>
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NmzKnownConeProperties(cone);</span>
-[ "Generators", "OriginalMonoidGenerators", "Sublattice" ]
+[ "EmbeddingDim", "Generators", "InternalIndex", "IsInhomogeneous", 
+  "OriginalMonoidGenerators", "Sublattice" ]
 </pre></div>
 
 <p><a id="X7AD4C81887308070" name="X7AD4C81887308070"></a></p>
@@ -282,20 +284,22 @@ false
 
 <div class="example"><pre>
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NmzKnownConeProperties(cone);</span>
-[ "Generators", "OriginalMonoidGenerators", "Sublattice" ]
+[ "EmbeddingDim", "Generators", "InternalIndex", "IsInhomogeneous", 
+  "OriginalMonoidGenerators", "Sublattice" ]
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NmzCompute(cone, ["SupportHyperplanes", "IsPointed"]);</span>
 true
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NmzKnownConeProperties(cone);</span>
-[ "Generators", "ExtremeRays", "SupportHyperplanes", "IsPointed",
-  "IsDeg1ExtremeRays", "OriginalMonoidGenerators", "Sublattice",
-  "MaximalSubspace" ]
-<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NmzCompute(cone);</span>
-true
+[ "EmbeddingDim", "ExtremeRays", "Generators", "InternalIndex", 
+  "IsDeg1ExtremeRays", "IsInhomogeneous", "IsPointed", "MaximalSubspace", 
+  "OriginalMonoidGenerators", "Rank", "Sublattice", "SupportHyperplanes" ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NmzCompute(cone);;</span>
 <span class="GAPprompt">gap&gt;</span> <span class="GAPinput">NmzKnownConeProperties(cone);</span>
-[ "Generators", "ExtremeRays", "SupportHyperplanes", "TriangulationSize",
-  "TriangulationDetSum", "HilbertBasis", "IsPointed", "IsDeg1ExtremeRays",
-  "IsIntegrallyClosed", "OriginalMonoidGenerators", "Sublattice",
-  "ClassGroup", "MaximalSubspace"]
+[ "ClassGroup", "EmbeddingDim", "ExtremeRays", "Generators", "HilbertBasis", 
+  "InternalIndex", "IsDeg1ExtremeRays", "IsInhomogeneous", 
+  "IsIntegrallyClosed", "IsPointed", "IsTriangulationNested", 
+  "IsTriangulationPartial", "MaximalSubspace", "OriginalMonoidGenerators", 
+  "Rank", "Sublattice", "SupportHyperplanes", "TriangulationDetSum", 
+  "TriangulationSize", "UnitGroupIndex" ]
 </pre></div>
 
 <p><a id="X78ED435078E3E377" name="X78ED435078E3E377"></a></p>
@@ -396,7 +400,7 @@ true
 <li><p><code class="code">ModuleGeneratorsOverOriginalMonoid</code> see <code class="func">NmzModuleGeneratorsOverOriginalMonoid</code> (<a href="chap2.html#X871D59BC83D7CADA"><span class="RefLink">2.3-26</span></a>),</p>
 
 </li>
-<li><p><code class="code">Sublattice</code> computes the efficient sublattice and returns a bool signaling whether the computation was successful. Actual data connected to it can be accessed by <code class="func">NmzRank</code> (<a href="chap2.html#X7DE5D105856F5001"><span class="RefLink">2.3-30</span></a>), <code class="func">NmzEquations</code> (<a href="chap2.html#X7DA58BB08657810D"><span class="RefLink">2.3-7</span></a>), <code class="func">NmzCongruences</code> (<a href="chap2.html#X7C7798F8847FE06F"><span class="RefLink">2.3-3</span></a>), and <code class="func">NmzBasisChange</code> (<a href="chap2.html#X84D0AADB7BAF0328"><span class="RefLink">2.3-58</span></a>).</p>
+<li><p><code class="code">Sublattice</code> computes the efficient sublattice and returns a bool signaling whether the computation was successful. Actual data connected to it can be accessed by <code class="func">NmzRank</code> (<a href="chap2.html#X7DE5D105856F5001"><span class="RefLink">2.3-30</span></a>), <code class="func">NmzEquations</code> (<a href="chap2.html#X7DA58BB08657810D"><span class="RefLink">2.3-7</span></a>), <code class="func">NmzCongruences</code> (<a href="chap2.html#X7C7798F8847FE06F"><span class="RefLink">2.3-3</span></a>), and <code class="func">NmzBasisChange</code> (<a href="chap2.html#X84D0AADB7BAF0328"><span class="RefLink">2.3-59</span></a>).</p>
 
 </li>
 </ul>
@@ -954,9 +958,18 @@ true
 
 <p>Supported in Normaliz &gt;= 3.7.0.</p>
 
+<p><a id="X81B24C9187682ACC" name="X81B24C9187682ACC"></a></p>
+
+<h5>2.3-58 NmzIncidence</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NmzIncidence</code>( <var class="Arg">cone</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>This is an alias for <code class="code">NmzConeProperty( cone, "Incidence" );</code> see <code class="func">NmzConeProperty</code> (<a href="chap2.html#X78ED435078E3E377"><span class="RefLink">2.2-6</span></a>).</p>
+
+<p>Supported in Normaliz &gt;= 3.8.0.</p>
+
 <p><a id="X84D0AADB7BAF0328" name="X84D0AADB7BAF0328"></a></p>
 
-<h5>2.3-58 NmzBasisChange</h5>
+<h5>2.3-59 NmzBasisChange</h5>
 
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; NmzBasisChange</code>( <var class="Arg">cone</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a record describing the basis change</p>
