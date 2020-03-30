@@ -116,3 +116,12 @@ else
 fi
 make -j4
 make install
+
+if [ "$(expr substr $(uname -s) 1 6)" == "CYGWIN" ]; then
+    echo "##"
+    echo "## Extra Cygwin installation step"
+    echo "##"
+    # We have to move the Normalize dll to $GAPDIR/.libs, as this is the only
+    # place which Cygwin will check for it inside $GAPDIR.
+    cp ${NormalizInstallDir}/bin/cygnormaliz-*.dll "${GAPDIR}/.libs"
+fi
