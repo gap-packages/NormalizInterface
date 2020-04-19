@@ -23,7 +23,7 @@
 #! @Section YOU FORGOT TO SET A SECTION
 */
 
-#include "src/compiled.h" /* GAP headers                */
+#include "compiled.h" // GAP headers
 
 #include "libnormaliz/cone.h"
 #include "libnormaliz/map_operations.h"
