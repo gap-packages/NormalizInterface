@@ -37,6 +37,12 @@
 # read GAP's build settings
 include $(GAPPATH)/sysinfo.gap
 
+# hack to support GAP = 4.9
+ifndef GAP_KERNEL_MAJOR_VERSION
+  KEXT_CFLAGS += -I$(GAP_LIB_DIR)/src
+  KEXT_CXXFLAGS += -I$(GAP_LIB_DIR)/src
+endif
+
 # various derived settings
 KEXT_BINARCHDIR = bin/$(GAParch)
 KEXT_SO = $(KEXT_BINARCHDIR)/$(KEXT_NAME).so
