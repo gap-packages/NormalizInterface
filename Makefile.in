@@ -7,23 +7,8 @@ KEXT_SOURCES = src/normaliz.cc
 KEXT_CXXFLAGS = @NORMALIZ_CPPFLAGS@ -std=c++11
 KEXT_LDFLAGS = -lstdc++ -R@NORMALIZ_LDPATH@ @NORMALIZ_LDFLAGS@ -lnormaliz
 
-KEXT_RECONF ?= ./config.status Makefile
+KEXT_USE_AUTOCONF = 1
 
 # include shared GAP package build system
 GAPPATH = @GAPROOT@
 include Makefile.gappkg
-
-# react to modifications of the build system
-configure: configure.ac $(wildcard m4/*.m4)
-	@if command -v autoconf >/dev/null 2>&1 ; then \
-	   echo "running autoconf" ; \
-	   autoconf ; \
-	 else \
-	   echo "autoconf not available, proceeding with stale configure" ; \
-	 fi
-
-# re-run configure if configure, Makefile.in or GAP itself changed
-config.status: configure $(GAPPATH)/sysinfo.gap
-	./config.status --recheck
-
-Makefile: config.status
