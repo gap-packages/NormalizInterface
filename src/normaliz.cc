@@ -406,7 +406,7 @@ bool GAPToNmz(long & out, Obj x)
 bool GAPToNmz(mpz_class & out, Obj x)
 {
     if (IS_INTOBJ(x)) {
-        out = INT_INTOBJ(x);
+        out = (mp_limb_signed_t)INT_INTOBJ(x);
         return true;
     }
     else if (TNUM_OBJ(x) == T_INTPOS || TNUM_OBJ(x) == T_INTNEG) {
@@ -423,7 +423,7 @@ bool GAPToNmz(mpz_class & out, Obj x)
 bool GAPToNmz(mpq_class & out, Obj x)
 {
     if (IS_INTOBJ(x)) {
-        out = INT_INTOBJ(x);
+        out = (mp_limb_signed_t)INT_INTOBJ(x);
         return true;
     }
     else if (TNUM_OBJ(x) == T_INTPOS || TNUM_OBJ(x) == T_INTNEG) {
