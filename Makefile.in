@@ -4,7 +4,9 @@
 KEXT_NAME = NormalizInterface
 KEXT_SOURCES = src/normaliz.cc
 
-KEXT_CXXFLAGS = @NORMALIZ_CPPFLAGS@ -std=gnu++11
+# workaround for GAP 4.11: we need _POSIX_C_SOURCE=1 to avoid an error during compilation;
+# see https://github.com/gap-packages/NormalizInterface/pull/91 for details
+KEXT_CXXFLAGS = @NORMALIZ_CPPFLAGS@ -std=c++11 -D_POSIX_C_SOURCE=1
 KEXT_LDFLAGS = -lstdc++ -R@NORMALIZ_LDPATH@ @NORMALIZ_LDFLAGS@ -lnormaliz
 
 KEXT_USE_AUTOCONF = 1
