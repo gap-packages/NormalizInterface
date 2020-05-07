@@ -117,7 +117,8 @@ fi
 make -j4
 make install
 
-if [ "$(expr substr $(uname -s) 1 6)" == "CYGWIN" ]; then
+osname=$(uname -s)
+if [ "${osname#*$CYGWIN}" != "$osname" ]; then
     echo "##"
     echo "## Extra Cygwin installation step"
     echo "##"
