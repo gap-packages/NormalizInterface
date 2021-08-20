@@ -54,7 +54,6 @@ while : ; do
     #
     # Compute checksum
     #
-    ActualChecksum=$(shasum -a 256 ${Filename})
     echo "Verifying SHA256 checksum of ${Filename}..."
     if command -v sha256sum >/dev/null 2>&1 ; then
         ActualChecksum=$(sha256sum ${Filename})
