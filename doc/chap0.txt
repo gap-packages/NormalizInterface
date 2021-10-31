@@ -6,10 +6,10 @@
                            [1X [5XGAP[105X wrapper for Normaliz [101X
   
   
-                                     1.2.0
+                                     1.3.0
   
   
-                                 26 March 2020
+                                31 October 2020
   
   
                                Sebastian Gutsche
@@ -31,12 +31,12 @@
   
   
   Max Horn
-      Email:    [7Xmailto:max.horn@uni-siegen.de[107X
+      Email:    [7Xmailto:horn@mathematik.uni-kl.de[107X
       Homepage: [7Xhttps://www.quendi.de/math[107X
-      Address:  [33X[0;14YDepartment Mathematik[133X
-                [33X[0;14YUniversität Siegen[133X
-                [33X[0;14YWalter-Flex-Straße 3[133X
-                [33X[0;14Y57072 Siegen[133X
+      Address:  [33X[0;14YFachbereich Mathematik[133X
+                [33X[0;14YTU Kaiserslautern[133X
+                [33X[0;14YGottlieb-Daimler-Straße 48[133X
+                [33X[0;14Y67663 Kaiserslautern[133X
                 [33X[0;14YGermany[133X
   
   
@@ -70,64 +70,135 @@
       2.2-7 NmzPrintConeProperties
     2.3 [33X[0;0YCone properties[133X
       2.3-1 NmzAffineDim
-      2.3-2 NmzClassGroup
-      2.3-3 NmzCongruences
-      2.3-4 NmzDeg1Elements
-      2.3-5 NmzDehomogenization
-      2.3-6 NmzEmbeddingDimension
-      2.3-7 NmzEquations
-      2.3-8 NmzExcludedFaces
-      2.3-9 NmzExtremeRays
-      2.3-10 NmzGenerators
-      2.3-11 NmzGeneratorOfInterior
-      2.3-12 NmzGrading
-      2.3-13 NmzHilbertBasis
-      2.3-14 NmzHilbertQuasiPolynomial
-      2.3-15 NmzHilbertSeries
-      2.3-16 NmzInclusionExclusionData
-      2.3-17 NmzIsDeg1ExtremeRays
-      2.3-18 NmzIsDeg1HilbertBasis
-      2.3-19 NmzIsGorenstein
-      2.3-20 NmzIsInhomogeneous
-      2.3-21 NmzIsIntegrallyClosed
-      2.3-22 NmzIsPointed
-      2.3-23 NmzIsReesPrimary
-      2.3-24 NmzMaximalSubspace
-      2.3-25 NmzModuleGenerators
-      2.3-26 NmzModuleGeneratorsOverOriginalMonoid
-      2.3-27 NmzModuleRank
-      2.3-28 NmzMultiplicity
-      2.3-29 NmzOriginalMonoidGenerators
-      2.3-30 NmzRank
-      2.3-31 NmzRecessionRank
-      2.3-32 NmzReesPrimaryMultiplicity
-      2.3-33 NmzSupportHyperplanes
-      2.3-34 NmzTriangulation
-      2.3-35 NmzTriangulationDetSum
-      2.3-36 NmzTriangulationSize
-      2.3-37 NmzVerticesFloat
-      2.3-38 NmzVerticesOfPolyhedron
-      2.3-39 NmzConeDecomposition
-      2.3-40 NmzEmbeddingDim
-      2.3-41 NmzExternalIndex
-      2.3-42 NmzGradingDenom
-      2.3-43 NmzIntegerHull
-      2.3-44 NmzInternalIndex
-      2.3-45 NmzStanleyDec
-      2.3-46 NmzSublattice
-      2.3-47 NmzUnitGroupIndex
-      2.3-48 NmzWeightedEhrhartQuasiPolynomial
-      2.3-49 NmzWeightedEhrhartSeries
-      2.3-50 NmzWitnessNotIntegrallyClosed
-      2.3-51 NmzEhrhartSeries
-      2.3-52 NmzEuclideanVolume
-      2.3-53 NmzProjectCone
-      2.3-54 NmzSuppHypsFloat
-      2.3-55 NmzVolume
-      2.3-56 NmzFVector
-      2.3-57 NmzFaceLattice
-      2.3-58 NmzIncidence
-      2.3-59 NmzBasisChange
+      2.3-2 NmzAllGeneratorsTriangulation
+      2.3-3 NmzAmbientAutomorphisms
+      2.3-4 NmzApproximate
+      2.3-5 NmzAutomorphisms
+      2.3-6 NmzAxesScaling
+      2.3-7 NmzBasicStanleyDec
+      2.3-8 NmzBasicTriangulation
+      2.3-9 NmzBigInt
+      2.3-10 NmzBottomDecomposition
+      2.3-11 NmzClassGroup
+      2.3-12 NmzCombinatorialAutomorphisms
+      2.3-13 NmzConeDecomposition
+      2.3-14 NmzCongruences
+      2.3-15 NmzCoveringFace
+      2.3-16 NmzDefaultMode
+      2.3-17 NmzDeg1Elements
+      2.3-18 NmzDehomogenization
+      2.3-19 NmzDescent
+      2.3-20 NmzDistributedComp
+      2.3-21 NmzDualFVector
+      2.3-22 NmzDualFaceLattice
+      2.3-23 NmzDualIncidence
+      2.3-24 NmzDualMode
+      2.3-25 NmzDynamic
+      2.3-26 NmzEhrhartQuasiPolynomial
+      2.3-27 NmzEhrhartSeries
+      2.3-28 NmzEmbeddingDimension
+      2.3-29 NmzEquations
+      2.3-30 NmzEuclideanAutomorphisms
+      2.3-31 NmzEuclideanIntegral
+      2.3-32 NmzEuclideanVolume
+      2.3-33 NmzExcludedFaces
+      2.3-34 NmzExploitAutomsVectors
+      2.3-35 NmzExploitIsosMult
+      2.3-36 NmzExternalIndex
+      2.3-37 NmzExtremeRays
+      2.3-38 NmzExtremeRaysFloat
+      2.3-39 NmzFVector
+      2.3-40 NmzFaceLattice
+      2.3-41 NmzFixedPrecision
+      2.3-42 NmzFullConeDynamic
+      2.3-43 NmzGeneratorOfInterior
+      2.3-44 NmzGenerators
+      2.3-45 NmzGrading
+      2.3-46 NmzGradingDenom
+      2.3-47 NmzGradingIsPositive
+      2.3-48 NmzHSOP
+      2.3-49 NmzHilbertBasis
+      2.3-50 NmzHilbertQuasiPolynomial
+      2.3-51 NmzHilbertSeries
+      2.3-52 NmzIncidence
+      2.3-53 NmzInclusionExclusionData
+      2.3-54 NmzInputAutomorphisms
+      2.3-55 NmzIntegerHull
+      2.3-56 NmzIntegral
+      2.3-57 NmzInternalIndex
+      2.3-58 NmzIsDeg1ExtremeRays
+      2.3-59 NmzIsDeg1HilbertBasis
+      2.3-60 NmzIsEmptySemiOpen
+      2.3-61 NmzIsGorenstein
+      2.3-62 NmzIsInhomogeneous
+      2.3-63 NmzIsIntegrallyClosed
+      2.3-64 NmzIsPointed
+      2.3-65 NmzIsReesPrimary
+      2.3-66 NmzIsTriangulationNested
+      2.3-67 NmzIsTriangulationPartial
+      2.3-68 NmzKeepOrder
+      2.3-69 NmzLatticePointTriangulation
+      2.3-70 NmzLatticePoints
+      2.3-71 NmzMaximalSubspace
+      2.3-72 NmzModuleGenerators
+      2.3-73 NmzModuleGeneratorsOverOriginalMonoid
+      2.3-74 NmzModuleRank
+      2.3-75 NmzMultiplicity
+      2.3-76 NmzNoBottomDec
+      2.3-77 NmzNoDescent
+      2.3-78 NmzNoGradingDenom
+      2.3-79 NmzNoLLL
+      2.3-80 NmzNoNestedTri
+      2.3-81 NmzNoPeriodBound
+      2.3-82 NmzNoProjection
+      2.3-83 NmzNoRelax
+      2.3-84 NmzNoSignedDec
+      2.3-85 NmzNoSubdivision
+      2.3-86 NmzNoSymmetrization
+      2.3-87 NmzNumberLatticePoints
+      2.3-88 NmzOriginalMonoidGenerators
+      2.3-89 NmzPlacingTriangulation
+      2.3-90 NmzPrimalMode
+      2.3-91 NmzProjectCone
+      2.3-92 NmzProjection
+      2.3-93 NmzProjectionFloat
+      2.3-94 NmzPullingTriangulation
+      2.3-95 NmzPullingTriangulationInternal
+      2.3-96 NmzRank
+      2.3-97 NmzRationalAutomorphisms
+      2.3-98 NmzRecessionRank
+      2.3-99 NmzReesPrimaryMultiplicity
+      2.3-100 NmzRenfVolume
+      2.3-101 NmzSignedDec
+      2.3-102 NmzStanleyDec
+      2.3-103 NmzStatic
+      2.3-104 NmzStrictIsoTypeCheck
+      2.3-105 NmzSublattice
+      2.3-106 NmzSuppHypsFloat
+      2.3-107 NmzSupportHyperplanes
+      2.3-108 NmzSymmetrize
+      2.3-109 NmzTestArithOverflowDescent
+      2.3-110 NmzTestArithOverflowDualMode
+      2.3-111 NmzTestArithOverflowFullCone
+      2.3-112 NmzTestArithOverflowProjAndLift
+      2.3-113 NmzTestLargePyramids
+      2.3-114 NmzTestLibNormaliz
+      2.3-115 NmzTestLinearAlgebraGMP
+      2.3-116 NmzTestSimplexParallel
+      2.3-117 NmzTestSmallPyramids
+      2.3-118 NmzTriangulation
+      2.3-119 NmzTriangulationDetSum
+      2.3-120 NmzTriangulationSize
+      2.3-121 NmzUnimodularTriangulation
+      2.3-122 NmzUnitGroupIndex
+      2.3-123 NmzVerticesFloat
+      2.3-124 NmzVerticesOfPolyhedron
+      2.3-125 NmzVirtualMultiplicity
+      2.3-126 NmzVolume
+      2.3-127 NmzWeightedEhrhartQuasiPolynomial
+      2.3-128 NmzWeightedEhrhartSeries
+      2.3-129 NmzWitnessNotIntegrallyClosed
+      2.3-130 NmzBasisChange
   3 [33X[0;0YExamples[133X
     3.1 [33X[0;0YGenerators[133X
     3.2 [33X[0;0YSystem of equations[133X

@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/gap-packages/NormalizInterface.svg?branch=master)](https://travis-ci.org/gap-packages/NormalizInterface)
+[![Build Status](https://github.com/gap-packages/NormalizInterface/workflows/CI/badge.svg?branch=master)](https://github.com/gap-packages/NormalizInterface/actions?query=workflow%3ACI+branch%3Amaster)
 [![Code Coverage](https://codecov.io/github/gap-packages/NormalizInterface/coverage.svg?branch=master&token=)](https://codecov.io/gh/gap-packages/NormalizInterface)
 
 # The GAP 4 package 'NormalizInterface'
@@ -27,6 +27,8 @@ and especially have a look at the manual.
 ## Installation
 
 NormalizInterface supports GAP 4.9 or later, and Normaliz 3.5.4 or later.
+However, we recommend using the most recent versions -- at the time this
+is written, that means GAP 4.11.1 and Normaliz 3.9.1.
 
 Assuming you have a suitable version installed, you still need to
 compile Normaliz. There is a complicating factor, however: Normaliz
