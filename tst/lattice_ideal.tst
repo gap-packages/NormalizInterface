@@ -9,13 +9,35 @@ gap> M := [
 gap> cone := NmzCone(["lattice_ideal", M]);;
 gap> NmzCompute(cone);
 true
-gap> Display(NmzGenerators(cone));
-[ [  0,  0,  1 ],
-  [  0,  1,  3 ],
-  [  1,  0,  0 ],
-  [  1,  1,  2 ],
-  [  2,  3,  5 ],
-  [  3,  1,  0 ] ]
+gap> Display(NmzTriangulation(cone));
+[ [ rec(
+          Excluded := [  ],
+          height := 0,
+          key := [ 0, 1, 2 ],
+          mult := 0,
+          vol := 1 ), rec(
+          Excluded := [  ],
+          height := 0,
+          key := [ 1, 2, 3 ],
+          mult := 0,
+          vol := 1 ), rec(
+          Excluded := [  ],
+          height := 0,
+          key := [ 1, 3, 4 ],
+          mult := 0,
+          vol := 2 ), rec(
+          Excluded := [  ],
+          height := 0,
+          key := [ 2, 3, 4 ],
+          mult := 0,
+          vol := 1 ), rec(
+          Excluded := [  ],
+          height := 0,
+          key := [ 2, 4, 5 ],
+          mult := 0,
+          vol := 5 ) ], 
+  [ [ 0, 0, 1 ], [ 0, 1, 3 ], [ 1, 0, 0 ], [ 1, 1, 2 ], [ 2, 3, 5 ], 
+      [ 3, 1, 0 ] ] ]
 gap> Display(NmzExtremeRays(cone));
 [ [  0,  0,  1 ],
   [  0,  1,  3 ],
@@ -68,6 +90,7 @@ gap> _NmzPrintSomeConeProperties(cone, [
 > "NumberLatticePoints",
 > "OriginalMonoidGenerators",
 > ]);
+BasicTriangulation = fail
 ClassGroup = [ 2 ]
 EmbeddingDim = 3
 Grading = [ 1, -2, 1 ]
@@ -89,10 +112,36 @@ TriangulationDetSum = 10
 TriangulationSize = 5
 UnitGroupIndex = 1
 gap> Display(NmzConeDecomposition(cone));
-[ [ false, false, false ], [ false, false, true ], [ false, false, true ], 
-  [ true, false, true ], [ false, false, true ] ]
+[ [ rec(
+          Excluded := [ false, false, false ],
+          height := 0,
+          key := [ 0, 1, 2 ],
+          mult := 0,
+          vol := 1 ), rec(
+          Excluded := [ false, false, true ],
+          height := 0,
+          key := [ 1, 2, 3 ],
+          mult := 0,
+          vol := 1 ), rec(
+          Excluded := [ false, false, true ],
+          height := 0,
+          key := [ 1, 3, 4 ],
+          mult := 0,
+          vol := 2 ), rec(
+          Excluded := [ true, false, true ],
+          height := 0,
+          key := [ 2, 3, 4 ],
+          mult := 0,
+          vol := 1 ), rec(
+          Excluded := [ false, false, true ],
+          height := 0,
+          key := [ 2, 4, 5 ],
+          mult := 0,
+          vol := 5 ) ], 
+  [ [ 0, 0, 1 ], [ 0, 1, 3 ], [ 1, 0, 0 ], [ 1, 1, 2 ], [ 2, 3, 5 ], 
+      [ 3, 1, 0 ] ] ]
 gap> ForAll(NmzConeDecomposition(cone), IsBlistRep);
-true
+false
 
 #
 gap> STOP_TEST("lattice_ideal.tst", 0);

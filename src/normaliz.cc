@@ -25,8 +25,10 @@
 
 #include "compiled.h" // GAP headers
 
-#include "libnormaliz/cone.h"
-#include "libnormaliz/map_operations.h"
+#define mpn_tdiv_q    // workaround issue with FLINT's inline definition of
+                      // mpn_tdiv_q
+
+#include "libnormaliz/libnormaliz.h"
 
 #include <vector>
 
@@ -383,6 +385,18 @@ static Obj NmzToGAP(const libnormaliz::Matrix<T> & in)
     return NmzToGAP(in.get_elements());
 }
 
+template <typename T>
+static Obj NmzToGAP(const libnormaliz::SHORTSIMPLEX<T> & in)
+{
+    Obj simplex = NEW_PREC(5);
+    ASS_REC(simplex, RNamName("key"), NmzToGAP(in.key));
+    ASS_REC(simplex, RNamName("height"), NmzToGAP(in.height));
+    ASS_REC(simplex, RNamName("vol"), NmzToGAP(in.vol));
+    ASS_REC(simplex, RNamName("mult"), NmzToGAP(in.mult));
+    ASS_REC(simplex, RNamName("Excluded"), NmzToGAP(in.Excluded));
+    return simplex;
+}
+
 bool GAPToNmz(long & out, Obj x)
 {
     if (IS_INTOBJ(x)) {
@@ -704,12 +718,14 @@ static Obj _NmzConePropertyImpl(Obj cone, libnormaliz::ConeProperty::Enum p)
         return NmzToGAP(C->getNumberLatticePoints());
 #endif
 
+#if NMZ_RELEASE < 30804
     // workaround: these two properties are marked as having output type
     // "void"
     if (p == libnormaliz::ConeProperty::IsTriangulationNested)
         return C->isTriangulationNested() ? True : False;
     if (p == libnormaliz::ConeProperty::IsTriangulationPartial)
         return C->isTriangulationPartial() ? True : False;
+#endif
 
     switch (libnormaliz::output_type(p)) {
     case libnormaliz::OutputType::Matrix:
@@ -717,6 +733,7 @@ static Obj _NmzConePropertyImpl(Obj cone, libnormaliz::ConeProperty::Enum p)
         return NmzToGAP(C->getMatrixConeProperty(p));
 
     case libnormaliz::OutputType::MatrixFloat:
+        // TODO: switch to getFloatMatrixConePropertyMatrix ?
         return NmzToGAP(C->getFloatMatrixConeProperty(p));
 
     case libnormaliz::OutputType::Vector:
@@ -768,7 +785,11 @@ static Obj _NmzConePropertyImpl(Obj cone, libnormaliz::ConeProperty::Enum p)
 #endif
 
     case libnormaliz::ConeProperty::ConeDecomposition:
+#if NMZ_RELEASE >= 30810
+        return NmzToGAP(C->getConeDecomposition());
+#else
         return NmzToGAP(C->getOpenFacets());
+#endif
 
 #if NMZ_RELEASE >= 30600
     case libnormaliz::ConeProperty::EhrhartQuasiPolynomial:

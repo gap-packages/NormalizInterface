@@ -46,17 +46,102 @@ SupportHyperplanes
 TriangulationDetSum
 TriangulationSize
 UnitGroupIndex
-gap> Display(NmzGenerators(cone));
-[ [  0,  0,  1,  1,  0,  1 ],
-  [  0,  0,  1,  1,  1,  0 ],
-  [  0,  1,  0,  0,  1,  1 ],
-  [  0,  1,  0,  1,  1,  0 ],
-  [  0,  1,  1,  0,  0,  1 ],
-  [  1,  0,  0,  0,  1,  1 ],
-  [  1,  0,  0,  1,  0,  1 ],
-  [  1,  0,  1,  0,  1,  0 ],
-  [  1,  1,  0,  1,  0,  0 ],
-  [  1,  1,  1,  0,  0,  0 ] ]
+gap> Display(NmzTriangulation(cone));
+[ [ rec(
+          Excluded := [  ],
+          height := 0,
+          key := [ 0, 1, 2, 3, 4, 5 ],
+          mult := 0,
+          vol := 1 ), rec(
+          Excluded := [  ],
+          height := 0,
+          key := [ 0, 1, 3, 4, 5, 6 ],
+          mult := 0,
+          vol := 1 ), rec(
+          Excluded := [  ],
+          height := 0,
+          key := [ 0, 1, 3, 4, 6, 8 ],
+          mult := 0,
+          vol := 1 ), rec(
+          Excluded := [  ],
+          height := 0,
+          key := [ 0, 1, 4, 5, 6, 7 ],
+          mult := 0,
+          vol := 1 ), rec(
+          Excluded := [  ],
+          height := 0,
+          key := [ 0, 1, 4, 6, 7, 8 ],
+          mult := 0,
+          vol := 1 ), rec(
+          Excluded := [  ],
+          height := 0,
+          key := [ 0, 1, 4, 7, 8, 9 ],
+          mult := 0,
+          vol := 1 ), rec(
+          Excluded := [  ],
+          height := 0,
+          key := [ 0, 2, 3, 4, 5, 6 ],
+          mult := 0,
+          vol := 1 ), rec(
+          Excluded := [  ],
+          height := 0,
+          key := [ 0, 4, 6, 7, 8, 9 ],
+          mult := 0,
+          vol := 1 ), rec(
+          Excluded := [  ],
+          height := 0,
+          key := [ 1, 2, 3, 4, 5, 7 ],
+          mult := 0,
+          vol := 1 ), rec(
+          Excluded := [  ],
+          height := 0,
+          key := [ 1, 3, 4, 5, 6, 7 ],
+          mult := 0,
+          vol := 2 ), rec(
+          Excluded := [  ],
+          height := 0,
+          key := [ 1, 3, 4, 6, 7, 8 ],
+          mult := 0,
+          vol := 2 ), rec(
+          Excluded := [  ],
+          height := 0,
+          key := [ 1, 3, 4, 7, 8, 9 ],
+          mult := 0,
+          vol := 1 ), rec(
+          Excluded := [  ],
+          height := 0,
+          key := [ 2, 3, 4, 5, 6, 8 ],
+          mult := 0,
+          vol := 1 ), rec(
+          Excluded := [  ],
+          height := 0,
+          key := [ 2, 3, 4, 5, 7, 8 ],
+          mult := 0,
+          vol := 1 ), rec(
+          Excluded := [  ],
+          height := 0,
+          key := [ 2, 3, 4, 7, 8, 9 ],
+          mult := 0,
+          vol := 1 ), rec(
+          Excluded := [  ],
+          height := 0,
+          key := [ 2, 4, 5, 7, 8, 9 ],
+          mult := 0,
+          vol := 1 ), rec(
+          Excluded := [  ],
+          height := 0,
+          key := [ 3, 4, 5, 6, 7, 8 ],
+          mult := 0,
+          vol := 2 ), rec(
+          Excluded := [  ],
+          height := 0,
+          key := [ 4, 5, 6, 7, 8, 9 ],
+          mult := 0,
+          vol := 1 ) ], 
+  [ [ 0, 0, 1, 1, 0, 1 ], [ 0, 0, 1, 1, 1, 0 ], [ 0, 1, 0, 0, 1, 1 ], 
+      [ 0, 1, 0, 1, 1, 0 ], [ 0, 1, 1, 0, 0, 1 ], [ 1, 0, 0, 0, 1, 1 ], 
+      [ 1, 0, 0, 1, 0, 1 ], [ 1, 0, 1, 0, 1, 0 ], [ 1, 1, 0, 1, 0, 0 ], 
+      [ 1, 1, 1, 0, 0, 0 ] ] ]
 gap> Display(NmzExtremeRays(cone));
 [ [  0,  0,  1,  1,  0,  1 ],
   [  0,  0,  1,  1,  1,  0 ],
@@ -140,10 +225,13 @@ gap> _NmzPrintSomeConeProperties(cone, [
 > "NumberLatticePoints",
 > "OriginalMonoidGenerators",
 > ]);
+BasicTriangulation = fail
 ClassGroup = [ 16 ]
+EhrhartQuasiPolynomial = [ [ 120, 314, 375, 265, 105, 21 ], 120 ]
 EmbeddingDim = 6
 Grading = [ 1/3, 1/3, 1/3, 1/3, 1/3, 1/3 ]
 GradingDenom = 3
+HilbertQuasiPolynomial = [ 7/40*t^5+7/8*t^4+53/24*t^3+25/8*t^2+157/60*t+1 ]
 HilbertQuasiPolynomial = [ 7/40*t^5+7/8*t^4+53/24*t^3+25/8*t^2+157/60*t+1 ]
 HilbertSeries = [ t^4+4*t^3+11*t^2+4*t+1, [ [ 1, 6 ] ] ]
 InternalIndex = 1
@@ -161,26 +249,103 @@ TriangulationDetSum = 21
 TriangulationSize = 18
 UnitGroupIndex = 1
 gap> Display(NmzConeDecomposition(cone));
-[ [ false, false, false, false, false, false ], 
-  [ false, true, false, false, false, true ], 
-  [ true, false, false, false, false, true ], 
-  [ true, false, false, false, false, true ], 
-  [ true, false, false, false, true, true ], 
-  [ true, true, false, false, false, true ], 
-  [ false, false, false, false, false, true ], 
-  [ true, false, false, false, false, true ], 
-  [ false, false, false, false, false, true ], 
-  [ false, false, false, false, true, true ], 
-  [ true, false, false, false, false, true ], 
-  [ true, false, false, false, false, true ], 
-  [ true, false, false, false, false, true ], 
-  [ true, false, false, false, true, true ], 
-  [ false, true, false, false, false, true ], 
-  [ false, false, false, false, false, true ], 
-  [ false, false, false, false, false, true ], 
-  [ false, false, true, false, false, true ] ]
+[ [ rec(
+          Excluded := [ false, false, false, false, false, false ],
+          height := 0,
+          key := [ 0, 1, 2, 3, 4, 5 ],
+          mult := 0,
+          vol := 1 ), rec(
+          Excluded := [ false, true, false, false, false, true ],
+          height := 0,
+          key := [ 0, 1, 3, 4, 5, 6 ],
+          mult := 0,
+          vol := 1 ), rec(
+          Excluded := [ true, false, false, false, false, true ],
+          height := 0,
+          key := [ 0, 1, 3, 4, 6, 8 ],
+          mult := 0,
+          vol := 1 ), rec(
+          Excluded := [ true, false, false, false, false, true ],
+          height := 0,
+          key := [ 0, 1, 4, 5, 6, 7 ],
+          mult := 0,
+          vol := 1 ), rec(
+          Excluded := [ true, false, false, false, true, true ],
+          height := 0,
+          key := [ 0, 1, 4, 6, 7, 8 ],
+          mult := 0,
+          vol := 1 ), rec(
+          Excluded := [ true, true, false, false, false, true ],
+          height := 0,
+          key := [ 0, 1, 4, 7, 8, 9 ],
+          mult := 0,
+          vol := 1 ), rec(
+          Excluded := [ false, false, false, false, false, true ],
+          height := 0,
+          key := [ 0, 2, 3, 4, 5, 6 ],
+          mult := 0,
+          vol := 1 ), rec(
+          Excluded := [ true, false, false, false, false, true ],
+          height := 0,
+          key := [ 0, 4, 6, 7, 8, 9 ],
+          mult := 0,
+          vol := 1 ), rec(
+          Excluded := [ false, false, false, false, false, true ],
+          height := 0,
+          key := [ 1, 2, 3, 4, 5, 7 ],
+          mult := 0,
+          vol := 1 ), rec(
+          Excluded := [ false, false, false, false, true, true ],
+          height := 0,
+          key := [ 1, 3, 4, 5, 6, 7 ],
+          mult := 0,
+          vol := 2 ), rec(
+          Excluded := [ true, false, false, false, false, true ],
+          height := 0,
+          key := [ 1, 3, 4, 6, 7, 8 ],
+          mult := 0,
+          vol := 2 ), rec(
+          Excluded := [ true, false, false, false, false, true ],
+          height := 0,
+          key := [ 1, 3, 4, 7, 8, 9 ],
+          mult := 0,
+          vol := 1 ), rec(
+          Excluded := [ true, false, false, false, false, true ],
+          height := 0,
+          key := [ 2, 3, 4, 5, 6, 8 ],
+          mult := 0,
+          vol := 1 ), rec(
+          Excluded := [ true, false, false, false, true, true ],
+          height := 0,
+          key := [ 2, 3, 4, 5, 7, 8 ],
+          mult := 0,
+          vol := 1 ), rec(
+          Excluded := [ false, true, false, false, false, true ],
+          height := 0,
+          key := [ 2, 3, 4, 7, 8, 9 ],
+          mult := 0,
+          vol := 1 ), rec(
+          Excluded := [ false, false, false, false, false, true ],
+          height := 0,
+          key := [ 2, 4, 5, 7, 8, 9 ],
+          mult := 0,
+          vol := 1 ), rec(
+          Excluded := [ false, false, false, false, false, true ],
+          height := 0,
+          key := [ 3, 4, 5, 6, 7, 8 ],
+          mult := 0,
+          vol := 2 ), rec(
+          Excluded := [ false, false, true, false, false, true ],
+          height := 0,
+          key := [ 4, 5, 6, 7, 8, 9 ],
+          mult := 0,
+          vol := 1 ) ], 
+  [ [ 0, 0, 1, 1, 0, 1 ], [ 0, 0, 1, 1, 1, 0 ], [ 0, 1, 0, 0, 1, 1 ], 
+      [ 0, 1, 0, 1, 1, 0 ], [ 0, 1, 1, 0, 0, 1 ], [ 1, 0, 0, 0, 1, 1 ], 
+      [ 1, 0, 0, 1, 0, 1 ], [ 1, 0, 1, 0, 1, 0 ], [ 1, 1, 0, 1, 0, 0 ], 
+      [ 1, 1, 1, 0, 0, 0 ] ] ]
 gap> ForAll(NmzConeDecomposition(cone), IsBlistRep);
-true
+false
 
 #
 gap> STOP_TEST("rp2poly.tst", 0);

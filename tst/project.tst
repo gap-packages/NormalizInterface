@@ -23,8 +23,13 @@ ProjectCone
 Rank
 Sublattice
 SupportHyperplanes
-gap> Display(NmzGenerators(cone));
-[ [  0,  1,  0,  0 ] ]
+gap> Display(NmzTriangulation(cone));
+[ [ rec(
+          Excluded := [  ],
+          height := 0,
+          key := [ 0 ],
+          mult := 0,
+          vol := 1 ) ], [ [ 0, 1, 0, 0 ] ] ]
 gap> Display(NmzExtremeRays(cone));
 [ [  0,  1,  0,  0 ] ]
 gap> Display(NmzSupportHyperplanes(cone));
@@ -46,6 +51,7 @@ gap> _NmzPrintSomeConeProperties(cone, [
 > "NumberLatticePoints",
 > "OriginalMonoidGenerators",
 > ]);
+BasicTriangulation = fail
 EmbeddingDim = 4
 Grading = [ 0, 1, 0, 0 ]
 GradingDenom = 1
@@ -57,6 +63,7 @@ IsTriangulationNested = false
 IsTriangulationPartial = true
 MaximalSubspace = 
 [ [  1,  0,  0,  0 ] ]
+Multiplicity = 1
 ProjectCone = <object>
 Rank = 2
 TriangulationDetSum = 0
@@ -78,8 +85,13 @@ OriginalMonoidGenerators
 Rank
 Sublattice
 SupportHyperplanes
-gap> Display(NmzGenerators(proj));
-[ [  0,  1,  0 ] ]
+gap> Display(NmzTriangulation(proj));
+[ [ rec(
+          Excluded := [  ],
+          height := 0,
+          key := [ 0 ],
+          mult := 0,
+          vol := 1 ) ], [ [ 0, 1, 0 ] ] ]
 gap> Display(NmzExtremeRays(proj));
 [ [  0,  1,  0 ] ]
 gap> Display(NmzSupportHyperplanes(proj));
@@ -100,6 +112,7 @@ gap> _NmzPrintSomeConeProperties(proj, [
 > "NumberLatticePoints",
 > "OriginalMonoidGenerators",
 > ]);
+BasicTriangulation = fail
 EmbeddingDim = 3
 Grading = [ 0, 1, 0 ]
 GradingDenom = 1
@@ -113,6 +126,7 @@ IsTriangulationNested = false
 IsTriangulationPartial = true
 MaximalSubspace = 
 [ [  1,  0,  0 ] ]
+Multiplicity = 1
 Rank = 2
 TriangulationDetSum = 0
 TriangulationSize = 0
