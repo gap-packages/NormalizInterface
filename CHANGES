@@ -1,5 +1,10 @@
 This file describes changes in the NormalizInterface package.
 
+1.3.0 (2021-10-31)
+  - Update to Normaliz 3.9.1
+  - Improve the new build system
+  - Various janitorial changes
+
 1.2.0 (2020-03-26)
   - Update to Normaliz 3.8.4
   - New build system
