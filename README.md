@@ -27,6 +27,8 @@ and especially have a look at the manual.
 ## Installation
 
 NormalizInterface supports GAP 4.9 or later, and Normaliz 3.5.4 or later.
+However, we recommend using the most recent versions -- at the time this
+is written, that means GAP 4.11.1 and Normaliz 3.9.1.
 
 Assuming you have a suitable version installed, you still need to
 compile Normaliz. There is a complicating factor, however: Normaliz

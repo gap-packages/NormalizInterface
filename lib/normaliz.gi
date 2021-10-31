@@ -57,7 +57,7 @@ function(cone, excluded)
         Error("First argument must be a Normaliz cone object");
         return;
     fi;
-    excluded := Union(excluded, [ "ExplicitHilbertSeries" ]);
+    excluded := Union(excluded, [ "ExplicitHilbertSeries", "Triangulation" ]);
     # iterate over properties in alphabetical order, to reduce
     # fluctuations between Normaliz versions
     for prop in NmzKnownConeProperties(cone) do

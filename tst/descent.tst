@@ -34,23 +34,25 @@ true
 gap> Perform(NmzKnownConeProperties(cone),Display);
 EmbeddingDim
 IsInhomogeneous
-gap> Display(NmzGenerators(cone));
+IsPointed
+MaximalSubspace
+gap> Display(NmzTriangulation(cone)[2]);
 [ [  0,  0,  0,  0,  0,  1,  0 ],
   [  0,  0,  0,  0,  1,  0,  0 ],
   [  0,  0,  0,  1,  0,  0,  0 ],
   [  0,  0,  1,  0,  0,  0,  0 ],
-  [  0,  1,  0,  0,  0,  0,  0 ],
-  [  1,  0,  0,  0,  0,  0,  0 ],
-  [  0,  1,  1,  0,  0,  1,  1 ],
-  [  0,  1,  0,  1,  1,  0,  1 ],
-  [  1,  1,  0,  1,  0,  0,  1 ],
-  [  1,  1,  1,  0,  0,  0,  1 ],
-  [  0,  0,  1,  1,  1,  0,  1 ],
-  [  1,  0,  1,  0,  1,  0,  1 ],
   [  0,  0,  1,  1,  0,  1,  1 ],
-  [  1,  0,  0,  1,  0,  1,  1 ],
+  [  0,  0,  1,  1,  1,  0,  1 ],
+  [  0,  1,  0,  0,  0,  0,  0 ],
   [  0,  1,  0,  0,  1,  1,  1 ],
-  [  1,  0,  0,  0,  1,  1,  1 ] ]
+  [  0,  1,  0,  1,  1,  0,  1 ],
+  [  0,  1,  1,  0,  0,  1,  1 ],
+  [  1,  0,  0,  0,  0,  0,  0 ],
+  [  1,  0,  0,  0,  1,  1,  1 ],
+  [  1,  0,  0,  1,  0,  1,  1 ],
+  [  1,  0,  1,  0,  1,  0,  1 ],
+  [  1,  1,  0,  1,  0,  0,  1 ],
+  [  1,  1,  1,  0,  0,  0,  1 ] ]
 gap> Display(NmzExtremeRays(cone));
 [ [  0,  0,  0,  0,  0,  1,  0 ],
   [  0,  0,  0,  0,  1,  0,  0 ],
@@ -145,6 +147,7 @@ gap> _NmzPrintSomeConeProperties(cone, [
 > "NumberLatticePoints",
 > "OriginalMonoidGenerators",
 > ]);
+BasicTriangulation = fail
 EmbeddingDim = 7
 Grading = [ 1, 1, 1, 1, 1, 1, -2 ]
 GradingDenom = 1
@@ -155,6 +158,7 @@ IsPointed = true
 IsTriangulationNested = false
 IsTriangulationPartial = true
 MaximalSubspace = [  ]
+Multiplicity = 72
 Rank = 7
 TriangulationDetSum = 2
 TriangulationSize = 1

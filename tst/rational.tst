@@ -40,10 +40,13 @@ SupportHyperplanes
 TriangulationDetSum
 TriangulationSize
 UnitGroupIndex
-gap> Display(NmzGenerators(cone));
-[ [   1,   1,   2 ],
-  [  -1,  -1,   3 ],
-  [   1,  -2,   4 ] ]
+gap> Display(NmzTriangulation(cone));
+[ [ rec(
+          Excluded := [  ],
+          height := 0,
+          key := [ 0, 1, 2 ],
+          mult := 0,
+          vol := 15 ) ], [ [ 1, 1, 2 ], [ -1, -1, 3 ], [ 1, -2, 4 ] ] ]
 gap> Display(NmzExtremeRays(cone));
 [ [   1,   1,   2 ],
   [  -1,  -1,   3 ],
@@ -80,10 +83,20 @@ gap> _NmzPrintSomeConeProperties(cone, [
 > "NumberLatticePoints",
 > "OriginalMonoidGenerators",
 > ]);
+BasicTriangulation = fail
 ClassGroup = [ 0, 3, 15 ]
+EhrhartQuasiPolynomial = [ [ 48, 28, 15 ], [ 11, 22, 15 ], [ -20, 28, 15 ], 
+  [ 39, 22, 15 ], [ 32, 28, 15 ], [ -5, 22, 15 ], [ 12, 28, 15 ], 
+  [ 23, 22, 15 ], [ 16, 28, 15 ], [ 27, 22, 15 ], [ -4, 28, 15 ], 
+  [ 7, 22, 15 ], 48 ]
 EmbeddingDim = 3
 Grading = [ 0, 0, 1 ]
 GradingDenom = 1
+HilbertQuasiPolynomial = [ 5/16*t^2+7/12*t+1, 5/16*t^2+11/24*t+11/48, 
+  5/16*t^2+7/12*t-5/12, 5/16*t^2+11/24*t+13/16, 5/16*t^2+7/12*t+2/3, 
+  5/16*t^2+11/24*t-5/48, 5/16*t^2+7/12*t+1/4, 5/16*t^2+11/24*t+23/48, 
+  5/16*t^2+7/12*t+1/3, 5/16*t^2+11/24*t+9/16, 5/16*t^2+7/12*t-1/12, 
+  5/16*t^2+11/24*t+7/48 ]
 HilbertQuasiPolynomial = [ 5/16*t^2+7/12*t+1, 5/16*t^2+11/24*t+11/48, 
   5/16*t^2+7/12*t-5/12, 5/16*t^2+11/24*t+13/16, 5/16*t^2+7/12*t+2/3, 
   5/16*t^2+11/24*t-5/48, 5/16*t^2+7/12*t+1/4, 5/16*t^2+11/24*t+23/48, 
@@ -106,17 +119,23 @@ TriangulationDetSum = 15
 TriangulationSize = 1
 UnitGroupIndex = 1
 gap> Display(NmzConeDecomposition(cone));
-[ [ false, false, false ] ]
+[ [ rec(
+          Excluded := [ false, false, false ],
+          height := 0,
+          key := [ 0, 1, 2 ],
+          mult := 0,
+          vol := 15 ) ], [ [ 1, 1, 2 ], [ -1, -1, 3 ], [ 1, -2, 4 ] ] ]
 gap> ForAll(NmzConeDecomposition(cone), IsBlistRep);
-true
+false
 
 #
 gap> NmzStanleyDec(cone);
-[ [ [ 0, 1, 2 ], 
-      [ [ 0, 0, 0 ], [ 1, 11, 10 ], [ 2, 7, 5 ], [ 3, 3, 0 ], [ 4, 14, 10 ], 
-          [ 5, 10, 5 ], [ 6, 6, 0 ], [ 7, 2, 10 ], [ 8, 13, 5 ], [ 9, 9, 0 ], 
-          [ 10, 5, 10 ], [ 11, 1, 5 ], [ 12, 12, 0 ], [ 13, 8, 10 ], 
-          [ 14, 4, 5 ] ] ] ]
+[ [ [ [ 0, 1, 2 ], 
+          [ [ 0, 0, 0 ], [ 1, 11, 10 ], [ 2, 7, 5 ], [ 3, 3, 0 ], 
+              [ 4, 14, 10 ], [ 5, 10, 5 ], [ 6, 6, 0 ], [ 7, 2, 10 ], 
+              [ 8, 13, 5 ], [ 9, 9, 0 ], [ 10, 5, 10 ], [ 11, 1, 5 ], 
+              [ 12, 12, 0 ], [ 13, 8, 10 ], [ 14, 4, 5 ] ] ] ], 
+  [ [ 1, 1, 2 ], [ -1, -1, 3 ], [ 1, -2, 4 ] ] ]
 
 #
 gap> (_NmzVersion() < [3, 7, 0]) or (NmzFVector(cone) = [ 1, 3, 3, 1 ]);
