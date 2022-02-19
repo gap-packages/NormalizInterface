@@ -13,15 +13,6 @@ Persons := [
     IsAuthor      := true,
     IsMaintainer  := false,
     Email         := "gutsche@mathematik.uni-siegen.de",
-    WWWHome       := "https://algebra.mathematik.uni-siegen.de/gutsche/",
-    PostalAddress := Concatenation(
-                       "Department Mathematik\n",
-                       "Universität Siegen\n",
-                       "Walter-Flex-Straße 3\n",
-                       "57072 Siegen\n",
-                       "Germany" ),
-    Place         := "Siegen",
-    Institution   := "Universität Siegen"
   ),
 
   rec(
@@ -47,14 +38,6 @@ Persons := [
     IsAuthor      := true,
     IsMaintainer  := false,
     Email         := "csoeger@uos.de",
-    WWWHome       := "https://www.normaliz.uni-osnabrueck.de",
-    PostalAddress := Concatenation(
-                       "Institut für Mathematik\n",
-                       "Albrechtstr. 28a\n",
-                       "49076 Osnabrück\n",
-                       "Germany" ),
-    Place         := "Osnabrück",
-    Institution   := "University of Osnabrück"
   ),
 ],
 
