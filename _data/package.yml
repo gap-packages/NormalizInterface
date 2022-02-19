@@ -1,16 +1,16 @@
 name: NormalizInterface
-version: 1.3.0
-date: 2020-10-31
+version: 1.3.1
+date: 2022-02-19
 description: |
     GAP wrapper for Normaliz
 
 authors:
     - name: Sebastian Gutsche
-      url: https://algebra.mathematik.uni-siegen.de/gutsche/
+      url: mailto:gutsche@mathematik.uni-siegen.de
     - name: Max Horn
       url: https://www.quendi.de/math
     - name: Christof Söger
-      url: https://www.normaliz.uni-osnabrueck.de
+      url: mailto:csoeger@uos.de
 
 maintainers:
     - name: Max Horn
@@ -24,9 +24,9 @@ packageinfo: https://gap-packages.github.io/NormalizInterface/PackageInfo.g
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/gap-packages/NormalizInterface/releases/download/v1.3.0/NormalizInterface-1.3.0.tar.gz
+      url: https://github.com/gap-packages/NormalizInterface/releases/download/v1.3.1/NormalizInterface-1.3.1.tar.gz
     - name: .tar.bz2
-      url: https://github.com/gap-packages/NormalizInterface/releases/download/v1.3.0/NormalizInterface-1.3.0.tar.bz2
+      url: https://github.com/gap-packages/NormalizInterface/releases/download/v1.3.1/NormalizInterface-1.3.1.tar.bz2
 
 abstract: |
     The <span class='pkgname'>NormalizInterface</span> package provides  a GAP interface to <a href='https://www.normaliz.uni-osnabrueck.de'>Normaliz</a>,  enabling direct access to the complete functionality of Normaliz, such as  computations in affine monoids, vector configurations, lattice polytopes, and rational cones.  

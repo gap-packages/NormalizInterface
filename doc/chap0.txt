@@ -6,10 +6,10 @@
                            [1X [5XGAP[105X wrapper for Normaliz [101X
   
   
-                                     1.3.0
+                                     1.3.1
   
   
-                                31 October 2020
+                                19 February 2022
   
   
                                Sebastian Gutsche
@@ -22,14 +22,6 @@
   
   Sebastian Gutsche
       Email:    [7Xmailto:gutsche@mathematik.uni-siegen.de[107X
-      Homepage: [7Xhttps://algebra.mathematik.uni-siegen.de/gutsche/[107X
-      Address:  [33X[0;14YDepartment Mathematik[133X
-                [33X[0;14YUniversität Siegen[133X
-                [33X[0;14YWalter-Flex-Straße 3[133X
-                [33X[0;14Y57072 Siegen[133X
-                [33X[0;14YGermany[133X
-  
-  
   Max Horn
       Email:    [7Xmailto:horn@mathematik.uni-kl.de[107X
       Homepage: [7Xhttps://www.quendi.de/math[107X
@@ -42,13 +34,6 @@
   
   Christof Söger
       Email:    [7Xmailto:csoeger@uos.de[107X
-      Homepage: [7Xhttps://www.normaliz.uni-osnabrueck.de[107X
-      Address:  [33X[0;14YInstitut für Mathematik[133X
-                [33X[0;14YAlbrechtstr. 28a[133X
-                [33X[0;14Y49076 Osnabrück[133X
-                [33X[0;14YGermany[133X
-  
-  
   
   -------------------------------------------------------
   

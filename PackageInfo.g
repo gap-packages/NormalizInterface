@@ -2,8 +2,8 @@ SetPackageInfo( rec(
 
 PackageName := "NormalizInterface",
 Subtitle := "GAP wrapper for Normaliz",
-Version := "1.3.0",
-Date    := "31/10/2020", # dd/mm/yyyy format
+Version := "1.3.1",
+Date    := "19/02/2022", # dd/mm/yyyy format
 License := "GPL-2.0-or-later",
 
 Persons := [
@@ -13,15 +13,6 @@ Persons := [
     IsAuthor      := true,
     IsMaintainer  := false,
     Email         := "gutsche@mathematik.uni-siegen.de",
-    WWWHome       := "https://algebra.mathematik.uni-siegen.de/gutsche/",
-    PostalAddress := Concatenation(
-                       "Department Mathematik\n",
-                       "Universität Siegen\n",
-                       "Walter-Flex-Straße 3\n",
-                       "57072 Siegen\n",
-                       "Germany" ),
-    Place         := "Siegen",
-    Institution   := "Universität Siegen"
   ),
 
   rec(
@@ -47,14 +38,6 @@ Persons := [
     IsAuthor      := true,
     IsMaintainer  := false,
     Email         := "csoeger@uos.de",
-    WWWHome       := "https://www.normaliz.uni-osnabrueck.de",
-    PostalAddress := Concatenation(
-                       "Institut für Mathematik\n",
-                       "Albrechtstr. 28a\n",
-                       "49076 Osnabrück\n",
-                       "Germany" ),
-    Place         := "Osnabrück",
-    Institution   := "University of Osnabrück"
   ),
 ],
 
