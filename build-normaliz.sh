@@ -118,7 +118,7 @@ make -j4
 make install
 
 osname=$(uname -s)
-if [ "${osname#*$CYGWIN}" != "$osname" ]; then
+if [ "${osname#*CYGWIN}" != "$osname" ]; then
     echo "##"
     echo "## Extra Cygwin installation step"
     echo "##"
