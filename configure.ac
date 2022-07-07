@@ -32,13 +32,17 @@ dnl ##
 dnl ## Locate Normaliz
 dnl ##
 
+NORMALIZ_RPATH_EXTRA=""
+
 AC_ARG_WITH([normaliz],
     [AS_HELP_STRING([--with-normaliz=<path>], [specify root of Normaliz installation])],
     [NORMALIZ="$with_normaliz"],
-    [NORMALIZ="$PWD/NormalizInstallDir"]
+    [NORMALIZ="$PWD/NormalizInstallDir"
+     NORMALIZ_RPATH_EXTRA="-Wl,-rpath=$NORMALIZ/lib"
+    ]
 )
 NORMALIZ_CPPFLAGS="-I$NORMALIZ/include"
-NORMALIZ_LDFLAGS="-L$NORMALIZ/lib"
+NORMALIZ_LDFLAGS="$NORMALIZ_RPATH_EXTRA -L$NORMALIZ/lib"
 AC_SUBST(NORMALIZ_LDFLAGS)
 AC_SUBST(NORMALIZ_CPPFLAGS)
 
