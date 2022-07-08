@@ -95,16 +95,6 @@ rm -rf ${NORMALIZ_BASE}
 tar xvf ${NORMALIZ_TAR}
 
 echo "##"
-echo "## patching Normaliz ${NORMALIZ_VERSION}"
-echo "##"
-
-# HACK: modify the Normaliz build system to ensure an explicit RPATH is
-# encoded into libnormaliz, so that loading NormalizInterface.so will load the
-# *correct* copy of libnormaliz
-cp ${NORMALIZ_BASE}/source/Makefile.in ${NORMALIZ_BASE}/source/Makefile.in.mod
-sed -e 's;libnormaliz_la_LDFLAGS = -no-undefined ;libnormaliz_la_LDFLAGS = -no-undefined -R $(libdir) ;' < ${NORMALIZ_BASE}/source/Makefile.in.mod > ${NORMALIZ_BASE}/source/Makefile.in
-
-echo "##"
 echo "## compiling Normaliz ${NORMALIZ_VERSION}"
 echo "##"
 
