@@ -38,7 +38,11 @@ AC_ARG_WITH([normaliz],
     [AS_HELP_STRING([--with-normaliz=<path>], [specify root of Normaliz installation])],
     [NORMALIZ="$with_normaliz"],
     [NORMALIZ="$PWD/NormalizInstallDir"
-     NORMALIZ_RPATH_EXTRA="-Wl,-rpath=$NORMALIZ/lib"
+     # The following is a hack to ensure compatibility with versions of gac that
+     # don't use GNU libtool anymore, and thus don't set a run path pointing to
+     # the specific version of libnormaliz we requested. Without this, when GAP
+     # loads NormalizInterface.so it may not find the libnormaliz shared library.
+     NORMALIZ_RPATH_EXTRA="-Wl,-rpath -Wl,$NORMALIZ/lib"
     ]
 )
 NORMALIZ_CPPFLAGS="-I$NORMALIZ/include"
