@@ -18,8 +18,8 @@ concurrency:
 jobs:
   # The CI test job
   test:
-    name: ${{ matrix.gap-branch }} ${{ matrix.ABI }}
-    runs-on: ubuntu-latest
+    name: ${{ matrix.gap-branch }} ${{ matrix.ABI }} ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
@@ -29,9 +29,14 @@ jobs:
           - stable-4.10
           - stable-4.9
         ABI: ['']
+        os: [ubuntu-latest]
         include:
           - gap-branch: master
             ABI: 32
+            os: ubuntu-latest
+          - gap-branch: master
+            ABI: ''
+            os: macos-latest
 
     steps:
       - uses: actions/checkout@v2
