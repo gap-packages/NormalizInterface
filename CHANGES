@@ -1,5 +1,8 @@
 This file describes changes in the NormalizInterface package.
 
+1.3.4 (2022-08-07)
+  - Fix regression that broke building NormalizInterface on macOS
+
 1.3.3 (2022-07-08)
   - Update to Normaliz 3.9.3
   - Improve build system to honor CPPFLAGS environment variable
