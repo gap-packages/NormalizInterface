@@ -8,7 +8,7 @@ KEXT_SOURCES = src/normaliz.cc
 # instead of -std=c++11 to avoid an error during compilation; see
 # https://github.com/gap-packages/NormalizInterface/pull/91 for details
 KEXT_CXXFLAGS = @CPPFLAGS@ @NORMALIZ_CPPFLAGS@ -std=gnu++11
-KEXT_LDFLAGS = @LDFLAGS@ -lgmp @NORMALIZ_LDFLAGS@ -lnormaliz
+KEXT_LDFLAGS = @LDFLAGS@ -lgmp @NORMALIZ_LDFLAGS@ -lnormaliz -lstdc++
 
 KEXT_USE_AUTOCONF = 1
 
