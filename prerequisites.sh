@@ -4,7 +4,7 @@
 # To use it, pass the location of your GAP installation
 # to it:
 #
-#  ./build-normaliz.sh GAPDIR
+#  ./prerequisites.sh GAPDIR
 #
 #  Then you can compile NormalizInterface as follows:
 #

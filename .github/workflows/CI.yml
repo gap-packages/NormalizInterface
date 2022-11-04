@@ -48,9 +48,6 @@ jobs:
         with:
           GAPBRANCH: ${{ matrix.gap-branch }}
           ABI: ${{ matrix.ABI }}
-      - name: 'Install additional dependencies'
-        run: |
-          ./build-normaliz.sh $HOME/gap
       - uses: gap-actions/build-pkg@v1
         with:
           ABI: ${{ matrix.ABI }}

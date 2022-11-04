@@ -42,17 +42,17 @@ in addition to a C++11 compiler:
  * curl OR wget for downloading the source code
 
 Once you have installed these, you can build Normaliz by using the
-`build-normaliz.sh` script provided by us. If NormalizInterface is
+`prerequisites.sh` script provided by us. If NormalizInterface is
 installed inside the `pkg` directory of your GAP installation, you
 can simply invoke it from inside the NormalizInterface directory as
 follows:
 
-    ./build-normaliz.sh
+    ./prerequisites.sh
 
 Otherwise, you have to tell the script where your GAP directory is,
 by passing it as an argumnt:
 
-    ./build-normaliz.sh GAPDIR
+    ./prerequisites.sh GAPDIR
 
 Not specifying GAPDIR is equivalent to passing `../..` as GAPDIR. If
 more than one argument is specified, then any arguments beyond the

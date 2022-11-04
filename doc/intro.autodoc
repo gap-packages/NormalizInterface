@@ -97,9 +97,9 @@ enter the following commands:
 <P/>
 
 <Listing><![CDATA[
-    make clean
-    ./configure --with-gmp=PATH/TO/YOUR/GMP
-    make
+make clean
+./configure --with-gmp=PATH/TO/YOUR/GMP
+make
 ]]></Listing>
 
 Next you need to compile a recent version of Normaliz. This requires the
@@ -110,12 +110,12 @@ via your system's package manager. At least the following are required:
  * curl OR wget for downloading the source code
 
 Once you have installed these, you can build Normaliz by using
-the build-normaliz.sh script we provide. It takes a single,
+the `prerequisites.sh` script we provide. It takes a single,
 optional parameter: the location of the GAP root directory.
 <P/>
 
 <Listing><![CDATA[
-    ./build-normaliz.sh GAPDIR
+./prerequisites.sh GAPDIR
 ]]></Listing>
 
 Once it completed successfully, you can then build NormalizInterface
@@ -123,6 +123,6 @@ like this:
 <P/>
 
 <Listing><![CDATA[
-    ./configure --with-gaproot=GAPDIR
-    make
+./configure --with-gaproot=GAPDIR
+make
 ]]></Listing>
