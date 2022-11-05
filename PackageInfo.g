@@ -2,8 +2,8 @@ SetPackageInfo( rec(
 
 PackageName := "NormalizInterface",
 Subtitle := "GAP wrapper for Normaliz",
-Version := "1.3.4",
-Date    := "07/08/2022", # dd/mm/yyyy format
+Version := "1.3.5",
+Date    := "05/11/2022", # dd/mm/yyyy format
 License := "GPL-2.0-or-later",
 
 Persons := [
