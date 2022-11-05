@@ -22,9 +22,9 @@
   following commands:[133X
   
   [4X[32X[104X
-    [4X    make clean[104X
-    [4X    ./configure --with-gmp=PATH/TO/YOUR/GMP[104X
-    [4X    make[104X
+    [4Xmake clean[104X
+    [4X./configure --with-gmp=PATH/TO/YOUR/GMP[104X
+    [4Xmake[104X
   [4X[32X[104X
   
   [33X[0;0YNext  you  need  to  compile a recent version of Normaliz. This requires the
@@ -34,18 +34,18 @@
   [30X    [33X[0;6Ycurl OR wget for downloading the source code[133X
   
   [33X[0;0YOnce  you  have  installed  these,  you  can  build  Normaliz  by  using the
-  build-normaliz.sh  script we provide. It takes a single, optional parameter:
+  [10Xprerequisites.sh[110X  script  we provide. It takes a single, optional parameter:
   the location of the GAP root directory.[133X
   
   [4X[32X[104X
-    [4X    ./build-normaliz.sh GAPDIR[104X
+    [4X./prerequisites.sh GAPDIR[104X
   [4X[32X[104X
   
   [33X[0;0YOnce  it  completed  successfully, you can then build NormalizInterface like
   this:[133X
   
   [4X[32X[104X
-    [4X    ./configure --with-gaproot=GAPDIR[104X
-    [4X    make[104X
+    [4X./configure --with-gaproot=GAPDIR[104X
+    [4Xmake[104X
   [4X[32X[104X
   

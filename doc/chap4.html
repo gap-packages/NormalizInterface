@@ -43,9 +43,9 @@
 
 
 <div class="example"><pre>
-    make clean
-    ./configure --with-gmp=PATH/TO/YOUR/GMP
-    make
+make clean
+./configure --with-gmp=PATH/TO/YOUR/GMP
+make
 </pre></div>
 
 <p>Next you need to compile a recent version of Normaliz. This requires the presence of several further system software packages, which you install via your system's package manager. At least the following are required:</p>
@@ -56,19 +56,19 @@
 
 </li>
 </ul>
-<p>Once you have installed these, you can build Normaliz by using the build-normaliz.sh script we provide. It takes a single, optional parameter: the location of the GAP root directory.</p>
+<p>Once you have installed these, you can build Normaliz by using the <code class="code">prerequisites.sh</code> script we provide. It takes a single, optional parameter: the location of the GAP root directory.</p>
 
 
 <div class="example"><pre>
-    ./build-normaliz.sh GAPDIR
+./prerequisites.sh GAPDIR
 </pre></div>
 
 <p>Once it completed successfully, you can then build NormalizInterface like this:</p>
 
 
 <div class="example"><pre>
-    ./configure --with-gaproot=GAPDIR
-    make
+./configure --with-gaproot=GAPDIR
+make
 </pre></div>
 
 
