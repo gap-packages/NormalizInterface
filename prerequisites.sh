@@ -19,7 +19,7 @@ else
     GAPDIR=../..
 fi
 
-# make path absolut
+# make path absolute
 SCRIPTDIR=$PWD
 cd $GAPDIR
 GAPDIR=$PWD
