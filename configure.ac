@@ -42,7 +42,7 @@ AC_ARG_WITH([normaliz],
      # don't use GNU libtool anymore, and thus don't set a run path pointing to
      # the specific version of libnormaliz we requested. Without this, when GAP
      # loads NormalizInterface.so it may not find the libnormaliz shared library.
-     NORMALIZ_RPATH_EXTRA="-Wl,-rpath -Wl,$NORMALIZ/lib"
+     NORMALIZ_RPATH_EXTRA="-Wl,-rpath,$NORMALIZ/lib"
     ]
 )
 NORMALIZ_CPPFLAGS="-I$NORMALIZ/include"
