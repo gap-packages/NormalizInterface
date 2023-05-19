@@ -50,7 +50,7 @@ follows:
     ./prerequisites.sh
 
 Otherwise, you have to tell the script where your GAP directory is,
-by passing it as an argumnt:
+by passing it as an argument:
 
     ./prerequisites.sh GAPDIR
 

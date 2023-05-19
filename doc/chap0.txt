@@ -6,10 +6,10 @@
                            [1X [5XGAP[105X wrapper for Normaliz [101X
   
   
-                                     1.3.5
+                                     1.3.6
   
   
-                                5 November 2022
+                                  19 May 2022
   
   
                                Sebastian Gutsche
@@ -23,10 +23,10 @@
   Sebastian Gutsche
       Email:    [7Xmailto:gutsche@mathematik.uni-siegen.de[107X
   Max Horn
-      Email:    [7Xmailto:horn@mathematik.uni-kl.de[107X
+      Email:    [7Xmailto:mhorn@rptu.de[107X
       Homepage: [7Xhttps://www.quendi.de/math[107X
       Address:  [33X[0;14YFachbereich Mathematik[133X
-                [33X[0;14YTU Kaiserslautern[133X
+                [33X[0;14YRPTU Kaiserslautern-Landau[133X
                 [33X[0;14YGottlieb-Daimler-Straße 48[133X
                 [33X[0;14Y67663 Kaiserslautern[133X
                 [33X[0;14YGermany[133X
