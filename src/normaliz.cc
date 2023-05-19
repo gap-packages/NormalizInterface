@@ -25,6 +25,10 @@
 
 #include "compiled.h" // GAP headers
 
+#if GAP_KERNEL_MAJOR_VERSION < 8
+#define BOOL Int
+#endif
+
 #define mpn_tdiv_q    // workaround issue with FLINT's inline definition of
                       // mpn_tdiv_q
 
@@ -185,7 +189,7 @@ static void NormalizCleanFunc(Obj o)
 {
 }
 
-static Int NormalizIsMutableObjFuncs(Obj o)
+static BOOL NormalizIsMutableObjFuncs(Obj o)
 {
     // Cone objects are mathematically immutable.
     return 0L;
