@@ -1,5 +1,6 @@
 name: NormalizInterface
-version: 1.3.6
+version: "1.3.6"
+license: "GPL-2.0-or-later"
 date: 2023-05-19
 description: |
     GAP wrapper for Normaliz
@@ -34,3 +35,32 @@ abstract: |
 status: deposited
 doc-html: doc/chap0_mj.html
 doc-pdf: doc/manual.pdf
+keywords: |
+    normaliz, cones.
+citeas: |
+    <p class='BibEntry'>
+    [<span class='BibKey'>GHS23</span>]   <b class='BibAuthor'>Gutsche, S., Horn, M. and Söger, C.</b>,
+     <i class='BibTitle'>NormalizInterface, GAP wrapper for Normaliz,
+             Version 1.3.6</i>
+     (<span class='BibYear'>2023</span>)<br />
+    (<span class='BibNote'>GAP package</span>),
+    <span class='BibHowpublished'><a href="https://gap-packages.github.io/NormalizInterface">https://gap-packages.github.io/NormalizInterface</a></span>.
+    </p>
+    
+
+bibtex: |
+    @misc{ NormalizInterface1.3.6,
+      author =           {Gutsche, S. and Horn, M. and S{\"o}ger, C.},
+      title =            {{NormalizInterface},   GAP   wrapper   for   Normaliz,
+                          {V}ersion 1.3.6},
+      month =            {May},
+      year =             {2023},
+      note =             {GAP package},
+      howpublished =     {\href
+                          {https://gap-packages.github.io/NormalizInterface}
+                          {\texttt{https://gap-packages.github.io/}\discretionary
+                          {}{}{}\texttt{NormalizInterface}}},
+      keywords =         {normaliz; cones},
+      printedkey =       {GHS23}
+    }
+
