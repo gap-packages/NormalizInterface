@@ -1,5 +1,16 @@
 This file describes changes in the NormalizInterface package.
 
+1.4.0 (2024-07-04)
+  - Update to Normaliz 3.10.3 (as usual this implies many breaking
+    changes, e.g. input type `lattice_ideal` has been renamed to
+    `normal_toric_ideal` while at the same time `lattice_ideal` has
+    a new meaning that is not quite compatible with how it worked before.
+    So beware and carefully study the Normaliz manual)
+  - When building Normaliz via `prerequisites.sh`, or NormalizInterface
+    itself, we need to locate the GMP library -- just like GAP does. In
+    GAP version >= 4.12.1, we now query GAP for the location of GMP
+    which allows building "out of the box" for more people than before.
+
 1.3.6 (2023-05-19)
   - Improve compatibility with an upcoming GAP update
   - Minor janitorial changes

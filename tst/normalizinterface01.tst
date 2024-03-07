@@ -10,20 +10,20 @@
 #
 gap> START_TEST("normalizinterface01.tst");
 
-# /doc/_Chunks.xml:163-166
+# doc/_Chunks.xml:163-166
 gap> cone := NmzCone(["integral_closure",[[2,1],[1,3]]]);
 <a Normaliz cone>
 
-# /doc/_Chunks.xml:120-123
+# doc/_Chunks.xml:120-123
 gap> NmzHasConeProperty(cone, "ExtremeRays");
 false
 
-# /doc/_Chunks.xml:129-133
+# doc/_Chunks.xml:129-133
 gap> NmzKnownConeProperties(cone);
 [ "EmbeddingDim", "Generators", "InternalIndex", "IsInhomogeneous", 
   "OriginalMonoidGenerators", "Sublattice" ]
 
-# /doc/_Chunks.xml:139-157
+# doc/_Chunks.xml:139-157
 gap> NmzKnownConeProperties(cone);
 [ "EmbeddingDim", "Generators", "InternalIndex", "IsInhomogeneous", 
   "OriginalMonoidGenerators", "Sublattice" ]
