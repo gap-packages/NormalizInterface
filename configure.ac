@@ -27,6 +27,25 @@ dnl ##
 dnl ## Locate the GAP root dir
 dnl ##
 FIND_GAP
+GMP_PREFIX=${GMP_PREFIX:-yes}
+
+
+dnl ##
+dnl ## Check for GMP
+dnl ##
+
+
+AC_ARG_WITH([gmp],
+  [AS_HELP_STRING([--with-gmp@<:@=PREFIX@:>@],
+    [prefix of GMP installation. e.g. /usr/local])],
+    [],[with_gmp=${GMP_PREFIX}]
+)
+
+GMP_CPPFLAGS="-I$GMP_PREFIX/include"
+GMP_LDFLAGS="-L$GMP_PREFIX/lib"
+AC_SUBST(GMP_LDFLAGS)
+AC_SUBST(GMP_CPPFLAGS)
+
 
 dnl ##
 dnl ## Locate Normaliz
@@ -50,12 +69,13 @@ NORMALIZ_LDFLAGS="$NORMALIZ_RPATH_EXTRA -L$NORMALIZ/lib"
 AC_SUBST(NORMALIZ_LDFLAGS)
 AC_SUBST(NORMALIZ_CPPFLAGS)
 
+
 dnl ## Make sure Normaliz can be used and its version is at least >= 3.4.0
 
 old_CPPFLAGS="$CPPFLAGS"
 old_LDFLAGS="$LDFLAGS"
-CPPFLAGS="$CPPFLAGS $NORMALIZ_CPPFLAGS"
-LDFLAGS="$LDFLAGS $NORMALIZ_LDFLAGS"
+CPPFLAGS="$CPPFLAGS $NORMALIZ_CPPFLAGS $GMP_CPPFLAGS"
+LDFLAGS="$LDFLAGS $NORMALIZ_LDFLAGS $GMP_LDFLAGS"
 AC_CHECK_HEADER([libnormaliz/cone.h], [], [AC_MSG_ERROR([could not use libnormaliz/cone.h])], [])
 
 AC_MSG_CHECKING([for Normaliz >= 3.5.4])

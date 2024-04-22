@@ -68,7 +68,12 @@ else
     #
     # Expert users can help with that, of course, by setting
     # the GMP_DIR variable manually.
+    #
+    # For the moment I am adding it to be $GMP_FREFIX, set in 
+    # sysinfo.gap 
+    GMP_FLAG="$GMP_PREFIX"
 fi
+
 
 # allow overriding the normaliz version via env var or argument, so that
 # we can test with many different ones
@@ -124,10 +129,5 @@ if [ "${osname#*CYGWIN}" != "$osname" ]; then
     echo "##"
     # We have to move the Normalize dll to $GAPDIR/.libs, as this is the only
     # place which Cygwin will check for it inside $GAPDIR.
-
-    # If using an older GAP built with libtool, put in .libs
-    if test -d ${GAPDIR}/.libs; then cp ${NormalizInstallDir}/bin/cygnormaliz-*.dll ${GAPDIR}/.libs/ ; fi
-    # For newer GAP, put in root directory (this is fine for older GAPs)
-    cp ${NormalizInstallDir}/bin/cygnormaliz-*.dll "${GAPDIR}/"
-
+    cp ${NormalizInstallDir}/bin/cygnormaliz-*.dll "${GAPDIR}/.libs"
 fi
