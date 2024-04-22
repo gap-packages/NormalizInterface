@@ -71,7 +71,12 @@ else
     #
     # For the moment I am adding it to be $GMP_FREFIX, set in 
     # sysinfo.gap 
-    GMP_FLAG="$GMP_PREFIX"
+    if [ -n "$GMP_PREFIX" ]; then
+        echo "Using GMP_FLAG = $GMP_PREFIX (GMP_PREFIX)"
+        GMP_FLAG="$GMP_PREFIX"
+    else 
+        echo "Do not know what to do in this case"
+    fi
 fi
 
 
