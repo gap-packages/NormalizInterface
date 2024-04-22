@@ -27,7 +27,7 @@ dnl ##
 dnl ## Locate the GAP root dir
 dnl ##
 FIND_GAP
-GMP_PREFIX=${GMP_PREFIX:-yes}
+GMP_PREFIX=${GMP_PREFIX}
 
 
 dnl ##
