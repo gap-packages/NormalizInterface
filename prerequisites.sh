@@ -134,5 +134,10 @@ if [ "${osname#*CYGWIN}" != "$osname" ]; then
     echo "##"
     # We have to move the Normalize dll to $GAPDIR/.libs, as this is the only
     # place which Cygwin will check for it inside $GAPDIR.
-    cp ${NormalizInstallDir}/bin/cygnormaliz-*.dll "${GAPDIR}/.libs"
+    # If using an older GAP built with libtool, put in .libs
+    if test -d ${GAPDIR}/.libs; then 
+        cp ${NormalizInstallDir}/bin/cygnormaliz-*.dll ${GAPDIR}/.libs/ ; 
+    fi
+    # For newer GAP, put in root directory (this is fine for older GAPs)
+    cp ${NormalizInstallDir}/bin/cygnormaliz-*.dll "${GAPDIR}/"
 fi
