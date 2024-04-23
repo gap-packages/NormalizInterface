@@ -27,22 +27,37 @@ dnl ##
 dnl ## Locate the GAP root dir
 dnl ##
 FIND_GAP
-GMP_PREFIX=${GMP_PREFIX}
 
 
 dnl ##
 dnl ## Check for GMP
 dnl ##
 
+GMP_PREFIX=${GMP_PREFIX:-none}
+GMP_CPPFLAGS=""
+GMP_LDFLAGS=""
 
-AC_ARG_WITH([gmp],
-  [AS_HELP_STRING([--with-gmp@<:@=PREFIX@:>@],
-    [prefix of GMP installation. e.g. /usr/local])],
-    [],[with_gmp=${GMP_PREFIX}]
-)
 
-GMP_CPPFLAGS="-I$GMP_PREFIX/include"
-GMP_LDFLAGS="-L$GMP_PREFIX/lib"
+if test "x$GMP_PREFIX" = "xnone" ; then
+    # If a gaproot was specified, try to find GMP in there; otherwise, fall
+    # back to whatever GMP may be found via user specified C/CPP/LDFLAGS
+    if test "${with_gaproot+set}" = set; then
+        echo "with_gaproot = $with_gaproot"
+        if test -f ${with_gaproot}/extern/install/gmp/include/gmp.h && test -d ${with_gaproot}/extern/install/gmp/lib ; then
+            echo "adjusting stuff based on gaproot"
+            GMP_CPPFLAGS="-I${with_gaproot}/extern/install/gmp/include"
+            GMP_LDFLAGS="-L${with_gaproot}/extern/install/gmp/lib"
+        fi
+    fi
+else
+	if test -d ${GMP_PREFIX}/include && test -d ${GMP_PREFIX}/lib ; then
+		GMP_CPPFLAGS="-I${GMP_PREFIX}/include"
+        GMP_LDFLAGS="-L${GMP_PREFIX}/lib"
+	else
+		AC_MSG_ERROR([Could not locate libgmp.a in the specified location])
+	fi
+fi;
+
 AC_SUBST(GMP_LDFLAGS)
 AC_SUBST(GMP_CPPFLAGS)
 
