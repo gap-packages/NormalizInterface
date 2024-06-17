@@ -86,7 +86,6 @@ NORMALIZ_LDFLAGS="$NORMALIZ_RPATH_EXTRA -L$NORMALIZ/lib"
 AC_SUBST(NORMALIZ_LDFLAGS)
 AC_SUBST(NORMALIZ_CPPFLAGS)
 
-
 dnl ## Make sure Normaliz can be used and its version is at least >= 3.4.0
 
 old_CPPFLAGS="$CPPFLAGS"
