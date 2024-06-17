@@ -56,7 +56,7 @@ else
 		GMP_CPPFLAGS="-I${GMP_PREFIX}/include"
         GMP_LDFLAGS="-L${GMP_PREFIX}/lib"
 	else
-		AC_MSG_ERROR([Could not locate libgmp.a in the specified location])
+		AC_MSG_ERROR([Could not locate libgmp in the specified location])
 	fi
 fi;
 
