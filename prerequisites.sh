@@ -56,22 +56,9 @@ elif [ -f "$GAP49_GMP/include/gmp.h" ]; then
     fi
 else
     echo "GAP was apparently built with external GMP"
-    # TODO: actually, now we should figure out somehow which
-    # external GMP library was used to build GAP. But that's not really
-    # possible: While we could e.g. scan the "internal" sysinfo.gap
-    # file for the "gap_config_options" string, and in there
-    # look for an "--with-gmp", this is not entirely reliable by
-    # itself (partially due to bugs in the GAP build system).
-    #
-    # So, we do not even try to figure out details, and instead
-    # cross our fingers and hope for the best.
-    #
-    # Expert users can help with that, of course, by setting
-    # the GMP_DIR variable manually.
-    #
-    # For the moment I am adding it to be $GMP_FREFIX, set in 
-    # sysinfo.gap 
-    if [ -n "$GMP_PREFIX" ]; then
+    if test "${GMP_PREFIX+set}" = set; then
+        # In GAP >= 4.12.1, we can find out where GAP found GMP
+        # by looking at GMP_PREFIX set in sysinfo.gap
         echo "Using GMP_FLAG = $GMP_PREFIX (GMP_PREFIX)"
         GMP_FLAG="$GMP_PREFIX"
     else 
