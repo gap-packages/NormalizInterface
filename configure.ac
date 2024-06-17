@@ -51,6 +51,7 @@ if test "x$GMP_PREFIX" = "xnone" ; then
         fi
     fi
 else
+    AC_MSG_RESULT([yes, at GAP supplied prefix ${GMP_PREFIX}])
 	if test -d ${GMP_PREFIX}/include && test -d ${GMP_PREFIX}/lib ; then
 		GMP_CPPFLAGS="-I${GMP_PREFIX}/include"
         GMP_LDFLAGS="-L${GMP_PREFIX}/lib"
