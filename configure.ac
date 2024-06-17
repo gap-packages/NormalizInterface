@@ -44,7 +44,7 @@ if test "x$GMP_PREFIX" = "xnone" ; then
     # back to whatever GMP may be found via user specified C/CPP/LDFLAGS
     if test "${with_gaproot+set}" = set; then
         if test -f ${with_gaproot}/extern/install/gmp/include/gmp.h && test -d ${with_gaproot}/extern/install/gmp/lib ; then
-            echo "adjusting stuff based on gaproot"
+            AC_MSG_RESULT([yes, bundled with GAP at ${with_gaproot}])
             GMP_CPPFLAGS="-I${with_gaproot}/extern/install/gmp/include"
             GMP_LDFLAGS="-L${with_gaproot}/extern/install/gmp/lib"
         fi
