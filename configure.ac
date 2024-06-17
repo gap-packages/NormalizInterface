@@ -37,6 +37,7 @@ GMP_PREFIX=${GMP_PREFIX:-none}
 GMP_CPPFLAGS=""
 GMP_LDFLAGS=""
 
+AC_MSG_CHECKING([for GMP])
 
 if test "x$GMP_PREFIX" = "xnone" ; then
     # If a gaproot was specified, try to find GMP in there; otherwise, fall
