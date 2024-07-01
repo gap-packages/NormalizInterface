@@ -29,7 +29,7 @@ NmzHilbertSeries(D);
 NmzHasConeProperty(D,"SupportHyperplanes");
 #! true
 NmzSupportHyperplanes(D);
-#! [ [ 1, 0, 0 ], [ 1, 3, -3 ] ]
+#! [ [ 0, 1, 0 ], [ 1, 0, 0 ] ]
 NmzEquations(D);
 #! [ [ 1, 2, -3 ] ]
 #! @EndExample
