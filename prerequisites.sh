@@ -56,19 +56,16 @@ elif [ -f "$GAP49_GMP/include/gmp.h" ]; then
     fi
 else
     echo "GAP was apparently built with external GMP"
-    # TODO: actually, now we should figure out somehow which
-    # external GMP library was used to build GAP. But that's not really
-    # possible: While we could e.g. scan the "internal" sysinfo.gap
-    # file for the "gap_config_options" string, and in there
-    # look for an "--with-gmp", this is not entirely reliable by
-    # itself (partially due to bugs in the GAP build system).
-    #
-    # So, we do not even try to figure out details, and instead
-    # cross our fingers and hope for the best.
-    #
-    # Expert users can help with that, of course, by setting
-    # the GMP_DIR variable manually.
+    if test "${GMP_PREFIX+set}" = set; then
+        # In GAP >= 4.12.1, we can find out where GAP found GMP
+        # by looking at GMP_PREFIX set in sysinfo.gap
+        echo "Using GMP_FLAG = $GMP_PREFIX (GMP_PREFIX)"
+        GMP_FLAG="$GMP_PREFIX"
+    else 
+        echo "Do not know what to do in this case"
+    fi
 fi
+
 
 # allow overriding the normaliz version via env var or argument, so that
 # we can test with many different ones
@@ -124,10 +121,10 @@ if [ "${osname#*CYGWIN}" != "$osname" ]; then
     echo "##"
     # We have to move the Normalize dll to $GAPDIR/.libs, as this is the only
     # place which Cygwin will check for it inside $GAPDIR.
-
     # If using an older GAP built with libtool, put in .libs
-    if test -d ${GAPDIR}/.libs; then cp ${NormalizInstallDir}/bin/cygnormaliz-*.dll ${GAPDIR}/.libs/ ; fi
+    if test -d ${GAPDIR}/.libs; then 
+        cp ${NormalizInstallDir}/bin/cygnormaliz-*.dll ${GAPDIR}/.libs/
+    fi
     # For newer GAP, put in root directory (this is fine for older GAPs)
     cp ${NormalizInstallDir}/bin/cygnormaliz-*.dll "${GAPDIR}/"
-
 fi

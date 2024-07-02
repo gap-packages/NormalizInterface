@@ -28,6 +28,41 @@ dnl ## Locate the GAP root dir
 dnl ##
 FIND_GAP
 
+
+dnl ##
+dnl ## Check for GMP
+dnl ##
+
+GMP_PREFIX=${GMP_PREFIX:-none}
+GMP_CPPFLAGS=""
+GMP_LDFLAGS=""
+
+AC_MSG_CHECKING([for GMP])
+
+if test "x$GMP_PREFIX" = "xnone" ; then
+    # If a gaproot was specified, try to find GMP in there; otherwise, fall
+    # back to whatever GMP may be found via user specified C/CPP/LDFLAGS
+    if test "${with_gaproot+set}" = set; then
+        if test -f ${with_gaproot}/extern/install/gmp/include/gmp.h && test -d ${with_gaproot}/extern/install/gmp/lib ; then
+            AC_MSG_RESULT([yes, bundled with GAP at ${with_gaproot}])
+            GMP_CPPFLAGS="-I${with_gaproot}/extern/install/gmp/include"
+            GMP_LDFLAGS="-L${with_gaproot}/extern/install/gmp/lib"
+        fi
+    fi
+else
+    AC_MSG_RESULT([yes, at GAP supplied prefix ${GMP_PREFIX}])
+	if test -d ${GMP_PREFIX}/include && test -d ${GMP_PREFIX}/lib ; then
+		GMP_CPPFLAGS="-I${GMP_PREFIX}/include"
+        GMP_LDFLAGS="-L${GMP_PREFIX}/lib"
+	else
+		AC_MSG_ERROR([Could not locate libgmp in the specified location])
+	fi
+fi;
+
+AC_SUBST(GMP_LDFLAGS)
+AC_SUBST(GMP_CPPFLAGS)
+
+
 dnl ##
 dnl ## Locate Normaliz
 dnl ##
@@ -54,8 +89,8 @@ dnl ## Make sure Normaliz can be used and its version is at least >= 3.4.0
 
 old_CPPFLAGS="$CPPFLAGS"
 old_LDFLAGS="$LDFLAGS"
-CPPFLAGS="$CPPFLAGS $NORMALIZ_CPPFLAGS"
-LDFLAGS="$LDFLAGS $NORMALIZ_LDFLAGS"
+CPPFLAGS="$CPPFLAGS $NORMALIZ_CPPFLAGS $GMP_CPPFLAGS"
+LDFLAGS="$LDFLAGS $NORMALIZ_LDFLAGS $GMP_LDFLAGS"
 AC_CHECK_HEADER([libnormaliz/cone.h], [], [AC_MSG_ERROR([could not use libnormaliz/cone.h])], [])
 
 AC_MSG_CHECKING([for Normaliz >= 3.5.4])
