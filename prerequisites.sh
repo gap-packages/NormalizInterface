@@ -36,34 +36,15 @@ echo "Found GAP in directory $GAPDIR"
 echo "GAParch = $GAParch"
 
 # check if GAP was built with its own GMP (this is kind of a hack...)
-GAP48_GMP="$GAPDIR/bin/$GAParch/extern/gmp"
-GAP49_GMP="$GAPDIR/extern/install/gmp"
 if [ -n "$GMP_FLAG" ]; then
     echo "Using supplied GMP_FLAG = $GMP_FLAG"
-elif [ -f "$GAP48_GMP/MAKE_CHECK_PASSED" -a  -f "$GAP48_GMP/include/gmp.h" ]; then
-    # GAP <= 4.8
-    echo "ERROR: your GAP is too old, need GAP 4.9 or later"
-    exit 1
-elif [ -f "$GAP49_GMP/include/gmp.h" ]; then
-    # GAP >= 4.9
-    echo "GAP >= 4.9 was built with its own GMP"
-    if [ -f "$GAP49_GMP/include/gmpxx.h" ]; then
-        echo "GAP's GMP includes C++ support"
-        GMP_FLAG="$GAP49_GMP"
-    else
-        echo "ERROR: GAP's GMP was built without C++ support"
-        exit 1
-    fi
+elif test "${GMP_PREFIX+set}" = set; then
+    # In GAP >= 4.12.1, we can find out where GAP found GMP
+    # by looking at GMP_PREFIX set in sysinfo.gap
+    echo "Using GMP_FLAG = $GMP_PREFIX (GMP_PREFIX)"
+    GMP_FLAG="$GMP_PREFIX"
 else
-    echo "GAP was apparently built with external GMP"
-    if test "${GMP_PREFIX+set}" = set; then
-        # In GAP >= 4.12.1, we can find out where GAP found GMP
-        # by looking at GMP_PREFIX set in sysinfo.gap
-        echo "Using GMP_FLAG = $GMP_PREFIX (GMP_PREFIX)"
-        GMP_FLAG="$GMP_PREFIX"
-    else 
-        echo "Do not know what to do in this case"
-    fi
+    echo "No GMP_FLAG found"
 fi
 
 
