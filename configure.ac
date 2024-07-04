@@ -19,9 +19,9 @@ AC_PROG_CXX
 AC_LANG([C++])
 
 dnl ##
-dnl ## Check for C++11 support
+dnl ## Check for C++14 support
 dnl ##
-AX_CXX_COMPILE_STDCXX(11, ,mandatory)
+AX_CXX_COMPILE_STDCXX(14, ,mandatory)
 
 dnl ##
 dnl ## Locate the GAP root dir

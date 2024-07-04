@@ -4,10 +4,12 @@
 KEXT_NAME = NormalizInterface
 KEXT_SOURCES = src/normaliz.cc
 
-# workaround for building with GAP 4.11 on Cygwin: we need -std=gnu++11
-# instead of -std=c++11 to avoid an error during compilation; see
-# https://github.com/gap-packages/NormalizInterface/pull/91 for details
-KEXT_CXXFLAGS = @CPPFLAGS@ @NORMALIZ_CPPFLAGS@  @GMP_CPPFLAGS@ -std=gnu++11
+# Normaliz requires C++11; but some of its dependencies (well at least
+# e-Antic) requires C++14. Since that's been in compilers for a decade
+# now, just always request C++14 support. Note: we use gnu++14 instead
+# of std++14 only for compatibility with GAP versions before 4.12 on
+# Cygwin, see <https://github.com/gap-packages/NormalizInterface/pull/91>.
+KEXT_CXXFLAGS = @CPPFLAGS@ @NORMALIZ_CPPFLAGS@  @GMP_CPPFLAGS@ -std=gnu++14
 KEXT_LDFLAGS = @LDFLAGS@ @GMP_LDFLAGS@ -lgmp @NORMALIZ_LDFLAGS@ -lnormaliz -lstdc++
 
 KEXT_USE_AUTOCONF = 1
