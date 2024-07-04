@@ -1,8 +1,6 @@
-_NORMALIZ_SO:=Filename(DirectoriesPackagePrograms("NormalizInterface"), "NormalizInterface.so");
-if _NORMALIZ_SO <> fail then
-    LoadDynamicModule(_NORMALIZ_SO);
+if LoadKernelExtension("NormalizInterface") = false then
+    Error("failed to load NormalizInterface kernel extension");
 fi;
-Unbind(_NORMALIZ_SO);
 
 ReadPackage("NormalizInterface", "lib/normaliz.gd");
 
