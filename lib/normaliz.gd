@@ -122,37 +122,9 @@ DeclareGlobalFunction( "NmzBasisChange" );
 #! correspond to a Normaliz input type string and the following matrix will be
 #! interpreted as input of that type.
 #!
-#! Currently the following strings are recognized:
-#! <List>
-#! <Item><C>integral_closure</C>,</Item>
-#! <Item><C>polyhedron</C>,</Item>
-#! <Item><C>normalization</C>,</Item>
-#! <Item><C>polytope</C>,</Item>
-#! <Item><C>rees_algebra</C>,</Item>
-#! <Item><C>inequalities</C>,</Item>
-#! <Item><C>strict_inequalities</C>,</Item>
-#! <Item><C>signs</C>,</Item>
-#! <Item><C>strict_signs</C>,</Item>
-#! <Item><C>equations</C>,</Item>
-#! <Item><C>congruences</C>,</Item>
-#! <Item><C>inhom_inequalities</C>,</Item>
-#! <Item><C>inhom_equations</C>,</Item>
-#! <Item><C>inhom_congruences</C>,</Item>
-#! <Item><C>dehomogenization</C>,</Item>
-#! <Item><C>lattice_ideal</C>,</Item>
-#! <Item><C>grading</C>,</Item>
-#! <Item><C>excluded_faces</C>,</Item>
-#! <Item><C>lattice</C>,</Item>
-#! <Item><C>saturation</C>,</Item>
-#! <Item><C>cone</C>,</Item>
-#! <Item><C>offset</C>,</Item>
-#! <Item><C>vertices</C>,</Item>
-#! <Item><C>support_hyperplanes</C>,</Item>
-#! <Item><C>cone_and_lattice</C>,</Item>
-#! <Item><C>subspace</C>.</Item>
-#! </List>
-#!
-#! See the Normaliz manual for a detailed description.
+#! See the Normaliz manual for the Normaliz version loaded by your version
+#! of NormalizInterface for a detailed description of which input type strings
+#! are supported and what arguments they take.
 #!
 #! @InsertChunk NmzCone_example
 DeclareGlobalFunction( "NmzCone" );
