@@ -77,7 +77,7 @@ PackageDoc := rec(
 ),
 
 Dependencies := rec(
-  GAP                    := ">= 4.9",
+  GAP                    := ">= 4.12.1",
   NeededOtherPackages    := [ ],
   SuggestedOtherPackages := [ ],
   ExternalConditions     := [ ]
@@ -86,9 +86,7 @@ Dependencies := rec(
 AvailabilityTest := function()
     local path;
     # test for existence of the compiled binary
-    path := DirectoriesPackagePrograms("NormalizInterface");
-    if not "NormalizInterface" in SHOW_STAT() and
-       Filename(path, "NormalizInterface.so") = fail then
+    if not IsKernelExtensionAvailable("NormalizInterface") then
        LogPackageLoadingMessage( PACKAGE_WARNING,
            [ "kernel functions for NormalizInterface not available." ] );
       return fail;
