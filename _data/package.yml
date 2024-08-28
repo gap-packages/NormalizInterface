@@ -1,7 +1,7 @@
 name: NormalizInterface
-version: "1.3.6"
+version: "1.3.7"
 license: "GPL-2.0-or-later"
-date: 2023-05-19
+date: 2024-07-07
 description: |
     GAP wrapper for Normaliz
 
@@ -17,7 +17,7 @@ maintainers:
     - name: Max Horn
       url: https://www.quendi.de/math
 
-GAP: ">= 4.9"
+GAP: ">= 4.12.1"
 
 www: https://gap-packages.github.io/NormalizInterface
 readme: README.md
@@ -25,9 +25,9 @@ packageinfo: https://gap-packages.github.io/NormalizInterface/PackageInfo.g
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/gap-packages/NormalizInterface/releases/download/v1.3.6/NormalizInterface-1.3.6.tar.gz
+      url: https://github.com/gap-packages/NormalizInterface/releases/download/v1.3.7/NormalizInterface-1.3.7.tar.gz
     - name: .tar.bz2
-      url: https://github.com/gap-packages/NormalizInterface/releases/download/v1.3.6/NormalizInterface-1.3.6.tar.bz2
+      url: https://github.com/gap-packages/NormalizInterface/releases/download/v1.3.7/NormalizInterface-1.3.7.tar.bz2
 
 abstract: |
     The <span class='pkgname'>NormalizInterface</span> package provides  a GAP interface to <a href='https://www.normaliz.uni-osnabrueck.de'>Normaliz</a>,  enabling direct access to the complete functionality of Normaliz, such as  computations in affine monoids, vector configurations, lattice polytopes, and rational cones.  
@@ -39,28 +39,28 @@ keywords: |
     normaliz, cones.
 citeas: |
     <p class='BibEntry'>
-    [<span class='BibKey'>GHS23</span>]   <b class='BibAuthor'>Gutsche, S., Horn, M. and Söger, C.</b>,
+    [<span class='BibKey'>GHS24</span>]   <b class='BibAuthor'>Gutsche, S., Horn, M. and Söger, C.</b>,
      <i class='BibTitle'>NormalizInterface, GAP wrapper for Normaliz,
-             Version 1.3.6</i>
-     (<span class='BibYear'>2023</span>)<br />
+             Version 1.3.7</i>
+     (<span class='BibYear'>2024</span>)<br />
     (<span class='BibNote'>GAP package</span>),
     <span class='BibHowpublished'><a href="https://gap-packages.github.io/NormalizInterface">https://gap-packages.github.io/NormalizInterface</a></span>.
     </p>
     
 
 bibtex: |
-    @misc{ NormalizInterface1.3.6,
+    @misc{ NormalizInterface,
       author =           {Gutsche, S. and Horn, M. and S{\"o}ger, C.},
       title =            {{NormalizInterface},   GAP   wrapper   for   Normaliz,
-                          {V}ersion 1.3.6},
-      month =            {May},
-      year =             {2023},
+                          {V}ersion 1.3.7},
+      month =            {Jul},
+      year =             {2024},
       note =             {GAP package},
       howpublished =     {\href
                           {https://gap-packages.github.io/NormalizInterface}
-                          {\texttt{https://gap-packages.github.io/}\discretionary
+                          {\texttt{https://gap\texttt{\symbol{45}}packages.github.io/}\discretionary
                           {}{}{}\texttt{NormalizInterface}}},
       keywords =         {normaliz; cones},
-      printedkey =       {GHS23}
+      printedkey =       {GHS24}
     }
 
