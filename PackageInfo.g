@@ -88,7 +88,7 @@ AvailabilityTest := function()
     if not IsKernelExtensionAvailable("NormalizInterface") then
        LogPackageLoadingMessage( PACKAGE_WARNING,
            [ "kernel functions for NormalizInterface not available." ] );
-      return fail;
+      return false;
     fi;
     return true;
   end,
