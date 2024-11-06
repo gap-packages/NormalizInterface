@@ -73,7 +73,6 @@ PackageDoc := rec(
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
   LongTitle := "GAP wrapper for Normaliz",
-  Autoload  := true
 ),
 
 Dependencies := rec(
