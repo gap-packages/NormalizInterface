@@ -1011,11 +1011,7 @@ static Int InitLibrary(StructInitInfo * module)
 
 // table of init functions
 static StructInitInfo module = {
-#ifdef NORMALIZSTATIC
-    /* type        = */ MODULE_STATIC,
-#else
     /* type        = */ MODULE_DYNAMIC,
-#endif
     /* name        = */ "Normaliz",
     /* revision_c  = */ 0,
     /* revision_h  = */ 0,
@@ -1029,14 +1025,7 @@ static StructInitInfo module = {
     /* postRestore = */ 0
 };
 
-#ifndef NORMALIZSTATIC
 extern "C" StructInitInfo * Init__Dynamic(void)
-{
-    return &module;
-}
-#endif
-
-extern "C" StructInitInfo * Init__normaliz(void)
 {
     return &module;
 }
