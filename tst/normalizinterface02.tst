@@ -36,7 +36,7 @@ gap> NmzHilbertSeries(D);
 gap> NmzHasConeProperty(D,"SupportHyperplanes");
 true
 gap> NmzSupportHyperplanes(D);
-[ [ 1, 0, 0 ], [ 1, 3, -3 ] ]
+[ [ 0, 1, 0 ], [ 1, 0, 0 ] ]
 gap> NmzEquations(D);
 [ [ 1, 2, -3 ] ]
 
