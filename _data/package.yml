@@ -1,7 +1,7 @@
 name: NormalizInterface
 version: "1.4.0"
 license: "GPL-2.0-or-later"
-date: 2024-04-14
+date: 2025-04-14
 description: |
     GAP wrapper for Normaliz
 
@@ -39,10 +39,10 @@ keywords: |
     normaliz, cones.
 citeas: |
     <p class='BibEntry'>
-    [<span class='BibKey'>GHS24</span>]   <b class='BibAuthor'>Gutsche, S., Horn, M. and Söger, C.</b>,
+    [<span class='BibKey'>GHS25</span>]   <b class='BibAuthor'>Gutsche, S., Horn, M. and Söger, C.</b>,
      <i class='BibTitle'>NormalizInterface, GAP wrapper for Normaliz,
              Version 1.4.0</i>
-     (<span class='BibYear'>2024</span>)<br />
+     (<span class='BibYear'>2025</span>)<br />
     (<span class='BibNote'>GAP package</span>),
     <span class='BibHowpublished'><a href="https://gap-packages.github.io/NormalizInterface">https://gap-packages.github.io/NormalizInterface</a></span>.
     </p>
@@ -54,13 +54,13 @@ bibtex: |
       title =            {{NormalizInterface},   {GAP   wrapper  for  Normaliz},
                           {V}ersion 1.4.0},
       month =            {Apr},
-      year =             {2024},
+      year =             {2025},
       note =             {GAP package},
       howpublished =     {\href
                           {https://gap-packages.github.io/NormalizInterface}
                           {\texttt{https://gap\texttt{\symbol{45}}packages.github.io/}\discretionary
                           {}{}{}\texttt{NormalizInterface}}},
       keywords =         {normaliz; cones},
-      printedkey =       {GHS24}
+      printedkey =       {GHS25}
     }
 
