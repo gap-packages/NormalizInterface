@@ -1,4 +1,4 @@
-[![Build Status](https://github.com/gap-packages/NormalizInterface/workflows/CI/badge.svg?branch=master)](https://github.com/gap-packages/NormalizInterface/actions?query=workflow%3ACI+branch%3Amaster)
+[![Build Status](https://github.com/gap-packages/NormalizInterface/actions/workflows/CI.yml/badge.svg)](https://github.com/gap-packages/NormalizInterface/actions/workflows/CI.yml)
 [![Code Coverage](https://codecov.io/github/gap-packages/NormalizInterface/coverage.svg?branch=master&token=)](https://codecov.io/gh/gap-packages/NormalizInterface)
 
 # The GAP 4 package 'NormalizInterface'
