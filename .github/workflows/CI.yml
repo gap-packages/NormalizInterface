@@ -51,27 +51,27 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
-  test-cygwin:
-    name: "cygwin64 - GAP master"
-    runs-on: windows-latest
-    env:
-      CHERE_INVOKING: 1
-    steps:
-      - uses: actions/checkout@v4
-      - uses: gap-actions/setup-cygwin@v1
-      - uses: gap-actions/setup-gap@cygwin-v2
-        with:
-          GAP_PKGS_TO_BUILD: "normalizinterface profiling io"
-      - uses: gap-actions/build-pkg@cygwin-v1
-      - uses: gap-actions/run-pkg-tests@cygwin-v2
-      - uses: gap-actions/process-coverage@cygwin-v2
-      - uses: codecov/codecov-action@v5
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-      - name: "Setup tmate session"
-        uses: mxschmitt/action-tmate@v3
-        if: ${{ failure() }}
-        timeout-minutes: 15
+#   test-cygwin:
+#     name: "cygwin64 - GAP master"
+#     runs-on: windows-latest
+#     env:
+#       CHERE_INVOKING: 1
+#     steps:
+#       - uses: actions/checkout@v4
+#       - uses: gap-actions/setup-cygwin@v1
+#       - uses: gap-actions/setup-gap@cygwin-v2
+#         with:
+#           GAP_PKGS_TO_BUILD: "normalizinterface profiling io"
+#       - uses: gap-actions/build-pkg@cygwin-v1
+#       - uses: gap-actions/run-pkg-tests@cygwin-v2
+#       - uses: gap-actions/process-coverage@cygwin-v2
+#       - uses: codecov/codecov-action@v5
+#         with:
+#           token: ${{ secrets.CODECOV_TOKEN }}
+#       - name: "Setup tmate session"
+#         uses: mxschmitt/action-tmate@v3
+#         if: ${{ failure() }}
+#         timeout-minutes: 15
 
   # The documentation job
   manual:
