@@ -2,8 +2,8 @@ SetPackageInfo( rec(
 
 PackageName := "NormalizInterface",
 Subtitle := "GAP wrapper for Normaliz",
-Version := "1.3.7",
-Date    := "07/07/2024", # dd/mm/yyyy format
+Version := "1.4.0",
+Date    := "14/04/2024", # dd/mm/yyyy format
 License := "GPL-2.0-or-later",
 
 Persons := [
@@ -73,7 +73,6 @@ PackageDoc := rec(
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
   LongTitle := "GAP wrapper for Normaliz",
-  Autoload  := true
 ),
 
 Dependencies := rec(
@@ -89,7 +88,7 @@ AvailabilityTest := function()
     if not IsKernelExtensionAvailable("NormalizInterface") then
        LogPackageLoadingMessage( PACKAGE_WARNING,
            [ "kernel functions for NormalizInterface not available." ] );
-      return fail;
+      return false;
     fi;
     return true;
   end,

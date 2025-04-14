@@ -20,61 +20,9 @@
   to  correspond to a Normaliz input type string and the following matrix will
   be interpreted as input of that type.[133X
   
-  [33X[0;0YCurrently the following strings are recognized:[133X
-  
-  [30X    [33X[0;6Y[10Xintegral_closure[110X,[133X
-  
-  [30X    [33X[0;6Y[10Xpolyhedron[110X,[133X
-  
-  [30X    [33X[0;6Y[10Xnormalization[110X,[133X
-  
-  [30X    [33X[0;6Y[10Xpolytope[110X,[133X
-  
-  [30X    [33X[0;6Y[10Xrees_algebra[110X,[133X
-  
-  [30X    [33X[0;6Y[10Xinequalities[110X,[133X
-  
-  [30X    [33X[0;6Y[10Xstrict_inequalities[110X,[133X
-  
-  [30X    [33X[0;6Y[10Xsigns[110X,[133X
-  
-  [30X    [33X[0;6Y[10Xstrict_signs[110X,[133X
-  
-  [30X    [33X[0;6Y[10Xequations[110X,[133X
-  
-  [30X    [33X[0;6Y[10Xcongruences[110X,[133X
-  
-  [30X    [33X[0;6Y[10Xinhom_inequalities[110X,[133X
-  
-  [30X    [33X[0;6Y[10Xinhom_equations[110X,[133X
-  
-  [30X    [33X[0;6Y[10Xinhom_congruences[110X,[133X
-  
-  [30X    [33X[0;6Y[10Xdehomogenization[110X,[133X
-  
-  [30X    [33X[0;6Y[10Xlattice_ideal[110X,[133X
-  
-  [30X    [33X[0;6Y[10Xgrading[110X,[133X
-  
-  [30X    [33X[0;6Y[10Xexcluded_faces[110X,[133X
-  
-  [30X    [33X[0;6Y[10Xlattice[110X,[133X
-  
-  [30X    [33X[0;6Y[10Xsaturation[110X,[133X
-  
-  [30X    [33X[0;6Y[10Xcone[110X,[133X
-  
-  [30X    [33X[0;6Y[10Xoffset[110X,[133X
-  
-  [30X    [33X[0;6Y[10Xvertices[110X,[133X
-  
-  [30X    [33X[0;6Y[10Xsupport_hyperplanes[110X,[133X
-  
-  [30X    [33X[0;6Y[10Xcone_and_lattice[110X,[133X
-  
-  [30X    [33X[0;6Y[10Xsubspace[110X.[133X
-  
-  [33X[0;0YSee the Normaliz manual for a detailed description.[133X
+  [33X[0;0YSee  the  Normaliz manual for the Normaliz version loaded by your version of
+  NormalizInterface for a detailed description of which input type strings are
+  supported and what arguments they take.[133X
   
   [4X[32X  Example  [32X[104X
     [4X[25Xgap>[125X [27Xcone := NmzCone(["integral_closure",[[2,1],[1,3]]]);[127X[104X

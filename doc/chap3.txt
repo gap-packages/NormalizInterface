@@ -34,7 +34,7 @@
     [4X[25Xgap>[125X [27XNmzHasConeProperty(D,"SupportHyperplanes");[127X[104X
     [4X[28Xtrue[128X[104X
     [4X[25Xgap>[125X [27XNmzSupportHyperplanes(D);[127X[104X
-    [4X[28X[ [ 1, 0, 0 ], [ 1, 3, -3 ] ][128X[104X
+    [4X[28X[ [ 0, 1, 0 ], [ 1, 0, 0 ] ][128X[104X
     [4X[25Xgap>[125X [27XNmzEquations(D);[127X[104X
     [4X[28X[ [ 1, 2, -3 ] ][128X[104X
   [4X[32X[104X
