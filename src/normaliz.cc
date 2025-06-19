@@ -23,7 +23,7 @@
 #! @Section YOU FORGOT TO SET A SECTION
 */
 
-#include "compiled.h" // GAP headers
+#include "gap_all.h" // GAP headers
 
 #if GAP_KERNEL_MAJOR_VERSION < 8
 #define BOOL Int
