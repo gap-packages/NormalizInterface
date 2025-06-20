@@ -1,7 +1,7 @@
 name: NormalizInterface
-version: "1.4.0"
+version: "1.4.1"
 license: "GPL-2.0-or-later"
-date: 2025-04-14
+date: 2025-06-20
 description: |
     GAP wrapper for Normaliz
 
@@ -25,9 +25,9 @@ packageinfo: https://gap-packages.github.io/NormalizInterface/PackageInfo.g
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/gap-packages/NormalizInterface/releases/download/v1.4.0/NormalizInterface-1.4.0.tar.gz
+      url: https://github.com/gap-packages/NormalizInterface/releases/download/v1.4.1/NormalizInterface-1.4.1.tar.gz
     - name: .tar.bz2
-      url: https://github.com/gap-packages/NormalizInterface/releases/download/v1.4.0/NormalizInterface-1.4.0.tar.bz2
+      url: https://github.com/gap-packages/NormalizInterface/releases/download/v1.4.1/NormalizInterface-1.4.1.tar.bz2
 
 abstract: |
     The <span class='pkgname'>NormalizInterface</span> package provides  a GAP interface to <a href='https://www.normaliz.uni-osnabrueck.de'>Normaliz</a>,  enabling direct access to the complete functionality of Normaliz, such as  computations in affine monoids, vector configurations, lattice polytopes, and rational cones.  
@@ -41,7 +41,7 @@ citeas: |
     <p class='BibEntry'>
     [<span class='BibKey'>GHS25</span>]   <b class='BibAuthor'>Gutsche, S., Horn, M. and Söger, C.</b>,
      <i class='BibTitle'>NormalizInterface, GAP wrapper for Normaliz,
-             Version 1.4.0</i>
+             Version 1.4.1</i>
      (<span class='BibYear'>2025</span>)<br />
     (<span class='BibNote'>GAP package</span>),
     <span class='BibHowpublished'><a href="https://gap-packages.github.io/NormalizInterface">https://gap-packages.github.io/NormalizInterface</a></span>.
@@ -52,8 +52,8 @@ bibtex: |
     @misc{ NormalizInterface,
       author =           {Gutsche, S. and Horn, M. and S{\"o}ger, C.},
       title =            {{NormalizInterface},   {GAP   wrapper  for  Normaliz},
-                          {V}ersion 1.4.0},
-      month =            {Apr},
+                          {V}ersion 1.4.1},
+      month =            {Jun},
       year =             {2025},
       note =             {GAP package},
       howpublished =     {\href

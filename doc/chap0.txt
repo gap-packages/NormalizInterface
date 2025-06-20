@@ -6,10 +6,10 @@
                            [1X [5XGAP[105X wrapper for Normaliz [101X
   
   
-                                     1.4.0
+                                     1.4.1
   
   
-                                 14 April 2025
+                                  20 June 2025
   
   
                                Sebastian Gutsche
