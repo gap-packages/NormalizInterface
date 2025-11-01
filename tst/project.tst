@@ -62,11 +62,11 @@ false
 gap> NmzConeProperty(cone, "IsTriangulationPartial");
 true
 gap> NmzConeProperty(cone, "MaximalSubspace");
-[ [  1,  0,  0,  0 ] ]
+[ [ 1, 0, 0, 0 ] ]
 gap> NmzConeProperty(cone, "Multiplicity");
 1
 gap> NmzConeProperty(cone, "ProjectCone");
-<object>
+<a Normaliz cone>
 gap> NmzConeProperty(cone, "Rank");
 2
 gap> NmzConeProperty(cone, "TriangulationDetSum");
@@ -98,13 +98,13 @@ gap> Display(NmzTriangulation(proj));
           mult := 0,
           vol := 1 ) ], [ [ 0, 1, 0 ] ] ]
 gap> Display(NmzExtremeRays(proj));
-[ [  0,  1,  0 ] ]
+[ [ 0, 1, 0 ] ]
 gap> Display(NmzSupportHyperplanes(proj));
-[ [  0,  1,  0 ] ]
+[ [ 0, 1, 0 ] ]
 gap> Display(NmzHilbertBasis(proj));
-[ [  0,  1,  0 ] ]
+[ [ 0, 1, 0 ] ]
 gap> Display(NmzDeg1Elements(proj));
-[ [  0,  1,  0 ] ]
+[ [ 0, 1, 0 ] ]
 gap> Display(NmzSublattice(proj));
 [ [ [ 1, 0, 0 ], [ 0, 1, 0 ] ], [ [ 1, 0 ], [ 0, 1 ], [ 0, 0 ] ], 1 ]
 gap> NmzConeProperty(cone, "BasicTriangulation");
@@ -132,7 +132,7 @@ false
 gap> NmzConeProperty(cone, "IsTriangulationPartial");
 true
 gap> NmzConeProperty(cone, "MaximalSubspace");
-[ [  1,  0,  0 ] ]
+[ [ 1, 0, 0 ] ]
 gap> NmzConeProperty(cone, "Multiplicity");
 1
 gap> NmzConeProperty(cone, "Rank");
