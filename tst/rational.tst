@@ -78,9 +78,9 @@ fail
 gap> NmzConeProperty(cone, "ClassGroup");
 [ 0, 3, 15 ]
 gap> NmzConeProperty(cone, "EhrhartQuasiPolynomial");
-[ [ 48, 28, 15 ], [ 11, 22, 15 ], [ -20, 28, 15 ],  [ 39, 22, 15 ], 
+[ [ 48, 28, 15 ], [ 11, 22, 15 ], [ -20, 28, 15 ], [ 39, 22, 15 ], 
   [ 32, 28, 15 ], [ -5, 22, 15 ], [ 12, 28, 15 ], [ 23, 22, 15 ], 
-  [ 16, 28, 15 ], [ 27, 22, 15 ], [ -4, 28, 15 ],  [ 7, 22, 15 ], 48 ]
+  [ 16, 28, 15 ], [ 27, 22, 15 ], [ -4, 28, 15 ], [ 7, 22, 15 ], 48 ]
 gap> NmzConeProperty(cone, "EmbeddingDim");
 3
 gap> NmzConeProperty(cone, "Grading");

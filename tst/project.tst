@@ -99,12 +99,10 @@ gap> Display(NmzSublattice(proj));
 gap> NmzConeProperty(cone, "BasicTriangulation");
 fail
 gap> NmzConeProperty(cone, "EmbeddingDim");
-3
+4
 gap> NmzConeProperty(cone, "Grading");
-[ 0, 1, 0 ]
+[ 0, 1, 0, 0 ]
 gap> NmzConeProperty(cone, "GradingDenom");
-1
-gap> NmzConeProperty(cone, "InternalIndex");
 1
 gap> NmzConeProperty(cone, "IsDeg1ExtremeRays");
 true
@@ -112,8 +110,6 @@ gap> NmzConeProperty(cone, "IsDeg1HilbertBasis");
 true
 gap> NmzConeProperty(cone, "IsInhomogeneous");
 false
-gap> NmzConeProperty(cone, "IsIntegrallyClosed");
-true
 gap> NmzConeProperty(cone, "IsPointed");
 false
 gap> NmzConeProperty(cone, "IsTriangulationNested");
@@ -121,7 +117,7 @@ false
 gap> NmzConeProperty(cone, "IsTriangulationPartial");
 true
 gap> NmzConeProperty(cone, "MaximalSubspace");
-[ [ 1, 0, 0 ] ]
+[ [ 1, 0, 0, 0 ] ]
 gap> NmzConeProperty(cone, "Multiplicity");
 1
 gap> NmzConeProperty(cone, "Rank");
@@ -130,8 +126,6 @@ gap> NmzConeProperty(cone, "TriangulationDetSum");
 0
 gap> NmzConeProperty(cone, "TriangulationSize");
 0
-gap> NmzConeProperty(cone, "UnitGroupIndex");
-1
 
 #
 gap> STOP_TEST("project.tst", 0);
