@@ -503,42 +503,54 @@ gap> Display(NmzOriginalMonoidGenerators(cone));
   [  0,  1,  0,  0,  1,  1,  1 ],
   [  0,  0,  1,  1,  1,  0,  1 ],
   [  0,  0,  1,  1,  0,  1,  1 ] ]
-gap> _NmzPrintSomeConeProperties(cone, [
-> "Generators",
-> "ExtremeRays",
-> "SupportHyperplanes",
-> "HilbertBasis",
-> "Deg1Elements",
-> "Sublattice",
-> "NumberLatticePoints",
-> "OriginalMonoidGenerators",
-> ]);
-BasicTriangulation = fail
-ClassGroup = [ 17 ]
-EhrhartQuasiPolynomial = [ [ 60, 194, 284, 245, 130, 41, 6 ], 60 ]
-EmbeddingDim = 7
-Grading = [ 1, 1, 1, 1, 1, 1, -2 ]
-GradingDenom = 1
-HilbertQuasiPolynomial = 
+gap> NmzConeProperty(cone, "BasicTriangulation");
+fail
+gap> NmzConeProperty(cone, "ClassGroup");
+[ 17 ]
+gap> NmzConeProperty(cone, "EhrhartQuasiPolynomial");
+[ [ 60, 194, 284, 245, 130, 41, 6 ], 60 ]
+gap> NmzConeProperty(cone, "EmbeddingDim");
+7
+gap> NmzConeProperty(cone, "Grading");
+[ 1, 1, 1, 1, 1, 1, -2 ]
+gap> NmzConeProperty(cone, "GradingDenom");
+1
+gap> NmzConeProperty(cone, "HilbertQuasiPolynomial");
 [ 1/10*t^6+41/60*t^5+13/6*t^4+49/12*t^3+71/15*t^2+97/30*t+1 ]
-HilbertQuasiPolynomial = 
+gap> NmzConeProperty(cone, "HilbertQuasiPolynomial");
 [ 1/10*t^6+41/60*t^5+13/6*t^4+49/12*t^3+71/15*t^2+97/30*t+1 ]
-HilbertSeries = [ 6*t^4+25*t^3+31*t^2+9*t+1, [ [ 1, 7 ] ] ]
-InternalIndex = 1
-IsDeg1ExtremeRays = true
-IsDeg1HilbertBasis = false
-IsInhomogeneous = false
-IsIntegrallyClosed = false
-IsPointed = true
-IsReesPrimary = false
-IsTriangulationNested = false
-IsTriangulationPartial = false
-MaximalSubspace = [  ]
-Multiplicity = 72
-Rank = 7
-TriangulationDetSum = 72
-TriangulationSize = 69
-UnitGroupIndex = 1
+gap> NmzConeProperty(cone, "HilbertSeries");
+[ 6*t^4+25*t^3+31*t^2+9*t+1, [ [ 1, 7 ] ] ]
+gap> NmzConeProperty(cone, "InternalIndex");
+1
+gap> NmzConeProperty(cone, "IsDeg1ExtremeRays");
+true
+gap> NmzConeProperty(cone, "IsDeg1HilbertBasis");
+false
+gap> NmzConeProperty(cone, "IsInhomogeneous");
+false
+gap> NmzConeProperty(cone, "IsIntegrallyClosed");
+false
+gap> NmzConeProperty(cone, "IsPointed");
+true
+gap> NmzConeProperty(cone, "IsReesPrimary");
+false
+gap> NmzConeProperty(cone, "IsTriangulationNested");
+false
+gap> NmzConeProperty(cone, "IsTriangulationPartial");
+false
+gap> NmzConeProperty(cone, "MaximalSubspace");
+[  ]
+gap> NmzConeProperty(cone, "Multiplicity");
+72
+gap> NmzConeProperty(cone, "Rank");
+7
+gap> NmzConeProperty(cone, "TriangulationDetSum");
+72
+gap> NmzConeProperty(cone, "TriangulationSize");
+69
+gap> NmzConeProperty(cone, "UnitGroupIndex");
+1
 
 #
 gap> STOP_TEST("rees.tst", 0);

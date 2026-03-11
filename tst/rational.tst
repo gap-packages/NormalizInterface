@@ -73,51 +73,61 @@ gap> Display(NmzOriginalMonoidGenerators(cone));
 [ [   1,   1,   2 ],
   [  -1,  -1,   3 ],
   [   1,  -2,   4 ] ]
-gap> _NmzPrintSomeConeProperties(cone, [
-> "Generators",
-> "ExtremeRays",
-> "SupportHyperplanes",
-> "HilbertBasis",
-> "Deg1Elements",
-> "Sublattice",
-> "NumberLatticePoints",
-> "OriginalMonoidGenerators",
-> ]);
-BasicTriangulation = fail
-ClassGroup = [ 0, 3, 15 ]
-EhrhartQuasiPolynomial = [ [ 48, 28, 15 ], [ 11, 22, 15 ], [ -20, 28, 15 ], 
-  [ 39, 22, 15 ], [ 32, 28, 15 ], [ -5, 22, 15 ], [ 12, 28, 15 ], 
-  [ 23, 22, 15 ], [ 16, 28, 15 ], [ 27, 22, 15 ], [ -4, 28, 15 ], 
-  [ 7, 22, 15 ], 48 ]
-EmbeddingDim = 3
-Grading = [ 0, 0, 1 ]
-GradingDenom = 1
-HilbertQuasiPolynomial = [ 5/16*t^2+7/12*t+1, 5/16*t^2+11/24*t+11/48, 
-  5/16*t^2+7/12*t-5/12, 5/16*t^2+11/24*t+13/16, 5/16*t^2+7/12*t+2/3, 
-  5/16*t^2+11/24*t-5/48, 5/16*t^2+7/12*t+1/4, 5/16*t^2+11/24*t+23/48, 
-  5/16*t^2+7/12*t+1/3, 5/16*t^2+11/24*t+9/16, 5/16*t^2+7/12*t-1/12, 
-  5/16*t^2+11/24*t+7/48 ]
-HilbertQuasiPolynomial = [ 5/16*t^2+7/12*t+1, 5/16*t^2+11/24*t+11/48, 
-  5/16*t^2+7/12*t-5/12, 5/16*t^2+11/24*t+13/16, 5/16*t^2+7/12*t+2/3, 
-  5/16*t^2+11/24*t-5/48, 5/16*t^2+7/12*t+1/4, 5/16*t^2+11/24*t+23/48, 
-  5/16*t^2+7/12*t+1/3, 5/16*t^2+11/24*t+9/16, 5/16*t^2+7/12*t-1/12, 
-  5/16*t^2+11/24*t+7/48 ]
-HilbertSeries = [ 2*t^12+t^11+t^10+t^9+t^8+2*t^7+2*t^6-t^5+2*t^4+3*t^3+1, 
+gap> NmzConeProperty(cone, "BasicTriangulation");
+fail
+gap> NmzConeProperty(cone, "ClassGroup");
+[ 0, 3, 15 ]
+gap> NmzConeProperty(cone, "EhrhartQuasiPolynomial");
+[ [ 48, 28, 15 ], [ 11, 22, 15 ], [ -20, 28, 15 ], [ 39, 22, 15 ], 
+  [ 32, 28, 15 ], [ -5, 22, 15 ], [ 12, 28, 15 ], [ 23, 22, 15 ], 
+  [ 16, 28, 15 ], [ 27, 22, 15 ], [ -4, 28, 15 ], [ 7, 22, 15 ], 48 ]
+gap> NmzConeProperty(cone, "EmbeddingDim");
+3
+gap> NmzConeProperty(cone, "Grading");
+[ 0, 0, 1 ]
+gap> NmzConeProperty(cone, "GradingDenom");
+1
+gap> NmzConeProperty(cone, "HilbertQuasiPolynomial");
+[ 5/16*t^2+7/12*t+1, 5/16*t^2+11/24*t+11/48, 5/16*t^2+7/12*t-5/12, 
+  5/16*t^2+11/24*t+13/16, 5/16*t^2+7/12*t+2/3, 5/16*t^2+11/24*t-5/48, 
+  5/16*t^2+7/12*t+1/4, 5/16*t^2+11/24*t+23/48, 5/16*t^2+7/12*t+1/3, 
+  5/16*t^2+11/24*t+9/16, 5/16*t^2+7/12*t-1/12, 5/16*t^2+11/24*t+7/48 ]
+gap> NmzConeProperty(cone, "HilbertQuasiPolynomial");
+[ 5/16*t^2+7/12*t+1, 5/16*t^2+11/24*t+11/48, 5/16*t^2+7/12*t-5/12, 
+  5/16*t^2+11/24*t+13/16, 5/16*t^2+7/12*t+2/3, 5/16*t^2+11/24*t-5/48, 
+  5/16*t^2+7/12*t+1/4, 5/16*t^2+11/24*t+23/48, 5/16*t^2+7/12*t+1/3, 
+  5/16*t^2+11/24*t+9/16, 5/16*t^2+7/12*t-1/12, 5/16*t^2+11/24*t+7/48 ]
+gap> NmzConeProperty(cone, "HilbertSeries");
+[ 2*t^12+t^11+t^10+t^9+t^8+2*t^7+2*t^6-t^5+2*t^4+3*t^3+1, 
   [ [ 1, 1 ], [ 2, 1 ], [ 12, 1 ] ] ]
-InternalIndex = 15
-IsDeg1ExtremeRays = false
-IsDeg1HilbertBasis = false
-IsInhomogeneous = false
-IsIntegrallyClosed = false
-IsPointed = true
-IsTriangulationNested = false
-IsTriangulationPartial = false
-MaximalSubspace = [  ]
-Multiplicity = 5/8
-Rank = 3
-TriangulationDetSum = 15
-TriangulationSize = 1
-UnitGroupIndex = 1
+gap> NmzConeProperty(cone, "InternalIndex");
+15
+gap> NmzConeProperty(cone, "IsDeg1ExtremeRays");
+false
+gap> NmzConeProperty(cone, "IsDeg1HilbertBasis");
+false
+gap> NmzConeProperty(cone, "IsInhomogeneous");
+false
+gap> NmzConeProperty(cone, "IsIntegrallyClosed");
+false
+gap> NmzConeProperty(cone, "IsPointed");
+true
+gap> NmzConeProperty(cone, "IsTriangulationNested");
+false
+gap> NmzConeProperty(cone, "IsTriangulationPartial");
+false
+gap> NmzConeProperty(cone, "MaximalSubspace");
+[  ]
+gap> NmzConeProperty(cone, "Multiplicity");
+5/8
+gap> NmzConeProperty(cone, "Rank");
+3
+gap> NmzConeProperty(cone, "TriangulationDetSum");
+15
+gap> NmzConeProperty(cone, "TriangulationSize");
+1
+gap> NmzConeProperty(cone, "UnitGroupIndex");
+1
 gap> Display(NmzConeDecomposition(cone));
 [ [ rec(
           Excluded := [ false, false, false ],

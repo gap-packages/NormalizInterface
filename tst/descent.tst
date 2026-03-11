@@ -137,31 +137,36 @@ gap> Display(NmzSublattice(cone));
   [ [ 1, 0, 0, 0, 0, 0, 0 ], [ 0, 1, 0, 0, 0, 0, 0 ], [ 0, 0, 1, 0, 0, 0, 0 ],
       [ 0, 0, 0, 1, 0, 0, 0 ], [ 0, 0, 0, 0, 1, 0, 0 ], 
       [ 0, 0, 0, 0, 0, 1, 0 ], [ 0, 0, 0, 0, 0, 0, 1 ] ], 1 ]
-gap> _NmzPrintSomeConeProperties(cone, [
-> "Generators",
-> "ExtremeRays",
-> "SupportHyperplanes",
-> "HilbertBasis",
-> "Deg1Elements",
-> "Sublattice",
-> "NumberLatticePoints",
-> "OriginalMonoidGenerators",
-> ]);
-BasicTriangulation = fail
-EmbeddingDim = 7
-Grading = [ 1, 1, 1, 1, 1, 1, -2 ]
-GradingDenom = 1
-IsDeg1ExtremeRays = true
-IsDeg1HilbertBasis = false
-IsInhomogeneous = false
-IsPointed = true
-IsTriangulationNested = false
-IsTriangulationPartial = true
-MaximalSubspace = [  ]
-Multiplicity = 72
-Rank = 7
-TriangulationDetSum = 2
-TriangulationSize = 1
+gap> NmzConeProperty(cone, "BasicTriangulation");
+fail
+gap> NmzConeProperty(cone, "EmbeddingDim");
+7
+gap> NmzConeProperty(cone, "Grading");
+[ 1, 1, 1, 1, 1, 1, -2 ]
+gap> NmzConeProperty(cone, "GradingDenom");
+1
+gap> NmzConeProperty(cone, "IsDeg1ExtremeRays");
+true
+gap> NmzConeProperty(cone, "IsDeg1HilbertBasis");
+false
+gap> NmzConeProperty(cone, "IsInhomogeneous");
+false
+gap> NmzConeProperty(cone, "IsPointed");
+true
+gap> NmzConeProperty(cone, "IsTriangulationNested");
+false
+gap> NmzConeProperty(cone, "IsTriangulationPartial");
+true
+gap> NmzConeProperty(cone, "MaximalSubspace");
+[  ]
+gap> NmzConeProperty(cone, "Multiplicity");
+72
+gap> NmzConeProperty(cone, "Rank");
+7
+gap> NmzConeProperty(cone, "TriangulationDetSum");
+2
+gap> NmzConeProperty(cone, "TriangulationSize");
+1
 
 #
 gap> NmzVolume(cone);
