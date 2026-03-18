@@ -24,7 +24,7 @@ true
 gap> NmzConeProperty(C,"SupportHyperplanes");
 [ [ -1, 2 ], [ 3, -1 ] ]
 
-# doc/_Chunks.xml:21-36
+# doc/_Chunks.xml:20-35
 gap> D := NmzCone(["equations",[[1,2,-3]], "grading",[[0,-1,3]]]);
 <a Normaliz cone>
 gap> NmzCompute(D,["DualMode","HilbertSeries"]);
@@ -40,7 +40,7 @@ gap> NmzSupportHyperplanes(D);
 gap> NmzEquations(D);
 [ [ 1, 2, -3 ] ]
 
-# doc/_Chunks.xml:42-53
+# doc/_Chunks.xml:40-51
 gap> P := NmzCone(["inhom_equations",[[1,2,-3,1]], "grading", [[1,1,1]]]);
 <a Normaliz cone>
 gap> NmzIsInhomogeneous(C);
@@ -52,7 +52,7 @@ gap> NmzHilbertBasis(P);
 gap> NmzModuleGenerators(P);
 [ [ 0, 1, 1, 1 ], [ 2, 0, 1, 1 ] ]
 
-# doc/_Chunks.xml:59-86
+# doc/_Chunks.xml:56-83
 gap> Magic3x3even := NmzCone(["equations",
 > [ [1, 1, 1,  -1, -1, -1,   0,  0,  0],
 >   [1, 1, 1,   0,  0,  0,  -1, -1, -1],
@@ -80,7 +80,7 @@ gap> NmzHilbertSeries(Magic3x3even);
 gap> NmzHilbertQuasiPolynomial(Magic3x3even);
 [ 1/2*t^2+t+1, 1/2*t^2-1/2 ]
 
-# doc/_Chunks.xml:92-114
+# doc/_Chunks.xml:88-110
 gap> M := [
 >  [ 8,  8,  8,  7 ],
 >  [ 0,  4,  0,  1 ],
