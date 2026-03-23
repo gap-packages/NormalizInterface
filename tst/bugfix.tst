@@ -34,4 +34,13 @@ gap> NmzModuleGenerators(C);
 [ [ 0, 0, 0, 0, 0, 1 ] ]
 
 #
+# Accept arbitrary lists (including ranges) as argument
+# See https://github.com/gap-packages/NormalizInterface/issues/121
+#
+gap> D := NmzCone(["equations",[[1..3]]]);
+<a Normaliz cone>
+gap> NmzEquations(D);
+[ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ]
+
+#
 gap> STOP_TEST("bugfix.tst", 0);
