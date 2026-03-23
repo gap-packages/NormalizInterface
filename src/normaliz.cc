@@ -458,12 +458,12 @@ bool GAPToNmz(mpq_class & out, Obj x)
 template <typename Number>
 static bool GAPToNmz(vector<Number> & out, Obj V)
 {
-    if (!IS_PLIST(V) || !IS_DENSE_LIST(V))
+    if (!IS_LIST(V) || !IS_DENSE_LIST(V))
         return false;
-    const int n = LEN_PLIST(V);
+    const int n = LEN_LIST(V);
     out.resize(n);
     for (int i = 0; i < n; ++i) {
-        Obj tmp = ELM_PLIST(V, i + 1);
+        Obj tmp = ELM_LIST(V, i + 1);
         if (!GAPToNmz(out[i], tmp))
             return false;
     }
