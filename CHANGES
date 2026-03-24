@@ -1,5 +1,10 @@
 This file describes changes in the NormalizInterface package.
 
+X.Y.Z (2026-MM-YY)
+  - Update to Normaliz 3.11.1
+  - Allow `NmzCone` and other functions to accept lists which are not
+    "plain" lists, such as ranges.
+
 1.4.1 (2025-06-20)
   - Janitorial changes
 

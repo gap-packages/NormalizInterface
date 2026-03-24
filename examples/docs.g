@@ -15,16 +15,14 @@ NmzHasConeProperty(cone, "ExtremeRays");
 #! @BeginChunk NmzKnownConeProperties_example
 #! @BeginExample
 NmzKnownConeProperties(cone);
-#! [ "EmbeddingDim", "Generators", "InternalIndex", "IsInhomogeneous", 
-#!   "OriginalMonoidGenerators", "Sublattice" ]
+#! [  ]
 #! @EndExample
 #! @EndChunk
 
 #! @BeginChunk NmzCompute_example
 #! @BeginExample
 NmzKnownConeProperties(cone);
-#! [ "EmbeddingDim", "Generators", "InternalIndex", "IsInhomogeneous", 
-#!   "OriginalMonoidGenerators", "Sublattice" ]
+#! [  ]
 NmzCompute(cone, ["SupportHyperplanes", "IsPointed"]);
 #! true
 NmzKnownConeProperties(cone);
