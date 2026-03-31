@@ -80,7 +80,6 @@ Dependencies := rec(
   GAP                    := ">= 4.12.1",
   NeededOtherPackages    := [ ],
   SuggestedOtherPackages := [ ],
-  NeededSystemPackages   := rec( Ubuntu := [["libnormaliz-dev"]] ),
   ExternalConditions     := [ ]
 ),
 
