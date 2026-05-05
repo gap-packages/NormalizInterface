@@ -1,20 +1,18 @@
+#############################################################################
+##  
+##  Demo PackageInfo.g for the GitHubPagesForGAP
+##
+
 SetPackageInfo( rec(
 
-PackageName := "NormalizInterface",
-Subtitle := "GAP wrapper for Normaliz",
-Version := "1.5.0",
-Date    := "24/03/2026", # dd/mm/yyyy format
-License := "GPL-2.0-or-later",
+PackageName := "GitHubPagesForGAP",
+
+Subtitle := "A GitHub Pages generator for GAP packages",
+Version := "0.4",
+Date := "10/04/2025", # dd/mm/yyyy format
+License := "0BSD",
 
 Persons := [
-  rec(
-    LastName      := "Gutsche",
-    FirstNames    := "Sebastian",
-    IsAuthor      := true,
-    IsMaintainer  := false,
-    Email         := "gutsche@mathematik.uni-siegen.de",
-  ),
-
   rec(
     LastName      := "Horn",
     FirstNames    := "Max",
@@ -22,7 +20,7 @@ Persons := [
     IsMaintainer  := true,
     Email         := "mhorn@rptu.de",
     WWWHome       := "https://www.quendi.de/math",
-    GitHubUsername := "fingolfin",
+    GitHubUsername:= "fingolfin",
     PostalAddress := Concatenation(
                        "Fachbereich Mathematik\n",
                        "RPTU Kaiserslautern-Landau\n",
@@ -34,89 +32,72 @@ Persons := [
   ),
 
   rec(
-    LastName      := "Söger",
-    FirstNames    := "Christof",
+    LastName      := "Thor",
+    FirstNames    := "A. U.",
     IsAuthor      := true,
     IsMaintainer  := false,
-    Email         := "csoeger@uos.de",
+    #Email         := "author@example.com",
+  ),
+
+  rec(
+    LastName      := "Itor",
+    FirstNames    := "Jan",
+    IsAuthor      := false,
+    IsMaintainer  := true,
+    #Email         := "janitor@example.com",
   ),
 ],
 
-Status         := "deposited",
-#CommunicatedBy := "name (place)",
-#AcceptDate     := "mm/yyyy",
+Status := "other",
 
-SourceRepository := rec(
-    Type := "git",
-    URL := Concatenation( "https://github.com/gap-packages/", ~.PackageName ),
-),
-IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
-PackageWWWHome  := Concatenation( "https://gap-packages.github.io/", ~.PackageName ),
-README_URL      := Concatenation( ~.PackageWWWHome, "/README.md" ),
-PackageInfoURL  := Concatenation( ~.PackageWWWHome, "/PackageInfo.g" ),
-ArchiveURL      := Concatenation( ~.SourceRepository.URL,
-                                 "/releases/download/v", ~.Version,
-                                 "/", ~.PackageName, "-", ~.Version ),
-ArchiveFormats  := ".tar.gz .tar.bz2",
+# The following are not strictly necessary in your own PackageInfo.g
+# (in the sense that update.g only looks at the usual fields
+# like PackageWWWHome, ArchiveURL etc.). But they are convenient
+# if you use exactly the scheme for your package website that we propose.
+GithubUser := "gap-system",
+GithubRepository := ~.PackageName,
+GithubWWW := Concatenation("https://github.com/", ~.GithubUser, "/", ~.GithubRepository),
 
-AbstractHTML :=
-  "The <span class='pkgname'>NormalizInterface</span> package provides\
-  a GAP interface to <a href='https://www.normaliz.uni-osnabrueck.de'>Normaliz</a>,\
-  enabling direct access to the complete functionality of Normaliz, such as\
-  computations in affine monoids, vector configurations, lattice polytopes, and rational cones.\
-  ",
+PackageWWWHome := Concatenation("https://", ~.GithubUser, ".github.io/", ~.GithubRepository, "/"),
+README_URL     := Concatenation( ~.PackageWWWHome, "README.md" ),
+PackageInfoURL := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
+# The following assumes you are using the Github releases system. If not, adjust
+# it accordingly.
+ArchiveURL     := Concatenation(~.GithubWWW,
+                    "/releases/download/v", ~.Version, "/",
+                    ~.GithubRepository, "-", ~.Version),
 
+ArchiveFormats := ".tar.gz .tar.bz2",
+
+AbstractHTML := 
+  "This is a pseudo package that contains no actual\
+  <span class=\"pkgname\">GAP</span> code. Instead, it is a template for other\
+  GAP packages that allows to quickly setup GitHub Pages.",
 
 PackageDoc := rec(
-  BookName  := "NormalizInterface",
-  ArchiveURLSubset := [ "doc" ],
-  HTMLStart := "doc/chap0_mj.html",
+  BookName  := "GitHubPagesForGAP",
+  ArchiveURLSubset := ["doc"],
+  HTMLStart := "doc/chap0.html",
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
-  LongTitle := "GAP wrapper for Normaliz",
+  LongTitle := "A GitHub Pages generator for GAP packages",
 ),
 
+# The following dependencies are fake and for testing / demo purposes
 Dependencies := rec(
-  GAP                    := ">= 4.12.1",
-  NeededOtherPackages    := [ ],
-  SuggestedOtherPackages := [ ],
-  ExternalConditions     := [ ]
+  GAP := ">=4.8.1",
+  NeededOtherPackages := [
+    ["GAPDoc", ">= 1.2"],
+    ["IO", ">= 4.1"],
+  ],
+  SuggestedOtherPackages := [["orb", ">= 4.2"]],
+  ExternalConditions := []
 ),
 
-AvailabilityTest := function()
-    local path;
-    # test for existence of the compiled binary
-    if not IsKernelExtensionAvailable("NormalizInterface") then
-       LogPackageLoadingMessage( PACKAGE_WARNING,
-           [ "kernel functions for NormalizInterface not available." ] );
-      return false;
-    fi;
-    return true;
-  end,
+AvailabilityTest := ReturnTrue,
 
-
-# Show the Normaliz version number in the banner string.
-# (We assume that this function gets called *after* the package has been
-# loaded, in particular after libnormaliz has been loaded.)
-BannerFunction := function( info )
-  local str, version;
-
-  str := DefaultPackageBannerString( info );
-  if not IsBoundGlobal( "_NmzVersion" ) then
-    return str;
-  fi;
-  version := ValueGlobal( "_NmzVersion" )();
-  version := JoinStringsWithSeparator(version, ".");
-
-  return ReplacedString( str, "by Sebastian",
-             Concatenation( "(Normaliz version is ", version, ")\n", "by Sebastian" ) );
-end,
-
-Keywords := [
-  "normaliz",
-  "cones"
-],
-
-TestFile := "tst/testall.g",
+Keywords := ["GitHub Pages", "GAP"]
 
 ));
+
+
