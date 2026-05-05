@@ -19,7 +19,7 @@ concurrency:
 jobs:
   # The CI test job
   test:
-    name: ${{ matrix.gap-version }} ${{ matrix.os }}
+    name: ${{ matrix.gap-version }} ${{ matrix.os }} ${{ matrix.system-libnormaliz }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -31,34 +31,18 @@ jobs:
           - '4.13'
           - '4.12'
         os: [ubuntu-latest]
+        system-libnormaliz: [true,false]
         include:
           - gap-version: 'devel'
             os: macos-latest
+            system-libnormaliz: false
 
     steps:
       - uses: actions/checkout@v6
-      - uses: gap-actions/setup-gap@v3
-        with:
-          gap-version: ${{ matrix.gap-version }}
-      - uses: gap-actions/build-pkg@v3
-      - uses: gap-actions/run-pkg-tests@v4
-      - uses: gap-actions/run-pkg-tests@v4
-        with:
-          mode: onlyneeded
-      - uses: gap-actions/process-coverage@v3
-      - uses: codecov/codecov-action@v6
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-
-  # test with libnormaliz
-  libnormaliz:
-    name: "Test with system libnormaliz"
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v6
-      - run: |
-          rm prerequisites.sh  # to prevent build-pkg from building Normaliz
+      - name: "Install and use system libnormaliz"
+        if: ${{ matrix.system-libnormaliz }}
+        run: |
+          rm prerequisites.sh   # prevent build-pkg from building Normaliz
           sudo apt install libnormaliz-dev   # install system libnormaliz
       - uses: gap-actions/setup-gap@v3
         with:
