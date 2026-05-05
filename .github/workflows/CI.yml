@@ -47,7 +47,7 @@ jobs:
       - uses: gap-actions/run-pkg-tests@v4
       - uses: gap-actions/run-pkg-tests@v4
         with:
-          mode: onlyneeded
+          only-needed: true
       - uses: gap-actions/process-coverage@v3
       - uses: codecov/codecov-action@v6
         with:
@@ -67,7 +67,7 @@ jobs:
 #       - uses: gap-actions/build-pkg@cygwin-v1
 #       - uses: gap-actions/run-pkg-tests@cygwin-v2
 #       - uses: gap-actions/process-coverage@cygwin-v2
-#       - uses: codecov/codecov-action@v5
+#       - uses: codecov/codecov-action@v6
 #         with:
 #           token: ${{ secrets.CODECOV_TOKEN }}
 #       - name: "Setup tmate session"
