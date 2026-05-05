@@ -13,16 +13,16 @@ NmzHasConeProperty(cone, "ExtremeRays");
 #! @EndChunk
 
 #! @BeginChunk NmzKnownConeProperties_example
-#! @BeginExample
-NmzKnownConeProperties(cone);
+#! @BeginLogSession
+#! NmzKnownConeProperties(cone);
 #! [  ]
-#! @EndExample
+#! @EndLogSession
 #! @EndChunk
 
 #! @BeginChunk NmzCompute_example
 #! @BeginExample
-NmzKnownConeProperties(cone);
-#! [  ]
+#! "SupportHyperplanes" in NmzKnownConeProperties(cone);
+#! false
 NmzCompute(cone, ["SupportHyperplanes", "IsPointed"]);
 #! true
 NmzKnownConeProperties(cone);
