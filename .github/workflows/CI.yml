@@ -19,7 +19,7 @@ concurrency:
 jobs:
   # The CI test job
   test:
-    name: ${{ matrix.gap-version }} ${{ matrix.os }}${{ matrix.system-libnormaliz && ' libnormaliz' }}
+    name: ${{ matrix.gap-version }} ${{ matrix.os }}${{ matrix.system-libnormaliz && ' libnormaliz' || '' }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
