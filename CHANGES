@@ -1,5 +1,9 @@
 This file describes changes in the NormalizInterface package.
 
+1.5.1 (2026-05-05)
+  - The `configure` script now searches the system for libnormaliz and
+    attempts to use it if found.
+
 1.5.0 (2026-03-24)
   - Update to Normaliz 3.11.1
   - Allow `NmzCone` and other functions to accept lists which are not
