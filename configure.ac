@@ -68,20 +68,62 @@ dnl ## Locate Normaliz
 dnl ##
 
 NORMALIZ_RPATH_EXTRA=""
+NORMALIZ_LIBDIR=""
 
 AC_ARG_WITH([normaliz],
     [AS_HELP_STRING([--with-normaliz=<path>], [specify root of Normaliz installation])],
     [NORMALIZ="$with_normaliz"],
-    [NORMALIZ="$PWD/NormalizInstallDir"
-     # The following is a hack to ensure compatibility with versions of gac that
-     # don't use GNU libtool anymore, and thus don't set a run path pointing to
-     # the specific version of libnormaliz we requested. Without this, when GAP
-     # loads NormalizInterface.so it may not find the libnormaliz shared library.
-     NORMALIZ_RPATH_EXTRA="-Wl,-rpath,$NORMALIZ/lib"
+    [NORMALIZ=""
+     NORMALIZ_DIRS=${NORMALIZ_DIRS:-"/opt/homebrew /usr/local /opt/local /usr /opt"}
+     AC_MSG_CHECKING([for an installed Normaliz])
+     for normaliz_dir in $NORMALIZ_DIRS; do
+         if test -f "$normaliz_dir/include/libnormaliz/cone.h"; then
+             if test -d "$normaliz_dir/lib64"; then
+                 normaliz_libdir="$normaliz_dir/lib64"
+             elif test -d "$normaliz_dir/lib"; then
+                 normaliz_libdir="$normaliz_dir/lib"
+             else
+                 continue
+             fi
+
+             old_CPPFLAGS="$CPPFLAGS"
+             CPPFLAGS="$CPPFLAGS -I$normaliz_dir/include $GMP_CPPFLAGS"
+             AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[@%:@include "libnormaliz/cone.h"]],
+                            [[#if !defined(NMZ_RELEASE) || NMZ_RELEASE < 30504
+                            #error Normaliz too old
+                            #endif
+                            return 0;]])],
+                    [NORMALIZ="$normaliz_dir"
+                     NORMALIZ_LIBDIR="$normaliz_libdir"
+                     break],
+                    [])
+             CPPFLAGS="$old_CPPFLAGS"
+         fi
+     done
+
+     if test "x$NORMALIZ" != "x"; then
+         AC_MSG_RESULT([$NORMALIZ])
+     else
+         NORMALIZ="$PWD/NormalizInstallDir"
+         NORMALIZ_LIBDIR="$NORMALIZ/lib"
+         AC_MSG_RESULT([not found, falling back to $NORMALIZ])
+         # The following is a hack to ensure compatibility with versions of gac that
+         # don't use GNU libtool anymore, and thus don't set a run path pointing to
+         # the specific version of libnormaliz we requested. Without this, when GAP
+         # loads NormalizInterface.so it may not find the libnormaliz shared library.
+         NORMALIZ_RPATH_EXTRA="-Wl,-rpath,$NORMALIZ_LIBDIR"
+     fi
     ]
 )
+if test "x$NORMALIZ_LIBDIR" = "x"; then
+    if test -d "$NORMALIZ/lib64"; then
+        NORMALIZ_LIBDIR="$NORMALIZ/lib64"
+    else
+        NORMALIZ_LIBDIR="$NORMALIZ/lib"
+    fi
+fi
 NORMALIZ_CPPFLAGS="-I$NORMALIZ/include"
-NORMALIZ_LDFLAGS="$NORMALIZ_RPATH_EXTRA -L$NORMALIZ/lib"
+NORMALIZ_LDFLAGS="$NORMALIZ_RPATH_EXTRA -L$NORMALIZ_LIBDIR"
 AC_SUBST(NORMALIZ_LDFLAGS)
 AC_SUBST(NORMALIZ_CPPFLAGS)
 

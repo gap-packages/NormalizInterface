@@ -18,13 +18,9 @@ gap> cone := NmzCone(["integral_closure",[[2,1],[1,3]]]);
 gap> NmzHasConeProperty(cone, "ExtremeRays");
 false
 
-# doc/_Chunks.xml:123-126
-gap> NmzKnownConeProperties(cone);
-[  ]
-
 # doc/_Chunks.xml:131-148
-gap> NmzKnownConeProperties(cone);
-[  ]
+gap> NmzHasConeProperty(cone, "SupportHyperplanes");
+false
 gap> NmzCompute(cone, ["SupportHyperplanes", "IsPointed"]);
 true
 gap> NmzKnownConeProperties(cone);
