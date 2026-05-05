@@ -58,14 +58,24 @@ Not specifying GAPDIR is equivalent to passing `../..` as GAPDIR. If
 more than one argument is specified, then any arguments beyond the
 first are passed on to the Normaliz `configure` script.
 
-Once the script completed successfully, you can build NormalizInterface
-like this:
+If you already have a suitable Normaliz installation in a standard
+location such as `/opt/homebrew`, `/usr/local`, `/opt/local`, `/usr`,
+or `/opt`, then `configure` will try to detect and use it
+automatically. Otherwise, or if you want to override the detected
+location, you can still use `prerequisites.sh` to build a local copy
+or pass `--with-normaliz=PATH` explicitly.
+
+Once the script completed successfully, or if you rely on an installed
+Normaliz found by `configure`, you can build NormalizInterface like
+this:
 
     ./configure --with-gaproot=GAPDIR
     make
 
 The ` --with-gaproot=GAPDIR` parameter is actually optional, and if omitted,
 the package will search for GAP in `../..`.
+Likewise, `--with-normaliz=PATH` is optional and only needed if
+automatic detection does not pick the desired installation.
 
 
 ## Documentation and tests
