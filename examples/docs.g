@@ -21,7 +21,7 @@ NmzHasConeProperty(cone, "ExtremeRays");
 
 #! @BeginChunk NmzCompute_example
 #! @BeginExample
-#! "SupportHyperplanes" in NmzKnownConeProperties(cone);
+NmzHasConeProperty(cone, "SupportHyperplanes");
 #! false
 NmzCompute(cone, ["SupportHyperplanes", "IsPointed"]);
 #! true

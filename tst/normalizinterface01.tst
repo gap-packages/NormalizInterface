@@ -19,7 +19,7 @@ gap> NmzHasConeProperty(cone, "ExtremeRays");
 false
 
 # doc/_Chunks.xml:131-148
-"SupportHyperplanes" in NmzKnownConeProperties(cone);
+gap> NmzHasConeProperty(cone, "SupportHyperplanes");
 false
 gap> NmzCompute(cone, ["SupportHyperplanes", "IsPointed"]);
 true
