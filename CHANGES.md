@@ -1,122 +1,146 @@
 This file describes changes in the NormalizInterface package.
 
-1.5.1 (2026-05-05)
-  - The `configure` script now searches the system for libnormaliz and
-    attempts to use it if found.
+## 1.5.1 (2026-05-05)
 
-1.5.0 (2026-03-24)
-  - Update to Normaliz 3.11.1
-  - Allow `NmzCone` and other functions to accept lists which are not
-    "plain" lists, such as ranges.
+- The `configure` script now searches the system for libnormaliz and
+  attempts to use it if found.
 
-1.4.1 (2025-06-20)
-  - Janitorial changes
+## 1.5.0 (2026-03-24)
 
-1.4.0 (2025-04-14)
-  - Update to Normaliz 3.10.2 (as usual this implies many breaking
-    changes, e.g. input type `lattice_ideal` has been renamed to
-    `normal_toric_ideal` while at the same time `lattice_ideal` has
-    a new meaning that is not quite compatible with how it worked before.
-    So beware and carefully study the Normaliz manual)
-  - Various janitorial changes
+- Update to Normaliz 3.11.1
+- Allow `NmzCone` and other functions to accept lists which are not
+  "plain" lists, such as ranges.
 
-1.3.7 (2024-07-07)
-  - Require C++14 (as Normaliz or rather e-Antic sometimes needs it, and
-    it seems OK to require a C++ compiler made in the last 10 years
-  - Require GAP >= 4.12.1 and use that to simplify some code and scripts
-  - Improve the code which tries to automatically find GMP headers
+## 1.4.1 (2025-06-20)
 
-1.3.6 (2023-05-19)
-  - Improve compatibility with an upcoming GAP update
-  - Minor janitorial changes
+- Janitorial changes
 
-1.3.5 (2022-11-05)
-  - Rename `build-normaliz.sh` to `prerequisites.sh` to match an
-    undocumented convention used across several packages.
-  - Minor build system tweaks
+## 1.4.0 (2025-04-14)
 
-1.3.4 (2022-08-07)
-  - Fix regression that broke building NormalizInterface on macOS
+- Update to Normaliz 3.10.2 (as usual this implies many breaking
+  changes, e.g. input type `lattice_ideal` has been renamed to
+  `normal_toric_ideal` while at the same time `lattice_ideal` has
+  a new meaning that is not quite compatible with how it worked before.
+  So beware and carefully study the Normaliz manual)
+- Various janitorial changes
 
-1.3.3 (2022-07-08)
-  - Update to Normaliz 3.9.3
-  - Improve build system to honor CPPFLAGS environment variable
-  - Explicitly set a so-called "run path" / "rpath" when linking against the
-    bundled copy of Normaliz (improves compatibility with future versions of
-    the GAP compiler `gac`, which will not be using GNU libtool anymore)
+## 1.3.7 (2024-07-07)
 
-1.3.2 (2022-02-24)
-  - Fix building on Cygwin
+- Require C++14 (as Normaliz or rather e-Antic sometimes needs it, and
+  it seems OK to require a C++ compiler made in the last 10 years
+- Require GAP >= 4.12.1 and use that to simplify some code and scripts
+- Improve the code which tries to automatically find GMP headers
 
-1.3.1 (2022-02-19)
-  - Fix building on FreeBSD
+## 1.3.6 (2023-05-19)
 
-1.3.0 (2021-10-31)
-  - Update to Normaliz 3.9.1
-  - Improve the new build system
-  - Various janitorial changes
+- Improve compatibility with an upcoming GAP update
+- Minor janitorial changes
 
-1.2.0 (2020-03-26)
-  - Update to Normaliz 3.8.4
-  - New build system
-  - Various janitorial changes
+## 1.3.5 (2022-11-05)
 
-1.1.0 (2019-08-23)
-  - Add support for rational inputs, e.g. polytopes with rational coordinates
-  - Update build system for improve compatibility with GAP >= 4.9
-  - Completely rewrote build-normaliz.sh (now downloads a tarball using
-    curl or wget, instead of cloning a git repository)
-  - Fix a potential crash when freeing proxy cone objects
-  - Fix 'unknown cone property' that could occur when using newer versions of
-    Normaliz, e.g. version 3.5.4
-  - Display the Normaliz version as part of banner string
-  - Loads of internal and janitorial changes
-  - Require Normaliz 3.5.4 or newer (and add support for its new features)
-  - Sebastian Gutsche is no longer package maintainer
+- Rename `build-normaliz.sh` to `prerequisites.sh` to match an
+  undocumented convention used across several packages.
+- Minor build system tweaks
 
-1.0.2 (2017-12-04)
-  - Use variable rays instead of Rays in test file
+## 1.3.4 (2022-08-07)
 
-1.0.1 (2017-11-30)
-  - Use TestDirectory, adapt to upcoming GAP build system changes
-  - Detect C++11 capabilities of compiler, add c++11 flag if necessary
+- Fix regression that broke building NormalizInterface on macOS
 
-1.0.0 (2017-09-06)
-  - update to libnormaliz 3.4.0
-    * added cone properties
-    * added wrappers for new normaliz functionality
+## 1.3.3 (2022-07-08)
 
-0.9.8 (2016-05-07)
-  - update to libnormaliz 3.1.1
+- Update to Normaliz 3.9.3
+- Improve build system to honor CPPFLAGS environment variable
+- Explicitly set a so-called "run path" / "rpath" when linking against the
+  bundled copy of Normaliz (improves compatibility with future versions of
+  the GAP compiler `gac`, which will not be using GNU libtool anymore)
 
-0.9.7 (2016-03-10)
-  - fix a bug in the conversion between GAP and Normaliz integer values,
-    which could lead to wrong results for integers with absolute value
-    roughly between 2^32 and 2^60
-  - fix crash when using StructuralCopy on a cone (issue #38)
-  - fix printing of certain integers on 32bit systems (issue #36)
-  - give better diagnostics when loading NormalizInterface fails due
-    to its kernel extension missing
+## 1.3.2 (2022-02-24)
 
-0.9.6 (2016-02-27)
-  - upgrade to Normaliz version 3.1.0
-  - fix wrong file permissions in package archive
+- Fix building on Cygwin
 
-0.9.5 (2016-02-01)
-  - improve build-normaliz.sh
-  - upgrade to Normaliz version 3.0.90
+## 1.3.1 (2022-02-19)
 
-0.9.4 (2016-01-16)
-  - README: update installation instructions
-  - README: explicitly state that the license is GPL v2 or later
+- Fix building on FreeBSD
 
-0.9.3 (2016-01-10)
-  - Fixes and changes in PackageInfo.g
-  - Tweak README.md to autolink URLs in it
+## 1.3.0 (2021-10-31)
 
-0.9.2 (2016-01-07)
-  - Fix installation instructions in manual
+- Update to Normaliz 3.9.1
+- Improve the new build system
+- Various janitorial changes
 
-0.9.1 (2016-01-07)
-  - Initial pre-release for public
+## 1.2.0 (2020-03-26)
 
+- Update to Normaliz 3.8.4
+- New build system
+- Various janitorial changes
+
+## 1.1.0 (2019-08-23)
+
+- Add support for rational inputs, e.g. polytopes with rational coordinates
+- Update build system for improve compatibility with GAP >= 4.9
+- Completely rewrote build-normaliz.sh (now downloads a tarball using
+  curl or wget, instead of cloning a git repository)
+- Fix a potential crash when freeing proxy cone objects
+- Fix 'unknown cone property' that could occur when using newer versions of
+  Normaliz, e.g. version 3.5.4
+- Display the Normaliz version as part of banner string
+- Loads of internal and janitorial changes
+- Require Normaliz 3.5.4 or newer (and add support for its new features)
+- Sebastian Gutsche is no longer package maintainer
+
+## 1.0.2 (2017-12-04)
+
+- Use variable rays instead of Rays in test file
+
+## 1.0.1 (2017-11-30)
+
+- Use TestDirectory, adapt to upcoming GAP build system changes
+- Detect C++11 capabilities of compiler, add c++11 flag if necessary
+
+## 1.0.0 (2017-09-06)
+
+- update to libnormaliz 3.4.0
+  * added cone properties
+  * added wrappers for new normaliz functionality
+
+## 0.9.8 (2016-05-07)
+
+- update to libnormaliz 3.1.1
+
+## 0.9.7 (2016-03-10)
+
+- fix a bug in the conversion between GAP and Normaliz integer values,
+  which could lead to wrong results for integers with absolute value
+  roughly between 2^32 and 2^60
+- fix crash when using StructuralCopy on a cone (issue #38)
+- fix printing of certain integers on 32bit systems (issue #36)
+- give better diagnostics when loading NormalizInterface fails due
+  to its kernel extension missing
+
+## 0.9.6 (2016-02-27)
+
+- upgrade to Normaliz version 3.1.0
+- fix wrong file permissions in package archive
+
+## 0.9.5 (2016-02-01)
+
+- improve build-normaliz.sh
+- upgrade to Normaliz version 3.0.90
+
+## 0.9.4 (2016-01-16)
+
+- README: update installation instructions
+- README: explicitly state that the license is GPL v2 or later
+
+## 0.9.3 (2016-01-10)
+
+- Fixes and changes in PackageInfo.g
+- Tweak README.md to autolink URLs in it
+
+## 0.9.2 (2016-01-07)
+
+- Fix installation instructions in manual
+
+## 0.9.1 (2016-01-07)
+
+- Initial pre-release for public
